@@ -9,7 +9,7 @@ func find_node_from(root: Node, name:String) -> Node:
 	
 	# If the current node is not the one we're looking for, recursively search its children
 	for child in root.get_children():
-		var result = find_child(child)
+		var result = find_child(child.name)
 		if result != null:
 			return result
 	

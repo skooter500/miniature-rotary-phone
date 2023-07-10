@@ -14,9 +14,9 @@ func set_enabled(e):
 func is_enabled():
 	return enabled
 	
-func draw_gizmos():
+func on_draw_gizmos():
 	pass
 	
 func _process(delta):	
 	if draw_gizmos and enabled:
-		draw_gizmos()
+		on_draw_gizmos()

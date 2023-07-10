@@ -4,7 +4,7 @@ class_name Seek extends SteeringBehavior
 var target
 var world_target:Vector3
 
-func draw_gizmos():
+func on_draw_gizmos():
 	if target:
 		world_target = target.global_transform.origin
 	DebugDraw.draw_sphere(world_target, 3, Color.AQUA)
