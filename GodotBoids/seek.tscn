@@ -1,15 +1,15 @@
-[gd_scene load_steps=26 format=3 uid="uid://ceylfvsp4dggl"]
+[gd_scene load_steps=25 format=3 uid="uid://ceylfvsp4dggl"]
 
 [ext_resource type="PackedScene" uid="uid://okvro62ssxp" path="res://Models/cobramk3_out/cobramk3.gltf" id="1"]
 [ext_resource type="Script" path="res://MoveTarget.gd" id="2"]
 [ext_resource type="Script" path="res://OffsetPursue.gd" id="3"]
-[ext_resource type="Script" path="res://TrailRender.gd" id="4"]
 [ext_resource type="Script" path="res://FPController.gd" id="5"]
 [ext_resource type="Script" path="res://root.gd" id="6"]
 [ext_resource type="Script" path="res://Avoidance.gd" id="7"]
 [ext_resource type="PackedScene" path="res://SceneSwitcher.tscn" id="10"]
 [ext_resource type="Script" path="res://CameraController.gd" id="11"]
 [ext_resource type="Script" path="res://Boid.gd" id="12"]
+[ext_resource type="Script" path="res://Trail3D.gd" id="12_1c3t3"]
 [ext_resource type="Script" path="res://Seek.gd" id="15"]
 [ext_resource type="Script" path="res://SpineAnimator.gd" id="16"]
 
@@ -36,13 +36,7 @@ ambient_light_energy = 2.0
 
 [sub_resource type="BoxShape3D" id="14"]
 
-[sub_resource type="Curve" id="16"]
-_data = [Vector2(0.00332226, 0.990909), 0.0, 0.0, 0, 0, Vector2(0.997785, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="17"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.998893, 0), 0.0, 0.0, 0, 0]
-point_count = 2
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_3qnrw"]
 
 [sub_resource type="BoxShape3D" id="15"]
 
@@ -177,13 +171,15 @@ target_path = NodePath("../../ShipTarget")
 
 [node name="Trail" type="Node3D" parent="Ship"]
 transform = Transform3D(-0.999064, 0.0432532, 0, -0.0432532, -0.999064, 0, 0, 0, 1, 0.55, -0.075, -0.1)
-script = ExtResource("4")
-width_curve = SubResource("16")
+script = ExtResource("12_1c3t3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ship/Trail"]
+transform = Transform3D(-0.999064, -0.0432532, 0, 0.0432532, -0.999064, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("RibbonTrailMesh_3qnrw")
+skeleton = NodePath("../../..")
 
 [node name="Trail2" type="Node3D" parent="Ship"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, -0.075, -0.1)
-script = ExtResource("4")
-width_curve = SubResource("17")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ship"]
 shape = SubResource("15")
