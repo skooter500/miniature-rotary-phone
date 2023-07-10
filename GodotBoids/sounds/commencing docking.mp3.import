@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d33gojf4mxcmf"
+path="res://.godot/imported/commencing docking.mp3-6e28987cc681f68f823c32890d40d595.mp3str"
+
+[deps]
+
+source_file="res://sounds/commencing docking.mp3"
+dest_files=["res://.godot/imported/commencing docking.mp3-6e28987cc681f68f823c32890d40d595.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,288 @@
+[gd_scene load_steps=37 format=2]
+
+[ext_resource path="res://Models/thargoid_out/thargoid.gltf" type="PackedScene" id=1]
+[ext_resource path="res://fire_at_target_global_state.gd" type="Script" id=2]
+[ext_resource path="res://sounds/Defening the base.mp3" type="AudioStream" id=3]
+[ext_resource path="res://sounds/Launching Viper.mp3" type="AudioStream" id=4]
+[ext_resource path="res://sounds/Enemy Out of Range.mp3" type="AudioStream" id=5]
+[ext_resource path="res://sounds/commencing docking.mp3" type="AudioStream" id=6]
+[ext_resource path="res://Sounds.gd" type="Script" id=7]
+[ext_resource path="res://sounds/launching attack.mp3" type="AudioStream" id=8]
+[ext_resource path="res://Models/coriolis_out/coriolis.gltf" type="PackedScene" id=9]
+[ext_resource path="res://Models/viper_out/viper.gltf" type="PackedScene" id=10]
+[ext_resource path="res://sounds/lets get out of here.mp3" type="AudioStream" id=11]
+[ext_resource path="res://Models/cobramk3_out/cobramk3.gltf" type="PackedScene" id=12]
+[ext_resource path="res://ready_to_launch.gd" type="Script" id=13]
+[ext_resource path="res://Rotate.gd" type="Script" id=14]
+[ext_resource path="res://root.gd" type="Script" id=15]
+[ext_resource path="res://FPController.gd" type="Script" id=16]
+[ext_resource path="res://Boid.gd" type="Script" id=17]
+[ext_resource path="res://PlayerSteering.gd" type="Script" id=18]
+[ext_resource path="res://Avoidance.gd" type="Script" id=19]
+[ext_resource path="res://SceneSwitcher.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Flee.gd" type="Script" id=21]
+[ext_resource path="res://Pursue.gd" type="Script" id=22]
+[ext_resource path="res://TrailRender.gd" type="Script" id=23]
+[ext_resource path="res://CobraTrail.tres" type="Material" id=24]
+[ext_resource path="res://trail_width_curve.tres" type="Curve" id=25]
+[ext_resource path="res://Wander.gd" type="Script" id=26]
+[ext_resource path="res://StateMachine.gd" type="Script" id=27]
+[ext_resource path="res://AttackState.gd" type="Script" id=28]
+[ext_resource path="res://Seek.gd" type="Script" id=29]
+[ext_resource path="res://default_environment.tres" type="Environment" id=30]
+[ext_resource path="res://sounds/safely home.mp3" type="AudioStream" id=31]
+[ext_resource path="res://OffsetPursue.gd" type="Script" id=32]
+[ext_resource path="res://CameraController.gd" type="Script" id=34]
+[ext_resource path="res://debug_draw_examples/Roboto_Bold_16.tres" type="FontFile" id=35]
+
+[sub_resource type="ConvexPolygonShape3D" id=2]
+
+[sub_resource type="SphereShape3D" id=3]
+radius = 22.031
+
+[node name="root" type="Node3D"]
+script = ExtResource( 15 )
+custom_font = ExtResource( 35 )
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -449.962, -8.2812, 445.521 )
+fov = 80.0
+far = 100000.0
+script = ExtResource( 16 )
+speed = 10.0
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Camera3D"]
+
+[node name="Control" type="Node" parent="Camera3D"]
+script = ExtResource( 34 )
+boid_path = NodePath("../../Attacker")
+mode = 1
+
+[node name="Attacker" type="CharacterBody3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -450, -20, 450 )
+collision_mask = 10
+script = ExtResource( 17 )
+force = Vector3( 0, -10, 0 )
+max_speed = 15.0
+max_force = 20
+
+[node name="StateMachine" type="Node" parent="Attacker"]
+script = ExtResource( 27 )
+initial_state = NodePath("../AttackState")
+global_state_path = NodePath("../FireAtTargetGlobalState")
+
+[node name="FireAtTargetGlobalState" type="Node" parent="Attacker"]
+script = ExtResource( 2 )
+target_path = NodePath("../../Base")
+
+[node name="Avoidance" type="Node" parent="Attacker"]
+script = ExtResource( 19 )
+weight = 20.0
+draw_gizmos = false
+feeler_angle = 30
+feeler_length = 70
+updates_per_second = 10
+
+[node name="AttackState" type="Node" parent="Attacker"]
+script = ExtResource( 28 )
+
+[node name="Seek" type="Node" parent="Attacker"]
+script = ExtResource( 29 )
+enabled = false
+
+[node name="Wander" type="Node" parent="Attacker"]
+script = ExtResource( 26 )
+weight = 0.5
+draw_gizmos = false
+enabled = false
+jitter = 100.0
+
+[node name="Flee" type="Node" parent="Attacker"]
+script = ExtResource( 21 )
+weight = 10.0
+draw_gizmos = false
+enabled = false
+enemy_path = NodePath("../../pig")
+flee_range = 30
+
+[node name="PlayerSteering" type="Node" parent="Attacker"]
+script = ExtResource( 18 )
+weight = 10.0
+draw_gizmos = false
+enabled = false
+
+[node name="MeshInstance3D" parent="Attacker" instance=ExtResource( 12 )]
+transform = Transform3D( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Attacker"]
+visible = false
+shape = SubResource( 2 )
+
+[node name="CamTarget" type="Marker3D" parent="Attacker"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9533, -6.65113 )
+
+[node name="TrailRenderer" type="Node3D" parent="Attacker"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.269, -0.043, -0.485001 )
+script = ExtResource( 23 )
+width = 0.4
+width_curve = ExtResource( 25 )
+material = ExtResource( 24 )
+
+[node name="TrailRenderer2" type="Node3D" parent="Attacker"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.269387, -0.0434498, -0.485435 )
+script = ExtResource( 23 )
+width = 0.4
+width_curve = ExtResource( 25 )
+material = ExtResource( 24 )
+
+[node name="Sounds" type="Node3D" parent="Attacker"]
+script = ExtResource( 7 )
+
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Attacker/Sounds"]
+stream = ExtResource( 8 )
+volume_db = 50.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Attacker/Sounds"]
+stream = ExtResource( 11 )
+volume_db = 50.0
+
+[node name="TrailRenderer3" type="Node3D" parent="Attacker"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.269, -0.043, -0.485001 )
+script = ExtResource( 23 )
+width = 0.4
+width_curve = ExtResource( 25 )
+material = ExtResource( 24 )
+
+[node name="TrailRenderer4" type="Node3D" parent="Attacker"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.269387, -0.0434498, -0.485435 )
+script = ExtResource( 23 )
+width = 0.4
+width_curve = ExtResource( 25 )
+material = ExtResource( 24 )
+
+[node name="camera follower" type="CharacterBody3D" parent="."]
+script = ExtResource( 17 )
+max_speed = 15.0
+max_force = 50
+
+[node name="OffsetPursue" type="Node" parent="camera follower"]
+script = ExtResource( 32 )
+leader_node_path = NodePath("../../Attacker")
+
+[node name="Avoidance" type="Node" parent="camera follower"]
+script = ExtResource( 19 )
+weight = 0.0
+draw_gizmos = false
+feeler_angle = 90
+feeler_length = 20
+updates_per_second = 10
+
+[node name="SceneSwitcher" parent="." instance=ExtResource( 20 )]
+
+[node name="Base" type="CharacterBody3D" parent="."]
+transform = Transform3D( 1, 0, 0, 2.98023e-08, 1, -2.98023e-08, 2.98023e-08, 2.98023e-08, 1, 0, 50, 0 )
+collision_layer = 2
+collision_mask = 13
+script = ExtResource( 14 )
+speed = -0.3
+
+[node name="coriolis" parent="Base" instance=ExtResource( 9 )]
+transform = Transform3D( -4.37114e-05, 1.3027e-12, -1000, 2.98023e-05, 1000, 0, 1000, -2.98023e-05, -4.37114e-05, -7.62939e-06, -2.86102e-06, 3.12639e-13 )
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base"]
+shape = SubResource( 3 )
+
+[node name="pig" type="CharacterBody3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0 )
+collision_layer = 8
+collision_mask = 7
+script = ExtResource( 17 )
+
+[node name="viper" parent="pig" instance=ExtResource( 10 )]
+transform = Transform3D( 80, 0, 0, 0, 80, 0, 0, 0, 80, 0, 0, 0 )
+
+[node name="FireAtTargetGlobalState" type="Node" parent="pig"]
+script = ExtResource( 2 )
+target_path = NodePath("../../Attacker")
+
+[node name="Avoidance" type="Node" parent="pig"]
+script = ExtResource( 19 )
+weight = 20.0
+
+[node name="Pursue" type="Node" parent="pig"]
+script = ExtResource( 22 )
+enabled = false
+enemy_node_path = NodePath("../../Attacker")
+
+[node name="StateMachine" type="Node" parent="pig"]
+script = ExtResource( 27 )
+initial_state = NodePath("../ReadyToLaunch")
+global_state_path = NodePath("../FireAtTargetGlobalState")
+
+[node name="Seek" type="Node" parent="pig"]
+script = ExtResource( 29 )
+enabled = false
+
+[node name="Wander" type="Node" parent="pig"]
+script = ExtResource( 26 )
+weight = 0.0
+enabled = false
+
+[node name="TrailRenderer" type="Node3D" parent="pig"]
+transform = Transform3D( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.3, 0, -0.955383 )
+script = ExtResource( 23 )
+width = 0.4
+width_curve = ExtResource( 25 )
+material = ExtResource( 24 )
+
+[node name="TrailRenderer2" type="Node3D" parent="pig"]
+transform = Transform3D( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.3, 0, -0.955383 )
+script = ExtResource( 23 )
+width = 0.4
+width_curve = ExtResource( 25 )
+material = ExtResource( 24 )
+
+[node name="Sounds" type="Node3D" parent="pig"]
+script = ExtResource( 7 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="pig/Sounds"]
+stream = ExtResource( 4 )
+volume_db = 50.0
+doppler_tracking = 2
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="pig/Sounds"]
+stream = ExtResource( 3 )
+volume_db = 50.0
+doppler_tracking = 2
+
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="pig/Sounds"]
+stream = ExtResource( 5 )
+volume_db = 50.0
+doppler_tracking = 2
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="pig/Sounds"]
+stream = ExtResource( 6 )
+volume_db = 50.0
+doppler_tracking = 2
+
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="pig/Sounds"]
+stream = ExtResource( 31 )
+
+[node name="ReadyToLaunch" type="Node" parent="pig"]
+script = ExtResource( 13 )
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D( 0.146447, -0.853553, 0.5, 0.5, 0.5, 0.707107, -0.853553, 0.146447, 0.5, 0, 0, 0 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 30 )
+
+[node name="AttackerBase" type="Marker3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -514.438, -125.307, 490.622 )
+
+[node name="thargoid" parent="AttackerBase" instance=ExtResource( 1 )]
+transform = Transform3D( 3000, 0, 0, 0, 3000, 0, 0, 0, 3000, -276.272, 0, 0 )
+script = ExtResource( 14 )
+speed = -0.3
+
+[editable path="Base/coriolis"]

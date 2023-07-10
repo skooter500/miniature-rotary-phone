@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://6a1wuewffd6y"
+path="res://.godot/imported/Enemy Out of Range.mp3-e09d8b259e4456bca4894cfc84fba653.mp3str"
+
+[deps]
+
+source_file="res://sounds/Enemy Out of Range.mp3"
+dest_files=["res://.godot/imported/Enemy Out of Range.mp3-e09d8b259e4456bca4894cfc84fba653.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

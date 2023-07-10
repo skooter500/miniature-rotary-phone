@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://deg77cbh6bk58"
+path="res://.godot/imported/lets get out of here.mp3-5840e27c91f45519b60b2135a34351a9.mp3str"
+
+[deps]
+
+source_file="res://sounds/lets get out of here.mp3"
+dest_files=["res://.godot/imported/lets get out of here.mp3-5840e27c91f45519b60b2135a34351a9.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

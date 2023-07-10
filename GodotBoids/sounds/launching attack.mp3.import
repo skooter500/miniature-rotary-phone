@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cxna3uugggnub"
+path="res://.godot/imported/launching attack.mp3-27db6ea77e191e9a9595b3c63d73f621.mp3str"
+
+[deps]
+
+source_file="res://sounds/launching attack.mp3"
+dest_files=["res://.godot/imported/launching attack.mp3-27db6ea77e191e9a9595b3c63d73f621.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
