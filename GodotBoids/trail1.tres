@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://u2l570sl0ei1"]
+
+[ext_resource type="Texture2D" uid="uid://bjijkga8k26mq" path="res://triangle.png" id="1_ayxi0"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.6
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_color = Color(0.670588, 0.847059, 0.0862745, 1)
+albedo_texture = ExtResource("1_ayxi0")

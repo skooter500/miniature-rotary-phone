@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://MoveTarget.gd" id="2"]
 [ext_resource type="FontFile" uid="uid://erdgllynwqkw" path="res://examples_dd3d/Roboto-Bold.ttf" id="2_2hpy5"]
 [ext_resource type="Script" path="res://OffsetPursue.gd" id="3"]
+[ext_resource type="Environment" uid="uid://b5dnnkkpxo3qc" path="res://seek_environment..tres" id="4_2wdi4"]
 [ext_resource type="Script" path="res://FPController.gd" id="5"]
 [ext_resource type="Script" path="res://root.gd" id="6"]
 [ext_resource type="Script" path="res://Avoidance.gd" id="7"]
@@ -12,13 +13,11 @@
 [ext_resource type="Material" path="res://Tank Material.tres" id="11_a5ijt"]
 [ext_resource type="Script" path="res://Boid.gd" id="12"]
 [ext_resource type="Script" path="res://addons/proton_trail/proton_trail.gd" id="12_23snj"]
-[ext_resource type="Material" uid="uid://df3peaokn72q8" path="res://addons/proton_trail/demo/sword_trail.tres" id="13_rdh1d"]
 [ext_resource type="Script" path="res://Seek.gd" id="15"]
 [ext_resource type="Script" path="res://SpineAnimator.gd" id="16"]
+[ext_resource type="Material" uid="uid://u2l570sl0ei1" path="res://trail1.tres" id="16_syijp"]
 
 [sub_resource type="SphereShape3D" id="18"]
-
-[sub_resource type="Environment" id="Environment_u0ooi"]
 
 [sub_resource type="PrismMesh" id="7"]
 
@@ -51,7 +50,7 @@ speed = 10.0
 shape = SubResource("18")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-environment = SubResource("Environment_u0ooi")
+environment = ExtResource("4_2wdi4")
 far = 10000.0
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Player/Camera3D"]
@@ -105,7 +104,7 @@ max_force = 50
 damping = 0.3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Creature/boid"]
-transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, -1.74846e-07, -2, 0, 4, -8.74228e-08, 0, 0, 0)
 mesh = SubResource("7")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("11_a5ijt")
@@ -120,7 +119,7 @@ target_path = NodePath("../../../CreatureTarget")
 [node name="tail" type="CharacterBody3D" parent="Creature"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Creature/tail"]
-transform = Transform3D(1, 0, 0, 0, -8.74228e-08, 1, 0, -2, -4.37114e-08, 0, 0, -0.504121)
+transform = Transform3D(2, 0, 0, 0, -1.74846e-07, 2, 0, -4, -8.74228e-08, 0, 0, -0.504121)
 mesh = SubResource("9")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("11_a5ijt")
@@ -133,6 +132,7 @@ disabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 
 [node name="MeshInstance2" type="MeshInstance3D" parent="Creature/body3"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("11")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("11_a5ijt")
@@ -144,6 +144,7 @@ shape = SubResource("12")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
 [node name="MeshInstance3" type="MeshInstance3D" parent="Creature/body2"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("11")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("11_a5ijt")
@@ -155,6 +156,7 @@ shape = SubResource("13")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
 
 [node name="MeshInstance4" type="MeshInstance3D" parent="Creature/body1"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("11")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("11_a5ijt")
@@ -174,36 +176,64 @@ script = ExtResource("15")
 target_path = NodePath("../../ShipTarget")
 
 [node name="Trail" type="Node3D" parent="Ship"]
-transform = Transform3D(-0.999064, 0.0432532, 0, -0.0432532, -0.999064, 0, 0, 0, 1, 0.55, -0.075, -0.1)
+transform = Transform3D(-0.999064, 0.0432532, 0, -0.0432532, -0.999064, 0, 0, 0, 1, 0.549999, -0.075, -1.0016)
+
+[node name="Trail2" type="Node3D" parent="Ship/Trail"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("12_23snj")
+material = ExtResource("16_syijp")
+life_time = 3.0
+smooth = 0.1
+cast_shadow = false
+
+[node name="Top" type="Marker3D" parent="Ship/Trail/Trail2"]
+transform = Transform3D(1, 7.45058e-09, 0, -7.45058e-09, 1, 0, 0, 0, 1, -0.0751112, 0.365082, 0)
+
+[node name="Bottom" type="Marker3D" parent="Ship/Trail/Trail2"]
+transform = Transform3D(1, 7.45058e-09, -1.05879e-22, -7.45058e-09, 1, -1.42109e-14, -3.55271e-15, 1.42109e-14, 1, -0.0561951, -0.353024, 0)
 
 [node name="Trail" type="Node3D" parent="Ship/Trail"]
-transform = Transform3D(1, -6.74248e-10, 0, -6.74248e-10, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("12_23snj")
-material = ExtResource("13_rdh1d")
-resolution = 6.0
-life_time = 1.0
+material = ExtResource("16_syijp")
+life_time = 3.0
+smooth = 0.1
+cast_shadow = false
 
 [node name="Top" type="Marker3D" parent="Ship/Trail/Trail"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+transform = Transform3D(1, 7.45058e-09, 0, -7.45058e-09, 1, 0, 0, 0, 1, -0.0751112, 0.365082, 0)
 
 [node name="Bottom" type="Marker3D" parent="Ship/Trail/Trail"]
-transform = Transform3D(1, -2.33147e-15, 0, -2.33147e-15, 1, -1.42109e-14, -3.55271e-15, 1.42109e-14, 1, 0.00757822, 1.12002, 0)
+transform = Transform3D(1, 7.45058e-09, -1.05879e-22, -7.45058e-09, 1, -1.42109e-14, -3.55271e-15, 1.42109e-14, 1, -0.0561951, -0.353024, 0)
 
 [node name="Trail2" type="Node3D" parent="Ship"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, -0.075, -0.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.549999, -0.075, -1.0016)
 
 [node name="Trail" type="Node3D" parent="Ship/Trail2"]
-transform = Transform3D(1, -6.74248e-10, 0, -6.74248e-10, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("12_23snj")
-material = ExtResource("13_rdh1d")
-resolution = 6.0
-life_time = 1.0
+material = ExtResource("16_syijp")
+life_time = 3.0
+smooth = 0.1
+cast_shadow = false
 
 [node name="Top" type="Marker3D" parent="Ship/Trail2/Trail"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.04308e-07, -0.335526, 0)
 
 [node name="Bottom" type="Marker3D" parent="Ship/Trail2/Trail"]
-transform = Transform3D(1, -2.33147e-15, 0, -2.33147e-15, 1, -1.42109e-14, -3.55271e-15, 1.42109e-14, 1, 0.00757822, 1.12002, 0)
+transform = Transform3D(1, -3.55271e-15, 0, -3.55271e-15, 1, -1.42109e-14, -3.55271e-15, 1.42109e-14, 1, 0.00757819, 0.355507, 0)
+
+[node name="Trail2" type="Node3D" parent="Ship/Trail2"]
+script = ExtResource("12_23snj")
+material = ExtResource("16_syijp")
+life_time = 3.0
+smooth = 0.1
+cast_shadow = false
+
+[node name="Top" type="Marker3D" parent="Ship/Trail2/Trail2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.04308e-07, -0.335526, 0)
+
+[node name="Bottom" type="Marker3D" parent="Ship/Trail2/Trail2"]
+transform = Transform3D(1, -3.55271e-15, 0, -3.55271e-15, 1, -1.42109e-14, -3.55271e-15, 1.42109e-14, 1, 0.00757819, 0.355507, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ship"]
 shape = SubResource("15")
