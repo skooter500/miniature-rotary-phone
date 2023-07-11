@@ -12,7 +12,7 @@ config_version=5
 
 config/name="GodotBoids"
 run/main_scene="res://StateMachineBots.tscn"
-config/features=PackedStringArray("4.0")
+config/features=PackedStringArray("4.1", "C#")
 config/icon="res://icon.png"
 
 [display]
@@ -29,7 +29,7 @@ project/assembly_name="GodotBoids"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/proton_trail/plugin.cfg")
 
 [filesystem]
 
@@ -103,7 +103,6 @@ project/assembly_name="Experiments1"
 
 [physics]
 
-3d/default_gravity=9.8
 common/enable_pause_aware_picking=true
 
 [rendering]

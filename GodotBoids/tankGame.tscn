@@ -64,6 +64,6 @@ canFire = false
 [node name="camTarget" parent="tank" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, -10)
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="tank"]
+[node name="CharacterBody3D2" type="CharacterBody3D" parent="tank"]
 
 [editable path="tank"]

@@ -9,7 +9,8 @@
 [ext_resource type="PackedScene" path="res://SceneSwitcher.tscn" id="10"]
 [ext_resource type="Script" path="res://CameraController.gd" id="11"]
 [ext_resource type="Script" path="res://Boid.gd" id="12"]
-[ext_resource type="Script" path="res://Trail3D.gd" id="12_1c3t3"]
+[ext_resource type="Script" path="res://addons/proton_trail/proton_trail.gd" id="12_23snj"]
+[ext_resource type="Material" uid="uid://df3peaokn72q8" path="res://addons/proton_trail/demo/sword_trail.tres" id="13_rdh1d"]
 [ext_resource type="Script" path="res://Seek.gd" id="15"]
 [ext_resource type="Script" path="res://SpineAnimator.gd" id="16"]
 
@@ -35,8 +36,6 @@ ambient_light_energy = 2.0
 [sub_resource type="BoxShape3D" id="13"]
 
 [sub_resource type="BoxShape3D" id="14"]
-
-[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_3qnrw"]
 
 [sub_resource type="BoxShape3D" id="15"]
 
@@ -69,9 +68,9 @@ max_force = 30
 
 [node name="OffsetPursue" type="Node" parent="camera follower"]
 script = ExtResource("3")
+leader_node_path = NodePath("../../Creature/boid")
 weight = 5.0
 draw_gizmos = false
-leader_node_path = NodePath("../../Creature/boid")
 
 [node name="Avoidance" type="Node" parent="camera follower"]
 script = ExtResource("7")
@@ -171,15 +170,35 @@ target_path = NodePath("../../ShipTarget")
 
 [node name="Trail" type="Node3D" parent="Ship"]
 transform = Transform3D(-0.999064, 0.0432532, 0, -0.0432532, -0.999064, 0, 0, 0, 1, 0.55, -0.075, -0.1)
-script = ExtResource("12_1c3t3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ship/Trail"]
-transform = Transform3D(-0.999064, -0.0432532, 0, 0.0432532, -0.999064, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("RibbonTrailMesh_3qnrw")
-skeleton = NodePath("../../..")
+[node name="Trail" type="Node3D" parent="Ship/Trail"]
+transform = Transform3D(1, -6.74248e-10, 0, -6.74248e-10, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("12_23snj")
+material = ExtResource("13_rdh1d")
+resolution = 6.0
+life_time = 1.0
+
+[node name="Top" type="Marker3D" parent="Ship/Trail/Trail"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+
+[node name="Bottom" type="Marker3D" parent="Ship/Trail/Trail"]
+transform = Transform3D(1, -2.33147e-15, 0, -2.33147e-15, 1, -1.42109e-14, -3.55271e-15, 1.42109e-14, 1, 0.00757822, 1.12002, 0)
 
 [node name="Trail2" type="Node3D" parent="Ship"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, -0.075, -0.1)
+
+[node name="Trail" type="Node3D" parent="Ship/Trail2"]
+transform = Transform3D(1, -6.74248e-10, 0, -6.74248e-10, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("12_23snj")
+material = ExtResource("13_rdh1d")
+resolution = 6.0
+life_time = 1.0
+
+[node name="Top" type="Marker3D" parent="Ship/Trail2/Trail"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+
+[node name="Bottom" type="Marker3D" parent="Ship/Trail2/Trail"]
+transform = Transform3D(1, -2.33147e-15, 0, -2.33147e-15, 1, -1.42109e-14, -3.55271e-15, 1.42109e-14, 1, 0.00757822, 1.12002, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ship"]
 shape = SubResource("15")
