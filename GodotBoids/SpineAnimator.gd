@@ -15,7 +15,8 @@ func calculateOffsets():
 		bones.push_back(bone)
 		if i > 0:
 			var offset = bones[i].global_transform.origin - bones[i-1].global_transform.origin
-			offset = bones[i-1](offset) * .global_transform.basis
+			# offset = bones[i-1].global_transform.basis.xform_inv(offset)
+			offset = bones[i-1].global_transform.basis.inverse() * offset
 			offsets.push_back(offset)
 
 # Called when the node enters the scene tree for the first time.
@@ -42,8 +43,7 @@ func _physics_process(delta):
 		
 		# Why?
 		var target_rot = prev.global_transform.looking_at(next.global_transform.origin, prev.global_transform.basis.y).basis.orthonormalized()			
-		# var next_rot = nextRot.slerp(prevRot, angular_damping * delta).orthonormalized()
-		 
+		# var next_rot = nextRot.slerp(prevRot, angular_damping * delta).orthonormalized()		 
 		next.global_transform.basis = next.global_transform.basis.slerp(target_rot, angular_damping * delta).orthonormalized()
 		
 
