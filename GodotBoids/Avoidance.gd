@@ -15,7 +15,7 @@ var feelers = []
 var space_state
 var needs_updating = true
 
-func draw_gizmos():
+func on_draw_gizmos():
 	for i in feelers.size():
 		var feeler = feelers[i]		
 		
@@ -37,7 +37,7 @@ func start_updating():
 	timer.start()
 
 
-func needs_updating():
+func on_needs_updating():
 	needs_updating = true
 
 func _physics_process(delta):
@@ -48,7 +48,8 @@ func _physics_process(delta):
 func feel(local_ray):
 	var feeler = {}
 	var ray_end = boid.global_transform * (local_ray)
-	var result = space_state.intersect_ray(boid.global_transform.origin, ray_end, [boid], boid.collision_mask)
+	var query = PhysicsRayQueryParameters3D.create(boid.global_transform.origin, ray_end, boid.collision_mask)
+	var result = space_state.intersect_ray(query)
 	feeler.end = ray_end
 	feeler.hit = result
 	if result:
