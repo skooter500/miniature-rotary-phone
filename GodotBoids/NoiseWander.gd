@@ -39,6 +39,7 @@ func calculate():
 
 	var rot = boid.global_transform.basis.get_euler()
 	rot.x = 0
+	
 
 	if axis == Axis.Horizontal:
 		target.x = sin(angle)
