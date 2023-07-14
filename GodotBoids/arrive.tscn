@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://biuciv8fpem15"]
+[gd_scene load_steps=29 format=3 uid="uid://biuciv8fpem15"]
 
 [ext_resource type="Script" path="res://FPController.gd" id="1"]
 [ext_resource type="Script" path="res://Boid.gd" id="2"]
@@ -7,18 +7,21 @@
 [ext_resource type="PackedScene" uid="uid://okvro62ssxp" path="res://Models/cobramk3_out/cobramk3.gltf" id="5"]
 [ext_resource type="PackedScene" path="res://SceneSwitcher.tscn" id="6"]
 [ext_resource type="Script" path="res://TrailRender.gd" id="7"]
+[ext_resource type="Material" path="res://Tank Material.tres" id="8"]
 [ext_resource type="Script" path="res://root.gd" id="9"]
 [ext_resource type="Script" path="res://OffsetPursue.gd" id="10"]
 [ext_resource type="Script" path="res://Arrive.gd" id="11"]
 [ext_resource type="Script" path="res://SpineAnimator.gd" id="12"]
 [ext_resource type="Script" path="res://MoveTarget.gd" id="13"]
+[ext_resource type="Material" uid="uid://ca5mcii5ms7ww" path="res://CobraTrail.tres" id="13_ht4di"]
 
 [sub_resource type="SphereShape3D" id="18"]
 
 [sub_resource type="Environment" id="19"]
 background_mode = 1
-ambient_light_color = Color(0.392157, 0.392157, 0.392157, 1)
-ambient_light_energy = 2.0
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.7
 
 [sub_resource type="PrismMesh" id="7"]
 
@@ -39,6 +42,9 @@ ambient_light_energy = 2.0
 [sub_resource type="Curve" id="16"]
 _data = [Vector2(0.00332226, 0.990909), 0.0, 0.0, 0, 0, Vector2(0.997785, 0), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nslo7"]
+albedo_color = Color(0.670588, 0.847059, 0.0862745, 1)
 
 [sub_resource type="Curve" id="17"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.998893, 0), 0.0, 0.0, 0, 0]
@@ -117,6 +123,7 @@ damping = 0.3
 transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("7")
 skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Creature/boid"]
 shape = SubResource("8")
@@ -126,42 +133,47 @@ script = ExtResource("11")
 target_node = NodePath("../../../CreatureTarget")
 
 [node name="tail" type="CharacterBody3D" parent="Creature"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.30076)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Creature/tail"]
 transform = Transform3D(1, 0, 0, 0, -8.74228e-08, 1, 0, -2, -4.37114e-08, 0, 0, -0.504121)
 mesh = SubResource("9")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Creature/tail"]
 shape = SubResource("10")
 disabled = true
 
 [node name="body3" type="CharacterBody3D" parent="Creature"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.67878)
 
 [node name="MeshInstance2" type="MeshInstance3D" parent="Creature/body3"]
 mesh = SubResource("11")
 skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Creature/body3"]
 shape = SubResource("12")
 
 [node name="body2" type="CharacterBody3D" parent="Creature"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.11919)
 
 [node name="MeshInstance3" type="MeshInstance3D" parent="Creature/body2"]
 mesh = SubResource("11")
 skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Creature/body2"]
 shape = SubResource("13")
 
 [node name="body1" type="CharacterBody3D" parent="Creature"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.4972)
 
 [node name="MeshInstance4" type="MeshInstance3D" parent="Creature/body1"]
 mesh = SubResource("11")
 skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Creature/body1"]
 shape = SubResource("14")
@@ -179,11 +191,13 @@ transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, 0, 0)
 transform = Transform3D(-0.999064, 0.0432532, 0, -0.0432532, -0.999064, 0, 0, 0, 1, 0.55, -0.075, -0.1)
 script = ExtResource("7")
 width_curve = SubResource("16")
+material = SubResource("StandardMaterial3D_nslo7")
 
 [node name="Trail2" type="Node3D" parent="Ship"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, -0.075, -0.1)
 script = ExtResource("7")
 width_curve = SubResource("17")
+material = ExtResource("13_ht4di")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ship"]
 shape = SubResource("15")

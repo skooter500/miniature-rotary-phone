@@ -51,8 +51,8 @@ func _process(delta: float) -> void:
 #############################
 func add_point() -> void:
 	var new_point = Node3D.new()
-	new_point.global_transform.origin = self.global_transform.origin
-	new_point.global_transform.origin = self.global_transform.basis.get_euler()
+	new_point.position = self.global_transform.origin
+	new_point.rotation = self.global_transform.basis.get_euler()
 	points.insert(0, new_point)
 	if points.size() > max_points:
 		var last_point = points.pop_back()

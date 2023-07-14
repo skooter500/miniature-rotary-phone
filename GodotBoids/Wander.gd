@@ -15,7 +15,7 @@ func _ready():
 	boid = get_parent()
 	wander_target = Utils.random_point_in_unit_sphere() * radius
 		
-func draw_gizmos():
+func on_draw_gizmos():
 	var cent = boid.global_transform * (Vector3.BACK * distance)
 	DebugDraw.draw_sphere(cent, radius, Color.DARK_SLATE_BLUE)
 	DebugDraw.draw_line(boid.global_transform.origin, cent, Color.DARK_SLATE_BLUE)

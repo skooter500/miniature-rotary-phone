@@ -31,7 +31,7 @@ func start_updating():
 	var timer = get_child(0)
 	timer.disconnect("timeout", Callable(self, "start_updating"))
 	timer.wait_time = 1.0 / updates_per_second	
-	timer.connect("timeout", Callable(self, "needs_updating"))
+	timer.connect("timeout", Callable(self, "on_needs_updating"))
 	
 	timer.one_shot = false
 	timer.start()

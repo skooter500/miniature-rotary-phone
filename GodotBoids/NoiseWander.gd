@@ -19,9 +19,10 @@ var noise:FastNoiseLite = FastNoiseLite.new()
 func _ready():
 	boid = get_parent()
 	noise.seed = randi()
-	noise.fractal_octaves = 4
-	noise.period = 20.0
-	noise.persistence = 0.8
+	noise.set_noise_type(FastNoiseLite.TYPE_PERLIN)
+	noise.set_frequency(0.01)
+	noise.set_fractal_lacunarity(2)
+	noise.set_fractal_gain(0.5)
 	
 func _process(delta):
 	if draw_gizmos:
@@ -53,7 +54,7 @@ func calculate():
 
 	var local_target = target + (Vector3.BACK * distance)
 	
-	var projected = Basis(rot)
+	var projected = Basis.from_euler(rot)
 	
 	world_target = boid.global_transform.origin + (projected * local_target)	
 	theta += frequency * delta * PI * 2.0

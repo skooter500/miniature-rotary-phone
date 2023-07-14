@@ -11,6 +11,7 @@ extends Node
 func _ready():
 	direction.add_item("Horizontal")
 	direction.add_item("Vertical")
+	
 	$GridContainer2/distance.value = harmonic.distance
 	$GridContainer2/distance.value = harmonic.distance
 	$GridContainer2/radius.value = harmonic.radius

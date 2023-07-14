@@ -6,23 +6,17 @@ class_name Constrain extends SteeringBehavior
 
 var center
 
-func draw_gizmos():
+func on_draw_gizmos():
 	var center_pos = center.global_transform.origin if center else Vector3.ZERO 
-#
 	DebugDraw.draw_sphere(center_pos, radius, Color.BEIGE)
 
 
 func calculate():
-	
 #	Inline IF!! 
 	var to_center = center.global_transform.origin - boid.global_transform.origin if center else - boid.global_transform.origin 
 #	
 	var power = max(to_center.length() - radius, 0)
 	return to_center.limit_length(power)
-	 
-func _process(delta):
-	if draw_gizmos:
-		draw_gizmos()
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():

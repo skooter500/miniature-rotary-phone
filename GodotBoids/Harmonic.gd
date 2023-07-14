@@ -1,4 +1,4 @@
-tool class_name Harmonic extends SteeringBehavior
+class_name Harmonic extends SteeringBehavior
 
 @export var frequency = 0.3
 @export var radius = 10.0
@@ -17,13 +17,13 @@ func _ready():
 	boid = get_parent()
 	theta = randf_range(0, PI * 2.0)
 	
-func _process(delta):
-	if draw_gizmos:
-		boid = get_parent()
-		var cent = boid.global_transform * (Vector3.BACK * distance)
-		DebugDraw.draw_sphere(cent, radius, Color.HOT_PINK)
-		DebugDraw.draw_line(boid.global_transform.origin, cent, Color.HOT_PINK)
-		DebugDraw.draw_arrow_line(cent, worldTarget, Color.HOT_PINK, 0.1)
+func on_draw_gizmos():
+	boid = get_parent()
+	var cent = boid.global_transform * (Vector3.BACK * distance)
+	DebugDraw.draw_sphere(cent, radius, Color.HOT_PINK)
+	DebugDraw.draw_line(boid.global_transform.origin, cent, Color.HOT_PINK)
+	DebugDraw.draw_arrow_line(cent, worldTarget, Color.HOT_PINK, 0.1)
+
 			
 func calculate():		
 	var n  = sin(theta)
@@ -48,7 +48,7 @@ func calculate():
 
 	var localtarget = target + (Vector3.BACK * distance)
 	
-	var projected = Basis(rot)
+	var projected = Basis.from_euler(rot)
 	
 	worldTarget = boid.global_transform.origin + (projected * localtarget)	
 	theta += frequency * delta * PI * 2.0

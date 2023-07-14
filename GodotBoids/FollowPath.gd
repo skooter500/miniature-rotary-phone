@@ -8,7 +8,7 @@ var pathIndex = 0
 
 var target
 
-func draw_gizmos():
+func on_draw_gizmos():
 	if target:
 		DebugDraw.draw_sphere(target, waypoint_seek_distance, Color.CYAN)
 
