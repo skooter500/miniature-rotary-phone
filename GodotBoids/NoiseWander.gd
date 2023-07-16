@@ -51,8 +51,6 @@ func calculate():
 		target.z = cos(angle)
 		target.x = 0
 		
-		
-		
 	target *= radius
 
 	var local_target = target + (Vector3.BACK * distance)

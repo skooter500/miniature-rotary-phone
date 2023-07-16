@@ -1,9 +1,9 @@
-[gd_scene load_steps=33 format=3 uid="uid://bflxosmklrhtm"]
+[gd_scene load_steps=34 format=3 uid="uid://bflxosmklrhtm"]
 
 [ext_resource type="Script" path="res://Avoidance.gd" id="1"]
 [ext_resource type="Script" path="res://PathDrawer.gd" id="2"]
 [ext_resource type="Script" path="res://Controller.gd" id="3"]
-[ext_resource type="PackedScene" path="res://Obstacle.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://gwmykrjbcyf6" path="res://Obstacle.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://SceneSwitcher.tscn" id="5"]
 [ext_resource type="Script" path="res://Arrive.gd" id="6"]
 [ext_resource type="Script" path="res://Obstacles.gd" id="7"]
@@ -19,13 +19,14 @@
 [ext_resource type="Script" path="res://Seek.gd" id="17"]
 [ext_resource type="Script" path="res://NoiseWander.gd" id="18"]
 [ext_resource type="Script" path="res://SpineAnimator.gd" id="19"]
+[ext_resource type="Material" path="res://Tank Material.tres" id="20"]
 
 [sub_resource type="SphereShape3D" id="12"]
 
 [sub_resource type="Environment" id="13"]
 background_mode = 1
-ambient_light_color = Color(0.392157, 0.392157, 0.392157, 1)
-ambient_light_energy = 2.0
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Curve3D" id="2"]
 _data = {
@@ -250,6 +251,7 @@ damping = 0.3
 transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("14")
 skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("20")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="creature/boid"]
 shape = SubResource("15")
@@ -298,42 +300,47 @@ draw_gizmos = false
 enabled = false
 
 [node name="tail" type="CharacterBody3D" parent="creature"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.26002)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="creature/tail"]
 transform = Transform3D(1, 0, 0, 0, -8.74228e-08, 1, 0, -2, -4.37114e-08, 0, 0, -0.504121)
 mesh = SubResource("16")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("20")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="creature/tail"]
 shape = SubResource("17")
 disabled = true
 
 [node name="body3" type="CharacterBody3D" parent="creature"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.70473)
 
 [node name="MeshInstance2" type="MeshInstance3D" parent="creature/body3"]
 mesh = SubResource("18")
 skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("20")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="creature/body3"]
 shape = SubResource("19")
 
 [node name="body2" type="CharacterBody3D" parent="creature"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.11057)
 
 [node name="MeshInstance3" type="MeshInstance3D" parent="creature/body2"]
 mesh = SubResource("18")
 skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("20")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="creature/body2"]
 shape = SubResource("20")
 
 [node name="body1" type="CharacterBody3D" parent="creature"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.6521)
 
 [node name="MeshInstance4" type="MeshInstance3D" parent="creature/body1"]
 mesh = SubResource("18")
 skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("20")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="creature/body1"]
 shape = SubResource("21")
