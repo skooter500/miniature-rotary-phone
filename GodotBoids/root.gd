@@ -29,7 +29,7 @@ extends Node3D
 @export var graph_frame_time_mode := true
 @export var graph_is_enabled := true
 
-func draw_gizmos():
+func on_draw_gizmos():
 	var size = 5000
 	var sub_divisions = size / 100
 	DebugDraw.draw_grid(Vector3.ZERO, Vector3.RIGHT* size, Vector3.BACK * size, Vector2(sub_divisions, sub_divisions), Color.AQUAMARINE)
@@ -57,7 +57,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	draw_gizmos()
+	on_draw_gizmos()
 	var g = _create_graph(&"FPS", true, false, DebugDrawGraph.TEXT_CURRENT | DebugDrawGraph.TEXT_AVG | DebugDrawGraph.TEXT_MAX | DebugDrawGraph.TEXT_MIN, &"", DebugDrawGraph.SIDE_BOTTOM, DebugDrawGraph.POSITION_LEFT_TOP if Engine.is_editor_hint() else DebugDrawGraph.POSITION_RIGHT_TOP, Vector2i(200, 80), custom_font)
 	g.frame_time_mode = false
 

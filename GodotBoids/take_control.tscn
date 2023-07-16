@@ -1,8 +1,9 @@
-[gd_scene load_steps=31 format=3 uid="uid://clj3n1do5ye2l"]
+[gd_scene load_steps=32 format=3 uid="uid://clj3n1do5ye2l"]
 
 [ext_resource type="Script" path="res://root.gd" id="1"]
 [ext_resource type="Script" path="res://FPController.gd" id="2"]
 [ext_resource type="Script" path="res://Boid.gd" id="3"]
+[ext_resource type="Environment" uid="uid://b5dnnkkpxo3qc" path="res://seek_environment..tres" id="3_ed3u0"]
 [ext_resource type="Script" path="res://Avoidance.gd" id="4"]
 [ext_resource type="Script" path="res://PathDrawer.gd" id="5"]
 [ext_resource type="Script" path="res://CreatureController.gd" id="6"]
@@ -16,15 +17,11 @@
 [ext_resource type="Script" path="res://Harmonic.gd" id="14"]
 [ext_resource type="Script" path="res://PlayerSteering.gd" id="15"]
 [ext_resource type="Script" path="res://NoiseWander.gd" id="16"]
-[ext_resource type="PackedScene" path="res://Dodecahedron.tscn" id="18"]
+[ext_resource type="Material" path="res://Tank Material.tres" id="17"]
+[ext_resource type="PackedScene" uid="uid://0byvm1g7eaa6" path="res://Dodecahedron.tscn" id="18"]
 [ext_resource type="Script" path="res://CameraController.gd" id="19"]
 
 [sub_resource type="SphereShape3D" id="23"]
-
-[sub_resource type="Environment" id="24"]
-background_mode = 1
-ambient_light_color = Color(0.392157, 0.392157, 0.392157, 1)
-ambient_light_energy = 2.0
 
 [sub_resource type="Curve3D" id="2"]
 _data = {
@@ -64,7 +61,7 @@ speed = 10.0
 shape = SubResource("23")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-environment = SubResource("24")
+environment = ExtResource("3_ed3u0")
 far = 10000.0
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Player/Camera3D"]
@@ -130,6 +127,7 @@ damping = 0.3
 transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("14")
 skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("17")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="creature/boid"]
 shape = SubResource("15")
@@ -142,9 +140,9 @@ weight = 10.0
 [node name="Harmonic" type="Node" parent="creature/boid"]
 script = ExtResource("14")
 frequency = 0.5
-distance = 10
+distance = 20
 axis = 1
-weight = 3.0
+weight = 7.0
 
 [node name="Constrain" type="Node" parent="creature/boid"]
 script = ExtResource("8")
@@ -164,41 +162,46 @@ draw_gizmos = false
 enabled = false
 
 [node name="body1" type="CharacterBody3D" parent="creature"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.6357)
 
 [node name="MeshInstance4" type="MeshInstance3D" parent="creature/body1"]
 mesh = SubResource("16")
 skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("17")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="creature/body1"]
 shape = SubResource("17")
 
 [node name="body2" type="CharacterBody3D" parent="creature"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.16915)
 
 [node name="MeshInstance3" type="MeshInstance3D" parent="creature/body2"]
 mesh = SubResource("16")
 skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("17")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="creature/body2"]
 shape = SubResource("18")
 
 [node name="body3" type="CharacterBody3D" parent="creature"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.63446)
 
 [node name="MeshInstance2" type="MeshInstance3D" parent="creature/body3"]
 mesh = SubResource("16")
 skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("17")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="creature/body3"]
 shape = SubResource("19")
 
 [node name="tail" type="CharacterBody3D" parent="creature"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.31343)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="creature/tail"]
 transform = Transform3D(1, 0, 0, 0, -8.74228e-08, 1, 0, -2, -4.37114e-08, 0, 0, -0.504121)
 mesh = SubResource("20")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("17")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="creature/tail"]
 shape = SubResource("21")

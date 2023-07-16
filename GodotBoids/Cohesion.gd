@@ -8,7 +8,7 @@ func _ready():
 	boid = get_parent()
 	boid.count_neighbors = true
 
-func draw_gizmos():
+func on_draw_gizmos():
 	DebugDraw.draw_arrow_line(boid.global_transform.origin, center_of_mass, Color.DARK_SEA_GREEN, 0.1)
 	
 func calculate():

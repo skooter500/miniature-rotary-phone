@@ -107,11 +107,13 @@ transform = Transform3D(0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-
 [node name="spineanimator" type="Node" parent="Creature"]
 script = ExtResource("16")
 bonePaths = [NodePath("../boid"), NodePath("../body1"), NodePath("../body2"), NodePath("../body3"), NodePath("../tail")]
+angular_damping = 15.0
 
 [node name="boid" type="CharacterBody3D" parent="Creature"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5154)
 script = ExtResource("12")
 max_force = 50
+banking = 0.2
 damping = 0.3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Creature/boid"]

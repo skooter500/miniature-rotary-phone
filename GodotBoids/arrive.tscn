@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://FPController.gd" id="1"]
 [ext_resource type="Script" path="res://Boid.gd" id="2"]
 [ext_resource type="Script" path="res://CameraController.gd" id="3"]
+[ext_resource type="Environment" uid="uid://b5dnnkkpxo3qc" path="res://seek_environment..tres" id="3_kcbvh"]
 [ext_resource type="Script" path="res://Avoidance.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://okvro62ssxp" path="res://Models/cobramk3_out/cobramk3.gltf" id="5"]
 [ext_resource type="PackedScene" path="res://SceneSwitcher.tscn" id="6"]
@@ -16,12 +17,6 @@
 [ext_resource type="Material" uid="uid://ca5mcii5ms7ww" path="res://CobraTrail.tres" id="13_ht4di"]
 
 [sub_resource type="SphereShape3D" id="18"]
-
-[sub_resource type="Environment" id="19"]
-background_mode = 1
-ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.7
 
 [sub_resource type="PrismMesh" id="7"]
 
@@ -64,7 +59,7 @@ speed = 10.0
 shape = SubResource("18")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-environment = SubResource("19")
+environment = ExtResource("3_kcbvh")
 far = 10000.0
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Player/Camera3D"]

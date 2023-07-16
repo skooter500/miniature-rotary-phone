@@ -6,7 +6,7 @@ func _ready():
 	boid = get_parent()
 	boid.count_neighbors = true
 
-func draw_gizmos():
+func on_draw_gizmos():
 	for i in boid.neighbors.size():
 		var other = boid.neighbors[i]
 		var to_other = boid.neighbors[i].global_transform.origin - boid.global_transform.origin

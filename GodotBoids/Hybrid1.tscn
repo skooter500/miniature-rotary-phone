@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Avoidance.gd" id="1"]
 [ext_resource type="Script" path="res://PathDrawer.gd" id="2"]
 [ext_resource type="Script" path="res://Controller.gd" id="3"]
+[ext_resource type="Environment" uid="uid://b5dnnkkpxo3qc" path="res://seek_environment..tres" id="3_kxtlv"]
 [ext_resource type="PackedScene" uid="uid://gwmykrjbcyf6" path="res://Obstacle.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://SceneSwitcher.tscn" id="5"]
 [ext_resource type="Script" path="res://Arrive.gd" id="6"]
@@ -22,11 +23,6 @@
 [ext_resource type="Material" path="res://Tank Material.tres" id="20"]
 
 [sub_resource type="SphereShape3D" id="12"]
-
-[sub_resource type="Environment" id="13"]
-background_mode = 1
-ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Curve3D" id="2"]
 _data = {
@@ -67,7 +63,7 @@ speed = 10.0
 shape = SubResource("12")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-environment = SubResource("13")
+environment = ExtResource("3_kxtlv")
 far = 10000.0
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Player/Camera3D"]
