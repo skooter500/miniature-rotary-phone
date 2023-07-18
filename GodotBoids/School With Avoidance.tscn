@@ -1,37 +1,34 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=3 uid="uid://bh1rpv2rmgjyo"]
 
-[ext_resource path="res://Boid.gd" type="Script" id=1]
-[ext_resource path="res://CameraController.gd" type="Script" id=2]
-[ext_resource path="res://Obstacle.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Fish2.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Center.gd" type="Script" id=5]
-[ext_resource path="res://school_config.gd" type="Script" id=6]
-[ext_resource path="res://root.gd" type="Script" id=7]
-[ext_resource path="res://School.gd" type="Script" id=8]
-[ext_resource path="res://Obstacles.gd" type="Script" id=9]
-[ext_resource path="res://OffsetPursue.gd" type="Script" id=10]
-[ext_resource path="res://Avoidance.gd" type="Script" id=11]
-[ext_resource path="res://FPController.gd" type="Script" id=12]
-[ext_resource path="res://SceneSwitcher.tscn" type="PackedScene" id=13]
+[ext_resource type="Script" path="res://Boid.gd" id="1"]
+[ext_resource type="Script" path="res://CameraController.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://gwmykrjbcyf6" path="res://Obstacle.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://Fish2.tscn" id="4"]
+[ext_resource type="Script" path="res://Center.gd" id="5"]
+[ext_resource type="Script" path="res://school_config.gd" id="6"]
+[ext_resource type="Script" path="res://root.gd" id="7"]
+[ext_resource type="Script" path="res://School.gd" id="8"]
+[ext_resource type="Script" path="res://Obstacles.gd" id="9"]
+[ext_resource type="Script" path="res://OffsetPursue.gd" id="10"]
+[ext_resource type="Script" path="res://Avoidance.gd" id="11"]
+[ext_resource type="Script" path="res://FPController.gd" id="12"]
+[ext_resource type="PackedScene" path="res://SceneSwitcher.tscn" id="13"]
 
-[sub_resource type="SphereShape3D" id=12]
+[sub_resource type="SphereShape3D" id="12"]
 
-[sub_resource type="Environment" id=13]
+[sub_resource type="Environment" id="13"]
 background_mode = 1
-ambient_light_color = Color( 0.392157, 0.392157, 0.392157, 1 )
+ambient_light_color = Color(0.392157, 0.392157, 0.392157, 1)
 ambient_light_energy = 2.0
 
-[sub_resource type="PlaneMesh" id=10]
-
-[sub_resource type="StandardMaterial3D" id=11]
-albedo_color = Color( 0.960784, 0.717647, 0, 1 )
+[sub_resource type="PlaneMesh" id="10"]
 
 [node name="root" type="Node3D"]
-script = ExtResource( 7 )
+script = ExtResource("7")
 
 [node name="School" type="Node3D" parent="."]
-script = ExtResource( 8 )
-fish_scene = ExtResource( 4 )
+script = ExtResource("8")
+fish_scene = ExtResource("4")
 count = 200
 radius = 150
 neighbor_distance = 25
@@ -41,70 +38,69 @@ grid_size = 1000
 center_path = NodePath("../Center")
 
 [node name="SchoolConfig" type="Node" parent="School"]
-script = ExtResource( 6 )
+script = ExtResource("6")
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.13334, 11.8629, 33.382 )
-script = ExtResource( 12 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.13334, 11.8629, 33.382)
+script = ExtResource("12")
 speed = 10.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-shape = SubResource( 12 )
+shape = SubResource("12")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-environment = SubResource( 13 )
+environment = SubResource("13")
 far = 10000.0
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Player/Camera3D"]
 
 [node name="Camera3D Controller" type="Node" parent="Player/Camera3D"]
-script = ExtResource( 2 )
+script = ExtResource("2")
 boid_player_path = NodePath("../../../camera follower")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.0512, 0.23691 )
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.0512, 0.23691)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="DirectionalLight3D"]
-transform = Transform3D( 0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-08, 1, 0.763187, -0.646177, -2.61999e-08, 0, 12.0512, 0.23691 )
+transform = Transform3D(0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-08, 1, 0.763187, -0.646177, -2.61999e-08, 0, 12.0512, 0.23691)
 
 [node name="Center" type="Marker3D" parent="."]
-script = ExtResource( 5 )
+script = ExtResource("5")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D( 30, 0, 0, 0, 1, 0, 0, 0, 30, 0, -35.9149, 0 )
+transform = Transform3D(30, 0, 0, 0, 1, 0, 0, 0, 30, 0, -35.9149, 0)
 visible = false
-mesh = SubResource( 10 )
-material/0 = SubResource( 11 )
+mesh = SubResource("10")
 
 [node name="camera follower" type="CharacterBody3D" parent="."]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 1.45153 )
-script = ExtResource( 1 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 1.45153)
+script = ExtResource("1")
 max_speed = 20.0
 max_force = 30
 draw_gizmos = false
 
 [node name="OffsetPursue" type="Node" parent="camera follower"]
-script = ExtResource( 10 )
+script = ExtResource("10")
+leader_node_path = NodePath("../../School")
 weight = 5.0
 draw_gizmos = false
-leader_node_path = NodePath("../../School")
 
 [node name="Avoidance" type="Node" parent="camera follower"]
-script = ExtResource( 11 )
-weight = 10.0
+script = ExtResource("11")
 feeler_angle = 90
 feeler_length = 20
 updates_per_second = 10
+weight = 10.0
 
 [node name="Obstacles" type="Node3D" parent="."]
-script = ExtResource( 9 )
-obstacle_scene = ExtResource( 3 )
+script = ExtResource("9")
+obstacle_scene = ExtResource("3")
 radius = 200
 bubble_radius = 50
 center_path = NodePath("../Center")
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="SceneSwitcher" parent="." instance=ExtResource( 13 )]
+[node name="SceneSwitcher" parent="." instance=ExtResource("13")]

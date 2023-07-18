@@ -114,8 +114,8 @@ shape = SubResource("8")
 
 [node name="NoiseWander" type="Node" parent="Creature/boid"]
 script = ExtResource("14")
-frequency = 2.0
-amplitude = 300
+frequency = 5.0
+amplitude = 200
 distance = 15
 weight = 10.0
 

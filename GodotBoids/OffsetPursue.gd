@@ -8,9 +8,9 @@ var world_target:Vector3
 var projected:Vector3
 
 func on_draw_gizmos():
-	DebugDraw.draw_sphere(world_target, 1, Color.GREEN)
-	DebugDraw.draw_sphere(projected, 1, Color.GREEN)
-	DebugDraw.draw_arrow_line(world_target, projected, Color.GREEN, 0.1)	
+	# DebugDraw.draw_sphere(world_target, 1, Color.GREEN)
+	# DebugDraw.draw_sphere(projected, 1, Color.GREEN)
+	DebugDraw.draw_arrow_line(world_target, projected, Color.BLUE_VIOLET, 0.1)	
 
 
 func calculate_offset():
@@ -23,11 +23,7 @@ func _ready():
 		
 	if leader_node_path:
 		leader_boid = get_node(leader_node_path)
-		calculate_offset()
-		
-func _process(delta):
-	if draw_gizmos:
-		DebugDraw.draw_line(projected, world_target, Color.ALICE_BLUE)			
+		calculate_offset()		
 
 func calculate():		
 	world_target = leader_boid.global_transform * (leader_offset)
