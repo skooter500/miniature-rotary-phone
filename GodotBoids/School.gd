@@ -43,7 +43,7 @@ func cell_to_position(cell):
 	p -= Vector3(10000, 10000, 10000) 
 	return p
 	
-func partition():
+func do_partition():
 	cells.clear()	
 	for boid in boids:
 		var key = position_to_cell(boid.transform.origin)
@@ -55,7 +55,7 @@ func _process(delta):
 	#if draw_gizmos:
 	draw_gizmos()
 	if partition:
-		partition()
+		do_partition()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

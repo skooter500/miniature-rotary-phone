@@ -6,7 +6,7 @@ extends CharacterBody3D
 
 @export var bulletPrefab:PackedScene
 
-@export var canFire = true; 
+@export var can_fire = true; 
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -22,7 +22,7 @@ func _ready():
 	pass # Replace with function body.
 	
 func enableFire():
-	canFire = true;
+	can_fire = true;
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):		
@@ -43,13 +43,12 @@ func _process(delta):
 		# move_and_collide()
 		
 		
-	if canFire and Input.is_action_pressed("ui_select"):
+	if can_fire and Input.is_action_pressed("ui_select"):
 		var bullet = bulletPrefab.instantiate()
 		$"..".add_child(bullet) 
-
-		bullet.global_transform.basis = $Turret/bulletSpawn.global_transform.basis
-		bullet.global_transform.origin = $Turret/bulletSpawn.global_transform.origin				
-		canFire = false;
+		bullet.global_transform.basis = $CharacterBody3D/Turret/bulletSpawn.global_transform.basis
+		bullet.global_transform.origin = $CharacterBody3D/Turret/bulletSpawn.global_transform.origin				
+		can_fire = false
 		$Timer.start(1.0 / fireRate)
 
 		

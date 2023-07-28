@@ -1,0 +1,76 @@
+[gd_scene load_steps=14 format=3 uid="uid://bxiscf5b1sm7y"]
+
+[ext_resource type="Script" path="res://Boid.gd" id="1_dfbys"]
+[ext_resource type="Material" path="res://Tank Material.tres" id="2_vtoex"]
+[ext_resource type="Script" path="res://Avoidance.gd" id="3_g2dhw"]
+[ext_resource type="Script" path="res://Separation.gd" id="4_ampyy"]
+[ext_resource type="Script" path="res://Alignment.gd" id="5_coyuf"]
+[ext_resource type="Script" path="res://Cohesion.gd" id="6_asgrn"]
+[ext_resource type="Script" path="res://Wander.gd" id="7_rkjf4"]
+[ext_resource type="Script" path="res://Constrain.gd" id="8_h2p78"]
+[ext_resource type="Script" path="res://TrailRender.gd" id="9_4bsox"]
+[ext_resource type="Material" uid="uid://ca5mcii5ms7ww" path="res://CobraTrail.tres" id="10_5wpc3"]
+
+[sub_resource type="PrismMesh" id="1"]
+
+[sub_resource type="BoxShape3D" id="2"]
+
+[sub_resource type="Curve" id="Curve_oox18"]
+_data = [Vector2(0.00332226, 0.990909), 0.0, 0.0, 0, 0, Vector2(0.997785, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Boid" type="CharacterBody3D"]
+script = ExtResource("1_dfbys")
+max_speed = 30.0
+max_force = 200
+damping = 0.3
+draw_gizmos = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("1")
+surface_material_override/0 = ExtResource("2_vtoex")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("2")
+
+[node name="Avoidance" type="Node" parent="."]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
+script = ExtResource("3_g2dhw")
+feeler_angle = 60
+feeler_length = 30
+weight = 5.0
+draw_gizmos = false
+
+[node name="Separation" type="Node" parent="."]
+script = ExtResource("4_ampyy")
+weight = 20.0
+draw_gizmos = false
+
+[node name="Alignment" type="Node" parent="."]
+script = ExtResource("5_coyuf")
+weight = 20.0
+draw_gizmos = false
+
+[node name="Cohesion" type="Node" parent="."]
+script = ExtResource("6_asgrn")
+weight = 8.0
+draw_gizmos = false
+
+[node name="Wander" type="Node" parent="."]
+script = ExtResource("7_rkjf4")
+draw_gizmos = false
+
+[node name="Constrain" type="Node" parent="."]
+script = ExtResource("8_h2p78")
+draw_gizmos = false
+
+[node name="Trail" type="Node3D" parent="."]
+transform = Transform3D(-0.999064, 0.0432532, 0, -0.0432532, -0.999064, 0, 0, 0, 1, -0.00296706, -0.075, -1.0077)
+script = ExtResource("9_4bsox")
+width_curve = SubResource("Curve_oox18")
+max_points = 50
+material = ExtResource("10_5wpc3")

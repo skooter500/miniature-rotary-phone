@@ -27,7 +27,7 @@ func timeout():
 	can_fire = true
 	timer.wait_time = randf_range(0.2, 1)
 
-func get_class():
+func get_class0():
 	return "FireAtATargetGlobalState"	
 
 func _enter():

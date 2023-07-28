@@ -44,7 +44,7 @@ func _physics_process(delta):
 	# var collision = move_and_collide(v)	
 	# 
 	# global_transform.origin += v
-	
+	translate(v)
 	# look_at(global_transform.origin - v, global_transform.basis.y)
 	t += delta * 10
 

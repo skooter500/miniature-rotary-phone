@@ -80,11 +80,9 @@ max_force = 30
 script = ExtResource("3")
 leader_node_path = NodePath("../../Creature/boid")
 weight = 5.0
-draw_gizmos = false
 
 [node name="Avoidance" type="Node" parent="camera follower"]
 script = ExtResource("7")
-draw_gizmos = false
 
 [node name="CreatureTarget" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90.1317)

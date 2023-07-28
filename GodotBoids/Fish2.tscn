@@ -1,60 +1,60 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=11 format=3 uid="uid://7h081wniqhgu"]
 
-[ext_resource path="res://Boid.gd" type="Script" id=1]
-[ext_resource path="res://Separation.gd" type="Script" id=2]
-[ext_resource path="res://Alignment.gd" type="Script" id=3]
-[ext_resource path="res://Cohesion.gd" type="Script" id=4]
-[ext_resource path="res://Tank Material.tres" type="Material" id=5]
-[ext_resource path="res://Constrain.gd" type="Script" id=6]
-[ext_resource path="res://Wander.gd" type="Script" id=7]
-[ext_resource path="res://Avoidance.gd" type="Script" id=8]
+[ext_resource type="Script" path="res://Boid.gd" id="1"]
+[ext_resource type="Script" path="res://Separation.gd" id="2"]
+[ext_resource type="Script" path="res://Alignment.gd" id="3"]
+[ext_resource type="Script" path="res://Cohesion.gd" id="4"]
+[ext_resource type="Material" path="res://Tank Material.tres" id="5"]
+[ext_resource type="Script" path="res://Constrain.gd" id="6"]
+[ext_resource type="Script" path="res://Wander.gd" id="7"]
+[ext_resource type="Script" path="res://Avoidance.gd" id="8"]
 
-[sub_resource type="PrismMesh" id=1]
+[sub_resource type="PrismMesh" id="1"]
 
-[sub_resource type="BoxShape3D" id=2]
+[sub_resource type="BoxShape3D" id="2"]
 
 [node name="Boid" type="CharacterBody3D"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 max_speed = 30.0
 max_force = 200
 damping = 0.3
 draw_gizmos = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D( 1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 5 )
+transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("1")
+surface_material_override/0 = ExtResource("5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0 )
-shape = SubResource( 2 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("2")
 
 [node name="Avoidance" type="Node" parent="."]
-script = ExtResource( 8 )
-weight = 2.0
-draw_gizmos = false
+script = ExtResource("8")
 feeler_angle = 60
 feeler_length = 30
+weight = 2.0
+draw_gizmos = false
 
 [node name="Separation" type="Node" parent="."]
-script = ExtResource( 2 )
+script = ExtResource("2")
 weight = 20.0
 draw_gizmos = false
 
 [node name="Alignment" type="Node" parent="."]
-script = ExtResource( 3 )
+script = ExtResource("3")
 weight = 20.0
 draw_gizmos = false
 
 [node name="Cohesion" type="Node" parent="."]
-script = ExtResource( 4 )
+script = ExtResource("4")
 weight = 8.0
 draw_gizmos = false
 
 [node name="Wander" type="Node" parent="."]
-script = ExtResource( 7 )
+script = ExtResource("7")
 draw_gizmos = false
 
 [node name="Constrain" type="Node" parent="."]
-script = ExtResource( 6 )
+script = ExtResource("6")
 draw_gizmos = false

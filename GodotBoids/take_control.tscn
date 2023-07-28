@@ -146,7 +146,6 @@ weight = 7.0
 
 [node name="Constrain" type="Node" parent="creature/boid"]
 script = ExtResource("8")
-weight = 0.1
 
 [node name="NoiseWander" type="Node" parent="creature/boid"]
 script = ExtResource("16")
