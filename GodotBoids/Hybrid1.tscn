@@ -62,6 +62,10 @@ speed = 10.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("12")
 
+[node name="XROrigin3D" type="XROrigin3D" parent="Player"]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="Player/XROrigin3D"]
+
 [node name="Camera3D" type="Camera3D" parent="Player"]
 environment = ExtResource("3_kxtlv")
 far = 10000.0
