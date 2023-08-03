@@ -21,5 +21,5 @@ func _think():
 	if target.distance_to(boid.global_transform.origin) < 5:
 		boid.get_node("StateMachine").change_state(DefendState.new())
 
-func get_class():
-	return "LaunchState"
+#func get_class():
+#	return "LaunchState"

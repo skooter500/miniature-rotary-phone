@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ddq8c12jj8vny"
 path.s3tc="res://.godot/imported/unitylogo.png-2d91118fb8c8cc6736d415e28cb27495.s3tc.ctex"
+path.etc2="res://.godot/imported/unitylogo.png-2d91118fb8c8cc6736d415e28cb27495.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://unitylogo.png"
-dest_files=["res://.godot/imported/unitylogo.png-2d91118fb8c8cc6736d415e28cb27495.s3tc.ctex"]
+dest_files=["res://.godot/imported/unitylogo.png-2d91118fb8c8cc6736d415e28cb27495.s3tc.ctex", "res://.godot/imported/unitylogo.png-2d91118fb8c8cc6736d415e28cb27495.etc2.ctex"]
 
 [params]
 

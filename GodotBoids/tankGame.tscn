@@ -23,6 +23,11 @@ ssil_enabled = true
 
 [node name="root" type="Node3D"]
 
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.42811, -6.33751)
+
 [node name="SceneSwitcher" parent="." instance=ExtResource("5")]
 
 [node name="Camera3D" type="Camera3D" parent="."]

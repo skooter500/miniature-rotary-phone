@@ -11,8 +11,8 @@ func _ready():
 	boid = get_parent()
 	pass
 
-func get_class():
-	return "AttackState"
+#func get_class():
+#	return "AttackState"
 
 func _enter():
 	print("Entering attack state")

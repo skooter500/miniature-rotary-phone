@@ -25,8 +25,8 @@ func _think():
 
 		pass
 		
-func get_class():
-	return "RetreatState"
+#func get_class():
+#	return "RetreatState"
 	
 func _ready():
 	boid = get_parent()

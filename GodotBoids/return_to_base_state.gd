@@ -30,8 +30,8 @@ func _think():
 		boid.get_node("StateMachine").change_state(DefendState.new())
 		pass
 		
-func get_class():
-	return "ReturnToBaseState"
+#func get_class():
+#	return "ReturnToBaseState"
 	
 func _ready():
 	boid = get_parent()

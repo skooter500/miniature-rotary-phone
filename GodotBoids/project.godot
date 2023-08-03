@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="GodotBoids"
-run/main_scene="res://StateMachineBots.tscn"
-config/features=PackedStringArray("4.1", "C#")
+run/main_scene="res://node_3d.tscn"
+config/features=PackedStringArray("4.1")
 config/icon="res://icon.png"
 
 [display]
 
 window/size/viewport_width=1000
-window/size/viewport_height=800
+window/size/viewport_height=1000
 window/size/initial_position_type=2
 window/size/resizable=false
 window/size/fullscreen=true
@@ -28,10 +28,6 @@ window/quality/msaa_3d=3
 [dotnet]
 
 project/assembly_name="GodotBoids"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/proton_trail/plugin.cfg")
 
 [filesystem]
 
@@ -109,9 +105,15 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
 environment/ssao/quality=3
 environment/ssil/quality=3
 anti_aliasing/screen_space_roughness_limiter/enabled=false
-anti_aliasing/quality/msaa_3d=3
 quality/subsurface_scattering/quality=2
 quality/filters/msaa=2
+
+[xr]
+
+openxr/enabled=true
+shaders/enabled=true

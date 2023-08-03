@@ -7,7 +7,7 @@ var enemy_boid:Node
 
 var force = Vector3.ZERO
 
-func draw_gizmos():
+func on_draw_gizmos():
 	DebugDraw.draw_sphere(boid.global_transform.origin, flee_range, Color.DARK_SALMON)
 	
 	if force != Vector3.ZERO:

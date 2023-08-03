@@ -6,8 +6,8 @@ var boid
 var base
 var target
 
-func get_class():
-	return "ReadyToLaunchState"
+#func get_class():
+#	return "ReadyToLaunchState"
 
 func _enter():
 	boid = get_parent()
