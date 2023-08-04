@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="GodotBoids"
-run/main_scene="res://Hybrid1.tscn"
+run/main_scene="res://Hybrid1_xr.tscn"
 config/features=PackedStringArray("4.1")
 config/icon="res://icon.png"
+
+[autoload]
+
+XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
 
 [display]
 
@@ -28,6 +32,10 @@ window/quality/msaa_3d=3
 [dotnet]
 
 project/assembly_name="GodotBoids"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
 
 [filesystem]
 
