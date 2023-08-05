@@ -41,19 +41,22 @@ func _process(delta):
 
 	if can_move:
 		var v = Vector3.ZERO
-		if left:
-			var joy = left.get_vector2("primary")
-			var cam_basis = $XROrigin3D/XRCamera3D.global_transform.basis
-			v += cam_basis.x * joy.x
-			v += cam_basis.z * joy.y			
+		
 		var mult = 1
 		if Input.is_key_pressed(KEY_SHIFT):
 			mult = 3
+		
+		if left:
+			var joy = left.get_vector2("primary")
+			var cam_basis = $XROrigin3D/XRCamera3D.global_transform.basis
+			global_translate(cam_basis.z * speed * mult * delta * -joy.y)
+			global_translate(cam_basis.x * speed * mult * delta * joy.x)
+				
 		var turn = Input.get_axis("turn_left", "turn_right") - v.x	
 		if abs(turn) > 0:     
 			global_translate(global_transform.basis.x * speed * turn * mult * delta)
 		
-		var movef = Input.get_axis("move_forward", "move_back") + v.y
+		var movef = Input.get_axis("move_forward", "move_back")
 		if abs(movef) > 0:     
 			global_translate(global_transform.basis.z * speed * movef * mult * delta)
 		
