@@ -23,11 +23,11 @@
 [ext_resource type="Script" path="res://Arrive.gd" id="20_p8h88"]
 [ext_resource type="Script" path="res://PlayerSteering.gd" id="21_tq6wu"]
 
-[sub_resource type="SphereShape3D" id="12"]
-
 [sub_resource type="BoxMesh" id="BoxMesh_fu5ng"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_w30mo"]
+
+[sub_resource type="SphereShape3D" id="12"]
 
 [sub_resource type="Curve3D" id="2"]
 _data = {
@@ -75,29 +75,29 @@ script = ExtResource("4_xyxu5")
 boid_player_path = NodePath("../../../camera follower")
 boid_path = NodePath("../../../creature/boid")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-shape = SubResource("12")
+[node name="XROrigin3D" type="XROrigin3D" parent="Player/Camera3D"]
 
-[node name="XROrigin3D" type="XROrigin3D" parent="Player"]
-
-[node name="XRCamera3D" type="XRCamera3D" parent="Player/XROrigin3D"]
+[node name="XRCamera3D" type="XRCamera3D" parent="Player/Camera3D/XROrigin3D"]
 environment = ExtResource("3_r0ykd")
 
-[node name="left" type="XRController3D" parent="Player/XROrigin3D"]
+[node name="left" type="XRController3D" parent="Player/Camera3D/XROrigin3D"]
 tracker = &"left_hand"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/XROrigin3D/left"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Camera3D/XROrigin3D/left"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 mesh = SubResource("BoxMesh_fu5ng")
 surface_material_override/0 = ExtResource("3_g0c2s")
 
-[node name="right" type="XRController3D" parent="Player/XROrigin3D"]
+[node name="right" type="XRController3D" parent="Player/Camera3D/XROrigin3D"]
 tracker = &"right_hand"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/XROrigin3D/right"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Camera3D/XROrigin3D/right"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 mesh = SubResource("BoxMesh_w30mo")
 surface_material_override/0 = ExtResource("3_g0c2s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("12")
 
 [node name="camera follower" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, -15.0557, 41.7624)
@@ -269,7 +269,6 @@ max_force = 50
 banking = 0.07
 damping = 0.3
 draw_gizmos = false
-pause = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="creature/boid"]
 transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0)
@@ -314,7 +313,7 @@ enabled = false
 
 [node name="Arrive" type="Node" parent="creature/boid"]
 script = ExtResource("20_p8h88")
-target_node = NodePath("../../../Camera3D/Position3D2")
+target_node = NodePath("../../../Center")
 draw_gizmos = false
 enabled = false
 
