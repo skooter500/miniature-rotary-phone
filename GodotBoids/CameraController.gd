@@ -14,10 +14,17 @@ enum Mode { Free, Follow, Boid}
 
 @export var mode = Mode.Free
 
+var left:XRController3D
+var right:XRController3D
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	boid = get_node(boid_path)
 	boid_player = get_node(boid_player_path)
+	
+	left = $"../../XROrigin3D/left"
+	right = $"../../XROrigin3D/right"
+	
 	match mode:
 		Mode.Free:
 			player.can_move = true
@@ -29,32 +36,33 @@ func _ready():
 func calculate_offset():
 	boid_player.get_node("OffsetPursue").calculate_offset()
 	
+func toggle_follow():
+	match mode:
+		Mode.Free:
+			player.can_move = false
+			mode = Mode.Follow
+			boid_player.transform.origin = player.transform.origin
+			boid_player.get_node("OffsetPursue").calculate_offset()
+		Mode.Follow:
+			player.can_move = true
+			mode = Mode.Free
+
+func toggle_boid():
+	match mode:
+		Mode.Follow, Mode.Free:
+			player.can_move = false
+			boid.find_child("MeshInstance3D").set_visible(false)
+			mode = Mode.Boid							
+		Mode.Boid:
+			boid.find_child("MeshInstance3D").set_visible(true)				
+			player.can_move = true
+			mode = Mode.Free
+
 func _input(event):
 	if event is InputEventKey and event.keycode == KEY_C and event.pressed:
-		match mode:
-			Mode.Free:
-				player.can_move = false
-				mode = Mode.Follow
-				boid_player.transform.origin = player.transform.origin
-				boid_player.get_node("OffsetPursue").calculate_offset()
-			Mode.Follow:
-				player.can_move = true
-				mode = Mode.Free
-
+		toggle_follow()
 	if event is InputEventKey and event.keycode == KEY_B and event.pressed:
-		match mode:
-			Mode.Follow:
-				player.can_move = false
-				boid.find_child("MeshInstance3D").set_visible(false)
-				mode = Mode.Free				
-			Mode.Free:
-				player.can_move = false
-				boid.find_child("MeshInstance3D").set_visible(false)
-				mode = Mode.Boid
-			Mode.Boid:
-				boid.find_child("MeshInstance3D").set_visible(true)				
-				player.can_move = true
-				mode = Mode.Free
+		toggle_boid()
 						
 func _physics_process(delta):
 	match mode:
@@ -68,5 +76,10 @@ func _physics_process(delta):
 			player.global_transform.basis = player.global_transform.basis.slerp(desired.basis, delta * 5).orthonormalized()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# print("hello")
 	# DebugDraw.set_text("mode", str(mode))
+	if left.is_button_pressed("ax_button"):
+		toggle_follow()
+	if left.is_button_pressed("by_button"):
+		toggle_boid()
 	pass

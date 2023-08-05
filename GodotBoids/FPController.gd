@@ -10,6 +10,10 @@ extends Node3D
 
 var controlling = true
 
+var left:XRController3D
+var right:XRController3D
+
+
 func _input(event):
 	if event is InputEventMouseMotion and controlling:
 		rotate(Vector3.DOWN, deg_to_rad(event.relative.x * sensitivity))
@@ -26,6 +30,8 @@ func _input(event):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	left = $XROrigin3D/left
+	right = $XROrigin3D/right
 	pass # Replace with function body.
 
 @export var can_move:bool = true
@@ -34,14 +40,20 @@ func _ready():
 func _process(delta):
 
 	if can_move:
+		var v = Vector3.ZERO
+		if left:
+			var joy = left.get_vector2("primary")
+			var cam_basis = $XROrigin3D/XRCamera3D.global_transform.basis
+			v += cam_basis.x * joy.x
+			v += cam_basis.z * joy.y			
 		var mult = 1
 		if Input.is_key_pressed(KEY_SHIFT):
 			mult = 3
-		var turn = Input.get_axis("turn_left", "turn_right")	
+		var turn = Input.get_axis("turn_left", "turn_right") - v.x	
 		if abs(turn) > 0:     
 			global_translate(global_transform.basis.x * speed * turn * mult * delta)
 		
-		var movef = Input.get_axis("move_forward", "move_back")
+		var movef = Input.get_axis("move_forward", "move_back") + v.y
 		if abs(movef) > 0:     
 			global_translate(global_transform.basis.z * speed * movef * mult * delta)
 		
