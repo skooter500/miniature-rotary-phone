@@ -1,6 +1,4 @@
-[gd_resource type="Environment" load_steps=2 format=3 uid="uid://b5dnnkkpxo3qc"]
-
-[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_47pdp"]
+[gd_resource type="Environment" format=3 uid="uid://b5dnnkkpxo3qc"]
 
 [resource]
 background_mode = 1
@@ -11,4 +9,3 @@ glow_normalized = true
 glow_intensity = 5.26
 glow_strength = 2.0
 glow_bloom = 0.31
-adjustment_color_correction = SubResource("NoiseTexture3D_47pdp")
