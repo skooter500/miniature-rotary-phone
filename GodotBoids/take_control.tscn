@@ -70,6 +70,7 @@ far = 10000.0
 script = ExtResource("19")
 boid_player_path = NodePath("../../../camera follower")
 boid_path = NodePath("../../../creature/boid")
+mode = null
 
 [node name="camera follower" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, -15.0557, 41.7624)

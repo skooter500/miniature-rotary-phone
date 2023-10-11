@@ -78,8 +78,8 @@ func _physics_process(delta):
 func _process(delta):
 	# print("hello")
 	# DebugDraw.set_text("mode", str(mode))
-	if left.is_button_pressed("ax_button"):
-		toggle_follow()
-	if left.is_button_pressed("by_button"):
-		toggle_boid()
+#	if left.is_button_pressed("ax_button"):
+#		toggle_follow()
+#	if left.is_button_pressed("by_button"):
+#		toggle_boid()
 	pass

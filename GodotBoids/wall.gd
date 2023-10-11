@@ -9,6 +9,9 @@ extends Node3D
 
 @export var brickScene:PackedScene
 
+func _process(delta):
+	print(delta)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
@@ -17,7 +20,7 @@ func _ready():
 	for j in height:
 		for i in width:				
 			var brick = brickScene.instantiate()
-			var s = 1			
+			var s = 0.5			
 			var pos = Vector3((i - half) * s , 1 + (j * s), 0)
 			brick.transform.origin = pos
 			

@@ -1,26 +1,24 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://phhjtdouyxfd"]
 
-[ext_resource path="res://Ground.tres" type="Material" id=1]
-[ext_resource path="res://CubeMove.gd" type="Script" id=2]
-[ext_resource path="res://root.gd" type="Script" id=3]
+[ext_resource type="Script" path="res://CubeMove.gd" id="2"]
+[ext_resource type="Script" path="res://root.gd" id="3"]
 
-[sub_resource type="BoxMesh" id=1]
+[sub_resource type="BoxMesh" id="1"]
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="Cube" type="MeshInstance3D" parent="."]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, -50 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
-script = ExtResource( 2 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, -50)
+mesh = SubResource("1")
+script = ExtResource("2")
 speed = 10.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D( 0.707107, -0.707107, 0, 0.5, 0.5, -0.707107, 0.5, 0.5, 0.707107, 0, 0, 0 )
+transform = Transform3D(0.707107, -0.707107, 0, 0.5, 0.5, -0.707107, 0.5, 0.5, 0.707107, 0, 0, 0)
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50.5958, 0, -6.18369 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.5958, 0, -6.18369)

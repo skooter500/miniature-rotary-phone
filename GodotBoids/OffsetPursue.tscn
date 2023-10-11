@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://02kudf58ofqw"]
 
 [ext_resource type="PackedScene" uid="uid://cjb0v7ofk5qio" path="res://Boid.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://test.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://cuhde4q4oadrf" path="res://test.tscn" id="3"]
 [ext_resource type="Script" path="res://Follow.gd" id="4"]
 [ext_resource type="Script" path="res://PathDrawer.gd" id="5"]
 [ext_resource type="Script" path="res://BigBoid.gd" id="6"]
@@ -82,7 +82,7 @@ curve = SubResource("8")
 script = ExtResource("5")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(-0.418493, -1.08647e-06, -0.90822, 5.68434e-14, 1, -1.19626e-06, 0.90822, -5.00628e-07, -0.418493, -28.8201, -5.34058e-05, 14.9069)
+transform = Transform3D(0.418493, -1.08647e-06, 0.90822, 5.68434e-14, 1, 1.19626e-06, -0.90822, -5.00627e-07, 0.418493, -28.8201, -5.34058e-05, 14.9069)
 script = ExtResource("4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D/PathFollow3D"]
