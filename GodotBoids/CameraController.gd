@@ -76,10 +76,5 @@ func _physics_process(delta):
 			player.global_transform.basis = player.global_transform.basis.slerp(desired.basis, delta * 5).orthonormalized()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	# print("hello")
-	# DebugDraw.set_text("mode", str(mode))
-#	if left.is_button_pressed("ax_button"):
-#		toggle_follow()
-#	if left.is_button_pressed("by_button"):
-#		toggle_boid()
+	print(mode)
 	pass

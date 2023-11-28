@@ -48,7 +48,7 @@ script = ExtResource("15")
 custom_font = ExtResource("35")
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.13334, 11.8629, 33.382)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -744.058, -106.248, 428.6)
 script = ExtResource("16")
 speed = 10.0
 
@@ -65,10 +65,10 @@ far = 10000.0
 script = ExtResource("34")
 boid_player_path = NodePath("../../../camera follower")
 boid_path = NodePath("../../../Attacker")
-mode = null
+mode = 1
 
 [node name="Attacker" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -450, -20, 450)
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -790.706, -124.258, 492.399)
 collision_mask = 10
 script = ExtResource("17")
 force = Vector3(0, -10, 0)
@@ -121,7 +121,7 @@ draw_gizmos = false
 enabled = false
 
 [node name="MeshInstance3D" parent="Attacker" instance=ExtResource("12")]
-transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Attacker"]
 visible = false
@@ -208,7 +208,6 @@ collision_mask = 7
 script = ExtResource("17")
 
 [node name="viper" parent="pig" instance=ExtResource("10")]
-transform = Transform3D(80, 0, 0, 0, 80, 0, 0, 0, 80, 0, 0, 0)
 
 [node name="FireAtTargetGlobalState" type="Node" parent="pig"]
 script = ExtResource("2")
