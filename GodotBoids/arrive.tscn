@@ -50,6 +50,20 @@ point_count = 2
 [node name="root" type="Node3D"]
 script = ExtResource("9")
 
+[node name="camera follower" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, -15.0557, 41.7624)
+script = ExtResource("2")
+max_force = 30
+
+[node name="OffsetPursue" type="Node" parent="camera follower"]
+script = ExtResource("10")
+leader_node_path = NodePath("../../Creature/boid")
+weight = 5.0
+
+[node name="Avoidance" type="Node" parent="camera follower"]
+script = ExtResource("4")
+draw_gizmos = false
+
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.13334, 11.8629, 33.382)
 script = ExtResource("1")
@@ -68,23 +82,6 @@ far = 10000.0
 script = ExtResource("3")
 boid_player_path = NodePath("../../../camera follower")
 boid_path = NodePath("../../../Creature/boid")
-
-[node name="camera follower" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, 12.5344, 41.7624)
-script = ExtResource("2")
-max_force = 30
-draw_gizmos = false
-
-[node name="OffsetPursue" type="Node" parent="camera follower"]
-script = ExtResource("10")
-leader_node_path = NodePath("../../Creature/boid")
-weight = 5.0
-draw_gizmos = false
-enabled = false
-
-[node name="Avoidance" type="Node" parent="camera follower"]
-script = ExtResource("4")
-draw_gizmos = false
 
 [node name="CreatureTarget" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90.1317)

@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="GodotBoids"
-run/main_scene="res://Hybrid1_xr.tscn"
-config/features=PackedStringArray("4.1")
+run/main_scene="res://StateMachineBots.tscn"
+config/features=PackedStringArray("4.2")
 config/icon="res://icon.png"
 
 [autoload]

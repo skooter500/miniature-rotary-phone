@@ -51,7 +51,6 @@ func _upd_graph_params():
 			if Engine.is_editor_hint() or g != &"FPS":
 				graph.frame_time_mode = graph_frame_time_mode
 
-
 var xr_interface: XRInterface
 
 func _ready():

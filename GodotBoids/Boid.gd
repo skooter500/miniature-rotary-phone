@@ -160,7 +160,7 @@ func _process(delta):
 			count_neighbors_simple()
 			
 func _physics_process(delta):
-	# pause = true
+	# 	pause = false
 	# lerp in the new forces
 	if should_calculate:
 		new_force = calculate()
