@@ -41,10 +41,10 @@ func _physics_process(delta):
 	# DebugDraw.draw_arrow_line(Vector3.ZERO, n * 50, Color.red, 0.1)
 	# I think this should return true when a collision happens, but it doesnt
 	v += n
-	# var collision = move_and_collide(v)	
+	var collision = move_and_collide(v)	
 	# 
 	# global_transform.origin += v
-	translate(v)
+	# translate(v)
 	# look_at(global_transform.origin - v, global_transform.basis.y)
 	t += delta * 10
 

@@ -64,18 +64,19 @@ shape = SubResource("12")
 
 [node name="XROrigin3D" type="XROrigin3D" parent="Player"]
 
+[node name="Camera3D Controller" type="Node" parent="Player/XROrigin3D"]
+script = ExtResource("8")
+boid_player_path = NodePath("../../../camera follower")
+boid_path = NodePath("../../../creature/boid")
+
 [node name="XRCamera3D" type="XRCamera3D" parent="Player/XROrigin3D"]
+environment = ExtResource("3_kxtlv")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 environment = ExtResource("3_kxtlv")
 far = 10000.0
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Player/Camera3D"]
-
-[node name="Camera3D Controller" type="Node" parent="Player/Camera3D"]
-script = ExtResource("8")
-boid_player_path = NodePath("../../../camera follower")
-boid_path = NodePath("../../../creature/boid")
 
 [node name="camera follower" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, -15.0557, 41.7624)

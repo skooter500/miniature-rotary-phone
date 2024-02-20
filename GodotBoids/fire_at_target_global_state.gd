@@ -40,7 +40,7 @@ func _think():
 
 		var dist = to_target.length()
 
-		if angle < 30 and dist < 400:
+		if angle < 30 and dist < 10000:
 			var bullet = bullet_scene.instantiate()
 			get_tree().get_current_scene().add_child(bullet)
 			bullet.global_transform.origin = boid.global_transform * (Vector3.BACK * 1.3)
