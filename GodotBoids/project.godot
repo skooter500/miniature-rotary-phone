@@ -125,5 +125,4 @@ quality/filters/msaa=2
 
 [xr]
 
-openxr/enabled=true
 shaders/enabled=true

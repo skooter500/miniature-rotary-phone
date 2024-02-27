@@ -64,10 +64,10 @@ weight = 10.0
 
 [node name="Harmonic" type="Node" parent="creature/boid"]
 script = ExtResource("10")
-weight = 3.0
 frequency = 0.5
 distance = 10
 axis = 1
+weight = 3.0
 
 [node name="Constrain" type="Node" parent="creature/boid"]
 script = ExtResource("8")
@@ -75,10 +75,10 @@ weight = 0.1
 
 [node name="NoiseWander" type="Node" parent="creature/boid"]
 script = ExtResource("4")
-draw_gizmos = false
 radius = 50.0
 amplitude = 90
 distance = 100
+draw_gizmos = false
 
 [node name="UserSteering" type="Node" parent="creature/boid"]
 script = ExtResource("5")

@@ -1,4 +1,4 @@
-extends Node3D
+class_name Root extends Node3D
 
 @export var custom_font : Font
 @export var zylann_example := false
@@ -11,7 +11,7 @@ extends Node3D
 @export_group("Text groups", "text_groups")
 @export var text_groups_show_hints := true
 @export var text_groups_show_stats := true
-@export var text_groups_position := DebugDrawConfig2D.POSITION_LEFT_TOP
+@export var text_groups_position := DebugDraw2DConfig.POSITION_LEFT_TOP
 @export var text_groups_offset := Vector2i(8, 8)
 @export var text_groups_padding := Vector2i(3, 1)
 @export_range(1, 100) var text_groups_default_font_size := 12
@@ -32,25 +32,10 @@ extends Node3D
 func on_draw_gizmos():
 	var size = 5000
 	var sub_divisions = size / 100
-	DebugDraw.draw_grid(Vector3.ZERO, Vector3.RIGHT* size, Vector3.BACK * size, Vector2(sub_divisions, sub_divisions), Color.AQUAMARINE)
+	DebugDraw3D.draw_grid(Vector3.ZERO, Vector3.RIGHT* size, Vector3.BACK * size, Vector2(sub_divisions, sub_divisions), Color.AQUAMARINE)
 	
 	# DebugDraw.draw_grid(Vector3.ZERO, Vector3.UP * size, Vector3.BACK * size, Vector2(sub_divisions, sub_divisions), Color.aquamarine)
 	# DebugDraw.draw_grid(Vector3.ZERO, Vector3.RIGHT* size, Vector3.BACK * size, Vector2(sub_divisions, sub_divisions), Color.AQUAMARINE)
-
-func _upd_graph_params():
-	DebugDraw.config_2d.graphs_base_offset = graph_offset
-	for g in [&"FPS", &"fps5", &"fps8"]:
-		var graph := DebugDraw.get_graph(g) as DebugDrawFPSGraph
-		if graph:
-			graph.size = graph_size
-			graph.title_size = graph_title_font_size
-			graph.text_size = graph_text_font_size
-			graph.line_width = graph_line_width
-			graph.text_precision = graph_text_precision
-			graph.buffer_size = graph_buffer_size
-			if Engine.is_editor_hint() or g != &"FPS":
-				graph.frame_time_mode = graph_frame_time_mode
-
 
 var xr_interface: XRInterface
 
@@ -72,16 +57,18 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	on_draw_gizmos()
-	var g = _create_graph(&"FPS", true, false, DebugDrawGraph.TEXT_CURRENT | DebugDrawGraph.TEXT_AVG | DebugDrawGraph.TEXT_MAX | DebugDrawGraph.TEXT_MIN, &"", DebugDrawGraph.SIDE_BOTTOM, DebugDrawGraph.POSITION_LEFT_TOP if Engine.is_editor_hint() else DebugDrawGraph.POSITION_RIGHT_TOP, Vector2i(200, 80), custom_font)
+	# var g = _create_graph(&"FPS", true, false, DebugDrawGraph.TEXT_CURRENT | DebugDrawGraph.TEXT_AVG | DebugDrawGraph.TEXT_MAX | DebugDrawGraph.TEXT_MIN, &"", DebugDrawGraph.SIDE_BOTTOM, DebugDrawGraph.POSITION_LEFT_TOP if Engine.is_editor_hint() else DebugDrawGraph.POSITION_RIGHT_TOP, Vector2i(200, 80), custom_font)
+	var g = _create_graph(&"FPS", true, false, DebugDraw2DGraph.TEXT_CURRENT | DebugDraw2DGraph.TEXT_AVG | DebugDraw2DGraph.TEXT_MAX | DebugDraw2DGraph.TEXT_MIN, &"", DebugDraw2DGraph.SIDE_BOTTOM, DebugDraw2DGraph.POSITION_LEFT_TOP if Engine.is_editor_hint() else DebugDraw2DGraph.POSITION_RIGHT_TOP, Vector2i(200, 80), custom_font)
+	
 	g.frame_time_mode = false
 
-func _create_graph(title, is_fps, show_title, flags, parent := &"", parent_side := DebugDrawGraph.SIDE_BOTTOM, pos = DebugDrawGraph.POSITION_LEFT_BOTTOM, size := Vector2i(256, 60), font = null) -> DebugDrawGraph:
-	var graph := DebugDraw.get_graph(title)
+func _create_graph(title, is_fps, show_title, flags, parent := &"", parent_side := DebugDraw2DGraph.SIDE_BOTTOM, pos = DebugDraw2DGraph.POSITION_LEFT_BOTTOM, size := Vector2i(256, 60), font = null) -> DebugDraw2DGraph:
+	var graph := DebugDraw2D.get_graph(title)
 	if !graph:
 		if is_fps:
-			graph = DebugDraw.create_fps_graph(title)
+			graph = DebugDraw2D.create_fps_graph(title)
 		else:
-			graph = DebugDraw.create_graph(title)
+			graph = DebugDraw2D.create_graph(title)
 		
 		if graph:
 			graph.size = size
