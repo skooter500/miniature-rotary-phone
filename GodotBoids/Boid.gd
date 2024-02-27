@@ -146,7 +146,7 @@ func calculate():
 				behaviors_active += " Limiting force"
 				break
 	if draw_gizmos:
-		DebugDraw2D.set_text(str(self) + " " + behaviors_active)
+		DebugDraw2D.set_text(str(self), behaviors_active)
 	return force_acc
 
 

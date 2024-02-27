@@ -1,33 +1,7 @@
 class_name Root extends Node3D
 
 @export var custom_font : Font
-@export var zylann_example := false
-@export var test_text := true
-@export var test_graphs := false
-@export var more_test_cases := true
-@export var draw_array_of_boxes := false
-@export_range(0, 1024) var start_culling_distance := 0.0
 
-@export_group("Text groups", "text_groups")
-@export var text_groups_show_hints := true
-@export var text_groups_show_stats := true
-@export var text_groups_position := DebugDraw2DConfig.POSITION_LEFT_TOP
-@export var text_groups_offset := Vector2i(8, 8)
-@export var text_groups_padding := Vector2i(3, 1)
-@export_range(1, 100) var text_groups_default_font_size := 12
-@export_range(1, 100) var text_groups_title_font_size := 14
-@export_range(1, 100) var text_groups_text_font_size := 12
-
-@export_category("Graphs")
-@export var graph_offset := Vector2i(8, 8)
-@export var graph_size := Vector2i(200, 80)
-@export_range(1, 100) var graph_title_font_size := 14
-@export_range(1, 100) var graph_text_font_size := 12
-@export_range(0, 64) var graph_text_precision := 2
-@export_range(1, 32) var graph_line_width := 1.0
-@export_range(1, 512) var graph_buffer_size := 128
-@export var graph_frame_time_mode := true
-@export var graph_is_enabled := true
 
 func on_draw_gizmos():
 	var size = 5000

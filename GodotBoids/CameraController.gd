@@ -76,5 +76,4 @@ func _physics_process(delta):
 			player.global_transform.basis = player.global_transform.basis.slerp(desired.basis, delta * 5).orthonormalized()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(mode)
 	pass
