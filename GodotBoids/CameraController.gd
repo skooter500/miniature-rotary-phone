@@ -22,8 +22,8 @@ func _ready():
 	boid = get_node(boid_path)
 	boid_player = get_node(boid_player_path)
 	
-	left = $"../../XROrigin3D/left"
-	right = $"../../XROrigin3D/right"
+	#left = $"../../XROrigin3D/left"
+	# right = $"../../XROrigin3D/right"
 	
 	match mode:
 		Mode.Free:

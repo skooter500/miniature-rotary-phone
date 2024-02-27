@@ -20,11 +20,11 @@ func on_draw_gizmos():
 		var feeler = feelers[i]		
 		
 		if feeler.hit:
-			DebugDraw.draw_line(boid.global_transform.origin, feeler.hit_target, Color.CHARTREUSE)
-			DebugDraw.draw_arrow_line(feeler.hit_target, feeler.hit_target + feeler.normal, Color.BLUE, 0.1)
-			DebugDraw.draw_arrow_line(feeler.hit_target, feeler.hit_target + feeler.force * weight, Color.RED, 0.1)			
+			DebugDraw3D.draw_line(boid.global_transform.origin, feeler.hit_target, Color.CHARTREUSE)
+			DebugDraw3D.draw_arrow(feeler.hit_target, feeler.hit_target + feeler.normal, Color.BLUE, 0.1)
+			DebugDraw3D.draw_arrow(feeler.hit_target, feeler.hit_target + feeler.force * weight, Color.RED, 0.1)			
 		else:
-			DebugDraw.draw_line(boid.global_transform.origin, feeler.end, Color.CHARTREUSE)
+			DebugDraw3D.draw_line(boid.global_transform.origin, feeler.end, Color.CHARTREUSE)
 
 func start_updating():
 	

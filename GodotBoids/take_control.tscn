@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://OffsetPursue.gd" id="7"]
 [ext_resource type="Script" path="res://Constrain.gd" id="8"]
 [ext_resource type="Script" path="res://Obstacles.gd" id="9"]
-[ext_resource type="PackedScene" path="res://SceneSwitcher.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://d26vt30ugeu0d" path="res://SceneSwitcher.tscn" id="10"]
 [ext_resource type="PackedScene" uid="uid://gwmykrjbcyf6" path="res://Obstacle.tscn" id="11"]
 [ext_resource type="Script" path="res://SpineAnimator.gd" id="12"]
 [ext_resource type="Script" path="res://Rotate.gd" id="13"]
@@ -134,6 +134,7 @@ shape = SubResource("15")
 
 [node name="Avoidance" type="Node" parent="creature/boid"]
 script = ExtResource("4")
+direction = 2
 feeler_length = 15
 weight = 10.0
 

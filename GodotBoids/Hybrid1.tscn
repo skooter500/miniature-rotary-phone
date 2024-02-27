@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Controller.gd" id="3"]
 [ext_resource type="Environment" uid="uid://b5dnnkkpxo3qc" path="res://seek_environment..tres" id="3_kxtlv"]
 [ext_resource type="PackedScene" uid="uid://gwmykrjbcyf6" path="res://Obstacle.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://SceneSwitcher.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://d26vt30ugeu0d" path="res://SceneSwitcher.tscn" id="5"]
 [ext_resource type="Script" path="res://Arrive.gd" id="6"]
 [ext_resource type="Script" path="res://Obstacles.gd" id="7"]
 [ext_resource type="Script" path="res://CameraController.gd" id="8"]
@@ -291,7 +291,7 @@ enabled = false
 
 [node name="Arrive" type="Node" parent="creature/boid"]
 script = ExtResource("6")
-target_node = NodePath("../../../Camera3D/Position3D2")
+target_node = NodePath("../../../Player")
 draw_gizmos = false
 enabled = false
 
