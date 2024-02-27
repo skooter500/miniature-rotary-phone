@@ -1,7 +1,13 @@
 class_name Root extends Node3D
 
-@export var custom_font : Font
+var custom_font:Font
 
+func _input(event):
+	if event is InputEventKey and event.pressed and event.keycode == KEY_F:
+		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 func on_draw_gizmos():
 	var size = 5000
@@ -13,7 +19,13 @@ func on_draw_gizmos():
 
 var xr_interface: XRInterface
 
+var text_size = 24
+
 func _ready():
+	custom_font = load("res://fonts/Hyperspace Bold.otf")
+	DebugDraw2D.config.text_custom_font = custom_font
+	DebugDraw2D.config.text_default_size = text_size
+	DebugDraw2D.config.text_background_color = Color.TRANSPARENT
 	xr_interface = XRServer.find_interface("OpenXR")
 	if xr_interface and xr_interface.is_initialized():
 		print("OpenXR initialised successfully")
@@ -51,6 +63,8 @@ func _create_graph(title, is_fps, show_title, flags, parent := &"", parent_side 
 			graph.show_title = show_title
 			graph.show_text_flags = flags
 			graph.custom_font = font
+			graph.background_color = Color.TRANSPARENT
+			graph.text_size = text_size
 			graph.set_parent(parent, parent_side)
 	
 	return graph

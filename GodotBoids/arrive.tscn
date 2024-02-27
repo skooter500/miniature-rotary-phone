@@ -1,8 +1,7 @@
-[gd_scene load_steps=30 format=3 uid="uid://biuciv8fpem15"]
+[gd_scene load_steps=29 format=3 uid="uid://biuciv8fpem15"]
 
 [ext_resource type="Script" path="res://FPController.gd" id="1"]
 [ext_resource type="Script" path="res://Boid.gd" id="2"]
-[ext_resource type="FontFile" uid="uid://rvjbc8pu44du" path="res://fonts/Hyperspace.otf" id="2_rj1sw"]
 [ext_resource type="Script" path="res://CameraController.gd" id="3"]
 [ext_resource type="Environment" uid="uid://b5dnnkkpxo3qc" path="res://seek_environment..tres" id="3_kcbvh"]
 [ext_resource type="Script" path="res://Avoidance.gd" id="4"]
@@ -50,7 +49,6 @@ point_count = 2
 
 [node name="root" type="Node3D"]
 script = ExtResource("9")
-custom_font = ExtResource("2_rj1sw")
 
 [node name="camera follower" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, -15.0557, 41.7624)
