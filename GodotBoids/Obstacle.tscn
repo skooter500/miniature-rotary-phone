@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Boid.gd" id="1"]
 [ext_resource type="Script" path="res://Wander.gd" id="2"]
-[ext_resource type="Material" path="res://Ground.tres" id="2_dmlrh"]
+[ext_resource type="Material" uid="uid://jru41rxv1b16" path="res://Ground.tres" id="2_dmlrh"]
 [ext_resource type="Script" path="res://Constrain.gd" id="3"]
 
 [sub_resource type="SphereShape3D" id="13"]

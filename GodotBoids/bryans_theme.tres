@@ -74,7 +74,7 @@ corner_detail = 5
 [resource]
 default_font = ExtResource("1_bmxlk")
 default_font_size = 24
-Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_color = Color(0.498039, 1, 0, 1)
 Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
 Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
 Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
@@ -95,3 +95,5 @@ Button/styles/focus = SubResource("StyleBoxFlat_030w0")
 Button/styles/hover = SubResource("StyleBoxFlat_5qtmj")
 Button/styles/normal = SubResource("StyleBoxFlat_mwj3f")
 Button/styles/pressed = SubResource("StyleBoxFlat_r3wnf")
+Label/colors/font_color = Color(0.498039, 1, 0, 1)
+RichTextLabel/colors/default_color = Color(0.498039, 1, 0, 1)

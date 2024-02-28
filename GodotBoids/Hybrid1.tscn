@@ -112,17 +112,10 @@ transform = Transform3D(0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-
 script = ExtResource("3")
 
 [node name="GridContainer2" type="GridContainer" parent="Controls"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -469.0
-offset_top = -32.0
-offset_right = 73.0
-offset_bottom = 464.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 22.0
+offset_top = 663.0
+offset_right = 508.0
+offset_bottom = 976.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0

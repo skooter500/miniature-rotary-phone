@@ -26,6 +26,7 @@ func _ready():
 	DebugDraw2D.config.text_custom_font = custom_font
 	DebugDraw2D.config.text_default_size = text_size
 	DebugDraw2D.config.text_background_color = Color.TRANSPARENT
+	DebugDraw2D.config.text_foreground_color = Color.CHARTREUSE
 	xr_interface = XRServer.find_interface("OpenXR")
 	if xr_interface and xr_interface.is_initialized():
 		print("OpenXR initialised successfully")
@@ -63,6 +64,7 @@ func _create_graph(title, is_fps, show_title, flags, parent := &"", parent_side 
 			graph.show_title = show_title
 			graph.show_text_flags = flags
 			graph.custom_font = font
+			graph.text_color = Color.CHARTREUSE
 			graph.background_color = Color.TRANSPARENT
 			graph.text_size = text_size
 			graph.set_parent(parent, parent_side)
