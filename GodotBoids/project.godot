@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="stingrays"
+config/name="GodotBoids"
 run/main_scene="res://Hybrid1.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://icon.png"
@@ -118,10 +118,10 @@ textures/vram_compression/import_etc2_astc=true
 environment/ssao/quality=3
 environment/ssil/quality=3
 anti_aliasing/screen_space_roughness_limiter/enabled=false
+anti_aliasing/quality/msaa_3d=3
 quality/subsurface_scattering/quality=2
 quality/filters/msaa=2
 
 [xr]
 
-openxr/enabled=true
 shaders/enabled=true
