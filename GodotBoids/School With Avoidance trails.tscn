@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://Avoidance.gd" id="11_cwb5e"]
 [ext_resource type="Script" path="res://Obstacles.gd" id="12_1r5bc"]
 [ext_resource type="PackedScene" uid="uid://gwmykrjbcyf6" path="res://Obstacle.tscn" id="13_pwdhc"]
-[ext_resource type="PackedScene" path="res://SceneSwitcher.tscn" id="14_ewmu6"]
+[ext_resource type="PackedScene" uid="uid://d26vt30ugeu0d" path="res://SceneSwitcher.tscn" id="14_ewmu6"]
 
 [sub_resource type="SphereShape3D" id="12"]
 

@@ -1,11 +1,8 @@
 class_name Arrive extends SteeringBehavior
 
-@export var target_node:NodePath
-
+@export var target:Node3D
 
 @export var slowing_radius:float = 20 
-
-var target
 
 func on_draw_gizmos():
 	if target: 
@@ -18,5 +15,4 @@ func calculate():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	boid = get_parent()
-	target = get_node(target_node)
 	pass # Replace with function body.

@@ -67,8 +67,10 @@ func _ready():
 		var fish = fish_scene.instantiate()		
 		var pos = Utils.random_point_in_unit_sphere() * radius
 		add_child(fish)
-		fish.global_transform.origin = pos
-		fish.global_transform.basis = Basis(Vector3.UP, randf_range(0, PI * 2.0))
+		fish.global_position = pos
+		fish.global_rotation = Vector3(0, randf_range(0, PI * 2.0),  0)
+		# fish.global_transform.origin = pos
+		# fish.global_transform.basis = Basis(Vector3.UP, randf_range(0, PI * 2.0))
 		var boid
 		if fish is Boid:
 			boid = fish
