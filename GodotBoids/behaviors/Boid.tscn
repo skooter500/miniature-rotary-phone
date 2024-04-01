@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjb0v7ofk5qio"]
+
+[ext_resource type="Script" path="res://behaviors/BigBoid.gd" id="1"]
+[ext_resource type="Script" path="res://behaviors/TrailRender.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://bylu6abfrb8hd" path="res://behaviors/cobramk3.tscn" id="3"]
+
+[sub_resource type="BoxShape3D" id="14"]
+size = Vector3(6.10159, nan, 4.62428)
+
+[sub_resource type="Curve" id="15"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="16"]
+albedo_color = Color(1, 0.960784, 0, 1)
+
+[node name="boid" type="CharacterBody3D"]
+script = ExtResource("1")
+controllerSteeringEnabled = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0867062, 0, -0.17341)
+shape = SubResource("14")
+
+[node name="TrailRenderer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31773, -0.160274, -1.00958)
+script = ExtResource("2")
+width = 1.7
+width_curve = SubResource("15")
+max_points = 50
+material = SubResource("16")
+
+[node name="CobraMk3" parent="." instance=ExtResource("3")]
+
+[node name="TrailRenderer2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.37491, -0.160274, -1.00958)
+script = ExtResource("2")
+width = 1.7
+width_curve = SubResource("15")
+max_points = 50
+material = SubResource("16")

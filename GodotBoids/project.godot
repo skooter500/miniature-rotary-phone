@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="GodotBoids"
-run/main_scene="res://Hybrid1.tscn"
+run/main_scene="res://behaviors/Hybrid1.tscn"
 config/features=PackedStringArray("4.2", "C#")
-config/icon="res://icon.png"
+config/icon="res://behaviors/icon.png"
+
+[audio]
+
+buses/default_bus_layout="res://behaviors/default_bus_layout.tres"
 
 [autoload]
 
@@ -32,6 +36,11 @@ window/quality/msaa_3d=3
 [dotnet]
 
 project/assembly_name="GodotBoids"
+
+[editor]
+
+version_control/plugin_name="git"
+version_control/autoload_on_startup=true
 
 [editor_plugins]
 

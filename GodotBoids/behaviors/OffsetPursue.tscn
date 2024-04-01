@@ -1,0 +1,108 @@
+[gd_scene load_steps=9 format=3 uid="uid://02kudf58ofqw"]
+
+[ext_resource type="PackedScene" uid="uid://cjb0v7ofk5qio" path="res://behaviors/Boid.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://cuhde4q4oadrf" path="res://behaviors/test.tscn" id="3"]
+[ext_resource type="Script" path="res://behaviors/Follow.gd" id="4"]
+[ext_resource type="Script" path="res://behaviors/PathDrawer.gd" id="5"]
+[ext_resource type="Script" path="res://behaviors/BigBoid.gd" id="6"]
+
+[sub_resource type="PlaneMesh" id="2"]
+
+[sub_resource type="Curve3D" id="8"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -28.8201, -5.34058e-05, 14.9069, 0, 0, 0, 0, 0, 0, -69.3669, -0.000106812, -3.77642, 0, 0, 0, 0, 0, 0, -50.6835, -7.62939e-05, -28.82, 0, 0, 0, 0, 0, 0, 46.7083, -5.34058e-05, -27.2299, 0, 0, 0, 0, 0, 0, 52.6711, 7.62939e-06, 0.993793, 0, 0, 0, 0, 0, 0, 61.4845, 0, 43.691, 0, 0, 0, 0, 0, 0, 27.23, 5.34058e-05, 42.3357, 0, 0, 0, 0, 0, 0, 2.29026, 0, 45.1004, 0, 0, 0, 0, 0, 0, -43.7805, -4.57764e-05, 32.4823),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 9
+
+[sub_resource type="PrismMesh" id="9"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Follower8" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.123, -2.28415, -76.6751)
+targetNodePath = NodePath("../Marker3D")
+offsetPursueEnabled = true
+leaderNodePath = NodePath("../Leader")
+
+[node name="Follower2" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.31269, -15.2277)
+targetNodePath = NodePath("../Marker3D")
+offsetPursueEnabled = true
+leaderNodePath = NodePath("../Leader")
+
+[node name="Follower" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.34765, -21.2265)
+targetNodePath = NodePath("../Marker3D")
+offsetPursueEnabled = true
+leaderNodePath = NodePath("../Leader")
+
+[node name="Follower3" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.258, 18.6279, -51.8382)
+targetNodePath = NodePath("../Marker3D")
+offsetPursueEnabled = true
+leaderNodePath = NodePath("../Leader")
+
+[node name="Follower4" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5313, 6.01877, -66.2404)
+targetNodePath = NodePath("../Marker3D")
+offsetPursueEnabled = true
+leaderNodePath = NodePath("../Leader")
+
+[node name="Follower5" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.6334, 16.2081, -29.694)
+targetNodePath = NodePath("../Marker3D")
+offsetPursueEnabled = true
+leaderNodePath = NodePath("../Leader")
+
+[node name="Follower6" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.6334, -4.85643, -50.2514)
+targetNodePath = NodePath("../Marker3D")
+offsetPursueEnabled = true
+leaderNodePath = NodePath("../Leader")
+
+[node name="Follower7" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.258, -18.6328, -51.0127)
+targetNodePath = NodePath("../Marker3D")
+offsetPursueEnabled = true
+leaderNodePath = NodePath("../Leader")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -1, 0)
+visible = false
+mesh = SubResource("2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Path3D" type="Path3D" parent="."]
+visible = false
+curve = SubResource("8")
+script = ExtResource("5")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.418493, -1.08647e-06, 0.90822, 5.68434e-14, 1, 1.19626e-06, -0.90822, -5.00627e-07, 0.418493, -28.8201, -5.34058e-05, 14.9069)
+script = ExtResource("4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D/PathFollow3D"]
+mesh = SubResource("9")
+
+[node name="Marker3D" parent="." instance=ExtResource("3")]
+
+[node name="Leader" parent="." instance=ExtResource("2")]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, -2.28415, 12.9662)
+targetNodePath = NodePath("../Marker3D")
+pathFollowEnabled = true
+
+[node name="camTarget" type="Node3D" parent="Leader"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.5695, -39.5444)
+
+[node name="camFollower2" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.85635, 8.83019, -46.5608)
+script = ExtResource("6")
+offsetPursueEnabled = true
+leaderNodePath = NodePath("../Leader")
+
+[node name="Camera3D" type="Camera3D" parent="camFollower2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

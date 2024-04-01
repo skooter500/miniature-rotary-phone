@@ -1,0 +1,116 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://behaviors/School.gd" id="1"]
+[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="2"]
+[ext_resource type="Script" path="res://behaviors/CameraController.gd" id="3"]
+[ext_resource type="Script" path="res://behaviors/Boid.gd" id="4"]
+[ext_resource type="Script" path="res://behaviors/Obstacles.gd" id="5"]
+[ext_resource type="Script" path="res://behaviors/FPController.gd" id="6"]
+[ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="7"]
+[ext_resource type="Script" path="res://behaviors/root.gd" id="8"]
+[ext_resource type="Script" path="res://behaviors/Center.gd" id="10"]
+[ext_resource type="PackedScene" uid="uid://gwmykrjbcyf6" path="res://behaviors/Obstacle.tscn" id="11"]
+[ext_resource type="PackedScene" path="res://behaviors/Fish3.tscn" id="12"]
+[ext_resource type="PackedScene" uid="uid://d26vt30ugeu0d" path="res://behaviors/SceneSwitcher.tscn" id="13"]
+
+[sub_resource type="Environment" id=6]
+background_mode = 1
+ambient_light_color = Color( 0.392157, 0.392157, 0.392157, 1 )
+ambient_light_energy = 2.0
+
+[sub_resource type="PlaneMesh" id=10]
+
+[sub_resource type="StandardMaterial3D" id=11]
+albedo_color = Color( 0.960784, 0.717647, 0, 1 )
+
+[node name="root" type="Node3D"]
+script = ExtResource( 8 )
+
+[node name="Fish" parent="." instance=ExtResource( 12 )]
+
+[node name="SpineAnimator" parent="Fish" index="0"]
+damping = 4.0
+angular_damping = 7.0
+
+[node name="Boid" parent="Fish" index="3"]
+max_speed = 15.0
+
+[node name="Constrain" parent="Fish/Boid" index="7"]
+weight = 0.17
+
+[node name="School" type="Node3D" parent="."]
+script = ExtResource( 1 )
+fish_scene = ExtResource( 12 )
+count = 100
+neighbor_distance = 25
+max_neighbors = 5
+cell_size = 20
+grid_size = 1000
+partition = false
+center_path = NodePath("../Center")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+environment = SubResource( 6 )
+far = 10000.0
+script = ExtResource( 6 )
+speed = 30.0
+move = true
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Camera3D"]
+
+[node name="Control" type="Node" parent="Camera3D"]
+script = ExtResource( 3 )
+boid_camera_path = NodePath("../../camera follower")
+boid_path = NodePath("../../Fish/Boid")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.0512, 0.23691 )
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="DirectionalLight3D"]
+transform = Transform3D( 0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-08, 1, 0.763187, -0.646177, -2.61999e-08, 0, 12.0512, 0.23691 )
+
+[node name="Center" type="Marker3D" parent="."]
+script = ExtResource( 10 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D( 30, 0, 0, 0, 1, 0, 0, 0, 30, 0, -35.9149, 0 )
+visible = false
+mesh = SubResource( 10 )
+material/0 = SubResource( 11 )
+
+[node name="camera follower" type="CharacterBody3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 1.45153 )
+script = ExtResource( 4 )
+max_speed = 20.0
+max_force = 30
+draw_gizmos = false
+
+[node name="OffsetPursue" type="Node" parent="camera follower"]
+script = ExtResource( 7 )
+weight = 5.0
+draw_gizmos = false
+leader_node_path = NodePath("../../Fish/Boid")
+
+[node name="Avoidance" type="Node" parent="camera follower"]
+script = ExtResource( 2 )
+weight = 10.0
+draw_gizmos = false
+feeler_angle = 90
+feeler_length = 20
+updates_per_second = 10
+
+[node name="Obstacles" type="Node3D" parent="."]
+script = ExtResource( 5 )
+obstacle_scene = ExtResource( 11 )
+count = 0
+radius = 200
+bubble_radius = 50
+center_path = NodePath("../Center")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="SceneSwitcher" parent="." instance=ExtResource( 13 )]
+
+[editable path="Fish"]

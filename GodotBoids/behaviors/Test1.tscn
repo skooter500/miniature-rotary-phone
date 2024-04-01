@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dql0ty7y8k0t7"]
+
+[ext_resource type="Script" path="res://behaviors/Test1.gd" id="1"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.42489, 0, 0)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 14.0
+text = "Hello World!"
+
+[node name="Button" type="Button" parent="."]
+offset_top = 63.0
+offset_right = 12.0
+offset_bottom = 83.0
+text = "Click my Big Hairy Button"
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

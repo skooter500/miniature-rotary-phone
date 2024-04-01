@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://behaviors/Spawner.gd" id="1"]
+[ext_resource type="PackedScene" path="res://behaviors/creature.tscn" id="2"]
+[ext_resource type="Script" path="res://behaviors/Boid.gd" id="3"]
+[ext_resource type="Script" path="res://behaviors/FPController.gd" id="7"]
+[ext_resource type="Script" path="res://behaviors/root.gd" id="13"]
+
+[sub_resource type="Environment" id=6]
+background_mode = 1
+ambient_light_color = Color( 0.392157, 0.392157, 0.392157, 1 )
+ambient_light_energy = 2.0
+
+[sub_resource type="Curve3D" id=2]
+_data = {
+"points": PackedVector3Array( 0, 0, 0, 0, 0, 0, -11.2065, -9.15527e-05, -29.797, 0, 0, 0, 0, 0, 0, -2.83316, 0.000137329, -9.18577, 0, 0, 0, 0, 0, 0, 16.3011, 23.6271, -8.24546, 0, 0, 0, 0, 0, 0, 46.7083, -5.34058e-05, -27.2299, 0, 0, 0, 0, 0, 0, 52.709, 22.523, -0.299791, 0, 0, 0, 0, 0, 0, 61.4845, 0, 43.691, 0, 0, 0, 0, 0, 0, 41.071, 9.53445, 8.45671, 0, 0, 0, 0, 0, 0, 2.29026, 0, 45.1004, 0, 0, 0, 0, 0, 0, 24.8938, -17.113, 20.9767 ),
+"tilts": PackedFloat32Array( 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[node name="root" type="Node3D"]
+script = ExtResource( 13 )
+
+[node name="creature" parent="." instance=ExtResource( 2 )]
+
+[node name="Constrain" parent="creature/boid" index="4"]
+center_path = NodePath("../../../center")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.1888, 7.1029, 48.8781 )
+environment = SubResource( 6 )
+far = 10000.0
+script = ExtResource( 7 )
+
+[node name="Position3D2" type="Marker3D" parent="Camera3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100 )
+
+[node name="camera follower" type="CharacterBody3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47.3768, 10.8322, 38.2638 )
+script = ExtResource( 3 )
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="center" type="Marker3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90.1317 )
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D( 0.029265, 0, -0.999572, 0, 1, 0, 0.999572, 0, 0.029265, -27.7878, -4.57764e-05, -12.9541 )
+curve = SubResource( 2 )
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.0512, 0.23691 )
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="DirectionalLight3D"]
+transform = Transform3D( 0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-08, 1, 0.763187, -0.646177, -2.61999e-08, 0, 12.0512, 0.23691 )
+
+[node name="BlueCreatures" type="Node3D" parent="."]
+script = ExtResource( 1 )
+
+[editable path="creature"]

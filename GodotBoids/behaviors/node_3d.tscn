@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxcchy8s5nej"]
+
+[ext_resource type="Script" path="res://behaviors/node_3d.gd" id="1_hmp5p"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ik3vi"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_hmp5p")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ik3vi")

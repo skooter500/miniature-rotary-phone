@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://b4pok7xvls88x"]
+
+[ext_resource type="Script" path="res://behaviors/Bullet.gd" id="1"]
+[ext_resource type="Material" uid="uid://b2raijlysriqd" path="res://behaviors/Tank Material.tres" id="2_tjw4x"]
+[ext_resource type="Script" path="res://behaviors/TrailRender.gd" id="4_hw6f4"]
+[ext_resource type="AudioStream" uid="uid://bl3ratrk2ga41" path="res://sounds/Laser_Shoot26.wav" id="5"]
+[ext_resource type="Curve" path="res://behaviors/trail_width_curve.tres" id="5_qhohp"]
+[ext_resource type="Material" uid="uid://ca5mcii5ms7ww" path="res://behaviors/CobraTrail.tres" id="6_ubv1i"]
+
+[sub_resource type="BoxShape3D" id="2"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_t4jm8"]
+
+[node name="bullet" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 11
+script = ExtResource("1")
+speed = 20.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+autostart = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+shape = SubResource("2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, -1.09278e-08, -0.25, 0, 0.25, -1.09278e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_t4jm8")
+surface_material_override/0 = ExtResource("2_tjw4x")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5")
+volume_db = 20.0
+autoplay = true
+doppler_tracking = 2
+
+[node name="TrailRenderer" type="Node3D" parent="."]
+script = ExtResource("4_hw6f4")
+width = 0.4
+width_curve = ExtResource("5_qhohp")
+material = ExtResource("6_ubv1i")
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

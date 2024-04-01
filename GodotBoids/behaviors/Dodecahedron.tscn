@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://0byvm1g7eaa6"]
+
+[ext_resource type="PackedScene" path="res://Models/Dodecahedron.fbx" id="1"]
+[ext_resource type="Material" path="res://behaviors/Trans Material.tres" id="2"]
+
+[sub_resource type="Animation" id="2"]
+resource_name = "Take 001"
+length = 0.958333
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hujvm"]
+_data = {
+"Take 001": SubResource("2")
+}
+
+[node name="Dodecahedron" instance=ExtResource("1")]
+
+[node name="dodecahedron" parent="RootNode" index="0"]
+surface_material_override/0 = ExtResource("2")
+
+[node name="AnimationPlayer" parent="RootNode" index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_hujvm")
+}
