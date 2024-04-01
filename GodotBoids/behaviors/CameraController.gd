@@ -38,7 +38,7 @@ func _ready():
 func calculate_offset():
 	boid_player.get_node("OffsetPursue").calculate_offset()
 	
-func toggle_follow():
+func toggle():
 	match mode:
 		Mode.Free:
 			player.can_move = false
@@ -46,25 +46,17 @@ func toggle_follow():
 			boid_player.transform.origin = player.transform.origin
 			boid_player.get_node("OffsetPursue").calculate_offset()
 		Mode.Follow:
-			player.can_move = true
-			mode = Mode.Free
-
-func toggle_boid():
-	match mode:
-		Mode.Follow, Mode.Free:
 			player.can_move = false
 			boid.find_child("MeshInstance3D").set_visible(false)
-			mode = Mode.Boid							
+			mode = Mode.Boid
 		Mode.Boid:
 			boid.find_child("MeshInstance3D").set_visible(true)				
 			player.can_move = true
 			mode = Mode.Free
-
+		
 func _input(event):
 	if event is InputEventKey and event.keycode == KEY_C and event.pressed:
-		toggle_follow()
-	if event is InputEventKey and event.keycode == KEY_B and event.pressed:
-		toggle_boid()
+		toggle()
 						
 func _physics_process(delta):
 	match mode:

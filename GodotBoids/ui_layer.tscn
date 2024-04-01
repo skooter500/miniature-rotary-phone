@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7rubewuhrpnq"]
+[gd_scene load_steps=3 format=3 uid="uid://c7rubewuhrpnq"]
 
+[ext_resource type="Script" path="res://ui_layer.gd" id="1_434qe"]
 [ext_resource type="Theme" uid="uid://bb6kabj53ba0t" path="res://behaviors/bryans_theme.tres" id="1_irlwy"]
 
 [node name="ui_layer" type="CanvasLayer"]
+script = ExtResource("1_434qe")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

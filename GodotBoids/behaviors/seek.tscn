@@ -212,3 +212,5 @@ autostart = true
 
 [connection signal="timeout" from="CreatureTarget/Timer" to="CreatureTarget" method="_on_Timer_timeout"]
 [connection signal="timeout" from="ShipTarget/Timer" to="ShipTarget" method="_on_Timer_timeout"]
+
+[editable path="ui_layer"]
