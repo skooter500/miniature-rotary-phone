@@ -1,7 +1,6 @@
 class_name Seek extends SteeringBehavior
 
-@export var target_path:NodePath
-var target
+@export var target:Node3D
 var world_target:Vector3
 
 func on_draw_gizmos():
@@ -19,6 +18,4 @@ func calculate():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	boid = get_parent()
-	if target_path:
-		target = get_node(target_path)
 

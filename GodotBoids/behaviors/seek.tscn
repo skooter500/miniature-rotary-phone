@@ -94,9 +94,9 @@ surface_material_override/0 = ExtResource("11_a5ijt")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Creature/boid"]
 shape = SubResource("8")
 
-[node name="Seek" type="Node" parent="Creature/boid"]
+[node name="Seek" type="Node" parent="Creature/boid" node_paths=PackedStringArray("target")]
 script = ExtResource("15")
-target_path = NodePath("../../../CreatureTarget")
+target = NodePath("../../../CreatureTarget")
 
 [node name="tail" type="CharacterBody3D" parent="Creature"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.17476)
@@ -151,9 +151,9 @@ script = ExtResource("12")
 [node name="cobramk3" parent="Ship" instance=ExtResource("1")]
 transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, 0, 0)
 
-[node name="Seek" type="Node" parent="Ship"]
+[node name="Seek" type="Node" parent="Ship" node_paths=PackedStringArray("target")]
 script = ExtResource("15")
-target_path = NodePath("../../ShipTarget")
+target = NodePath("../../ShipTarget")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ship"]
 shape = SubResource("15")
