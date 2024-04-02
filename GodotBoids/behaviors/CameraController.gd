@@ -6,11 +6,8 @@ extends Node
 # var b = "text"
 
 @onready var player = get_node("../..")
-@export var boid_player_path:NodePath
-var boid_player 
-
-@export var boid_path:NodePath
-var boid
+@export var boid_player:Boid
+@export var boid:Boid
 
 enum Mode { Free, Follow, Boid}
 
@@ -21,8 +18,6 @@ var right:XRController3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	boid = get_node(boid_path)
-	boid_player = get_node(boid_player_path)
 	
 	#left = $"../../XROrigin3D/left"
 	# right = $"../../XROrigin3D/right"
@@ -45,14 +40,17 @@ func toggle():
 			mode = Mode.Follow
 			boid_player.transform.origin = player.transform.origin
 			boid_player.get_node("OffsetPursue").calculate_offset()
+			boid_player.draw_gizmos = false
 		Mode.Follow:
 			player.can_move = false
 			boid.find_child("MeshInstance3D").set_visible(false)
 			mode = Mode.Boid
+			boid_player.draw_gizmos = true
 		Mode.Boid:
 			boid.find_child("MeshInstance3D").set_visible(true)				
 			player.can_move = true
 			mode = Mode.Free
+			boid_player.draw_gizmos = true
 		
 func _input(event):
 	if event is InputEventKey and event.keycode == KEY_C and event.pressed:

@@ -48,7 +48,7 @@ point_count = 2
 
 [sub_resource type="BoxShape3D" id="15"]
 
-[node name="root" type="Node3D"]
+[node name="arrive" type="Node3D"]
 script = ExtResource("9")
 
 [node name="camera follower" type="CharacterBody3D" parent="."]
@@ -79,10 +79,11 @@ far = 10000.0
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Player/Camera3D"]
 
-[node name="Camera3D Controller" type="Node" parent="Player/Camera3D"]
+[node name="Camera3D Controller" type="Node" parent="Player/Camera3D" node_paths=PackedStringArray("boid_player", "boid")]
 script = ExtResource("3")
-boid_player_path = NodePath("../../../camera follower")
-boid_path = NodePath("../../../Creature/boid")
+boid_player = NodePath("../../../camera follower")
+boid = NodePath("../../../Creature/boid")
+mode = 1
 
 [node name="CreatureTarget" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90.1317)
@@ -197,7 +198,7 @@ shape = SubResource("15")
 
 [node name="Arrive" type="Node" parent="Ship" node_paths=PackedStringArray("target")]
 script = ExtResource("11")
-target = NodePath("../../CreatureTarget")
+target = NodePath("../../ShipTarget")
 
 [node name="ShipTarget" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90.1317)

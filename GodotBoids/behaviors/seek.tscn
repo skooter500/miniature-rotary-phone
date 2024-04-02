@@ -48,11 +48,11 @@ albedo_color = Color(0.670588, 0.847059, 0.0862745, 1)
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.998893, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="root" type="Node3D"]
+[node name="seek" type="Node3D"]
 script = ExtResource("6")
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.13334, 11.8629, 33.382)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.5873, 6.48073, 33.382)
 script = ExtResource("5")
 speed = 10.0
 
@@ -65,10 +65,10 @@ far = 10000.0
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Player/Camera3D"]
 
-[node name="Camera3D Controller" type="Node" parent="Player/Camera3D"]
+[node name="Camera3D Controller" type="Node" parent="Player/Camera3D" node_paths=PackedStringArray("boid_player", "boid")]
 script = ExtResource("11")
-boid_player_path = NodePath("../../../camera follower")
-boid_path = NodePath("../../../Creature/boid")
+boid_player = NodePath("../../../camera follower")
+boid = NodePath("../../../Ship")
 mode = 1
 
 [node name="camera follower" type="CharacterBody3D" parent="."]
