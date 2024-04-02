@@ -1,23 +1,18 @@
-[gd_scene load_steps=30 format=3 uid="uid://ceylfvsp4dggl"]
+[gd_scene load_steps=23 format=3 uid="uid://ceylfvsp4dggl"]
 
 [ext_resource type="PackedScene" uid="uid://okvro62ssxp" path="res://Models/cobramk3_out/cobramk3.gltf" id="1"]
 [ext_resource type="Script" path="res://behaviors/MoveTarget.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://ivslos3b7cmv" path="res://behaviors/player.tscn" id="2_gcac3"]
 [ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="3"]
-[ext_resource type="Environment" uid="uid://b5dnnkkpxo3qc" path="res://behaviors/seek_environment..tres" id="4_2wdi4"]
-[ext_resource type="Script" path="res://behaviors/FPController.gd" id="5"]
 [ext_resource type="Script" path="res://behaviors/root.gd" id="6"]
 [ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="7"]
 [ext_resource type="PackedScene" uid="uid://d26vt30ugeu0d" path="res://behaviors/SceneSwitcher.tscn" id="10"]
-[ext_resource type="Script" path="res://behaviors/CameraController.gd" id="11"]
 [ext_resource type="Material" uid="uid://b2raijlysriqd" path="res://behaviors/Tank Material.tres" id="11_a5ijt"]
 [ext_resource type="Script" path="res://behaviors/Boid.gd" id="12"]
+[ext_resource type="PackedScene" uid="uid://4mtp0em00spx" path="res://behaviors/jet_particles.tscn" id="12_75r8b"]
 [ext_resource type="Script" path="res://behaviors/Seek.gd" id="15"]
-[ext_resource type="Script" path="res://behaviors/TrailRender.gd" id="15_aelvy"]
 [ext_resource type="Script" path="res://behaviors/SpineAnimator.gd" id="16"]
 [ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="16_c0578"]
-[ext_resource type="Material" uid="uid://ca5mcii5ms7ww" path="res://behaviors/CobraTrail.tres" id="16_h4o1t"]
-
-[sub_resource type="SphereShape3D" id="18"]
 
 [sub_resource type="PrismMesh" id="7"]
 
@@ -37,39 +32,14 @@
 
 [sub_resource type="BoxShape3D" id="15"]
 
-[sub_resource type="Curve" id="Curve_btimm"]
-_data = [Vector2(0.00332226, 0.990909), 0.0, 0.0, 0, 0, Vector2(0.997785, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7yhh"]
-albedo_color = Color(0.670588, 0.847059, 0.0862745, 1)
-
-[sub_resource type="Curve" id="Curve_6had8"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.998893, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
 [node name="seek" type="Node3D"]
 script = ExtResource("6")
 
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.5873, 6.48073, 33.382)
-script = ExtResource("5")
-speed = 10.0
+[node name="Player" parent="." instance=ExtResource("2_gcac3")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-shape = SubResource("18")
-
-[node name="Camera3D" type="Camera3D" parent="Player"]
-environment = ExtResource("4_2wdi4")
-far = 10000.0
-
-[node name="AudioListener3D" type="AudioListener3D" parent="Player/Camera3D"]
-
-[node name="Camera3D Controller" type="Node" parent="Player/Camera3D" node_paths=PackedStringArray("boid_player", "boid")]
-script = ExtResource("11")
+[node name="Camera3D Controller" parent="Player/Camera3D" index="1" node_paths=PackedStringArray("boid_player", "boid")]
 boid_player = NodePath("../../../camera follower")
-boid = NodePath("../../../Ship")
-mode = 1
+boid = NodePath("../../../Creature/boid")
 
 [node name="camera follower" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, 12.5344, 41.7624)
@@ -190,15 +160,13 @@ shape = SubResource("15")
 
 [node name="Trail" type="Node3D" parent="Ship"]
 transform = Transform3D(-0.999064, 0.0432532, 0, -0.0432532, -0.999064, 0, 0, 0, 1, 0.55, -0.075, -0.1)
-script = ExtResource("15_aelvy")
-width_curve = SubResource("Curve_btimm")
-material = SubResource("StandardMaterial3D_r7yhh")
+
+[node name="GPUParticles3D" parent="Ship/Trail" instance=ExtResource("12_75r8b")]
 
 [node name="Trail2" type="Node3D" parent="Ship"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, -0.075, -0.1)
-script = ExtResource("15_aelvy")
-width_curve = SubResource("Curve_6had8")
-material = ExtResource("16_h4o1t")
+
+[node name="GPUParticles3D" parent="Ship/Trail2" instance=ExtResource("12_75r8b")]
 
 [node name="ShipTarget" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90.1317)
@@ -213,4 +181,5 @@ autostart = true
 [connection signal="timeout" from="CreatureTarget/Timer" to="CreatureTarget" method="_on_Timer_timeout"]
 [connection signal="timeout" from="ShipTarget/Timer" to="ShipTarget" method="_on_Timer_timeout"]
 
+[editable path="Player"]
 [editable path="ui_layer"]
