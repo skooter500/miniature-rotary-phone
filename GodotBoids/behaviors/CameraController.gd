@@ -25,15 +25,17 @@ func _ready():
 	
 	call_deferred("calculate_offset")
 
+
 func calculate_offset():
 	boid_player.get_node("OffsetPursue").calculate_offset()
 	
 func set_mode(mode):
+	self.mode = mode
 	match mode:
 		Mode.Follow:
 			player.can_move = false	
 			boid_player.transform.origin = player.transform.origin
-			boid_player.get_node("OffsetPursue").calculate_offset()
+			call_deferred("calculate_offset") 
 			boid_player.draw_gizmos_recursive(false)
 		Mode.Boid:
 			player.can_move = false	

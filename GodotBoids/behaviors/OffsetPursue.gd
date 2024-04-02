@@ -13,16 +13,12 @@ func on_draw_gizmos():
 
 
 func calculate_offset():
-	leader_boid = get_node(leader_node_path)
 	leader_offset = boid.global_transform.origin - leader_boid.global_transform.origin
 	leader_offset = (leader_offset) * leader_boid.global_transform.basis	
 
 func _ready():
-	boid = get_parent()
-		
-	if leader_node_path:
-		leader_boid = get_node(leader_node_path)
-		calculate_offset()		
+	boid = get_parent()		
+	calculate_offset()		
 
 func calculate():		
 	world_target = leader_boid.global_transform * (leader_offset)

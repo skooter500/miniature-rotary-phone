@@ -47,9 +47,9 @@ script = ExtResource("12")
 max_force = 30
 draw_gizmos = false
 
-[node name="OffsetPursue" type="Node" parent="camera follower"]
+[node name="OffsetPursue" type="Node" parent="camera follower" node_paths=PackedStringArray("leader_boid")]
 script = ExtResource("3")
-leader_node_path = NodePath("../../Creature/boid")
+leader_boid = NodePath("../../Creature/boid")
 weight = 5.0
 
 [node name="Avoidance" type="Node" parent="camera follower"]

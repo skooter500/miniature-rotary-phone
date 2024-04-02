@@ -56,9 +56,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, -15.0557, 41.7624)
 script = ExtResource("2")
 max_force = 30
 
-[node name="OffsetPursue" type="Node" parent="camera follower"]
+[node name="OffsetPursue" type="Node" parent="camera follower" node_paths=PackedStringArray("leader_boid")]
 script = ExtResource("10")
-leader_node_path = NodePath("../../Creature/boid")
+leader_boid = NodePath("../../Creature/boid")
 weight = 5.0
 
 [node name="Avoidance" type="Node" parent="camera follower"]
