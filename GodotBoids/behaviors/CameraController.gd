@@ -20,10 +20,14 @@ var right:XRController3D
 func _ready():
 	
 	#left = $"../../XROrigin3D/left"
+	
 	# right = $"../../XROrigin3D/right"
-	set_mode(mode)
+
+	
+	
 	
 	call_deferred("calculate_offset")
+	call_deferred("set_mode", mode)
 
 
 func calculate_offset():

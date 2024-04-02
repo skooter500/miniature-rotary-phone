@@ -1,10 +1,10 @@
-[gd_scene load_steps=39 format=3 uid="uid://cvigcjuk854tq"]
+[gd_scene load_steps=36 format=3 uid="uid://cvigcjuk854tq"]
 
 [ext_resource type="PackedScene" uid="uid://cg4a4sf8baa2e" path="res://Models/thargoid_out/thargoid.gltf" id="1"]
 [ext_resource type="Script" path="res://behaviors/fire_at_target_global_state.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://ivslos3b7cmv" path="res://behaviors/player.tscn" id="2_jclav"]
 [ext_resource type="AudioStream" uid="uid://bxcjvwiv88bng" path="res://sounds/Defening the base.mp3" id="3"]
 [ext_resource type="AudioStream" uid="uid://cqfjt7scnqdla" path="res://sounds/Launching Viper.mp3" id="4"]
-[ext_resource type="Environment" uid="uid://b5dnnkkpxo3qc" path="res://behaviors/seek_environment..tres" id="4_iysci"]
 [ext_resource type="AudioStream" uid="uid://6a1wuewffd6y" path="res://sounds/Enemy Out of Range.mp3" id="5"]
 [ext_resource type="AudioStream" uid="uid://d33gojf4mxcmf" path="res://sounds/commencing docking.mp3" id="6"]
 [ext_resource type="Script" path="res://behaviors/Sounds.gd" id="7"]
@@ -16,7 +16,6 @@
 [ext_resource type="Script" path="res://behaviors/ready_to_launch.gd" id="13"]
 [ext_resource type="Script" path="res://behaviors/Rotate.gd" id="14"]
 [ext_resource type="Script" path="res://behaviors/root.gd" id="15"]
-[ext_resource type="Script" path="res://behaviors/FPController.gd" id="16"]
 [ext_resource type="Script" path="res://behaviors/Boid.gd" id="17"]
 [ext_resource type="Script" path="res://behaviors/PlayerSteering.gd" id="18"]
 [ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="19"]
@@ -33,10 +32,7 @@
 [ext_resource type="Environment" uid="uid://1cpn0tg8jm7c" path="res://behaviors/default_environment.tres" id="30"]
 [ext_resource type="AudioStream" uid="uid://yggohfeablt2" path="res://sounds/safely home.mp3" id="31"]
 [ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="32"]
-[ext_resource type="Script" path="res://behaviors/CameraController.gd" id="34"]
 [ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="35_dvhi1"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_21llw"]
 
 [sub_resource type="ConvexPolygonShape3D" id="2"]
 
@@ -46,25 +42,11 @@ radius = 22.031
 [node name="root" type="Node3D"]
 script = ExtResource("15")
 
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -744.058, -106.248, 428.6)
-script = ExtResource("16")
-speed = 10.0
+[node name="Player" parent="." instance=ExtResource("2_jclav")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-shape = SubResource("SphereShape3D_21llw")
-
-[node name="Camera3D" type="Camera3D" parent="Player"]
-environment = ExtResource("4_iysci")
-far = 10000.0
-
-[node name="AudioListener3D" type="AudioListener3D" parent="Player/Camera3D"]
-
-[node name="Camera3D Controller" type="Node" parent="Player/Camera3D"]
-script = ExtResource("34")
-boid_player_path = NodePath("../../../camera follower")
-boid_path = NodePath("../../../Attacker")
-mode = 1
+[node name="Camera3D Controller" parent="Player/Camera3D" index="1" node_paths=PackedStringArray("boid_player", "boid")]
+boid_player = NodePath("../../../camera follower")
+boid = NodePath("../../../Attacker")
 
 [node name="Attacker" type="CharacterBody3D" parent="."]
 transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -790.706, -124.258, 492.399)
@@ -175,7 +157,6 @@ max_force = 50
 
 [node name="OffsetPursue" type="Node" parent="camera follower"]
 script = ExtResource("32")
-leader_node_path = NodePath("../../Attacker")
 
 [node name="Avoidance" type="Node" parent="camera follower"]
 script = ExtResource("19")
@@ -294,4 +275,5 @@ speed = -0.3
 
 [node name="ui_layer" parent="." instance=ExtResource("35_dvhi1")]
 
+[editable path="Player"]
 [editable path="Base/coriolis"]
