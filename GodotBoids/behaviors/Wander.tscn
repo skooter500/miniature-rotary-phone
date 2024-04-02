@@ -1,8 +1,8 @@
-[gd_scene load_steps=30 format=3 uid="uid://bd10kechokuj7"]
+[gd_scene load_steps=27 format=3 uid="uid://bd10kechokuj7"]
 
 [ext_resource type="Script" path="res://behaviors/SpineAnimator.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://ivslos3b7cmv" path="res://behaviors/player.tscn" id="2_4myfi"]
 [ext_resource type="Script" path="res://behaviors/Wander.gd" id="3"]
-[ext_resource type="Environment" uid="uid://b5dnnkkpxo3qc" path="res://behaviors/seek_environment..tres" id="3_w56lq"]
 [ext_resource type="Script" path="res://behaviors/TrailRender.gd" id="4"]
 [ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="5"]
 [ext_resource type="Script" path="res://behaviors/root.gd" id="6"]
@@ -10,15 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://d26vt30ugeu0d" path="res://behaviors/SceneSwitcher.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://okvro62ssxp" path="res://Models/cobramk3_out/cobramk3.gltf" id="9"]
 [ext_resource type="Material" uid="uid://b2raijlysriqd" path="res://behaviors/Tank Material.tres" id="10"]
-[ext_resource type="Script" path="res://behaviors/FPController.gd" id="11"]
-[ext_resource type="Script" path="res://behaviors/CameraController.gd" id="12"]
 [ext_resource type="Script" path="res://behaviors/Boid.gd" id="13"]
 [ext_resource type="Script" path="res://behaviors/NoiseWander.gd" id="14"]
 [ext_resource type="Script" path="res://behaviors/Constrain.gd" id="15"]
 [ext_resource type="Material" uid="uid://ca5mcii5ms7ww" path="res://behaviors/CobraTrail.tres" id="15_jv7r0"]
 [ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="17_fnhpk"]
-
-[sub_resource type="SphereShape3D" id="18"]
 
 [sub_resource type="PrismMesh" id="7"]
 
@@ -49,24 +45,11 @@ point_count = 2
 [node name="root" type="Node3D"]
 script = ExtResource("6")
 
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.13334, 11.8629, 33.382)
-script = ExtResource("11")
-speed = 10.0
+[node name="Player" parent="." instance=ExtResource("2_4myfi")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-shape = SubResource("18")
-
-[node name="Camera3D" type="Camera3D" parent="Player"]
-environment = ExtResource("3_w56lq")
-far = 10000.0
-
-[node name="AudioListener3D" type="AudioListener3D" parent="Player/Camera3D"]
-
-[node name="Camera3D Controller" type="Node" parent="Player/Camera3D"]
-script = ExtResource("12")
-boid_player_path = NodePath("../../../camera follower")
-boid_path = NodePath("../../../Creature/boid")
+[node name="Camera3D Controller" parent="Player/Camera3D" index="1" node_paths=PackedStringArray("boid_player", "boid")]
+boid_player = NodePath("../../../camera follower")
+boid = NodePath("../../../Creature/boid")
 
 [node name="camera follower" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, 12.5344, 41.7624)
@@ -79,6 +62,7 @@ script = ExtResource("5")
 leader_node_path = NodePath("../../Creature/boid")
 weight = 5.0
 draw_gizmos = false
+enabled = null
 
 [node name="Avoidance" type="Node" parent="camera follower"]
 script = ExtResource("7")
@@ -205,3 +189,5 @@ center_path = NodePath("../../Marker3D")
 [node name="Marker3D" type="Marker3D" parent="."]
 
 [node name="ui_layer" parent="." instance=ExtResource("17_fnhpk")]
+
+[editable path="Player"]

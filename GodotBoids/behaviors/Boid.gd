@@ -22,6 +22,14 @@ var school = null
 var new_force = Vector3.ZERO
 var should_calculate = false
 
+func draw_gizmos_recursive(dg):
+	draw_gizmos = dg
+	var children = get_children()
+	for child in children:
+		if child is SteeringBehavior:
+			child.draw_gizmos = dg
+
+
 func count_neighbors_partitioned():
 	neighbors.clear()
 

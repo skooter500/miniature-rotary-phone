@@ -10,7 +10,7 @@ var target
 
 func on_draw_gizmos():
 	if target:
-		DebugDraw3D.draw_sphere(target, waypoint_seek_distance, Color.CYAN)
+		DebugDraw3D.draw_position(Transform3D(Basis(), target), Color.CYAN)
 
 func calculate():
 	target = path.global_transform * (path.get_curve().get_point_position(pathIndex))

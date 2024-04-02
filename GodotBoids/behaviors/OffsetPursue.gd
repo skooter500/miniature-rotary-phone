@@ -1,7 +1,6 @@
 class_name OffsetPursue extends SteeringBehavior
 
-@export var leader_node_path:NodePath
-var leader_boid:Node
+@export var leader_boid:Boid
 var leader_offset:Vector3
 var target:Vector3
 var world_target:Vector3

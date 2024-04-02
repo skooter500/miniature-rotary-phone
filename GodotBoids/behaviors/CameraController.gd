@@ -21,36 +21,32 @@ func _ready():
 	
 	#left = $"../../XROrigin3D/left"
 	# right = $"../../XROrigin3D/right"
+	set_mode(mode)
 	
-	match mode:
-		Mode.Free:
-			player.can_move = true
-		Mode.Follow:
-			player.can_move = false
-			boid_player.global_transform.origin = player.transform.origin
-			call_deferred("calculate_offset")
+	call_deferred("calculate_offset")
 
 func calculate_offset():
 	boid_player.get_node("OffsetPursue").calculate_offset()
 	
-func toggle():
+func set_mode(mode):
 	match mode:
-		Mode.Free:
-			player.can_move = false
-			mode = Mode.Follow
+		Mode.Follow:
+			player.can_move = false	
 			boid_player.transform.origin = player.transform.origin
 			boid_player.get_node("OffsetPursue").calculate_offset()
-			boid_player.draw_gizmos = false
-		Mode.Follow:
-			player.can_move = false
-			boid.find_child("MeshInstance3D").set_visible(false)
-			mode = Mode.Boid
-			boid_player.draw_gizmos = true
+			boid_player.draw_gizmos_recursive(false)
 		Mode.Boid:
+			player.can_move = false	
+			boid.find_child("MeshInstance3D").set_visible(false)
+			boid_player.draw_gizmos_recursive(true)
+		Mode.Free:
 			boid.find_child("MeshInstance3D").set_visible(true)				
-			player.can_move = true
-			mode = Mode.Free
-			boid_player.draw_gizmos = true
+			player.can_move = true			
+			boid_player.draw_gizmos_recursive(true)
+	
+func toggle():
+	set_mode((mode + 1) % Mode.keys().size())
+			
 		
 func _input(event):
 	if event is InputEventKey and event.keycode == KEY_C and event.pressed:
