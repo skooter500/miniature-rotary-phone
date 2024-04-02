@@ -18,7 +18,7 @@ func calculate_offset():
 
 func _ready():
 	boid = get_parent()		
-	calculate_offset()		
+	call_deferred("calculate_offset")		
 
 func calculate():		
 	world_target = leader_boid.global_transform * (leader_offset)
