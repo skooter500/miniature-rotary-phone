@@ -155,8 +155,9 @@ script = ExtResource("17")
 max_speed = 15.0
 max_force = 50
 
-[node name="OffsetPursue" type="Node" parent="camera follower"]
+[node name="OffsetPursue" type="Node" parent="camera follower" node_paths=PackedStringArray("leader_boid")]
 script = ExtResource("32")
+leader_boid = NodePath("../../Attacker")
 
 [node name="Avoidance" type="Node" parent="camera follower"]
 script = ExtResource("19")
