@@ -1,17 +1,14 @@
 class_name FireAtTargetGlobalState extends State
 
-@export var target_path:NodePath
-
 var boid
 @onready var bullet_scene:PackedScene
-var target
+@export var target:Node3D
 var timer
 var can_fire = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	boid = get_parent()
-	target = get_node(target_path)
 	bullet_scene = load("Bullet1.tscn")
 	timer = Timer.new()
 	add_child(timer)	

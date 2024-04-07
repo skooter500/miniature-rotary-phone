@@ -43,6 +43,7 @@ radius = 22.031
 script = ExtResource("15")
 
 [node name="Player" parent="." instance=ExtResource("2_jclav")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -875.007, -124.258, 408.098)
 
 [node name="Camera3D Controller" parent="Player/Camera3D" index="1" node_paths=PackedStringArray("boid_player", "boid")]
 boid_player = NodePath("../../../camera follower")
@@ -61,9 +62,9 @@ script = ExtResource("27")
 initial_state = NodePath("../AttackState")
 global_state_path = NodePath("../FireAtTargetGlobalState")
 
-[node name="FireAtTargetGlobalState" type="Node" parent="Attacker"]
+[node name="FireAtTargetGlobalState" type="Node" parent="Attacker" node_paths=PackedStringArray("target")]
 script = ExtResource("2")
-target_path = NodePath("../../Base")
+target = NodePath("../../Base")
 
 [node name="Avoidance" type="Node" parent="Attacker"]
 script = ExtResource("19")
@@ -76,8 +77,9 @@ draw_gizmos = false
 [node name="AttackState" type="Node" parent="Attacker"]
 script = ExtResource("28")
 
-[node name="Seek" type="Node" parent="Attacker"]
+[node name="Seek" type="Node" parent="Attacker" node_paths=PackedStringArray("target")]
 script = ExtResource("29")
+target = NodePath("../../Base/Marker3D")
 enabled = false
 
 [node name="Wander" type="Node" parent="Attacker"]
@@ -182,6 +184,9 @@ transform = Transform3D(-4.37114e-05, 1.3027e-12, -1000, 2.98023e-05, 1000, 0, 1
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Base"]
 shape = SubResource("3")
 
+[node name="Marker3D" type="Marker3D" parent="Base"]
+transform = Transform3D(1, 0, 0, 8.88177e-16, 1, 0, 0, 0, 1, 44.1358, 3.8147e-06, -38.8262)
+
 [node name="pig" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
 collision_layer = 8
@@ -190,9 +195,9 @@ script = ExtResource("17")
 
 [node name="viper" parent="pig" instance=ExtResource("10")]
 
-[node name="FireAtTargetGlobalState" type="Node" parent="pig"]
+[node name="FireAtTargetGlobalState" type="Node" parent="pig" node_paths=PackedStringArray("target")]
 script = ExtResource("2")
-target_path = NodePath("../../Attacker")
+target = NodePath("../../Attacker")
 
 [node name="Avoidance" type="Node" parent="pig"]
 script = ExtResource("19")
@@ -208,8 +213,9 @@ script = ExtResource("27")
 initial_state = NodePath("../ReadyToLaunch")
 global_state_path = NodePath("../FireAtTargetGlobalState")
 
-[node name="Seek" type="Node" parent="pig"]
+[node name="Seek" type="Node" parent="pig" node_paths=PackedStringArray("target")]
 script = ExtResource("29")
+target = NodePath("../../Attacker")
 enabled = false
 
 [node name="Wander" type="Node" parent="pig"]
