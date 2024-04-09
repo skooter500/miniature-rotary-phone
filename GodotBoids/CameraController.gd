@@ -22,8 +22,8 @@ func _ready():
 	boid = get_node(boid_path)
 	boid_player = get_node(boid_player_path)
 	
-	left = $"../../XROrigin3D/left"
-	right = $"../../XROrigin3D/right"
+	#left = $"../../XROrigin3D/left"
+	# right = $"../../XROrigin3D/right"
 	
 	match mode:
 		Mode.Free:
@@ -76,5 +76,4 @@ func _physics_process(delta):
 			player.global_transform.basis = player.global_transform.basis.slerp(desired.basis, delta * 5).orthonormalized()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(mode)
 	pass

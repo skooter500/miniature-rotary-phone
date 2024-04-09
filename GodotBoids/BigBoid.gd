@@ -3,7 +3,6 @@ extends CharacterBody3D
 @export var mass = 1
 @export var force = Vector3.ZERO
 @export var acceleration = Vector3.ZERO
-@export var velocity = Vector3.ZERO
 @export var speed:float
 @export var max_speed: float = 10.0
 
@@ -46,18 +45,18 @@ var leaderOffset:Vector3
 @export var jitter:float = 10
 var wanderTarget:Vector3
 
-func drawGizmos():
+func on_draw_gizmos():
 	
 	# DebugDraw.draw_line(transform.origin,  transform.origin + transform.basis.z * 10.0 , Color(0, 0, 1))
 	#DebugDraw.draw_line(transform.origin,  transform.origin + transform.basis.x * 10.0 , Color(1, 0, 0))
 	#DebugDraw.draw_line(transform.origin,  transform.origin + transform.basis.y * 10.0 , Color(0, 1, 0))
-	DebugDraw.draw_line(transform.origin, transform.origin + (force * 20), Color(1, 1, 0))
+	DebugDraw3D.draw_line(transform.origin, transform.origin + (force * 20), Color(1, 1, 0))
 	
 	if pursueEnabled:
-		DebugDraw.draw_sphere(pursueTarget, 1, Color.RED)
+		DebugDraw3D.draw_sphere(pursueTarget, 1, Color.RED)
 	
 	if (arriveEnabled):
-		DebugDraw.draw_sphere(targetNode.position, slowingDistance, Color.BLUE_VIOLET)
+		DebugDraw3D.draw_sphere(targetNode.position, slowingDistance, Color.BLUE_VIOLET)
 
 func jitterWander():
 	var delta = get_process_delta_time()
@@ -73,13 +72,13 @@ func jitterWander():
 	# print("world" + str(worldTarget))
 	
 	var cent = global_transform * (Vector3.FORWARD * distance)
-	DebugDraw.draw_sphere(cent, radius, Color.DEEP_PINK)
-	DebugDraw.draw_line(global_transform.origin, cent, Color.YELLOW_GREEN)
-	DebugDraw.draw_line(cent, worldTarget, Color.BLUE_VIOLET)
+	DebugDraw3D.draw_sphere(cent, radius, Color.DEEP_PINK)
+	DebugDraw3D.draw_line(global_transform.origin, cent, Color.YELLOW_GREEN)
+	DebugDraw3D.draw_line(cent, worldTarget, Color.BLUE_VIOLET)
 	
-	DebugDraw.draw_sphere(worldTarget, 1)
+	DebugDraw3D.draw_sphere(worldTarget, 1)
 	var f = worldTarget - global_transform.origin;
-	DebugDraw.draw_line(global_transform.origin, global_transform.origin + f)
+	DebugDraw3D.draw_line(global_transform.origin, global_transform.origin + f)
 	return f
 	
 
@@ -199,6 +198,6 @@ func _physics_process(delta):
 		var tempUp = transform.basis.y.lerp(Vector3.UP + (acceleration * banking), delta * 5.0)
 		#  look_at(global_transform.origin - velocity, tempUp)
 	if drawGizmos:
-		drawGizmos()	
+		on_draw_gizmos()	
 	
 		

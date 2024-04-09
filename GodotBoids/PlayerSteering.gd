@@ -3,7 +3,7 @@ class_name PlayerSteering extends SteeringBehavior
 var force:Vector3
 
 func on_draw_gizmos():
-	DebugDraw.draw_arrow_line(boid.global_transform.origin, boid.global_transform.origin + force * 10 * weight, Color.YELLOW, 0.1)
+	DebugDraw3D.draw_arrow(boid.global_transform.origin, boid.global_transform.origin + force * 10 * weight, Color.YELLOW, 0.1)
 
 func _ready():
 	boid = get_parent()

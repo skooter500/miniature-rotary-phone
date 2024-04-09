@@ -22,7 +22,7 @@ var center
 func draw_gizmos():
 	var size = 200
 	var sub_divisions = size / cell_size
-	DebugDraw.draw_grid(Vector3.ZERO, Vector3.RIGHT * size, Vector3.BACK * size, Vector2(sub_divisions, sub_divisions), Color.AQUAMARINE)
+	DebugDraw3D.draw_grid(Vector3.ZERO, Vector3.RIGHT * size, Vector3.BACK * size, Vector2(sub_divisions, sub_divisions), Color.AQUAMARINE)
 	# DebugDraw.draw_grid(Vector3.ZERO, Vector3.UP * size, Vector3.BACK * size, Vector2(sub_divisions, sub_divisions), Color.aquamarine)
 
 

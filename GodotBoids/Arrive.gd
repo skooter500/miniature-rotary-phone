@@ -9,7 +9,7 @@ var target
 
 func on_draw_gizmos():
 	if target: 
-		DebugDraw.draw_sphere(target.global_transform.origin, slowing_radius, Color.AQUAMARINE)
+		DebugDraw3D.draw_sphere(target.global_transform.origin, slowing_radius, Color.AQUAMARINE)
 	# DebugDraw.draw_arrow_line(boid.global_transform.origin, target.global_transform.origin, Color.aquamarine)
 
 func calculate():

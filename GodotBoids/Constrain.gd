@@ -8,7 +8,7 @@ var center
 
 func on_draw_gizmos():
 	var center_pos = center.global_transform.origin if center else Vector3.ZERO 
-	DebugDraw.draw_sphere(center_pos, radius, Color.BEIGE)
+	DebugDraw3D.draw_sphere(center_pos, radius, Color.BEIGE)
 
 
 func calculate():

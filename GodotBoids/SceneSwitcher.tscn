@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://d26vt30ugeu0d"]
 
-[ext_resource path="res://SceneSwitcher.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://SceneSwitcher.gd" id="1"]
 
 [node name="SceneSwitcher" type="Node"]
-script = ExtResource( 1 )
-scenes = [ "StateMachineBots.tscn", "Seek.tscn", "Arrive.tscn", "FollowPath.tscn", "Wander.tscn", "PlayerSteering.tscn", "Hybrid1.tscn", "offset_pursue.tscn", "School With Avoidance.tscn", "take_control.tscn" ]
+script = ExtResource("1")
+scenes = Array[String](["StateMachineBots.tscn", "Seek.tscn", "Arrive.tscn", "FollowPath.tscn", "Wander.tscn", "PlayerSteering.tscn", "Hybrid1.tscn", "offset_pursue.tscn", "School With Avoidance.tscn", "take_control.tscn"])

@@ -1,16 +1,17 @@
-[gd_scene load_steps=34 format=3 uid="uid://bflxosmklrhtm"]
+[gd_scene load_steps=35 format=3 uid="uid://bflxosmklrhtm"]
 
 [ext_resource type="Script" path="res://Avoidance.gd" id="1"]
 [ext_resource type="Script" path="res://PathDrawer.gd" id="2"]
 [ext_resource type="Script" path="res://Controller.gd" id="3"]
 [ext_resource type="Environment" uid="uid://b5dnnkkpxo3qc" path="res://seek_environment..tres" id="3_kxtlv"]
 [ext_resource type="PackedScene" uid="uid://gwmykrjbcyf6" path="res://Obstacle.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://SceneSwitcher.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://d26vt30ugeu0d" path="res://SceneSwitcher.tscn" id="5"]
 [ext_resource type="Script" path="res://Arrive.gd" id="6"]
 [ext_resource type="Script" path="res://Obstacles.gd" id="7"]
 [ext_resource type="Script" path="res://CameraController.gd" id="8"]
 [ext_resource type="Script" path="res://Boid.gd" id="9"]
 [ext_resource type="Script" path="res://FPController.gd" id="10"]
+[ext_resource type="Theme" uid="uid://e4nebgkl4j2a" path="res://bryans_theme.tres" id="10_03u6j"]
 [ext_resource type="Script" path="res://OffsetPursue.gd" id="11"]
 [ext_resource type="Script" path="res://root.gd" id="12"]
 [ext_resource type="Script" path="res://Constrain.gd" id="13"]
@@ -111,18 +112,14 @@ transform = Transform3D(0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-
 script = ExtResource("3")
 
 [node name="GridContainer2" type="GridContainer" parent="Controls"]
-anchors_preset = -1
-anchor_top = 0.621
-anchor_right = 0.61
-anchor_bottom = 1.0
-offset_left = 17.0
-offset_top = 93.072
-offset_right = -332.64
-offset_bottom = -17.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 22.0
+offset_top = 663.0
+offset_right = 508.0
+offset_bottom = 976.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("10_03u6j")
 columns = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Controls/GridContainer2"]
@@ -130,7 +127,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource("9")
-text = "Distance:"
+text = "Dist:"
 
 [node name="distance" type="HSlider" parent="Controls/GridContainer2"]
 layout_mode = 2
@@ -140,7 +137,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource("9")
-text = "Radius:"
+text = "Rad:"
 
 [node name="radius" type="HSlider" parent="Controls/GridContainer2"]
 layout_mode = 2
@@ -152,7 +149,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource("9")
-text = "Amplitude:"
+text = "Amp:"
 
 [node name="amplitude" type="HSlider" parent="Controls/GridContainer2"]
 layout_mode = 2
@@ -165,7 +162,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource("9")
-text = "Frequency:
+text = "Freq:
 "
 scroll_active = false
 
@@ -181,8 +178,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource("9")
-text = "Weight:
-"
+text = "Weight:"
 scroll_active = false
 
 [node name="weight" type="HSlider" parent="Controls/GridContainer2"]
@@ -192,31 +188,47 @@ size_flags_vertical = 3
 max_value = 10.0
 step = 0.1
 
-[node name="RichTextLabel5" type="RichTextLabel" parent="Controls/GridContainer2"]
+[node name="RichTextLabel8" type="RichTextLabel" parent="Controls/GridContainer2"]
 layout_mode = 2
-text = "Axis:
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("9")
+text = "Damp:
 "
+scroll_active = false
+
+[node name="damping" type="HSlider" parent="Controls/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 10.0
+step = 0.1
+
+[node name="RichTextLabel9" type="RichTextLabel" parent="Controls/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("9")
+text = "Angular:"
+scroll_active = false
+
+[node name="angularDamping" type="HSlider" parent="Controls/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 10.0
+step = 0.1
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="Controls/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("9")
+text = "Movement:"
 scroll_active = false
 
 [node name="OptionButton" type="OptionButton" parent="Controls/GridContainer2"]
 layout_mode = 2
-
-[node name="RichTextLabel7" type="RichTextLabel" parent="Controls/GridContainer2"]
-layout_mode = 2
-text = "Damping"
-
-[node name="damping" type="HSlider" parent="Controls/GridContainer2"]
-layout_mode = 2
-max_value = 50.0
-
-[node name="RichTextLabel8" type="RichTextLabel" parent="Controls/GridContainer2"]
-layout_mode = 2
-text = "Angular Damping"
-
-[node name="angularDamping" type="HSlider" parent="Controls/GridContainer2"]
-layout_mode = 2
-max_value = 10.0
-step = 0.1
 
 [node name="Center" type="Marker3D" parent="."]
 
@@ -291,7 +303,7 @@ enabled = false
 
 [node name="Arrive" type="Node" parent="creature/boid"]
 script = ExtResource("6")
-target_node = NodePath("../../../Camera3D/Position3D2")
+target_node = NodePath("../../../Player")
 draw_gizmos = false
 enabled = false
 
@@ -351,6 +363,6 @@ shape = SubResource("21")
 [connection signal="value_changed" from="Controls/GridContainer2/amplitude" to="Controls" method="_on_amplitude_value_changed"]
 [connection signal="value_changed" from="Controls/GridContainer2/Frequency" to="Controls" method="_on_Frequency_value_changed"]
 [connection signal="value_changed" from="Controls/GridContainer2/weight" to="Controls" method="_on_weight_value_changed"]
+[connection signal="value_changed" from="Controls/GridContainer2/damping" to="Controls" method="_on_weight_value_changed"]
+[connection signal="value_changed" from="Controls/GridContainer2/angularDamping" to="Controls" method="_on_weight_value_changed"]
 [connection signal="item_selected" from="Controls/GridContainer2/OptionButton" to="Controls" method="_on_OptionButton_item_selected"]
-[connection signal="value_changed" from="Controls/GridContainer2/damping" to="Controls" method="_on_damping_value_changed"]
-[connection signal="value_changed" from="Controls/GridContainer2/angularDamping" to="Controls" method="_on_angularDamping_value_changed"]

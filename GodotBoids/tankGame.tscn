@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://wall.gd" id="2"]
 [ext_resource type="Script" path="res://CamFollow.gd" id="2_lqmp0"]
 [ext_resource type="PackedScene" uid="uid://bsmshwh5fdw1y" path="res://Box.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://SceneSwitcher.tscn" id="5"]
-[ext_resource type="Material" path="res://Ground.tres" id="5_m2ykm"]
+[ext_resource type="PackedScene" uid="uid://d26vt30ugeu0d" path="res://SceneSwitcher.tscn" id="5"]
+[ext_resource type="Material" uid="uid://jru41rxv1b16" path="res://Ground.tres" id="5_m2ykm"]
 [ext_resource type="PackedScene" uid="uid://dsoyb1m4o4ieh" path="res://tank.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://b4pok7xvls88x" path="res://bullet1.tscn" id="7_yhs48"]
 

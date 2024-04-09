@@ -8,14 +8,14 @@ var enemy_boid:Node
 var force = Vector3.ZERO
 
 func on_draw_gizmos():
-	DebugDraw.draw_sphere(boid.global_transform.origin, flee_range, Color.DARK_SALMON)
+	DebugDraw3D.draw_sphere(boid.global_transform.origin, flee_range, Color.DARK_SALMON)
 	
 	if force != Vector3.ZERO:
-		DebugDraw.draw_arrow_line(boid.global_transform.origin, enemy_boid.global_transform.origin, Color.DARK_SALMON)
+		DebugDraw3D.draw_arrow(boid.global_transform.origin, enemy_boid.global_transform.origin, Color.DARK_SALMON)
 
 func calculate():
 	var to_enemy = enemy_boid.global_transform.origin - boid.global_transform.origin
-	DebugDraw.set_text("to_enemy", to_enemy.length())
+	DebugDraw2D.set_text("to_enemy", to_enemy.length())
 	if to_enemy.length() < flee_range:
 		to_enemy = to_enemy.normalized()
 		var desired = to_enemy * boid.max_speed

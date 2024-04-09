@@ -11,7 +11,7 @@ func draw_gizmos():
 	for i in range(1, path.get_curve().get_point_count()):
 		var start = transform * (path.get_curve().get_point_position(i - 1))
 		var end = transform * (path.get_curve().get_point_position(i))
-		DebugDraw.draw_line(start, end , Color.CYAN)
+		DebugDraw3D.draw_line(start, end , Color.CYAN)
 
 
 # Called when the node enters the scene tree for the first time.c

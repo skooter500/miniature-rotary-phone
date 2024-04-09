@@ -6,7 +6,7 @@
 [ext_resource type="Environment" uid="uid://b5dnnkkpxo3qc" path="res://seek_environment..tres" id="3_kcbvh"]
 [ext_resource type="Script" path="res://Avoidance.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://okvro62ssxp" path="res://Models/cobramk3_out/cobramk3.gltf" id="5"]
-[ext_resource type="PackedScene" path="res://SceneSwitcher.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://d26vt30ugeu0d" path="res://SceneSwitcher.tscn" id="6"]
 [ext_resource type="Script" path="res://TrailRender.gd" id="7"]
 [ext_resource type="Material" path="res://Tank Material.tres" id="8"]
 [ext_resource type="Script" path="res://root.gd" id="9"]

@@ -78,10 +78,11 @@ func set_enabled(behavior, enabled):
 
 
 func on_draw_gizmos():
-	DebugDraw3D.draw_arrow_line(global_transform.origin,  global_transform.origin + transform.basis.z * 10.0 , Color(0, 0, 1), 0.1)
-	DebugDraw3D.draw_arrow_line(global_transform.origin,  global_transform.origin + transform.basis.x * 10.0 , Color(1, 0, 0), 0.1)
-	DebugDraw3D.draw_arrow_line(global_transform.origin,  global_transform.origin + transform.basis.y * 10.0 , Color(0, 1, 0), 0.1)
-	DebugDraw3D.draw_arrow_line(global_transform.origin,  global_transform.origin + force, Color(1, 1, 0), 0.1)
+
+	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.z * 10.0 , Color(0, 0, 1), 0.1)
+	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.x * 10.0 , Color(1, 0, 0), 0.1)
+	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.y * 10.0 , Color(0, 1, 0), 0.1)
+	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + force, Color(1, 1, 0), 0.1)
 	
 	if school and count_neighbors:
 		DebugDraw3D.draw_sphere(global_transform.origin, school.neighbor_distance, Color.WEB_PURPLE)
@@ -145,7 +146,7 @@ func calculate():
 				behaviors_active += " Limiting force"
 				break
 	if draw_gizmos:
-		DebugDraw3D.set_text(str(self) + " " + behaviors_active)
+		DebugDraw2D.set_text(name, behaviors_active)
 	return force_acc
 
 
@@ -160,7 +161,6 @@ func _process(delta):
 			count_neighbors_simple()
 			
 func _physics_process(delta):
-	pause = false
 	# lerp in the new forces
 	if should_calculate:
 		new_force = calculate()

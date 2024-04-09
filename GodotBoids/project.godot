@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GodotBoids"
-run/main_scene="res://StateMachineBots.tscn"
+run/main_scene="res://Hybrid1.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://icon.png"
 
@@ -21,7 +21,7 @@ XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd
 
 [display]
 
-window/size/viewport_width=1024
+window/size/viewport_width=1000
 window/size/viewport_height=1000
 window/size/initial_position_type=2
 window/size/resizable=false
@@ -113,11 +113,12 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
+renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
 environment/ssao/quality=3
 environment/ssil/quality=3
 anti_aliasing/screen_space_roughness_limiter/enabled=false
+anti_aliasing/quality/msaa_3d=3
 quality/subsurface_scattering/quality=2
 quality/filters/msaa=2
 
