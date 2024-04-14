@@ -9,7 +9,7 @@ var can_fire = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	boid = get_parent()
-	bullet_scene = load("Bullet1.tscn")
+	bullet_scene = load("res://behaviors/bullet1.tscn")
 	timer = Timer.new()
 	add_child(timer)	
 	timer.wait_time = 1
@@ -23,9 +23,6 @@ func _ready():
 func timeout():
 	can_fire = true
 	timer.wait_time = randf_range(0.2, 1)
-
-func get_class0():
-	return "FireAtATargetGlobalState"	
 
 func _enter():
 	pass

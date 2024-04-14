@@ -23,8 +23,10 @@ func _ready():
 	
 	# right = $"../../XROrigin3D/right"
 
+	boid_player = get_tree().current_scene.find_child("camera follower")
 	
-	
+	if !boid:
+		boid = get_tree().current_scene.find_child("boid")
 	
 	call_deferred("calculate_offset")
 	call_deferred("set_mode", mode)
