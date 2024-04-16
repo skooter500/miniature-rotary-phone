@@ -1,0 +1,220 @@
+[gd_scene load_steps=17 format=3 uid="uid://dcgryjgjfd26n"]
+
+[ext_resource type="Script" path="res://behaviors/Boid.gd" id="1"]
+[ext_resource type="Script" path="res://behaviors/CameraController.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://gwmykrjbcyf6" path="res://behaviors/Obstacle.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://d26vt30ugeu0d" path="res://behaviors/SceneSwitcher.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://behaviors/creature.tscn" id="7"]
+[ext_resource type="Script" path="res://behaviors/root.gd" id="9"]
+[ext_resource type="Script" path="res://behaviors/PathDrawer.gd" id="10"]
+[ext_resource type="Script" path="res://behaviors/Obstacles.gd" id="11"]
+[ext_resource type="Script" path="res://behaviors/Controller.gd" id="12"]
+[ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="13"]
+[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="14"]
+[ext_resource type="Script" path="res://behaviors/FPController.gd" id="15"]
+
+[sub_resource type="Environment" id="6"]
+background_mode = 1
+ambient_light_color = Color(0.392157, 0.392157, 0.392157, 1)
+ambient_light_energy = 2.0
+
+[sub_resource type="Curve3D" id="2"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -11.2065, -9.15527e-05, -29.797, 0, 0, 0, 0, 0, 0, -2.83316, 0.000137329, -9.18577, 0, 0, 0, 0, 0, 0, 16.3011, 23.6271, -8.24546, 0, 0, 0, 0, 0, 0, 46.7083, -5.34058e-05, -27.2299, 0, 0, 0, 0, 0, 0, 52.709, 22.523, -0.299791, 0, 0, 0, 0, 0, 0, 61.4845, 0, 43.691, 0, 0, 0, 0, 0, 0, 41.071, 9.53445, 8.45671, 0, 0, 0, 0, 0, 0, 2.29026, 0, 45.1004, 0, 0, 0, 0, 0, 0, 24.8938, -17.113, 20.9767),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 9
+
+[sub_resource type="Theme" id="9"]
+
+[sub_resource type="PlaneMesh" id="10"]
+
+[node name="root2" type="Node3D"]
+script = ExtResource("9")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.13334, -19.3311, 39.7214)
+environment = SubResource("6")
+far = 10000.0
+script = ExtResource("15")
+speed = 30.0
+
+[node name="Camera3D Controller" type="Node" parent="Camera3D"]
+script = ExtResource("2")
+boid_path = NodePath("../../creature/boid")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Camera3D"]
+
+[node name="camera follower" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, -15.0557, 41.7624)
+script = ExtResource("1")
+max_force = 30
+draw_gizmos = false
+
+[node name="OffsetPursue" type="Node" parent="camera follower"]
+script = ExtResource("13")
+leader_node_path = NodePath("../../creature/boid")
+weight = 5.0
+
+[node name="Avoidance" type="Node" parent="camera follower"]
+script = ExtResource("14")
+draw_gizmos = false
+
+[node name="creature" parent="." instance=ExtResource("7")]
+
+[node name="body2" type="CharacterBody3D" parent="creature"]
+
+[node name="body3" type="CharacterBody3D" parent="creature"]
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90.1317)
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(0.029265, 0, -0.999572, 0, 1, 0, 0.999572, 0, 0.029265, 6.28377, -4.57764e-05, -18.2004)
+curve = SubResource("2")
+script = ExtResource("10")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.0512, 0.23691)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="DirectionalLight3D"]
+transform = Transform3D(0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-08, 1, 0.763187, -0.646177, -2.61999e-08, 0, 12.0512, 0.23691)
+
+[node name="Controls" type="Node" parent="."]
+script = ExtResource("12")
+
+[node name="GridContainer2" type="GridContainer" parent="Controls"]
+anchors_preset = -1
+anchor_top = 0.621
+anchor_right = 0.61
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 93.072
+offset_right = -332.64
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Controls/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("9")
+text = "Distance:"
+
+[node name="distance" type="HSlider" parent="Controls/GridContainer2"]
+layout_mode = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Controls/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("9")
+text = "Radius:"
+
+[node name="radius" type="HSlider" parent="Controls/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Controls/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("9")
+text = "Amplitude:"
+
+[node name="amplitude" type="HSlider" parent="Controls/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 180.0
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Controls/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("9")
+text = "Frequency:
+"
+scroll_active = false
+
+[node name="Frequency" type="HSlider" parent="Controls/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 2.0
+step = 0.01
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="Controls/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("9")
+text = "Weight:
+"
+scroll_active = false
+
+[node name="weight" type="HSlider" parent="Controls/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 10.0
+step = 0.1
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="Controls/GridContainer2"]
+layout_mode = 2
+text = "Axis:
+"
+scroll_active = false
+
+[node name="OptionButton" type="OptionButton" parent="Controls/GridContainer2"]
+layout_mode = 2
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="Controls/GridContainer2"]
+layout_mode = 2
+text = "Damping"
+
+[node name="damping" type="HSlider" parent="Controls/GridContainer2"]
+layout_mode = 2
+max_value = 50.0
+
+[node name="RichTextLabel8" type="RichTextLabel" parent="Controls/GridContainer2"]
+layout_mode = 2
+text = "Angular Damping"
+
+[node name="angularDamping" type="HSlider" parent="Controls/GridContainer2"]
+layout_mode = 2
+max_value = 10.0
+step = 0.1
+
+[node name="Center" type="Marker3D" parent="."]
+
+[node name="Obstacles" type="Node3D" parent="."]
+script = ExtResource("11")
+obstacle_scene = ExtResource("3")
+radius = 30
+center_path = NodePath("../Center")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(30, 0, 0, 0, 1, 0, 0, 0, 30, 0, -35.9149, 0)
+visible = false
+mesh = SubResource("10")
+
+[node name="SceneSwitcher" parent="." instance=ExtResource("4")]
+
+[connection signal="value_changed" from="Controls/GridContainer2/distance" to="Controls" method="_on_distance_value_changed"]
+[connection signal="value_changed" from="Controls/GridContainer2/radius" to="Controls" method="_on_radius_value_changed"]
+[connection signal="value_changed" from="Controls/GridContainer2/amplitude" to="Controls" method="_on_amplitude_value_changed"]
+[connection signal="value_changed" from="Controls/GridContainer2/Frequency" to="Controls" method="_on_Frequency_value_changed"]
+[connection signal="value_changed" from="Controls/GridContainer2/weight" to="Controls" method="_on_weight_value_changed"]
+[connection signal="item_selected" from="Controls/GridContainer2/OptionButton" to="Controls" method="_on_OptionButton_item_selected"]
+[connection signal="value_changed" from="Controls/GridContainer2/damping" to="Controls" method="_on_damping_value_changed"]
+[connection signal="value_changed" from="Controls/GridContainer2/angularDamping" to="Controls" method="_on_angularDamping_value_changed"]
+
+[editable path="creature"]

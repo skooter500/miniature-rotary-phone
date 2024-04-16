@@ -1,0 +1,209 @@
+[gd_scene load_steps=30 format=3 uid="uid://clj3n1do5ye2l"]
+
+[ext_resource type="Script" path="res://behaviors/root.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://ivslos3b7cmv" path="res://behaviors/player.tscn" id="2_ov0ef"]
+[ext_resource type="Script" path="res://behaviors/Boid.gd" id="3"]
+[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="4"]
+[ext_resource type="Script" path="res://behaviors/PathDrawer.gd" id="5"]
+[ext_resource type="Script" path="res://behaviors/CreatureController.gd" id="6"]
+[ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="7"]
+[ext_resource type="Script" path="res://behaviors/Constrain.gd" id="8"]
+[ext_resource type="Script" path="res://behaviors/Obstacles.gd" id="9"]
+[ext_resource type="PackedScene" uid="uid://d26vt30ugeu0d" path="res://behaviors/SceneSwitcher.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://gwmykrjbcyf6" path="res://behaviors/Obstacle.tscn" id="11"]
+[ext_resource type="Script" path="res://behaviors/SpineAnimator.gd" id="12"]
+[ext_resource type="Script" path="res://behaviors/Rotate.gd" id="13"]
+[ext_resource type="Script" path="res://behaviors/Harmonic.gd" id="14"]
+[ext_resource type="Script" path="res://behaviors/PlayerSteering.gd" id="15"]
+[ext_resource type="Script" path="res://behaviors/NoiseWander.gd" id="16"]
+[ext_resource type="Material" uid="uid://b2raijlysriqd" path="res://behaviors/Tank Material.tres" id="17"]
+[ext_resource type="PackedScene" uid="uid://0byvm1g7eaa6" path="res://behaviors/Dodecahedron.tscn" id="18"]
+[ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="21_5k42o"]
+
+[sub_resource type="Curve3D" id="2"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -11.2065, -9.15527e-05, -29.797, 0, 0, 0, 0, 0, 0, -2.83316, 0.000137329, -9.18577, 0, 0, 0, 0, 0, 0, 16.3011, 23.6271, -8.24546, 0, 0, 0, 0, 0, 0, 46.7083, -5.34058e-05, -27.2299, 0, 0, 0, 0, 0, 0, 52.709, 22.523, -0.299791, 0, 0, 0, 0, 0, 0, 61.4845, 0, 43.691, 0, 0, 0, 0, 0, 0, 41.071, 9.53445, 8.45671, 0, 0, 0, 0, 0, 0, 2.29026, 0, 45.1004, 0, 0, 0, 0, 0, 0, 24.8938, -17.113, 20.9767),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 9
+
+[sub_resource type="PrismMesh" id="14"]
+
+[sub_resource type="BoxShape3D" id="15"]
+
+[sub_resource type="BoxMesh" id="16"]
+
+[sub_resource type="BoxShape3D" id="17"]
+
+[sub_resource type="BoxShape3D" id="18"]
+
+[sub_resource type="BoxShape3D" id="19"]
+
+[sub_resource type="PrismMesh" id="20"]
+
+[sub_resource type="BoxShape3D" id="21"]
+
+[sub_resource type="SphereShape3D" id="22"]
+radius = 3.0
+
+[node name="root" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Player" parent="." instance=ExtResource("2_ov0ef")]
+
+[node name="Camera3D Controller" parent="Player/Camera3D" index="1" node_paths=PackedStringArray("boid_player", "boid")]
+boid_player = NodePath("../../../camera follower")
+boid = NodePath("../../../creature/boid")
+
+[node name="camera follower" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, -15.0557, 41.7624)
+script = ExtResource("3")
+max_force = 30
+draw_gizmos = false
+
+[node name="OffsetPursue" type="Node" parent="camera follower" node_paths=PackedStringArray("leader_boid")]
+script = ExtResource("7")
+leader_boid = NodePath("../../creature/boid")
+weight = 5.0
+
+[node name="Avoidance" type="Node" parent="camera follower"]
+script = ExtResource("4")
+draw_gizmos = false
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90.1317)
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(0.029265, 0, -0.999572, 0, 1, 0, 0.999572, 0, 0.029265, 6.28377, -4.57764e-05, -18.2004)
+curve = SubResource("2")
+script = ExtResource("5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.0512, 0.23691)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="DirectionalLight3D"]
+transform = Transform3D(0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-08, 1, 0.763187, -0.646177, -2.61999e-08, 0, 12.0512, 0.23691)
+
+[node name="Obstacles" type="Node3D" parent="."]
+script = ExtResource("9")
+obstacle_scene = ExtResource("11")
+radius = 30
+center_path = NodePath("../Marker3D")
+
+[node name="SceneSwitcher" parent="." instance=ExtResource("10")]
+
+[node name="creature" type="Node3D" parent="."]
+
+[node name="Controller" type="Node" parent="creature"]
+script = ExtResource("6")
+
+[node name="spineanimator" type="Node" parent="creature"]
+script = ExtResource("12")
+bonePaths = [NodePath("../boid"), NodePath("../body1"), NodePath("../body2"), NodePath("../body3"), NodePath("../tail")]
+
+[node name="boid" type="CharacterBody3D" parent="creature"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5154)
+script = ExtResource("3")
+max_force = 80
+damping = 0.3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="creature/boid"]
+transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("14")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("17")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="creature/boid"]
+shape = SubResource("15")
+
+[node name="Avoidance" type="Node" parent="creature/boid"]
+script = ExtResource("4")
+direction = 2
+feeler_length = 15
+weight = 10.0
+
+[node name="Harmonic" type="Node" parent="creature/boid"]
+script = ExtResource("14")
+frequency = 0.5
+distance = 20
+axis = 1
+weight = 7.0
+
+[node name="Constrain" type="Node" parent="creature/boid"]
+script = ExtResource("8")
+
+[node name="NoiseWander" type="Node" parent="creature/boid"]
+script = ExtResource("16")
+radius = 50.0
+amplitude = 90
+distance = 100
+draw_gizmos = false
+
+[node name="UserSteering" type="Node" parent="creature/boid"]
+script = ExtResource("15")
+weight = 15.0
+draw_gizmos = false
+enabled = false
+
+[node name="body1" type="CharacterBody3D" parent="creature"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.6357)
+
+[node name="MeshInstance4" type="MeshInstance3D" parent="creature/body1"]
+mesh = SubResource("16")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("17")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="creature/body1"]
+shape = SubResource("17")
+
+[node name="body2" type="CharacterBody3D" parent="creature"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.16915)
+
+[node name="MeshInstance3" type="MeshInstance3D" parent="creature/body2"]
+mesh = SubResource("16")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("17")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="creature/body2"]
+shape = SubResource("18")
+
+[node name="body3" type="CharacterBody3D" parent="creature"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.63446)
+
+[node name="MeshInstance2" type="MeshInstance3D" parent="creature/body3"]
+mesh = SubResource("16")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("17")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="creature/body3"]
+shape = SubResource("19")
+
+[node name="tail" type="CharacterBody3D" parent="creature"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.31343)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="creature/tail"]
+transform = Transform3D(1, 0, 0, 0, -8.74228e-08, 1, 0, -2, -4.37114e-08, 0, 0, -0.504121)
+mesh = SubResource("20")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("17")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="creature/tail"]
+shape = SubResource("21")
+disabled = true
+
+[node name="Pod" type="Area3D" parent="creature/tail"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -2)
+
+[node name="Dodecahedron" parent="creature/tail/Pod" instance=ExtResource("18")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.210667, 0)
+script = ExtResource("13")
+speed = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="creature/tail/Pod"]
+shape = SubResource("22")
+
+[node name="ui_layer" parent="." instance=ExtResource("21_5k42o")]
+
+[connection signal="body_entered" from="creature/tail/Pod" to="creature/Controller" method="_on_Pod_body_entered"]
+
+[editable path="Player"]

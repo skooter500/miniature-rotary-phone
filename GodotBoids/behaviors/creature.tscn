@@ -1,0 +1,135 @@
+[gd_scene load_steps=19 format=3 uid="uid://pk6xti30q24e"]
+
+[ext_resource type="Script" path="res://behaviors/Constrain.gd" id="2"]
+[ext_resource type="Script" path="res://behaviors/Boid.gd" id="3"]
+[ext_resource type="Script" path="res://behaviors/Seek.gd" id="4"]
+[ext_resource type="Script" path="res://behaviors/Harmonic.gd" id="5"]
+[ext_resource type="Script" path="res://behaviors/FollowPath.gd" id="6"]
+[ext_resource type="Script" path="res://behaviors/SpineAnimator.gd" id="7"]
+[ext_resource type="Script" path="res://behaviors/NoiseWander.gd" id="8"]
+[ext_resource type="Script" path="res://behaviors/PlayerSteering.gd" id="9"]
+[ext_resource type="Script" path="res://behaviors/Arrive.gd" id="10"]
+[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="11"]
+
+[sub_resource type="PrismMesh" id="5"]
+
+[sub_resource type="BoxShape3D" id="9"]
+
+[sub_resource type="PrismMesh" id="8"]
+
+[sub_resource type="BoxShape3D" id="10"]
+
+[sub_resource type="BoxMesh" id="1"]
+
+[sub_resource type="BoxShape3D" id="11"]
+
+[sub_resource type="BoxShape3D" id="12"]
+
+[sub_resource type="BoxShape3D" id="13"]
+
+[node name="root" type="Node3D"]
+
+[node name="Node2" type="Node" parent="."]
+
+[node name="spineanimator" type="Node" parent="Node2"]
+script = ExtResource("7")
+bonePaths = [NodePath("../boid"), NodePath("../body1"), NodePath("../body2"), NodePath("../body3"), NodePath("../tail")]
+
+[node name="boid" type="CharacterBody3D" parent="Node2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5154)
+script = ExtResource("3")
+max_force = 50
+damping = 0.3
+draw_gizmos = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node2/boid"]
+transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("5")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node2/boid"]
+shape = SubResource("9")
+
+[node name="Avoidance" type="Node" parent="Node2/boid"]
+script = ExtResource("11")
+
+[node name="Harmonic" type="Node" parent="Node2/boid"]
+script = ExtResource("5")
+frequency = 0.5
+distance = 10
+axis = 1
+weight = 6.0
+
+[node name="Constrain" type="Node" parent="Node2/boid"]
+script = ExtResource("2")
+center_path = NodePath("..")
+weight = 0.1
+
+[node name="NoiseWander" type="Node" parent="Node2/boid"]
+script = ExtResource("8")
+radius = 50.0
+amplitude = 90
+distance = 100
+draw_gizmos = false
+
+[node name="PathFollow3D" type="Node" parent="Node2/boid"]
+script = ExtResource("6")
+weight = 3.0
+draw_gizmos = false
+enabled = false
+
+[node name="Seek" type="Node" parent="Node2/boid"]
+script = ExtResource("4")
+draw_gizmos = false
+enabled = false
+
+[node name="Arrive" type="Node" parent="Node2/boid"]
+script = ExtResource("10")
+draw_gizmos = false
+enabled = false
+
+[node name="UserSteering" type="Node" parent="Node2/boid"]
+script = ExtResource("9")
+draw_gizmos = false
+enabled = false
+
+[node name="tail" type="CharacterBody3D" parent="Node2"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node2/tail"]
+transform = Transform3D(1, 0, 0, 0, -8.74228e-08, 1, 0, -2, -4.37114e-08, 0, 0, -0.504121)
+mesh = SubResource("8")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node2/tail"]
+shape = SubResource("10")
+disabled = true
+
+[node name="body3" type="CharacterBody3D" parent="Node2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="MeshInstance2" type="MeshInstance3D" parent="Node2/body3"]
+mesh = SubResource("1")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node2/body3"]
+shape = SubResource("11")
+
+[node name="body2" type="CharacterBody3D" parent="Node2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+
+[node name="MeshInstance3" type="MeshInstance3D" parent="Node2/body2"]
+mesh = SubResource("1")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node2/body2"]
+shape = SubResource("12")
+
+[node name="body1" type="CharacterBody3D" parent="Node2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+
+[node name="MeshInstance4" type="MeshInstance3D" parent="Node2/body1"]
+mesh = SubResource("1")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node2/body1"]
+shape = SubResource("13")

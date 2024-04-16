@@ -1,2 +1,0 @@
-# effective-sniffle
-Learning Godot

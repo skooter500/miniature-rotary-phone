@@ -1,0 +1,82 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://behaviors/school_config.gd" id="1"]
+[ext_resource type="Script" path="res://behaviors/Center.gd" id="2"]
+[ext_resource type="PackedScene" path="res://behaviors/Fish1.tscn" id="3"]
+[ext_resource type="Script" path="res://behaviors/root.gd" id="4"]
+[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="5"]
+[ext_resource type="Script" path="res://behaviors/FPController.gd" id="6"]
+[ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="7"]
+[ext_resource type="Script" path="res://behaviors/School.gd" id="8"]
+[ext_resource type="Script" path="res://behaviors/CameraController.gd" id="9"]
+[ext_resource type="Script" path="res://behaviors/Boid.gd" id="10"]
+
+[sub_resource type="Environment" id=6]
+background_mode = 1
+ambient_light_color = Color( 0.392157, 0.392157, 0.392157, 1 )
+ambient_light_energy = 2.0
+
+[sub_resource type="PlaneMesh" id=10]
+
+[sub_resource type="StandardMaterial3D" id=11]
+albedo_color = Color( 0.960784, 0.717647, 0, 1 )
+
+[node name="root2" type="Node3D"]
+script = ExtResource( 4 )
+
+[node name="School" type="Node3D" parent="."]
+script = ExtResource( 8 )
+fish_scene = ExtResource( 3 )
+count = 100
+radius = 200
+neighbor_distance = 25
+max_neighbors = 25
+cell_size = 20
+grid_size = 1000
+
+[node name="config" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="Camera3D" type="Camera3D" parent="."]
+environment = SubResource( 6 )
+current = true
+far = 10000.0
+script = ExtResource( 6 )
+speed = 5.0
+move = true
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Camera3D"]
+
+[node name="Control" type="Node" parent="Camera3D"]
+script = ExtResource( 9 )
+boid_camera_path = NodePath("../../camera follower")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.0512, 0.23691 )
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="DirectionalLight3D"]
+transform = Transform3D( 0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-08, 1, 0.763187, -0.646177, -2.61999e-08, 0, 12.0512, 0.23691 )
+
+[node name="Center" type="Marker3D" parent="."]
+script = ExtResource( 2 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D( 30, 0, 0, 0, 1, 0, 0, 0, 30, 0, -35.9149, 0 )
+visible = false
+mesh = SubResource( 10 )
+material/0 = SubResource( 11 )
+
+[node name="camera follower" type="CharacterBody3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 1.45153 )
+script = ExtResource( 10 )
+max_force = 30
+draw_gizmos = false
+
+[node name="OffsetPursue" type="Node" parent="camera follower"]
+script = ExtResource( 7 )
+weight = 5.0
+
+[node name="Avoidance" type="Node" parent="camera follower"]
+script = ExtResource( 5 )

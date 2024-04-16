@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://dsoyb1m4o4ieh"]
+
+[ext_resource type="PackedScene" uid="uid://co8hbh88amgo1" path="res://behaviors/bullet.tscn" id="1"]
+[ext_resource type="Script" path="res://behaviors/Tank.gd" id="3"]
+[ext_resource type="Material" uid="uid://b2raijlysriqd" path="res://behaviors/Tank Material.tres" id="3_wdivp"]
+
+[sub_resource type="BoxMesh" id="1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2mivd"]
+
+[sub_resource type="BoxMesh" id="6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w0fv0"]
+size = Vector3(0.25, 0.25, 2)
+
+[node name="tank" type="CharacterBody3D"]
+script = ExtResource("3")
+bulletPrefab = ExtResource("1")
+
+[node name="camTarget" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -5)
+
+[node name="tankMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("1")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("3_wdivp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_2mivd")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+
+[node name="Turret" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 2, 0, 0.625, 1)
+mesh = SubResource("6")
+skeleton = NodePath("../../tankMesh")
+surface_material_override/0 = ExtResource("3_wdivp")
+
+[node name="bulletSpawn" type="Node3D" parent="CharacterBody3D/Turret"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 1)
+shape = SubResource("BoxShape3D_w0fv0")

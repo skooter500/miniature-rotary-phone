@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://ivslos3b7cmv"]
+
+[ext_resource type="Script" path="res://behaviors/FPController.gd" id="1_1myh2"]
+[ext_resource type="Environment" uid="uid://b5dnnkkpxo3qc" path="res://behaviors/seek_environment..tres" id="2_jj480"]
+[ext_resource type="Script" path="res://behaviors/CameraController.gd" id="3_hu8t5"]
+
+[sub_resource type="SphereShape3D" id="18"]
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.5873, 6.48073, 33.382)
+script = ExtResource("1_1myh2")
+speed = 10.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("18")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+environment = ExtResource("2_jj480")
+far = 10000.0
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Camera3D"]
+
+[node name="Camera3D Controller" type="Node" parent="Camera3D" node_paths=PackedStringArray("boid_player", "boid")]
+script = ExtResource("3_hu8t5")
+boid_player = NodePath("")
+boid = NodePath("")
+mode = 1

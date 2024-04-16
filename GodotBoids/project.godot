@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="GodotBoids"
-run/main_scene="res://Hybrid1.tscn"
+run/main_scene="res://behaviors/Hybrid1.tscn"
 config/features=PackedStringArray("4.2")
-config/icon="res://icon.png"
+config/icon="res://behaviors/icon.png"
+
+[audio]
+
+buses/default_bus_layout="res://behaviors/default_bus_layout.tres"
 
 [autoload]
 
@@ -21,8 +25,8 @@ XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd
 
 [display]
 
-window/size/viewport_width=1000
-window/size/viewport_height=1000
+window/size/viewport_width=1024
+window/size/viewport_height=768
 window/size/initial_position_type=2
 window/size/resizable=false
 window/size/fullscreen=true
@@ -33,6 +37,11 @@ window/quality/msaa_3d=3
 
 project/assembly_name="GodotBoids"
 
+[editor]
+
+version_control/plugin_name="git"
+version_control/autoload_on_startup=true
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
@@ -40,6 +49,8 @@ enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
 [filesystem]
 
 import/fbx/enabled=false
+import/fbx/enabled.android=true
+import/fbx/enabled.web=true
 
 [gdnative]
 

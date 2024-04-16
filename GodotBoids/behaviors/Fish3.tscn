@@ -1,0 +1,94 @@
+[gd_scene load_steps=14 format=3 uid="uid://chdm2fe4bopcl"]
+
+[ext_resource type="Script" path="res://behaviors/Wander.gd" id="1"]
+[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="2"]
+[ext_resource type="Script" path="res://behaviors/Separation.gd" id="3"]
+[ext_resource type="Script" path="res://behaviors/Cohesion.gd" id="4"]
+[ext_resource type="Script" path="res://behaviors/Alignment.gd" id="5"]
+[ext_resource type="Script" path="res://behaviors/Boid.gd" id="6"]
+[ext_resource type="Script" path="res://behaviors/Constrain.gd" id="7"]
+[ext_resource type="Script" path="res://behaviors/Harmonic.gd" id="9"]
+[ext_resource type="Script" path="res://behaviors/SpineAnimator.gd" id="10"]
+[ext_resource type="Script" path="res://behaviors/NoiseWander.gd" id="11"]
+
+[sub_resource type="PrismMesh" id="1"]
+
+[sub_resource type="BoxMesh" id="3"]
+
+[sub_resource type="BoxShape3D" id="2"]
+
+[node name="Fish" type="Node3D"]
+
+[node name="SpineAnimator" type="Node" parent="."]
+script = ExtResource("10")
+bonePaths = [NodePath("../Boid"), NodePath("../Body"), NodePath("../Tail")]
+angular_damping = 5.0
+
+[node name="Tail" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.9908)
+
+[node name="MeshInstance3" type="MeshInstance3D" parent="Tail"]
+transform = Transform3D(1, 0, 0, 0, -8.74228e-08, 1, 0, -2, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("1")
+skeleton = NodePath("")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.4954)
+mesh = SubResource("3")
+skeleton = NodePath("")
+
+[node name="Boid" type="CharacterBody3D" parent="."]
+script = ExtResource("6")
+max_force = 100
+draw_gizmos = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boid"]
+transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("1")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("2")
+
+[node name="Avoidance" type="Node" parent="Boid"]
+script = ExtResource("2")
+feeler_angle = 60
+feeler_length = 30
+weight = 100.0
+draw_gizmos = false
+
+[node name="Separation" type="Node" parent="Boid"]
+script = ExtResource("3")
+weight = 20.0
+draw_gizmos = false
+
+[node name="Alignment" type="Node" parent="Boid"]
+script = ExtResource("5")
+weight = 70.0
+draw_gizmos = false
+
+[node name="Cohesion" type="Node" parent="Boid"]
+script = ExtResource("4")
+weight = 8.0
+draw_gizmos = false
+
+[node name="Wander" type="Node" parent="Boid"]
+script = ExtResource("1")
+draw_gizmos = false
+enabled = false
+
+[node name="Constrain" type="Node" parent="Boid"]
+script = ExtResource("7")
+draw_gizmos = false
+
+[node name="Harmonic" type="Node" parent="Boid"]
+script = ExtResource("9")
+distance = 20
+axis = 1
+weight = 10.0
+draw_gizmos = false
+
+[node name="NoiseWander" type="Node" parent="Boid"]
+script = ExtResource("11")
+distance = 20
