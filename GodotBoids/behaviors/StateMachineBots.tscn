@@ -32,14 +32,14 @@
 [ext_resource type="Environment" path="res://behaviors/default_environment.tres" id="30"]
 [ext_resource type="AudioStream" uid="uid://yggohfeablt2" path="res://sounds/safely home.mp3" id="31"]
 [ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="32"]
-[ext_resource type="PackedScene" path="res://ui_layer.tscn" id="35_dvhi1"]
+[ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="35_dvhi1"]
 
 [sub_resource type="ConvexPolygonShape3D" id="2"]
 
 [sub_resource type="SphereShape3D" id="3"]
 radius = 22.031
 
-[node name="root" type="Node3D"]
+[node name="State machines" type="Node3D"]
 script = ExtResource("15")
 
 [node name="Player" parent="." instance=ExtResource("2_jclav")]

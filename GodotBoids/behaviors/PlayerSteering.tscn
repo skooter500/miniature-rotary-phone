@@ -30,14 +30,15 @@
 
 [sub_resource type="BoxShape3D" id="14"]
 
-[node name="root" type="Node3D"]
+[node name="player steering" type="Node3D"]
 script = ExtResource("6")
 
 [node name="Player" parent="." instance=ExtResource("2_r27b7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.5873, 6.48073, 45.8974)
 
-[node name="Camera3D Controller" parent="Player/Camera3D" index="1"]
-mode = 0
+[node name="Camera3D Controller" parent="Player/Camera3D" index="1" node_paths=PackedStringArray("boid_player", "boid")]
+boid_player = NodePath("../../../camera follower")
+boid = NodePath("../../../Creature/boid")
 
 [node name="camera follower" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.534, -40.9348)
