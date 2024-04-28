@@ -104,7 +104,7 @@ func _process(delta: float) -> void:
 	mesh.clear_surfaces()
 	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 
-	draw_faces(top_vertices)
+	#draw_faces(top_vertices)
 	create_wing()
 	#draw_new_face(bottom_vertices)
 	#draw_new_face(front_vertices)
@@ -141,12 +141,19 @@ func create_sin_points()-> Array:
 
 func create_wing():
 	var points = create_sin_points()
+	var vertices
 	for i in range(num_of_points):
-		if i == 0:
-			continue
 		var next_point = points[i]
 		var prev_point = points[i-1]
-		var vertices = create_fronts(next_point, prev_point)
+		if i == 0:
+			continue
+		if i == (num_of_points-1):
+			vertices = create_end_face(next_point, prev_point)
+			draw_faces(vertices)
+			continue
+		vertices = create_fronts(next_point, prev_point)
+		draw_faces(vertices)
+		vertices = create_tops(next_point, prev_point)
 		draw_faces(vertices)
 
 func create_fronts(next_point: Vector3, prev_point: Vector3):
@@ -181,4 +188,76 @@ func create_fronts(next_point: Vector3, prev_point: Vector3):
 	vertices.append(Vector3(next_point.x,c,-width_offset))
 	vertices.append(Vector3(prev_point.x,d,-width_offset))
 	
+	return vertices
+
+func create_tops(next_point: Vector3, prev_point: Vector3):
+	var offset = tickness/2
+	var width_offset = witdh/2
+	
+	var a = next_point.z+width_offset
+	var b = next_point.z-width_offset
+	var c = prev_point.z+width_offset
+	var d = prev_point.z-width_offset
+	
+	var vertices = []
+	# Construct the triangles
+	# Top face
+	# First triangle	
+	vertices.append(Vector3(next_point.x,next_point.y+offset,a))
+	vertices.append(Vector3(next_point.x,next_point.y+offset,b))
+	vertices.append(Vector3(prev_point.x,prev_point.y+offset,c))
+	# Second triangle
+	vertices.append(Vector3(next_point.x,next_point.y+offset,b))
+	vertices.append(Vector3(prev_point.x,prev_point.y+offset,d))
+	vertices.append(Vector3(prev_point.x,prev_point.y+offset,c))
+	# Bottom face
+	# First triangle	
+	vertices.append(Vector3(next_point.x,next_point.y-offset,a))
+	vertices.append(Vector3(prev_point.x,prev_point.y-offset,c))
+	vertices.append(Vector3(next_point.x,next_point.y-offset,b))
+	# Second triangle
+	vertices.append(Vector3(next_point.x,next_point.y-offset,b))
+	vertices.append(Vector3(prev_point.x,prev_point.y-offset,c))
+	vertices.append(Vector3(prev_point.x,prev_point.y-offset,d))
+	return vertices
+
+func create_end_face(next_point: Vector3, prev_point: Vector3):
+	var offset = tickness/2
+	var width_offset = witdh/2
+	
+	var a = next_point.z+width_offset
+	var b = next_point.z-width_offset
+	var c = prev_point.z+width_offset
+	var d = prev_point.z-width_offset
+	
+	var vertices = []
+	# Construct the triangles
+	# Top face
+	# First triangle	
+	vertices.append(Vector3(next_point.x,next_point.y,a))
+	vertices.append(Vector3(next_point.x,next_point.y,b))
+	vertices.append(Vector3(prev_point.x,prev_point.y+offset,c))
+	# Second triangle
+	vertices.append(Vector3(next_point.x,next_point.y,b))
+	vertices.append(Vector3(prev_point.x,prev_point.y+offset,d))
+	vertices.append(Vector3(prev_point.x,prev_point.y+offset,c))
+	# Bottom face
+	# First triangle	
+	vertices.append(Vector3(next_point.x,next_point.y,a))
+	vertices.append(Vector3(prev_point.x,prev_point.y-offset,c))
+	vertices.append(Vector3(next_point.x,next_point.y,b))
+	# Second triangle
+	vertices.append(Vector3(next_point.x,next_point.y,b))
+	vertices.append(Vector3(prev_point.x,prev_point.y-offset,c))
+	vertices.append(Vector3(prev_point.x,prev_point.y-offset,d))
+	# Front face
+	# First triangle	
+	vertices.append(Vector3(next_point.x,next_point.y,width_offset))
+	vertices.append(Vector3(prev_point.x,prev_point.y+offset,width_offset))
+	vertices.append(Vector3(prev_point.x,prev_point.y-offset,width_offset))
+	# Back face
+	# Second triangle
+	vertices.append(Vector3(prev_point.x,prev_point.y+offset,-width_offset))
+	vertices.append(Vector3(next_point.x,next_point.y,-width_offset))
+	vertices.append(Vector3(prev_point.x,prev_point.y-offset,-width_offset))
 	return vertices

@@ -1,16 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://lk8nhpq4tq5t"]
+[gd_scene load_steps=6 format=3 uid="uid://lk8nhpq4tq5t"]
 
 [ext_resource type="Script" path="res://Assignment/WingScript.gd" id="1_5j6ps"]
 [ext_resource type="Script" path="res://Assignment/WingLines.gd" id="2_ocqhg"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_us5sd"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s6gof"]
+albedo_color = Color(0, 1, 1, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_ae0ka"]
 
 [node name="WingTest" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.0226402, 0, 0)
 mesh = SubResource("ImmediateMesh_us5sd")
+script = ExtResource("1_5j6ps")
+tickness = 0.2
+witdh = 2.0
+dist_between_points = 1.0
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+mesh = SubResource("ImmediateMesh_us5sd")
+surface_material_override/0 = SubResource("StandardMaterial3D_s6gof")
 script = ExtResource("1_5j6ps")
 tickness = 0.2
 witdh = 2.0
