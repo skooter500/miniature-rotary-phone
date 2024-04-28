@@ -1,59 +1,92 @@
-[gd_scene load_steps=6 format=3 uid="uid://lk8nhpq4tq5t"]
+[gd_scene load_steps=13 format=3 uid="uid://lk8nhpq4tq5t"]
 
 [ext_resource type="Script" path="res://Assignment/WingScript.gd" id="1_5j6ps"]
-[ext_resource type="Script" path="res://Assignment/WingLines.gd" id="2_ocqhg"]
+[ext_resource type="Script" path="res://behaviors/Boid.gd" id="1_ptjb1"]
+[ext_resource type="Script" path="res://behaviors/Harmonic.gd" id="3_wsylb"]
+[ext_resource type="Script" path="res://behaviors/NoiseWander.gd" id="4_jiyq7"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_us5sd"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s6gof"]
-albedo_color = Color(0, 1, 1, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_828u5"]
+albedo_color = Color(0.160784, 0.160784, 0.160784, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_ae0ka"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_djt5d"]
 
-[node name="WingTest" type="Node3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_7d1pf"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.0226402, 0, 0)
+[sub_resource type="PrismMesh" id="PrismMesh_uymvl"]
+left_to_right = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ro1sb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dvlo7"]
+albedo_color = Color(0.392157, 0.388235, 0.0313726, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7lw0"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="WingTest" type="CharacterBody3D"]
+script = ExtResource("1_ptjb1")
+
+[node name="Wing1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.999998, -0.00202314, 0.000460309, 0.00202301, 0.999998, 0.000285964, -0.00046089, -0.000285027, 1, 0, 0, 0)
 mesh = SubResource("ImmediateMesh_us5sd")
 script = ExtResource("1_5j6ps")
 tickness = 0.2
 witdh = 2.0
 dist_between_points = 1.0
+pos = -1.0
+play_flapping = true
+invert = true
+material = SubResource("StandardMaterial3D_828u5")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-mesh = SubResource("ImmediateMesh_us5sd")
-surface_material_override/0 = SubResource("StandardMaterial3D_s6gof")
+[node name="Wing2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+mesh = SubResource("ImmediateMesh_djt5d")
 script = ExtResource("1_5j6ps")
 tickness = 0.2
 witdh = 2.0
 dist_between_points = 1.0
-invert = true
-
-[node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(0, -0.0106418, -0.5, -0.062, -1, -0.343013, -1.5, -0.78488, -2, -1.27942, -2.5, -1.70554, -3, -1.95892, -3.5, -1.97753)
-width = 0.11
-script = ExtResource("2_ocqhg")
-amplitude = -1.0
-frequency = 16.0
-phase_shift = 2.0
-vertical_shift = -1.0
-num_of_points = 8
-dist_between_points = 0.5
 pos = -1.0
+play_flapping = true
 invert = true
+material = SubResource("StandardMaterial3D_828u5")
 
-[node name="Line2D2" type="Line2D" parent="."]
-points = PackedVector2Array(0, -0.0106418, 0.5, -0.062, 1, -0.343013, 1.5, -0.78488, 2, -1.27942, 2.5, -1.70554, 3, -1.95892, 3.5, -1.97753)
-width = 0.11
-script = ExtResource("2_ocqhg")
-amplitude = -1.0
-frequency = 16.0
-phase_shift = 2.0
-vertical_shift = -1.0
-num_of_points = 8
-dist_between_points = 0.5
-pos = -1.0
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.73845, -0.000882983, -0.523981, -0.255872)
+mesh = SubResource("BoxMesh_7d1pf")
+surface_material_override/0 = SubResource("StandardMaterial3D_828u5")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-position = Vector2(0, 0.479134)
-mesh = SubResource("SphereMesh_ae0ka")
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.04907e-07, -8.74228e-08, 0.991764, 0, -1, -8.67028e-08, 2.4, -3.82137e-15, 4.33514e-08, -0.00365886, -0.521629, -2.82313)
+mesh = SubResource("PrismMesh_uymvl")
+skeleton = NodePath("../MeshInstance3D3")
+surface_material_override/0 = SubResource("StandardMaterial3D_828u5")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37558e-08, 6.19125e-08, -0.991764, 3.10904e-22, -0.708196, -8.67028e-08, -1.00102, -2.70628e-15, 4.33514e-08, -0.00365886, -0.668405, 1.61057)
+mesh = SubResource("PrismMesh_uymvl")
+skeleton = NodePath("../MeshInstance3D3")
+surface_material_override/0 = SubResource("StandardMaterial3D_828u5")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.37558e-08, -2.90706e-15, 0.991764, -3.82525e-15, 0.289746, 1.42109e-14, -1.00102, -1.10723e-15, 4.33514e-08, -0.00365886, -0.172187, 1.61057)
+mesh = SubResource("PrismMesh_uymvl")
+skeleton = NodePath("../MeshInstance3D3")
+surface_material_override/0 = SubResource("StandardMaterial3D_828u5")
+
+[node name="Eyes7" type="MeshInstance3D" parent="."]
+transform = Transform3D(-8.74228e-09, 0.5, 0, -0.2, -2.18557e-08, 0, 0, 0, 0.2, 0, -0.283863, 1.44773)
+mesh = SubResource("CylinderMesh_ro1sb")
+surface_material_override/0 = SubResource("StandardMaterial3D_dvlo7")
+
+[node name="Eyes8" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-09, 0.51, 0, -0.1, -2.22928e-08, 0, 0, 0, 0.1, 0, -0.283863, 1.44773)
+mesh = SubResource("CylinderMesh_ro1sb")
+surface_material_override/0 = SubResource("StandardMaterial3D_k7lw0")
+
+[node name="Harmonic" type="Node" parent="."]
+script = ExtResource("3_wsylb")
+
+[node name="NoiseWander" type="Node" parent="."]
+script = ExtResource("4_jiyq7")

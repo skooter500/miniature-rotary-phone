@@ -18,6 +18,8 @@ var druation: float = 1
 var play_flapping: bool
 @export
 var invert: bool
+@export
+var material: StandardMaterial3D
 
 var amplitude: float = 1.0
 var frequency: float = 16.0
@@ -33,87 +35,32 @@ var uvs: PackedVector2Array = PackedVector2Array([
 	Vector2(1,1)
 ])
 
-var top_vertices: Array = [
-	Vector3(-1,1,-1),
-	Vector3(1,1,1),
-	Vector3(-1,1,1),
-	#Triangle 2
-	Vector3(1,1,-1),
-	Vector3(1,1,1),
-	Vector3(-1,1,-1)
-]
-
-var bottom_vertices: Array = [
-	Vector3(1,-1,1),
-	Vector3(-1,-1,-1),
-	Vector3(-1,-1,1),
-	#Triangle 2
-	Vector3(1,-1,1),
-	Vector3(1,-1,-1),
-	Vector3(-1,-1,-1)
-]
-
-var front_vertices: Array = [
-	Vector3(1,1,1),
-	Vector3(-1,-1,1),
-	Vector3(-1,1,1),
-	#Triangle 2
-	Vector3(1,1,1),
-	Vector3(1,-1,1),
-	Vector3(-1,-1,1)
-]
-
-var back_vertices: Array = [
-	Vector3(-1,-1,-1),
-	Vector3(1,1,-1),
-	Vector3(-1,1,-1),
-	#Triangle 2
-	Vector3(1,-1,-1),
-	Vector3(1,1,-1),
-	Vector3(-1,-1,-1)
-]
-
-var left_vertices: Array = [
-	Vector3(-1,1,1),
-	Vector3(-1,-1,1),
-	Vector3(-1,-1,-1),
-	#Triangle 2
-	Vector3(-1,1,1),
-	Vector3(-1,-1,-1),
-	Vector3(-1,1,-1),
-]
-
-var right_vertices: Array = [
-	Vector3(1,-1,1),
-	Vector3(1,1,1),
-	Vector3(1,-1,-1),
-	#Triangle 2
-	Vector3(1,-1,-1),
-	Vector3(1,1,1),
-	Vector3(1,1,-1),
-]
+var tween: Tween
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Godot use a clockwise winding order
 	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if (tween == null or not tween.is_running()) and play_flapping: 
+		tween = get_tree().create_tween()
+		tween.set_ease(Tween.EASE_IN)
+		tween.set_trans(Tween.TRANS_BACK)
+		tween.tween_property(self, "pos", 1, druation)
+		tween.chain().tween_property(self, "pos", -1, druation)
+		tween.play()
+	create_mesh()
+
+func create_mesh() -> void:
 	mesh.clear_surfaces()
 	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
-
-	#draw_faces(top_vertices)
+	# Godot use a clockwise winding order
 	create_wing()
-	#draw_new_face(bottom_vertices)
-	#draw_new_face(front_vertices)
-	#draw_new_face(back_vertices)
-	#draw_new_face(left_vertices)
-	#draw_new_face(right_vertices)
-
 	# End drawing.
 	mesh.surface_end()
+	mesh.surface_set_material(0, material)
 
 func draw_faces(vertices: Array):
 	for i in range(len(vertices)):
@@ -128,11 +75,6 @@ func create_sin_points()-> Array:
 	vertical_shift = pos
 	for x in range(num_of_points):
 		var y = amplitude * sin((x-frequency)/phase_shift)+vertical_shift
-		#var y
-		#if x == 0:
-			#y = amplitude * sin((x-frequency))+vertical_shift
-		#else:
-			#y = amplitude * sin((x-frequency)/phase_shift)+vertical_shift
 		if invert:
 			points.append(Vector3(-(x*dist_between_points),y,0))
 		else:
