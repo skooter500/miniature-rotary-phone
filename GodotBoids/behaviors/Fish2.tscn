@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://behaviors/Separation.gd" id="2"]
 [ext_resource type="Script" path="res://behaviors/Alignment.gd" id="3"]
 [ext_resource type="Script" path="res://behaviors/Cohesion.gd" id="4"]
-[ext_resource type="Material" path="res://behaviors/Tank Material.tres" id="5"]
+[ext_resource type="Material" uid="uid://b2raijlysriqd" path="res://behaviors/Tank Material.tres" id="5"]
 [ext_resource type="Script" path="res://behaviors/Constrain.gd" id="6"]
 [ext_resource type="Script" path="res://behaviors/Wander.gd" id="7"]
 [ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="8"]
