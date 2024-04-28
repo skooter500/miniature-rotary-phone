@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://lk8nhpq4tq5t"]
+
+[ext_resource type="Script" path="res://Assignment/WingScript.gd" id="1_5j6ps"]
+[ext_resource type="Script" path="res://Assignment/WingLines.gd" id="2_ocqhg"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_pdh41"]
+
+[node name="WingTest" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("ImmediateMesh_pdh41")
+script = ExtResource("1_5j6ps")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, -0.0106418, -0.5, -0.062, -1, -0.343013, -1.5, -0.78488, -2, -1.27942, -2.5, -1.70554, -3, -1.95892, -3.5, -1.97753)
+width = 0.11
+script = ExtResource("2_ocqhg")
+amplitude = -1.0
+frequency = 16.0
+phase_shift = 2.0
+vertical_shift = -1.0
+num_of_points = 8
+dist_between_points = 0.5
+pos = -1.0
+invert = null
+
+[node name="Line2D2" type="Line2D" parent="."]
+points = PackedVector2Array(0, -0.0106418, -0.5, -0.062, -1, -0.343013, -1.5, -0.78488, -2, -1.27942, -2.5, -1.70554, -3, -1.95892, -3.5, -1.97753)
+width = 0.11
+script = ExtResource("2_ocqhg")
+amplitude = -1.0
+frequency = 16.0
+phase_shift = 2.0
+vertical_shift = -1.0
+num_of_points = 8
+dist_between_points = 0.5
+pos = -1.0
+invert = null
