@@ -45,6 +45,7 @@ func _process(delta: float) -> void:
 
 func draw_sin_line()-> void:
 	clear_points()
+	# Make sure the wings stay in place
 	amplitude = pos
 	vertical_shift = pos
 	for x in range(num_of_points):
