@@ -32,7 +32,9 @@ albedo_color = Color(0, 0, 0, 1)
 size = Vector3(1, 3.59283, 4.48999)
 
 [node name="Boid" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("11_cksal")
+wind_direction = 90.0
 draw_gizmos = false
 
 [node name="StateMachine" type="Node" parent="."]
@@ -87,8 +89,8 @@ tickness = 0.2
 width = 2.0
 num_of_points = 6
 dist_between_points = 1.0
-pos = -1.12323
-play_flapping = true
+pos = -1.0
+wind_threshold = 15.0
 invert = true
 material = SubResource("StandardMaterial3D_828u5")
 parent = NodePath("../..")
@@ -102,8 +104,8 @@ tickness = 0.2
 width = 2.0
 num_of_points = 6
 dist_between_points = 1.0
-pos = -1.12323
-play_flapping = true
+pos = -1.0
+wind_threshold = 15.0
 invert = true
 material = SubResource("StandardMaterial3D_828u5")
 parent = NodePath("../..")

@@ -18,6 +18,11 @@ var pos: float = 1
 var druation: float = 1
 @export
 var play_flapping: bool
+# In degrees
+@export_range(0,360)
+var wind_direction: float = 0
+@export_range(0,90)
+var wind_threshold: float = 7.5
 @export
 var invert: bool
 @export
@@ -37,8 +42,6 @@ var vertical_shift: float = 1.0
 
 var sin_points: Array[Vector3]
 
-# In degrees
-var wind_direction: float = 0
 
 var uvs: PackedVector2Array = PackedVector2Array([
 	Vector2(0,1),
@@ -55,7 +58,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	var threshold_lower = wind_direction-wind_threshold
+	var threshold_higher = wind_direction+wind_threshold
 	if parent.rotation_degrees.x > 1 and parent.rotation_degrees.x < 180:
+		play_flapping = false
+	elif (parent.rotation_degrees.y > threshold_lower and parent.rotation_degrees.y < threshold_higher):
 		play_flapping = false
 	else:
 		play_flapping = true
