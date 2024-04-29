@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://gm8k5ho3bvrl"]
+[gd_scene load_steps=12 format=3 uid="uid://gm8k5ho3bvrl"]
 
-[ext_resource type="Script" path="res://SceneSetup.gd" id="1_ikvyg"]
+[ext_resource type="Script" path="res://Assignment/SceneSetup.gd" id="1_ikvyg"]
 [ext_resource type="PackedScene" uid="uid://lk8nhpq4tq5t" path="res://Assignment/WingTest.tscn" id="1_lp8lg"]
+[ext_resource type="Script" path="res://Assignment/Murder.gd" id="1_ydpnf"]
 [ext_resource type="PackedScene" uid="uid://ivslos3b7cmv" path="res://behaviors/player.tscn" id="2_tbqge"]
 [ext_resource type="Script" path="res://behaviors/Boid.gd" id="3_elotg"]
 [ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="4_1qvir"]
@@ -19,26 +20,30 @@ sky_material = SubResource("PhysicalSkyMaterial_thata")
 background_mode = 2
 sky = SubResource("Sky_t0a3h")
 
-[node name="Node3D" type="Node3D" node_paths=PackedStringArray("default_bird", "camera_controller", "camera_pursue")]
-script = ExtResource("1_ikvyg")
-default_bird = NodePath("Bird")
-camera_controller = NodePath("Player/Camera3D/Camera3D Controller")
-camera_pursue = NodePath("camera follower/OffsetPursue")
+[node name="Node3D" type="Node3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Ground" type="MeshInstance3D" parent="."]
 transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
 mesh = SubResource("PlaneMesh_n0yb5")
 
-[node name="Bird" parent="." node_paths=PackedStringArray("centre_point") instance=ExtResource("1_lp8lg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.9033, 0)
-centre_point = NodePath("../Marker3D")
+[node name="Murder" type="Node3D" parent="."]
+script = ExtResource("1_ydpnf")
+starting_point = Vector3(0, 100, 0)
+fish_scene = ExtResource("1_lp8lg")
+count = 100
+center_path = NodePath("../Marker3D")
+
+[node name="SceneSetup" type="Node" parent="." node_paths=PackedStringArray("birds", "camera_controller", "camera_pursue")]
+script = ExtResource("1_ikvyg")
+birds = NodePath("../Murder")
+camera_controller = NodePath("../Player/Camera3D/Camera3D Controller")
+camera_pursue = NodePath("../camera follower/OffsetPursue")
 
 [node name="Player" parent="." instance=ExtResource("2_tbqge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.85036, 6.48073, 7.11182)
 
-[node name="Camera3D Controller" parent="Player/Camera3D" index="1" node_paths=PackedStringArray("boid_player", "boid")]
+[node name="Camera3D Controller" parent="Player/Camera3D" index="1" node_paths=PackedStringArray("boid_player")]
 boid_player = NodePath("../../../camera follower")
-boid = NodePath("../../../Bird")
 mode = 0
 
 [node name="camera follower" type="CharacterBody3D" parent="."]
@@ -56,34 +61,7 @@ script = ExtResource("5_yaxik")
 draw_gizmos = false
 
 [node name="Marker3D" type="Marker3D" parent="."]
-
-[node name="Bird3" parent="." node_paths=PackedStringArray("centre_point") instance=ExtResource("1_lp8lg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 28.6741, 59.8755)
-centre_point = NodePath("../Marker3D")
-
-[node name="Bird2" parent="." node_paths=PackedStringArray("centre_point") instance=ExtResource("1_lp8lg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 28.6741, -22.6494)
-centre_point = NodePath("../Marker3D")
-
-[node name="Bird8" parent="." node_paths=PackedStringArray("centre_point") instance=ExtResource("1_lp8lg")]
-transform = Transform3D(-0.837976, 0, 0.545707, 0, 1, 0, -0.545707, 0, -0.837976, -26.7631, 28.2476, 36.1737)
-centre_point = NodePath("../Marker3D")
-
-[node name="Bird7" parent="." node_paths=PackedStringArray("centre_point") instance=ExtResource("1_lp8lg")]
-transform = Transform3D(0.664005, 0, 0.747729, 0, 1, 0, -0.747729, 0, 0.664005, -22.1942, 29.2425, -24.6713)
-centre_point = NodePath("../Marker3D")
-
-[node name="Bird6" parent="." node_paths=PackedStringArray("centre_point") instance=ExtResource("1_lp8lg")]
-transform = Transform3D(-0.552359, 0, -0.833606, 0, 1, 0, 0.833606, 0, -0.552359, 7.5551, 30.2219, 23.8278)
-centre_point = NodePath("../Marker3D")
-
-[node name="Bird5" parent="." node_paths=PackedStringArray("centre_point") instance=ExtResource("1_lp8lg")]
-transform = Transform3D(0.600295, 0, 0.799779, 0, 1, 0, -0.799779, 0, 0.600295, -26.2289, 23.4675, 0)
-centre_point = NodePath("../Marker3D")
-
-[node name="Bird4" parent="." node_paths=PackedStringArray("centre_point") instance=ExtResource("1_lp8lg")]
-transform = Transform3D(-0.454892, 0, -0.890547, 0, 1, 0, 0.890547, 0, -0.454892, 0, 31.3752, 0)
-centre_point = NodePath("../Marker3D")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.0595396, -0.82277, 0.565248, -0.0861885, 0.568375, 0.818243, -0.994498, 3.7459e-09, -0.104754, -2.22929, 48.4534, 0.0760765)

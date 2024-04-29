@@ -11,7 +11,7 @@ var body = $Boid/MeshInstance3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	setup_constrain()
+	#setup_constrain()
 	pass # Replace with function body.
 
 
