@@ -37,7 +37,7 @@ mesh = SubResource("BoxMesh_8my78")
 skeleton = NodePath("../..")
 
 [node name="wing2" type="MeshInstance3D" parent="Boid/Body"]
-transform = Transform3D(4.63507, 0, 0, 0, 0.13327, 0, 0, 0, 1.80809, -2.8382, 0, 0)
+transform = Transform3D(4.63523, 0, 0, 0, 0.123715, 0, 0, 0, 1.78898, -2.90032, -0.0493588, -0.000561472)
 mesh = SubResource("BoxMesh_8my78")
 skeleton = NodePath("../..")
 

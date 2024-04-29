@@ -7,7 +7,7 @@ func _ready():
 	var amount = 25
 	for i in range(amount):
 		var butterfly = butterfly_scene.instantiate()
-		butterfly.transform.origin.y += 1500
+		butterfly.transform.origin.y += randi_range(1500, 2000);
 		butterfly.transform.origin.x += randi_range(-2000, 2000);
 		butterfly.transform.origin.z += randi_range(-2000, 2000);
 		add_child(butterfly)
