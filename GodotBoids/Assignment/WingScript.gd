@@ -2,10 +2,12 @@
 
 extends MeshInstance3D
 
+class_name Wing
+
 @export
 var tickness: float = 1.0
 @export
-var witdh: float = 5
+var width: float = 5
 @export
 var num_of_points: int = 8
 @export
@@ -18,6 +20,9 @@ var druation: float = 1
 var play_flapping: bool
 @export
 var invert: bool
+@export
+var retract_width: float = 0.5
+
 @export
 var material: StandardMaterial3D
 
@@ -85,7 +90,7 @@ func create_wing():
 	var points = create_sin_points()
 	var vertices
 	if num_of_points <= 1:
-		var next_point = Vector3(0.5,0,0)
+		var next_point = Vector3(-retract_width,0,0)
 		var prev_point = Vector3(0,0,0)
 		vertices = create_end_face(next_point, prev_point)
 		draw_faces(vertices)
@@ -106,7 +111,7 @@ func create_wing():
 
 func create_fronts(next_point: Vector3, prev_point: Vector3):
 	var offset = tickness/2
-	var width_offset = witdh/2
+	var width_offset = width/2
 	# a,b,c,d are the four corners in the rectangle. Each point in the sin point
 	# represent the midpoint between the corners. a and b are top corners while
 	# c and d are bottom corners
@@ -140,7 +145,7 @@ func create_fronts(next_point: Vector3, prev_point: Vector3):
 
 func create_tops(next_point: Vector3, prev_point: Vector3):
 	var offset = tickness/2
-	var width_offset = witdh/2
+	var width_offset = width/2
 	
 	var a = next_point.z+width_offset
 	var b = next_point.z-width_offset
@@ -171,7 +176,7 @@ func create_tops(next_point: Vector3, prev_point: Vector3):
 
 func create_end_face(next_point: Vector3, prev_point: Vector3):
 	var offset = tickness/2
-	var width_offset = witdh/2
+	var width_offset = width/2
 	
 	var a = next_point.z+width_offset
 	var b = next_point.z-width_offset
