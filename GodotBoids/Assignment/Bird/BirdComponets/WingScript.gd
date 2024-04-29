@@ -53,6 +53,7 @@ var tween: Tween
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	wind_direction = parent.wind_direction
 	parent.wind_direction_update.connect(on_wind_direction_update)
 
 

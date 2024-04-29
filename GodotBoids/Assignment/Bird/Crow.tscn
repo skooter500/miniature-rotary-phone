@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://lk8nhpq4tq5t"]
+[gd_scene load_steps=21 format=3 uid="uid://lk8nhpq4tq5t"]
 
 [ext_resource type="Script" path="res://behaviors/StateMachine.gd" id="2_7ae1c"]
 [ext_resource type="Script" path="res://Assignment/Bird/BirdStates/BirdGlobalState.gd" id="3_lslpa"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://behaviors/Alignment.gd" id="8_ht5wb"]
 [ext_resource type="Script" path="res://Assignment/Bird/BirdComponets/WingScript.gd" id="10_bqgsl"]
 [ext_resource type="Script" path="res://Assignment/Bird/Bird.gd" id="11_cksal"]
+[ext_resource type="Script" path="res://Assignment/Bird/BirdComponets/Stamina.gd" id="13_g33kj"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_us5sd"]
 
@@ -32,7 +33,6 @@ albedo_color = Color(0, 0, 0, 1)
 size = Vector3(1, 3.59283, 4.48999)
 
 [node name="Boid" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("11_cksal")
 wind_direction = 90.0
 draw_gizmos = false
@@ -247,3 +247,8 @@ material = SubResource("StandardMaterial3D_828u5")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.202545, -0.348267)
 shape = SubResource("BoxShape3D_nts63")
+
+[node name="Stamina" type="Timer" parent="."]
+autostart = true
+script = ExtResource("13_g33kj")
+cost_time = 1.0
