@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnvnjemlfct6o"]
+
+[ext_resource type="Script" path="res://map/UI/user_interface.gd" id="1_wi56x"]
+
+[node name="UserInterface" type="Node3D"]
+script = ExtResource("1_wi56x")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="butterfly_amount" type="SpinBox" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -83.0625
+offset_bottom = 31.0
+grow_horizontal = 0
+min_value = 1.0
+value = 1.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/butterfly_amount"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.83
+anchor_top = 1.0
+anchor_right = -0.83
+anchor_bottom = 1.0
+offset_left = -18.9956
+offset_top = -27.0
+offset_right = 63.0044
+offset_bottom = -4.0
+text = "Butterfles:"
