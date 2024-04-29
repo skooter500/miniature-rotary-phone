@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c0xw6shfaj2ag"]
 
-[ext_resource type="Script" path="res://Assignment/WingLines.gd" id="1_pfrhg"]
+[ext_resource type="Script" path="res://Assignment/Bird/BirdComponets/WingLines.gd" id="1_pfrhg"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_gju5e"]
 

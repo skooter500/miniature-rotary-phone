@@ -26,6 +26,9 @@ var retract_width: float = 0.5
 @export
 var material: StandardMaterial3D
 
+@export
+var parent: Boid
+
 var amplitude: float = 1.0
 var frequency: float = 16.0
 # Broken?
@@ -49,6 +52,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if parent.rotation_degrees.x > 1 and parent.rotation_degrees.x < 180:
+		play_flapping = false
+	else:
+		play_flapping = true
+
 	if (tween == null or not tween.is_running()) and play_flapping: 
 		tween = get_tree().create_tween()
 		tween.set_ease(Tween.EASE_IN)

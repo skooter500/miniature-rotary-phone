@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://gm8k5ho3bvrl"]
 
-[ext_resource type="Script" path="res://Assignment/SceneSetup.gd" id="1_ikvyg"]
-[ext_resource type="PackedScene" uid="uid://lk8nhpq4tq5t" path="res://Assignment/WingTest.tscn" id="1_lp8lg"]
-[ext_resource type="Script" path="res://Assignment/Murder.gd" id="1_ydpnf"]
+[ext_resource type="Script" path="res://Assignment/Bird/BirdSpawner/SceneSetup.gd" id="1_ikvyg"]
+[ext_resource type="PackedScene" uid="uid://lk8nhpq4tq5t" path="res://Assignment/Bird/Crow.tscn" id="1_lp8lg"]
+[ext_resource type="Script" path="res://Assignment/Bird/BirdSpawner/Murder.gd" id="1_ydpnf"]
 [ext_resource type="PackedScene" uid="uid://ivslos3b7cmv" path="res://behaviors/player.tscn" id="2_tbqge"]
 [ext_resource type="Script" path="res://behaviors/Boid.gd" id="3_elotg"]
 [ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="4_1qvir"]
