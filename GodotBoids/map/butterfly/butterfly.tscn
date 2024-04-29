@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://cdfwqeyq0gkuk"]
+
+[ext_resource type="Script" path="res://map/butterfly/butterfly.gd" id="1_d22uj"]
+[ext_resource type="Script" path="res://behaviors/Boid.gd" id="1_qrlei"]
+[ext_resource type="Script" path="res://behaviors/Wander.gd" id="2_h8p7j"]
+[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="3_vsk4k"]
+[ext_resource type="Script" path="res://behaviors/NoiseWander.gd" id="4_cmk2c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_misk8"]
+albedo_color = Color(0.138061, 0.0493356, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_n172x"]
+material = SubResource("StandardMaterial3D_misk8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s4w7r"]
+albedo_color = Color(0.824982, 0.61755, 0.0487809, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8my78"]
+material = SubResource("StandardMaterial3D_s4w7r")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ips2i"]
+
+[node name="Butterfly" type="Node3D"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+script = ExtResource("1_d22uj")
+
+[node name="Boid" type="CharacterBody3D" parent="."]
+script = ExtResource("1_qrlei")
+
+[node name="Body" type="MeshInstance3D" parent="Boid"]
+transform = Transform3D(0.436104, 0, 0, 0, 0.364936, 0, 0, 0, 2.44859, 0, 0, 0)
+mesh = SubResource("BoxMesh_n172x")
+
+[node name="wing" type="MeshInstance3D" parent="Boid/Body"]
+transform = Transform3D(4.63523, 0, 0, 0, 0.123715, 0, 0, 0, 1.78898, 2.87066, -0.0493588, -0.000561472)
+mesh = SubResource("BoxMesh_8my78")
+skeleton = NodePath("../..")
+
+[node name="wing2" type="MeshInstance3D" parent="Boid/Body"]
+transform = Transform3D(4.63523, 0, 0, 0, 0.123715, 0, 0, 0, 1.78898, -2.90032, -0.0493588, -0.000561472)
+mesh = SubResource("BoxMesh_8my78")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boid"]
+shape = SubResource("BoxShape3D_ips2i")
+
+[node name="Wander" type="Node" parent="Boid"]
+script = ExtResource("2_h8p7j")
+draw_gizmos = false
+
+[node name="Avoidance" type="Node" parent="Boid"]
+script = ExtResource("3_vsk4k")
+feeler_angle = 60
+feeler_length = 30
+weight = 100.0
+draw_gizmos = false
+
+[node name="NoiseWander" type="Node" parent="Boid"]
+script = ExtResource("4_cmk2c")
+amplitude = 85
+distance = 20
+draw_gizmos = false
