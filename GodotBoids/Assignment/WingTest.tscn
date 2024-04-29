@@ -34,20 +34,22 @@ mesh = SubResource("ImmediateMesh_us5sd")
 script = ExtResource("1_5j6ps")
 tickness = 0.2
 witdh = 2.0
+num_of_points = 1
 dist_between_points = 1.0
-pos = -1.0
+pos = -1.00249
 play_flapping = true
 invert = true
 material = SubResource("StandardMaterial3D_828u5")
 
 [node name="Wing2" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.00428593, -2.98023e-08, -0.00157785)
 mesh = SubResource("ImmediateMesh_djt5d")
 script = ExtResource("1_5j6ps")
 tickness = 0.2
 witdh = 2.0
+num_of_points = 1
 dist_between_points = 1.0
-pos = -1.0
+pos = -1.00249
 play_flapping = true
 invert = true
 material = SubResource("StandardMaterial3D_828u5")
@@ -69,7 +71,7 @@ mesh = SubResource("PrismMesh_uymvl")
 skeleton = NodePath("../MeshInstance3D3")
 surface_material_override/0 = SubResource("StandardMaterial3D_828u5")
 
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(4.37558e-08, -2.90706e-15, 0.991764, -3.82525e-15, 0.289746, 1.42109e-14, -1.00102, -1.10723e-15, 4.33514e-08, -0.00365886, -0.172187, 1.61057)
 mesh = SubResource("PrismMesh_uymvl")
 skeleton = NodePath("../MeshInstance3D3")

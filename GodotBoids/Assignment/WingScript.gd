@@ -84,6 +84,12 @@ func create_sin_points()-> Array:
 func create_wing():
 	var points = create_sin_points()
 	var vertices
+	if num_of_points <= 1:
+		var next_point = Vector3(0.5,0,0)
+		var prev_point = Vector3(0,0,0)
+		vertices = create_end_face(next_point, prev_point)
+		draw_faces(vertices)
+		return
 	for i in range(num_of_points):
 		var next_point = points[i]
 		var prev_point = points[i-1]

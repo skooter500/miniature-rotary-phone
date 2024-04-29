@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://gm8k5ho3bvrl"]
+
+[ext_resource type="PackedScene" uid="uid://lk8nhpq4tq5t" path="res://Assignment/WingTest.tscn" id="1_lp8lg"]
+[ext_resource type="PackedScene" uid="uid://ivslos3b7cmv" path="res://behaviors/player.tscn" id="2_tbqge"]
+[ext_resource type="Script" path="res://behaviors/Boid.gd" id="3_elotg"]
+[ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="4_1qvir"]
+[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="5_yaxik"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_n0yb5"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(7.9, 0, 0, 0, 1, 0, 0, 0, 7.99, 0, 0, 0)
+mesh = SubResource("PlaneMesh_n0yb5")
+
+[node name="WingTest" parent="." instance=ExtResource("1_lp8lg")]
+transform = Transform3D(0.400752, 0, 0, 0, 0.50094, 0, 0, 0, 0.300564, 0, 2.10585, 0)
+
+[node name="Player" parent="." instance=ExtResource("2_tbqge")]
+
+[node name="Camera3D Controller" parent="Player/Camera3D" index="1" node_paths=PackedStringArray("boid_player", "boid")]
+boid_player = NodePath("../../../camera follower")
+boid = NodePath("../../../WingTest")
+
+[node name="camera follower" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, -15.0557, 41.7624)
+script = ExtResource("3_elotg")
+max_force = 30
+draw_gizmos = false
+
+[node name="OffsetPursue" type="Node" parent="camera follower" node_paths=PackedStringArray("leader_boid")]
+script = ExtResource("4_1qvir")
+leader_boid = NodePath("../../WingTest")
+weight = 5.0
+
+[node name="Avoidance" type="Node" parent="camera follower"]
+script = ExtResource("5_yaxik")
+draw_gizmos = false
+
+[editable path="Player"]
