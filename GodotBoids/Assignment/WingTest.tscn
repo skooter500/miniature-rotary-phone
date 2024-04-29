@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://lk8nhpq4tq5t"]
+[gd_scene load_steps=17 format=3 uid="uid://lk8nhpq4tq5t"]
 
 [ext_resource type="Script" path="res://Assignment/WingScript.gd" id="1_5j6ps"]
 [ext_resource type="Script" path="res://Assignment/Bird.gd" id="1_ob88s"]
@@ -7,6 +7,9 @@
 [ext_resource type="Script" path="res://Assignment/BodyAnimator.gd" id="4_c6rrh"]
 [ext_resource type="Script" path="res://behaviors/NoiseWander.gd" id="4_jiyq7"]
 [ext_resource type="Script" path="res://behaviors/Constrain.gd" id="5_ltxfv"]
+[ext_resource type="Script" path="res://behaviors/Cohesion.gd" id="6_0ivu5"]
+[ext_resource type="Script" path="res://behaviors/Separation.gd" id="7_q465w"]
+[ext_resource type="Script" path="res://behaviors/Alignment.gd" id="8_ht5wb"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_us5sd"]
 
@@ -28,6 +31,17 @@ script = ExtResource("1_ob88s")
 
 [node name="Boid" type="CharacterBody3D" parent="."]
 script = ExtResource("1_ptjb1")
+
+[node name="Separation" type="Node" parent="Boid"]
+script = ExtResource("7_q465w")
+
+[node name="Alignment" type="Node" parent="Boid"]
+script = ExtResource("8_ht5wb")
+weight = 7.0
+
+[node name="Cohesion" type="Node" parent="Boid"]
+script = ExtResource("6_0ivu5")
+weight = 8.0
 
 [node name="Harmonic" type="Node" parent="Boid"]
 script = ExtResource("3_wsylb")
