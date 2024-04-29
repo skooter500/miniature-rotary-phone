@@ -27,7 +27,7 @@ var retract_width: float = 0.5
 var material: StandardMaterial3D
 
 @export
-var parent: Boid
+var parent: Bird
 
 var amplitude: float = 1.0
 var frequency: float = 16.0
@@ -36,6 +36,9 @@ var phase_shift: float = 2.0
 var vertical_shift: float = 1.0
 
 var sin_points: Array[Vector3]
+
+# In degrees
+var wind_direction: float = 0
 
 var uvs: PackedVector2Array = PackedVector2Array([
 	Vector2(0,1),
@@ -47,7 +50,7 @@ var tween: Tween
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	parent.wind_direction_update.connect(on_wind_direction_update)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -66,7 +69,11 @@ func _process(delta: float) -> void:
 		tween.play()
 	create_mesh()
 
+func on_wind_direction_update(new_value):
+	wind_direction = new_value
+
 func create_mesh() -> void:
+	# Clear the old surface
 	mesh.clear_surfaces()
 	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 	# Godot use a clockwise winding order

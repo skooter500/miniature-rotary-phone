@@ -1,5 +1,7 @@
 extends Boid
 
+class_name Bird
+
 @export_category("Behaviours")
 @export
 var centre_point: Marker3D
@@ -8,6 +10,16 @@ var centre_point: Marker3D
 var boid: Boid = $Boid
 @onready
 var body = $Boid/MeshInstance3D
+
+@export_range(0,360)
+var wind_direction: float = 0:
+	set(new_value):
+		wind_direction_update.emit(new_value)
+		wind_direction = new_value
+	get:
+		return wind_direction
+
+signal wind_direction_update(new_direction: float)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
