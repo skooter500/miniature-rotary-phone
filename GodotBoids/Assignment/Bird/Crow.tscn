@@ -1,8 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://lk8nhpq4tq5t"]
+[gd_scene load_steps=21 format=3 uid="uid://lk8nhpq4tq5t"]
 
 [ext_resource type="Script" path="res://behaviors/Boid.gd" id="1_ptjb1"]
 [ext_resource type="Script" path="res://behaviors/StateMachine.gd" id="2_7ae1c"]
+[ext_resource type="Script" path="res://Assignment/Bird/BirdStates/BirdGlobalState.gd" id="3_lslpa"]
 [ext_resource type="Script" path="res://behaviors/Harmonic.gd" id="3_wsylb"]
+[ext_resource type="Script" path="res://Assignment/Bird/BirdStates/FlockState.gd" id="4_ajedj"]
 [ext_resource type="Script" path="res://Assignment/Bird/BirdComponets/BodyAnimator.gd" id="4_c6rrh"]
 [ext_resource type="Script" path="res://behaviors/NoiseWander.gd" id="4_jiyq7"]
 [ext_resource type="Script" path="res://behaviors/Constrain.gd" id="5_ltxfv"]
@@ -36,6 +38,14 @@ draw_gizmos = false
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("2_7ae1c")
+initial_state = NodePath("../FlockState")
+global_state_path = NodePath("../BirdGlobalState")
+
+[node name="BirdGlobalState" type="Node" parent="."]
+script = ExtResource("3_lslpa")
+
+[node name="FlockState" type="Node" parent="."]
+script = ExtResource("4_ajedj")
 
 [node name="Separation" type="Node" parent="."]
 script = ExtResource("7_q465w")
@@ -78,7 +88,7 @@ tickness = 0.2
 width = 2.0
 num_of_points = 6
 dist_between_points = 1.0
-pos = 1.08156
+pos = 1.18743
 play_flapping = true
 invert = true
 material = SubResource("StandardMaterial3D_828u5")
@@ -93,7 +103,7 @@ tickness = 0.2
 width = 2.0
 num_of_points = 6
 dist_between_points = 1.0
-pos = 1.08156
+pos = 1.18743
 play_flapping = true
 invert = true
 material = SubResource("StandardMaterial3D_828u5")
