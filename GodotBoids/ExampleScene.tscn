@@ -1,0 +1,83 @@
+[gd_scene load_steps=13 format=3 uid="uid://dshg81nojisda"]
+
+[ext_resource type="Script" path="res://Assignment/Bird/BirdSpawner/Murder.gd" id="1_orda2"]
+[ext_resource type="PackedScene" uid="uid://lk8nhpq4tq5t" path="res://Assignment/Bird/Crow.tscn" id="2_jc8ar"]
+[ext_resource type="Script" path="res://Assignment/Bird/BirdSpawner/SceneSetup.gd" id="3_q381m"]
+[ext_resource type="PackedScene" uid="uid://ivslos3b7cmv" path="res://behaviors/player.tscn" id="4_p70xn"]
+[ext_resource type="Script" path="res://behaviors/Boid.gd" id="5_jtqjp"]
+[ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="6_ux442"]
+[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="7_kh34w"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ue3y"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_n0yb5"]
+size = Vector2(1, 1)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_thata"]
+energy_multiplier = 7.88
+
+[sub_resource type="Sky" id="Sky_t0a3h"]
+sky_material = SubResource("PhysicalSkyMaterial_thata")
+
+[sub_resource type="Environment" id="Environment_a3epi"]
+background_mode = 2
+sky = SubResource("Sky_t0a3h")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_0ue3y")
+
+[node name="Ground" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
+mesh = SubResource("PlaneMesh_n0yb5")
+skeleton = NodePath("../..")
+
+[node name="Murder" type="Node3D" parent="." node_paths=PackedStringArray("ground")]
+script = ExtResource("1_orda2")
+starting_point = Vector3(0, 100, 0)
+ground = NodePath("../Ground/Ground")
+fish_scene = ExtResource("2_jc8ar")
+count = 1
+center_path = NodePath("../Marker3D")
+
+[node name="SceneSetup" type="Node" parent="." node_paths=PackedStringArray("birds", "camera_controller", "camera_pursue")]
+script = ExtResource("3_q381m")
+birds = NodePath("../Murder")
+camera_controller = NodePath("../Player/Camera3D/Camera3D Controller")
+camera_pursue = NodePath("../camera follower/OffsetPursue")
+
+[node name="Player" parent="." instance=ExtResource("4_p70xn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.85036, 6.48073, 7.11182)
+
+[node name="Camera3D Controller" parent="Player/Camera3D" index="1" node_paths=PackedStringArray("boid_player")]
+boid_player = NodePath("../../../camera follower")
+mode = 0
+
+[node name="camera follower" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, -15.0557, 41.7624)
+script = ExtResource("5_jtqjp")
+max_force = 30
+draw_gizmos = false
+
+[node name="OffsetPursue" type="Node" parent="camera follower"]
+script = ExtResource("6_ux442")
+weight = 5.0
+
+[node name="Avoidance" type="Node" parent="camera follower"]
+script = ExtResource("7_kh34w")
+draw_gizmos = false
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.0595396, -0.82277, 0.565248, -0.0861885, 0.568375, 0.818243, -0.994498, 3.7459e-09, -0.104754, -2.22929, 48.4534, 0.0760765)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_a3epi")
+
+[editable path="Player"]
