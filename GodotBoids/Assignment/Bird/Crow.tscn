@@ -1,15 +1,20 @@
-[gd_scene load_steps=17 format=3 uid="uid://lk8nhpq4tq5t"]
+[gd_scene load_steps=23 format=3 uid="uid://lk8nhpq4tq5t"]
 
-[ext_resource type="Script" path="res://Assignment/WingScript.gd" id="1_5j6ps"]
-[ext_resource type="Script" path="res://Assignment/Bird.gd" id="1_ob88s"]
-[ext_resource type="Script" path="res://behaviors/Boid.gd" id="1_ptjb1"]
+[ext_resource type="Script" path="res://behaviors/StateMachine.gd" id="2_7ae1c"]
+[ext_resource type="Script" path="res://Assignment/Bird/BirdStates/BirdGlobalState.gd" id="3_lslpa"]
 [ext_resource type="Script" path="res://behaviors/Harmonic.gd" id="3_wsylb"]
-[ext_resource type="Script" path="res://Assignment/BodyAnimator.gd" id="4_c6rrh"]
+[ext_resource type="Script" path="res://Assignment/Bird/BirdStates/FlockState.gd" id="4_ajedj"]
+[ext_resource type="Script" path="res://Assignment/Bird/BirdComponets/BodyAnimator.gd" id="4_c6rrh"]
 [ext_resource type="Script" path="res://behaviors/NoiseWander.gd" id="4_jiyq7"]
 [ext_resource type="Script" path="res://behaviors/Constrain.gd" id="5_ltxfv"]
 [ext_resource type="Script" path="res://behaviors/Cohesion.gd" id="6_0ivu5"]
 [ext_resource type="Script" path="res://behaviors/Separation.gd" id="7_q465w"]
 [ext_resource type="Script" path="res://behaviors/Alignment.gd" id="8_ht5wb"]
+[ext_resource type="Script" path="res://Assignment/Bird/BirdComponets/WingScript.gd" id="10_bqgsl"]
+[ext_resource type="Script" path="res://behaviors/Arrive.gd" id="11_8ecqk"]
+[ext_resource type="Script" path="res://Assignment/Bird/Bird.gd" id="11_cksal"]
+[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="12_d4g50"]
+[ext_resource type="Script" path="res://Assignment/Bird/BirdComponets/Stamina.gd" id="13_g33kj"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_us5sd"]
 
@@ -26,33 +31,61 @@ albedo_color = Color(0.482353, 0.854902, 1, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7lw0"]
 albedo_color = Color(0, 0, 0, 1)
 
-[node name="Bird" type="Node3D"]
-script = ExtResource("1_ob88s")
+[sub_resource type="BoxShape3D" id="BoxShape3D_oknbe"]
+size = Vector3(1, 3.62082, 4.47559)
 
-[node name="Boid" type="CharacterBody3D" parent="."]
-script = ExtResource("1_ptjb1")
+[node name="Boid" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = ExtResource("11_cksal")
+wind_direction = 90.0
+draw_gizmos = false
 
-[node name="Separation" type="Node" parent="Boid"]
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_7ae1c")
+initial_state = NodePath("../FlockState")
+global_state_path = NodePath("../BirdGlobalState")
+
+[node name="BirdGlobalState" type="Node" parent="." node_paths=PackedStringArray("stamina")]
+script = ExtResource("3_lslpa")
+stamina = NodePath("../Stamina")
+
+[node name="FlockState" type="Node" parent="."]
+script = ExtResource("4_ajedj")
+
+[node name="Separation" type="Node" parent="."]
 script = ExtResource("7_q465w")
+weight = 4.0
 
-[node name="Alignment" type="Node" parent="Boid"]
+[node name="Alignment" type="Node" parent="."]
 script = ExtResource("8_ht5wb")
-weight = 7.0
+weight = 5.0
 
-[node name="Cohesion" type="Node" parent="Boid"]
+[node name="Cohesion" type="Node" parent="."]
 script = ExtResource("6_0ivu5")
-weight = 8.0
+weight = 2.0
+draw_gizmos = false
 
-[node name="Harmonic" type="Node" parent="Boid"]
+[node name="Harmonic" type="Node" parent="."]
 script = ExtResource("3_wsylb")
 
-[node name="NoiseWander" type="Node" parent="Boid"]
+[node name="NoiseWander" type="Node" parent="."]
 script = ExtResource("4_jiyq7")
 
-[node name="Constrain" type="Node" parent="Boid"]
+[node name="Constrain" type="Node" parent="."]
 script = ExtResource("5_ltxfv")
 
-[node name="MeshInstance3D" type="Node3D" parent="Boid" node_paths=PackedStringArray("wing1", "wing2", "body", "claw1", "claw2")]
+[node name="Arrive" type="Node" parent="."]
+script = ExtResource("11_8ecqk")
+enabled = false
+
+[node name="Avoidance" type="Node" parent="."]
+script = ExtResource("12_d4g50")
+direction = 1
+feeler_angle = 5
+feeler_length = 15
+weight = 3.0
+
+[node name="MeshInstance3D" type="Node3D" parent="." node_paths=PackedStringArray("wing1", "wing2", "body", "claw1", "claw2")]
 script = ExtResource("4_c6rrh")
 state = "Flying"
 wing1 = NodePath("Wing1")
@@ -60,167 +93,181 @@ wing2 = NodePath("Wing2")
 body = NodePath("Body2")
 claw1 = NodePath("Claw")
 claw2 = NodePath("Claw2")
-druation = 0.1
 wing_span = 6
 
-[node name="Wing1" type="MeshInstance3D" parent="Boid/MeshInstance3D"]
+[node name="Wing1" type="MeshInstance3D" parent="MeshInstance3D" node_paths=PackedStringArray("parent")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.621, -0.354)
 mesh = SubResource("ImmediateMesh_us5sd")
 skeleton = NodePath("../..")
-script = ExtResource("1_5j6ps")
+script = ExtResource("10_bqgsl")
 tickness = 0.2
 width = 2.0
 num_of_points = 6
 dist_between_points = 1.0
-pos = 1.17975
+pos = -1.0
 play_flapping = true
+wind_direction = 90.0
+wind_threshold = 15.0
 invert = true
 material = SubResource("StandardMaterial3D_828u5")
+parent = NodePath("../..")
 
-[node name="Wing2" type="MeshInstance3D" parent="Boid/MeshInstance3D"]
+[node name="Wing2" type="MeshInstance3D" parent="MeshInstance3D" node_paths=PackedStringArray("parent")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.621, -0.354)
 mesh = SubResource("ImmediateMesh_djt5d")
 skeleton = NodePath("../..")
-script = ExtResource("1_5j6ps")
+script = ExtResource("10_bqgsl")
 tickness = 0.2
 width = 2.0
 num_of_points = 6
 dist_between_points = 1.0
-pos = 1.17975
+pos = -1.0
 play_flapping = true
+wind_direction = 90.0
+wind_threshold = 15.0
 invert = true
 material = SubResource("StandardMaterial3D_828u5")
+parent = NodePath("../..")
 
-[node name="Eyes7" type="MeshInstance3D" parent="Boid/MeshInstance3D"]
+[node name="Eyes7" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(-8.74228e-09, 0.501, 0, -0.2, -2.18994e-08, 0, 0, 0, 0.2, 6.20702e-08, 1.13614, 1.44773)
 mesh = SubResource("CylinderMesh_ro1sb")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_dvlo7")
 
-[node name="Eyes8" type="MeshInstance3D" parent="Boid/MeshInstance3D"]
+[node name="Eyes8" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(-4.37114e-09, 0.51, 0, -0.1, -2.22928e-08, 0, 0, 0, 0.1, 6.20702e-08, 1.13614, 1.44773)
 mesh = SubResource("CylinderMesh_ro1sb")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_k7lw0")
 
-[node name="Head" type="CSGCombiner3D" parent="Boid/MeshInstance3D"]
+[node name="Head" type="CSGCombiner3D" parent="MeshInstance3D"]
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Boid/MeshInstance3D/Head"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="MeshInstance3D/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.975, 1.225)
 size = Vector3(1, 1.25, 1.35)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="SubBox" type="CSGBox3D" parent="Boid/MeshInstance3D/Head"]
+[node name="SubBox" type="CSGBox3D" parent="MeshInstance3D/Head"]
 transform = Transform3D(1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 0, 1.60608, 2.00879)
 operation = 2
 size = Vector3(1, 0.55, 0.6)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="SubBox2" type="CSGBox3D" parent="Boid/MeshInstance3D/Head"]
+[node name="SubBox2" type="CSGBox3D" parent="MeshInstance3D/Head"]
 transform = Transform3D(1, 0, 0, 0, -0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 1.64844, 0.419949)
 operation = 2
 size = Vector3(1, 0.55, 0.55)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="SubBox3" type="CSGBox3D" parent="Boid/MeshInstance3D/Head"]
+[node name="SubBox3" type="CSGBox3D" parent="MeshInstance3D/Head"]
 transform = Transform3D(1, 0, 0, 0, -0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0.464033, 1.92255)
 operation = 2
 size = Vector3(1, 0.55, 1.2)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="Beak" type="CSGCombiner3D" parent="Boid/MeshInstance3D"]
+[node name="Beak" type="CSGCombiner3D" parent="MeshInstance3D"]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Boid/MeshInstance3D/Beak"]
+[node name="CSGBox3D" type="CSGBox3D" parent="MeshInstance3D/Beak"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025, 1.025, 2.125)
 size = Vector3(0.25, 0.35, 0.45)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="SubBox" type="CSGBox3D" parent="Boid/MeshInstance3D/Beak"]
+[node name="SubBox" type="CSGBox3D" parent="MeshInstance3D/Beak"]
 transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, -0.025, 1.20651, 2.20992)
 operation = 2
 size = Vector3(0.55, 0.35, 0.7)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="SubBox2" type="CSGBox3D" parent="Boid/MeshInstance3D/Beak"]
+[node name="SubBox2" type="CSGBox3D" parent="MeshInstance3D/Beak"]
 transform = Transform3D(1.38623e-08, 1, 1.49012e-08, 0.965926, -2.98023e-08, -0.258819, -0.258819, 0, -0.965926, -0.025, 0.715346, 2.21212)
 operation = 2
 size = Vector3(0.45, 0.35, 0.95)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="Body2" type="CSGCombiner3D" parent="Boid/MeshInstance3D"]
+[node name="Body2" type="CSGCombiner3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 1.29, -0.336)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Boid/MeshInstance3D/Body2"]
+[node name="CSGBox3D" type="CSGBox3D" parent="MeshInstance3D/Body2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, -0.175)
 size = Vector3(1, 2.7, 3.25)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="SubBox" type="CSGBox3D" parent="Boid/MeshInstance3D/Body2"]
+[node name="SubBox" type="CSGBox3D" parent="MeshInstance3D/Body2"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.742373, -1.04121)
 operation = 2
 size = Vector3(1, 1.9, 4.6)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="SubBox2" type="CSGBox3D" parent="Boid/MeshInstance3D/Body2"]
+[node name="SubBox2" type="CSGBox3D" parent="MeshInstance3D/Body2"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -1.87392, 1.43367)
 operation = 2
 size = Vector3(1, 1.4, 2.3)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="SubBox3" type="CSGBox3D" parent="Boid/MeshInstance3D/Body2"]
+[node name="SubBox3" type="CSGBox3D" parent="MeshInstance3D/Body2"]
 transform = Transform3D(1, 0, 0, 0, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, -2.07956, -1.62197)
 operation = 2
 size = Vector3(1, 1.4, 2.3)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="SubBox4" type="CSGBox3D" parent="Boid/MeshInstance3D/Body2"]
+[node name="SubBox4" type="CSGBox3D" parent="MeshInstance3D/Body2"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, -1.95935, -0.377459)
 operation = 2
 size = Vector3(1, 0.7, 0.95)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="Claw" type="CSGCombiner3D" parent="Boid/MeshInstance3D"]
+[node name="Claw" type="CSGCombiner3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0.05, -0.1, -1.15)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Boid/MeshInstance3D/Claw"]
+[node name="CSGBox3D" type="CSGBox3D" parent="MeshInstance3D/Claw"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.475, -0.475, -0.35)
 size = Vector3(0.05, 0.05, 0.3)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="Boid/MeshInstance3D/Claw"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="MeshInstance3D/Claw"]
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -0.436016, -0.475, -0.0923325)
 size = Vector3(0.05, 0.05, 0.3)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Boid/MeshInstance3D/Claw"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="MeshInstance3D/Claw"]
 transform = Transform3D(0.966819, 0, -0.255463, 0, 1, 0, 0.255463, 0, 0.966819, -0.510568, -0.475, -0.0963059)
 size = Vector3(0.05, 0.05, 0.3)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="Boid/MeshInstance3D/Claw"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="MeshInstance3D/Claw"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.475, -0.25, -0.225)
 size = Vector3(0.05, 0.5, 0.05)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="Claw2" type="CSGCombiner3D" parent="Boid/MeshInstance3D"]
+[node name="Claw2" type="CSGCombiner3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0.8, -0.1, -1.15)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Boid/MeshInstance3D/Claw2"]
+[node name="CSGBox3D" type="CSGBox3D" parent="MeshInstance3D/Claw2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.475, -0.475, -0.35)
 size = Vector3(0.05, 0.05, 0.3)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="Boid/MeshInstance3D/Claw2"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="MeshInstance3D/Claw2"]
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -0.436016, -0.475, -0.0923325)
 size = Vector3(0.05, 0.05, 0.3)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Boid/MeshInstance3D/Claw2"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="MeshInstance3D/Claw2"]
 transform = Transform3D(0.966819, 0, -0.255463, 0, 1, 0, 0.255463, 0, 0.966819, -0.510568, -0.475, -0.0963059)
 size = Vector3(0.05, 0.05, 0.3)
 material = SubResource("StandardMaterial3D_828u5")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="Boid/MeshInstance3D/Claw2"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="MeshInstance3D/Claw2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.475, -0.25, -0.225)
 size = Vector3(0.05, 0.5, 0.05)
 material = SubResource("StandardMaterial3D_828u5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.200478, -0.334107)
+shape = SubResource("BoxShape3D_oknbe")
+
+[node name="Stamina" type="Timer" parent="."]
+autostart = true
+script = ExtResource("13_g33kj")
+regen = false

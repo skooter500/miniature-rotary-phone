@@ -19,12 +19,22 @@ var druation: float = 1
 @export
 var play_flapping: bool
 @export
+var play_slowdown: bool
+# In degrees
+@export_range(0,360)
+var wind_direction: float = 0
+@export_range(0,90)
+var wind_threshold: float = 7.5
+@export
 var invert: bool
 @export
 var retract_width: float = 0.5
 
 @export
 var material: StandardMaterial3D
+
+@export
+var parent: Bird
 
 var amplitude: float = 1.0
 var frequency: float = 16.0
@@ -33,6 +43,7 @@ var phase_shift: float = 2.0
 var vertical_shift: float = 1.0
 
 var sin_points: Array[Vector3]
+
 
 var uvs: PackedVector2Array = PackedVector2Array([
 	Vector2(0,1),
@@ -44,12 +55,29 @@ var tween: Tween
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	wind_direction = parent.wind_direction
+	parent.wind_direction_update.connect(on_wind_direction_update)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if (tween == null or not tween.is_running()) and play_flapping: 
+	var threshold_lower = wind_direction-wind_threshold
+	var threshold_higher = wind_direction+wind_threshold
+	if parent.rotation_degrees.x > 1 and parent.rotation_degrees.x < 180:
+		play_flapping = false
+	elif (parent.rotation_degrees.y > threshold_lower and parent.rotation_degrees.y < threshold_higher):
+		play_flapping = false
+	else:
+		play_flapping = true
+	
+	if (tween == null or not tween.is_running()) and play_slowdown: 
+		tween = get_tree().create_tween()
+		tween.set_ease(Tween.EASE_IN)
+		tween.set_trans(Tween.TRANS_BACK)
+		tween.tween_property(self, "pos", 1, druation)
+		tween.play()
+
+	if (tween == null or not tween.is_running()) and play_flapping and not play_slowdown: 
 		tween = get_tree().create_tween()
 		tween.set_ease(Tween.EASE_IN)
 		tween.set_trans(Tween.TRANS_BACK)
@@ -58,7 +86,11 @@ func _process(delta: float) -> void:
 		tween.play()
 	create_mesh()
 
+func on_wind_direction_update(new_value):
+	wind_direction = new_value
+
 func create_mesh() -> void:
+	# Clear the old surface
 	mesh.clear_surfaces()
 	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 	# Godot use a clockwise winding order
@@ -88,13 +120,20 @@ func create_sin_points()-> Array:
 
 func create_wing():
 	var points = create_sin_points()
-	var vertices
 	if num_of_points <= 1:
-		var next_point = Vector3(-retract_width,0,0)
-		var prev_point = Vector3(0,0,0)
-		vertices = create_end_face(next_point, prev_point)
-		draw_faces(vertices)
+		create_retracted_wing()
 		return
+	else:
+		create_extended_wing(points)
+
+func create_retracted_wing():
+	var next_point = Vector3(-retract_width,0,0)
+	var prev_point = Vector3(0,0,0)
+	var vertices = create_end_face(next_point, prev_point)
+	draw_faces(vertices)
+
+func create_extended_wing(points):
+	var vertices	
 	for i in range(num_of_points):
 		var next_point = points[i]
 		var prev_point = points[i-1]
