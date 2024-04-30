@@ -18,6 +18,8 @@ var pos: float = 1
 var druation: float = 1
 @export
 var play_flapping: bool
+@export
+var play_slowdown: bool
 # In degrees
 @export_range(0,360)
 var wind_direction: float = 0
@@ -67,8 +69,15 @@ func _process(delta: float) -> void:
 		play_flapping = false
 	else:
 		play_flapping = true
+	
+	if (tween == null or not tween.is_running()) and play_slowdown: 
+		tween = get_tree().create_tween()
+		tween.set_ease(Tween.EASE_IN)
+		tween.set_trans(Tween.TRANS_BACK)
+		tween.tween_property(self, "pos", 1, druation)
+		tween.play()
 
-	if (tween == null or not tween.is_running()) and play_flapping: 
+	if (tween == null or not tween.is_running()) and play_flapping and not play_slowdown: 
 		tween = get_tree().create_tween()
 		tween.set_ease(Tween.EASE_IN)
 		tween.set_trans(Tween.TRANS_BACK)
