@@ -22,6 +22,7 @@ func spawn_butterflies(new_value):
 func spawn_additional_butterflies(count):
 	for i in range(count):
 		var butterfly = butterfly_scene.instantiate()
+		
 		butterfly.transform.origin.y += randi_range(1500, 2000);
 		butterfly.transform.origin.x += randi_range(-2000, 2000);
 		butterfly.transform.origin.z += randi_range(-2000, 2000);

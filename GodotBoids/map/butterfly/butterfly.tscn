@@ -27,6 +27,8 @@ script = ExtResource("1_d22uj")
 
 [node name="Boid" type="CharacterBody3D" parent="."]
 script = ExtResource("1_qrlei")
+banking = 0.5
+damping = 0.5
 
 [node name="Body" type="MeshInstance3D" parent="Boid"]
 transform = Transform3D(0.436104, 0, 0, 0, 0.364936, 0, 0, 0, 2.44859, 0, 0, 0)

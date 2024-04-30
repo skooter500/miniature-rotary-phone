@@ -5,7 +5,7 @@ var left_wing : MeshInstance3D
 var right_wing : MeshInstance3D
 var max_flap_angle = 95.0
 var time : float
-var flap_speed = randf_range(5.0, 10.0)
+var flap_speed = randf_range(10.0, 20.0)
 var boid
 
 # Called when the node enters the scene tree for the first time.
@@ -16,6 +16,7 @@ func _ready():
 	body =  get_node("Boid/Body");
 	left_wing =  get_node("Boid/wing");
 	right_wing = get_node("Boid/wing2");
+	left_wing.get_active_material(0).albedo_color = Color(randf(), randf(), randf())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -29,3 +30,4 @@ func set_speed(new_speed):
 	print("setting butterfly speed to", new_speed)
 	boid.speed = new_speed
 	boid.max_speed = new_speed * 2
+	boid.max_force = new_speed * 2

@@ -23,8 +23,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -83.0625
-offset_bottom = 31.0
+offset_left = -94.0
+offset_top = 10.0
+offset_right = -10.9375
+offset_bottom = 41.0
 grow_horizontal = 0
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/butterfly_amount"]
@@ -45,10 +47,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -83.0
-offset_top = 33.0
-offset_right = 0.0625
-offset_bottom = 64.0
+offset_left = -93.9375
+offset_top = 43.0
+offset_right = -10.875
+offset_bottom = 74.0
 grow_horizontal = 0
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/butterfly_speed"]
