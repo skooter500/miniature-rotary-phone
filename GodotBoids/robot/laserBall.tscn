@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bu8cymkyvch83"]
+
+[ext_resource type="Script" path="res://robot/laserBall.gd" id="1_eqn5x"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_84imb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r8oy7"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 5.25
+
+[node name="LaserBall" type="Node3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+script = ExtResource("1_eqn5x")
+timer_delay = 0.2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_84imb")
+surface_material_override/0 = SubResource("StandardMaterial3D_r8oy7")

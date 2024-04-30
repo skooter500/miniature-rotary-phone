@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://gm8k5ho3bvrl"]
+[gd_scene load_steps=12 format=3 uid="uid://gm8k5ho3bvrl"]
 
 [ext_resource type="Script" path="res://SceneSetup.gd" id="1_ikvyg"]
 [ext_resource type="PackedScene" uid="uid://lk8nhpq4tq5t" path="res://Assignment/WingTest.tscn" id="1_lp8lg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://behaviors/Boid.gd" id="3_elotg"]
 [ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="4_1qvir"]
 [ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="5_yaxik"]
+[ext_resource type="PackedScene" uid="uid://c2ob3qj0e3xjf" path="res://robot.tscn" id="7_oyvs3"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_n0yb5"]
 
@@ -90,5 +91,9 @@ transform = Transform3D(-0.0595396, -0.82277, 0.565248, -0.0861885, 0.568375, 0.
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a3epi")
+
+[node name="Robot" parent="." instance=ExtResource("7_oyvs3")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0.771736, 16.6627, -13.9734)
+isTrigger = true
 
 [editable path="Player"]
