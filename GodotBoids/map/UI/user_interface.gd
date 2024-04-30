@@ -17,9 +17,10 @@ func _ready():
 # for camera movement
 func _input(event):
 	if event is InputEventMouseMotion:
-		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
-		pov.rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
-		pov.rotation.x = clamp(pov.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+		if toggle_mouse == true:
+			rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
+			pov.rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
+			pov.rotation.x = clamp(pov.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 		
 	if Input.is_action_just_pressed("hide_cursor"):
 		if toggle_mouse:
