@@ -2,6 +2,8 @@ extends School
 
 @export
 var starting_point: Vector3
+@export
+var ground: Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,4 +24,7 @@ func _ready() -> void:
 		if constrain:
 			constrain.center = center
 			constrain.radius = radius
+		var arrive: Arrive = boid.get_node("Arrive")
+		if arrive:
+			arrive.target = ground
 

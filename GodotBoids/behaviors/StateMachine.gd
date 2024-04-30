@@ -10,7 +10,6 @@ var previous_state:State
 var boid
 
 func change_state(new_state):
-	print(str(boid) + "\t" + new_state.get_class())
 	if current_state:
 		current_state._exit()
 		boid.call_deferred("remove_child", current_state);

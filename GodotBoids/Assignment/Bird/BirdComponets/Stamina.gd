@@ -41,7 +41,7 @@ func update_stamina():
 		stamina += regen_value
 	else:
 		stamina -= cost_value
-	clamp(stamina, 0, max)
+	stamina = clamp(stamina, 0, max)
 	
 func check_stamina():
 	if stamina == max:
