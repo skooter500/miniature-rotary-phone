@@ -4,12 +4,14 @@ class_name LandState
 
 func _enter():
 	disable_all_behaviours()
+	change_behaviour("Arrive", true)
 	change_behaviour("Avoidance", true)
 	
 func _think():
 	for i in boid.get_slide_collision_count():
 		var collision = boid.get_slide_collision(i)
 		if collision.get_collider().name == "Ground":
+			change_behaviour("Arrive", false)	
 			change_behaviour("Avoidance", false) 
 			# Come to complete stop
 			boid.pause = true

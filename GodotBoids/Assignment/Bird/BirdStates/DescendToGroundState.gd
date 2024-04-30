@@ -4,6 +4,9 @@ class_name DescendToGroundState
 
 func _enter():
 	disable_all_behaviours()
+	var arrive: Arrive = boid.get_node("Arrive")
+	if arrive:
+		arrive.target = boid.ground
 	change_behaviour("Constrain", true)	
 	change_behaviour("Arrive", true)
 	change_behaviour("Avoidance", true)

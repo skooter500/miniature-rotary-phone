@@ -24,9 +24,6 @@ func _ready() -> void:
 		if constrain:
 			constrain.center = center
 			constrain.radius = radius
-		var arrive: Arrive = boid.get_node("Arrive")
-		if arrive:
-			arrive.target = ground
-			boid.ground = ground
+		boid.ground = ground
 			
 
