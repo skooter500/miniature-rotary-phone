@@ -8,6 +8,9 @@ var pathIndex = 0
 
 var target
 
+func _ready():
+	boid = get_parent()
+
 func on_draw_gizmos():
 	pass
 	#if target:
@@ -20,12 +23,3 @@ func calculate():
 		pathIndex = (pathIndex + 1) % path.get_curve().get_point_count()
 	return boid.seek_force(target)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	boid = get_parent()
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

@@ -2,8 +2,10 @@ extends Node3D
 
 var xr_interface: XRInterface
 
+
 func _process(delta):
 	print("preocess")
+
 
 func _ready():
 	xr_interface = XRServer.find_interface("OpenXR")

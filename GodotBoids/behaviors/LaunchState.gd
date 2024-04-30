@@ -1,9 +1,10 @@
 class_name LaunchState extends State
 
-var base 
+var base
 
 var boid
 var target
+
 
 func _enter():
 	boid = get_parent()
@@ -13,9 +14,11 @@ func _enter():
 	boid.get_node("Seek").set_enabled(true)
 	boid.get_node("Sounds").play_sound(0)
 
+
 func _exit():
 	boid.get_node("Seek").set_enabled(false)
 	pass
+
 
 func _think():
 	if target.distance_to(boid.global_transform.origin) < 5:

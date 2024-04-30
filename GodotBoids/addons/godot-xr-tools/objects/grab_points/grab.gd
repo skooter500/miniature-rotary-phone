@@ -1,12 +1,10 @@
 class_name Grab
 extends Grabber
 
-
 ## Grab Class
 ##
 ## This class encodes information about an active grab. Additionally it applies
 ## hand poses and collision exceptions as appropriate.
-
 
 ## Priority for grip poses
 const GRIP_POSE_PRIORITY := 100
@@ -14,39 +12,33 @@ const GRIP_POSE_PRIORITY := 100
 ## Priority for grip targeting
 const GRIP_TARGET_PRIORITY := 100
 
-
 ## Grab target
-var what : XRToolsPickable
+var what: XRToolsPickable
 
 ## Grab point information
-var point : XRToolsGrabPoint
+var point: XRToolsGrabPoint
 
 ## Hand grab point information
-var hand_point : XRToolsGrabPointHand
+var hand_point: XRToolsGrabPointHand
 
 ## Grab transform
-var transform : Transform3D
+var transform: Transform3D
 
 ## Position drive strength
-var drive_position : float = 1.0
+var drive_position: float = 1.0
 
 ## Angle drive strength
-var drive_angle : float = 1.0
+var drive_angle: float = 1.0
 
 ## Aim drive strength
-var drive_aim : float = 0.0
+var drive_aim: float = 0.0
 
 ## Has target arrived at grab point
-var _arrived : bool = false
+var _arrived: bool = false
 
 
 ## Initialize the grab
-func _init(
-	p_grabber : Grabber,
-	p_what : XRToolsPickable,
-	p_point : XRToolsGrabPoint,
-	p_precise : bool) -> void:
-
+func _init(p_grabber: Grabber, p_what: XRToolsPickable, p_point: XRToolsGrabPoint, p_precise: bool) -> void:
 	# Copy the grabber information
 	by = p_grabber.by
 	pickup = p_grabber.pickup
@@ -96,7 +88,7 @@ func set_arrived() -> void:
 
 
 ## Set the grab point
-func set_grab_point(p_point : XRToolsGrabPoint) -> void:
+func set_grab_point(p_point: XRToolsGrabPoint) -> void:
 	# Skip if no change
 	if p_point == point:
 		return

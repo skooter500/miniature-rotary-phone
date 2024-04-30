@@ -98,9 +98,9 @@ func on_draw_gizmos():
 		for neighbor in neighbors:
 			#DebugDraw3D.draw_sphere(neighbor.global_transform.origin, 3, Color.WEB_PURPLE)
 			pass
+
 func seek_force(target: Vector3):	
-	var toTarget = target - global_transform.origin
-	toTarget = toTarget.normalized()
+	var toTarget = (target - global_transform.origin).normalized()
 	var desired = toTarget * max_speed
 	return desired - vel
 	

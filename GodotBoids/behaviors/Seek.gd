@@ -14,8 +14,6 @@ func calculate():
 		world_target = target.global_transform.origin
 	return boid.seek_force(world_target)
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	boid = get_parent()
 

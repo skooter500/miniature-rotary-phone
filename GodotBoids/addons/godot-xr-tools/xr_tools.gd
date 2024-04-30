@@ -15,7 +15,8 @@ static func get_grip_threshold() -> float:
 
 	return threshold
 
-static func set_grip_threshold(p_threshold : float) -> void:
+
+static func set_grip_threshold(p_threshold: float) -> void:
 	if !(p_threshold >= 0.2 and p_threshold <= 0.8):
 		print("Threshold out of bounds")
 		return
@@ -36,7 +37,8 @@ static func get_snap_turning_deadzone() -> float:
 
 	return deadzone
 
-static func set_snap_turning_deadzone(p_deadzone : float) -> void:
+
+static func set_snap_turning_deadzone(p_deadzone: float) -> void:
 	if !(p_deadzone >= 0.0 and p_deadzone <= 0.5):
 		print("Deadzone out of bounds")
 		return
@@ -53,7 +55,8 @@ static func get_default_snap_turning() -> bool:
 	# default may not be bool, so JIC
 	return default == true
 
-static func set_default_snap_turning(p_default : bool) -> void:
+
+static func set_default_snap_turning(p_default: bool) -> void:
 	ProjectSettings.set_setting("godot_xr_tools/input/default_snap_turning", p_default)
 
 
@@ -69,12 +72,14 @@ static func get_player_standard_height() -> float:
 
 	return standard_height
 
-static func set_player_standard_height(p_height : float) -> void:
+
+static func set_player_standard_height(p_height: float) -> void:
 	if !(p_height >= 1.0 and p_height <= 2.5):
 		print("Standard height out of bounds")
 		return
 
 	ProjectSettings.set_setting("godot_xr_tools/player/standard_height", p_height)
+
 
 ## Find all children of the specified node matching the given criteria
 ##
@@ -93,16 +98,14 @@ static func set_player_standard_height(p_height : float) -> void:
 ##
 ## The owned argument specifies whether the node must be owned.
 static func find_xr_children(
-		node : Node,
-		pattern : String,
-		type : String = "",
-		recursive : bool = true,
-		owned : bool = true) -> Array:
+	node: Node, pattern: String, type: String = "", recursive: bool = true, owned: bool = true
+) -> Array:
 	# Find the children
 	var found := []
 	if node:
 		_find_xr_children(found, node, pattern, type, recursive, owned)
 	return found
+
 
 ## Find a child of the specified node matching the given criteria
 ##
@@ -120,17 +123,15 @@ static func find_xr_children(
 ##
 ## The owned argument specifies whether the node must be owned.
 static func find_xr_child(
-		node : Node,
-		pattern : String,
-		type : String = "",
-		recursive : bool = true,
-		owned : bool = true) -> Node:
+	node: Node, pattern: String, type: String = "", recursive: bool = true, owned: bool = true
+) -> Node:
 	# Find the child
 	if node:
 		return _find_xr_child(node, pattern, type, recursive, owned)
 
 	# Invalid node
 	return null
+
 
 ## Find an ancestor of the specified node matching the given criteria
 ##
@@ -142,15 +143,11 @@ static func find_xr_child(
 ##
 ## The type argument specifies the type of node to find. Use "" to match any
 ## type.
-static func find_xr_ancestor(
-		node : Node,
-		pattern : String,
-		type : String = "") -> Node:
+static func find_xr_ancestor(node: Node, pattern: String, type: String = "") -> Node:
 	# Loop finding ancestor
 	while node:
 		# If node matches filter then break
-		if (node.name.match(pattern) and
-			(type == "" or is_xr_class(node, type))):
+		if node.name.match(pattern) and (type == "" or is_xr_class(node, type)):
 			break
 
 		# Advance to parent
@@ -159,45 +156,42 @@ static func find_xr_ancestor(
 	# Return found node (or null)
 	return node
 
+
 # Recursive helper function for find_children.
 static func _find_xr_children(
-		found : Array,
-		node : Node,
-		pattern : String,
-		type : String,
-		recursive : bool,
-		owned : bool) -> void:
+	found: Array, node: Node, pattern: String, type: String, recursive: bool, owned: bool
+) -> void:
 	# Iterate over all children
 	for i in node.get_child_count():
 		# Get the child
 		var child := node.get_child(i)
 
 		# If child matches filter then add it to the array
-		if (child.name.match(pattern) and
-			(type == "" or is_xr_class(child, type)) and
-			(not owned or child.owner)):
+		if (
+			child.name.match(pattern)
+			and (type == "" or is_xr_class(child, type))
+			and (not owned or child.owner)
+		):
 			found.push_back(child)
 
 		# If recursive is enabled then descend into children
 		if recursive:
 			_find_xr_children(found, child, pattern, type, recursive, owned)
 
+
 # Recursive helper functiomn for find_child
-static func _find_xr_child(
-		node : Node,
-		pattern : String,
-		type : String,
-		recursive : bool,
-		owned : bool) -> Node:
+static func _find_xr_child(node: Node, pattern: String, type: String, recursive: bool, owned: bool) -> Node:
 	# Iterate over all children
 	for i in node.get_child_count():
 		# Get the child
 		var child := node.get_child(i)
 
 		# If child matches filter then return it
-		if (child.name.match(pattern) and
-			(type == "" or is_xr_class(child, type)) and
-			(not owned or child.owner)):
+		if (
+			child.name.match(pattern)
+			and (type == "" or is_xr_class(child, type))
+			and (not owned or child.owner)
+		):
 			return child
 
 		# If recursive is enabled then descend into children
@@ -209,8 +203,9 @@ static func _find_xr_child(
 	# Not found
 	return null
 
+
 # Test if a given node is of the specified class
-static func is_xr_class(node : Node, type : String) -> bool:
+static func is_xr_class(node: Node, type: String) -> bool:
 	if node.has_method("is_xr_class"):
 		if node.is_xr_class(type):
 			return true

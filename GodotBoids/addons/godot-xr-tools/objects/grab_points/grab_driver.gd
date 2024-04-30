@@ -1,38 +1,36 @@
 class_name XRToolsGrabDriver
 extends RemoteTransform3D
 
-
 ## Grab state
 enum State {
 	LERP,
 	SNAP,
 }
 
-
 ## Drive state
-var state : State = State.SNAP
+var state: State = State.SNAP
 
 ## Target pickable
-var target : XRToolsPickable
+var target: XRToolsPickable
 
 ## Primary grab information
-var primary : Grab = null
+var primary: Grab = null
 
 ## Secondary grab information
-var secondary : Grab = null
+var secondary: Grab = null
 
 ## Lerp start position
-var lerp_start : Transform3D
+var lerp_start: Transform3D
 
 ## Lerp total duration
-var lerp_duration : float = 1.0
+var lerp_duration: float = 1.0
 
 ## Lerp time
-var lerp_time : float = 0.0
+var lerp_time: float = 0.0
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta : float) -> void:
+func _physics_process(delta: float) -> void:
 	# Skip if no primary node
 	if not is_instance_valid(primary):
 		return
@@ -52,8 +50,8 @@ func _physics_process(delta : float) -> void:
 
 		# Independently lerp the angle and position
 		destination = Transform3D(
-			x1.basis.slerp(x2.basis, angle_lerp),
-			x1.origin.lerp(x2.origin, position_lerp))
+			x1.basis.slerp(x2.basis, angle_lerp), x1.origin.lerp(x2.origin, position_lerp)
+		)
 
 		# Test if we need to apply aiming
 		if secondary.drive_aim > 0.0:
@@ -83,14 +81,14 @@ func _physics_process(delta : float) -> void:
 			lerp_time += delta
 			if lerp_time < lerp_duration:
 				# Interpolate from lerp_start to destination
-				destination = lerp_start.interpolate_with(
-					destination,
-					lerp_time / lerp_duration)
+				destination = lerp_start.interpolate_with(destination, lerp_time / lerp_duration)
 			else:
 				# Lerp completed
 				state = State.SNAP
-				if primary: primary.set_arrived()
-				if secondary: secondary.set_arrived()
+				if primary:
+					primary.set_arrived()
+				if secondary:
+					secondary.set_arrived()
 
 	# Apply the destination transform
 	global_transform = destination
@@ -100,7 +98,7 @@ func _physics_process(delta : float) -> void:
 
 
 ## Set the secondary grab point
-func add_grab(p_grab : Grab) -> void:
+func add_grab(p_grab: Grab) -> void:
 	# Set the secondary grab
 	if p_grab.hand_point and p_grab.hand_point.mode == XRToolsGrabPointHand.Mode.PRIMARY:
 		print_verbose("%s> new primary grab %s" % [target.name, p_grab.by.name])
@@ -116,7 +114,7 @@ func add_grab(p_grab : Grab) -> void:
 
 
 ## Get the grab information for the grab node
-func get_grab(by : Node3D) -> Grab:
+func get_grab(by: Node3D) -> Grab:
 	if primary and primary.by == by:
 		return primary
 
@@ -126,7 +124,7 @@ func get_grab(by : Node3D) -> Grab:
 	return null
 
 
-func remove_grab(p_grab : Grab) -> void:
+func remove_grab(p_grab: Grab) -> void:
 	# Remove the appropriate grab
 	if p_grab == primary:
 		# Remove primary (secondary promoted)
@@ -147,11 +145,7 @@ func discard():
 
 # Create the driver to lerp the target from its current location to the
 # primary grab-point.
-static func create_lerp(
-	p_target : Node3D,
-	p_grab : Grab,
-	p_lerp_speed : float) -> XRToolsGrabDriver:
-
+static func create_lerp(p_target: Node3D, p_grab: Grab, p_lerp_speed: float) -> XRToolsGrabDriver:
 	print_verbose("%s> lerping %s" % [p_target.name, p_grab.by.name])
 
 	# Construct the driver lerping from the current position
@@ -180,10 +174,7 @@ static func create_lerp(
 
 
 # Create the driver to instantly snap to the primary grab-point.
-static func create_snap(
-	p_target : Node3D,
-	p_grab : Grab) -> XRToolsGrabDriver:
-
+static func create_snap(p_target: Node3D, p_grab: Grab) -> XRToolsGrabDriver:
 	print_verbose("%s> snapping to %s" % [p_target.name, p_grab.by.name])
 
 	# Construct the driver snapped to the held position
@@ -209,7 +200,7 @@ static func create_snap(
 
 
 # Calculate the lerp voting from a to b
-static func _vote(a : float, b : float) -> float:
+static func _vote(a: float, b: float) -> float:
 	if a == 0.0 and b == 0.0:
 		return 0.0
 

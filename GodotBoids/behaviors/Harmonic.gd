@@ -29,22 +29,20 @@ func on_draw_gizmos():
 func calculate():		
 	var n  = sin(theta)
 	var angle = deg_to_rad(n * amplitude)
-	
 	var delta = get_process_delta_time()
-
 	var rot = boid.global_transform.basis.get_euler()
+	
 	rot.x = 0
 
 	if axis == Axis.Horizontal:
 		target.x = sin(angle)
-		target.z =  cos(angle)
 		target.y = 0
 		rot.z = 0
 	else:
 		target.x = 0
 		target.y = sin(angle)
-		target.z = cos(angle)
-	
+		
+	target.z = cos(angle)
 	target *= radius
 
 	var localtarget = target + (Vector3.BACK * distance)
@@ -54,6 +52,4 @@ func calculate():
 	worldTarget = boid.global_transform.origin + (projected * localtarget)	
 	theta += frequency * delta * PI * 2.0
 	
-	var f = boid.seek_force(worldTarget)  
-
-	return f
+	return boid.seek_force(worldTarget)  
