@@ -2,19 +2,15 @@ extends State
 
 class_name DescendToGroundState
 
-
 func _enter():
-	change_behaviour("Separation", false)
-	change_behaviour("Alignment", false)
-	change_behaviour("Cohesion", false)
-	change_behaviour("Harmonic", false)
-	change_behaviour("NoiseWander", false)
+	disable_all_behaviours()
+	change_behaviour("Constrain", true)	
 	change_behaviour("Arrive", true)
 	change_behaviour("Avoidance", true)
-	pass
 
 func _think():
-	var threshold = boid.ground.global_position.y + 20
+	var arrive = boid.find_child("Arrive")
+	var threshold = boid.ground.global_position.y + arrive.slowing_radius 
 	if boid.global_position.y <= threshold:
 		var wings = boid.find_children("Wing?", "", true, false)
 		for wing in wings:

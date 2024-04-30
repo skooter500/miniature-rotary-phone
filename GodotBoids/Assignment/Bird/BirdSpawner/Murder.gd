@@ -3,7 +3,7 @@ extends School
 @export
 var starting_point: Vector3
 @export
-var ground: Node3D
+var ground: Ground
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

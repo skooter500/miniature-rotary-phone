@@ -20,14 +20,11 @@ func _enter():
 	stamina.stamina_replenished.connect(_on_stamina_regen)
 
 func _think():
+	print(state_machine.current_state.name)
 	pass
 
 func _on_stamina_depleted():
-	print(state_machine.current_state.name)
-	if not state_machine.current_state.name in ground_states or not state_machine.current_state.name.contains("Node"):
-		var new_state = DescendToGroundState.new()
-		new_state.name = "DescendToGroundState"
-		state_machine.change_state(new_state)
+	pass
 	
 func _on_stamina_regen():
 	pass

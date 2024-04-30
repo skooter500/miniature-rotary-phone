@@ -6,7 +6,7 @@ class_name Bird
 @export
 var centre_point: Marker3D
 @export
-var ground: Node3D
+var ground: Ground
 
 @onready
 var boid: Boid = $Boid

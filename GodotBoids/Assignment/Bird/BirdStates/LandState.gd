@@ -3,9 +3,8 @@ extends State
 class_name LandState
 
 func _enter():
-	change_behaviour("Arrive", false)
-	change_behaviour("Constrain", false)
-	#change_behaviour("Avoidance", false)
+	disable_all_behaviours()
+	change_behaviour("Avoidance", true)
 	
 func _think():
 	for i in boid.get_slide_collision_count():

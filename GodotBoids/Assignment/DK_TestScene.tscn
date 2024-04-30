@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://48bqgtxek4o7"]
+[gd_scene load_steps=14 format=3 uid="uid://48bqgtxek4o7"]
 
+[ext_resource type="Script" path="res://Assignment/Ground.gd" id="1_ep45x"]
 [ext_resource type="Script" path="res://Assignment/Bird/BirdSpawner/Murder.gd" id="1_vwlqs"]
 [ext_resource type="PackedScene" uid="uid://lk8nhpq4tq5t" path="res://Assignment/Bird/Crow.tscn" id="2_ossph"]
 [ext_resource type="Script" path="res://Assignment/Bird/BirdSpawner/SceneSetup.gd" id="3_3rktv"]
@@ -27,6 +28,7 @@ sky = SubResource("Sky_t0a3h")
 [node name="Node3D" type="Node3D"]
 
 [node name="Ground" type="StaticBody3D" parent="."]
+script = ExtResource("1_ep45x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_0ue3y")
@@ -39,7 +41,7 @@ skeleton = NodePath("../..")
 [node name="Murder" type="Node3D" parent="." node_paths=PackedStringArray("ground")]
 script = ExtResource("1_vwlqs")
 starting_point = Vector3(0, 100, 0)
-ground = NodePath("../Ground/Ground")
+ground = NodePath("../Ground")
 fish_scene = ExtResource("2_ossph")
 count = 1
 center_path = NodePath("../Marker3D")

@@ -9,7 +9,8 @@ func _enter():
 	var constrain = boid.find_child("Constrain")
 	constrain.center_path = boid.ground.get_path()
 	#change_behaviour("Constrain", true)
-	change_behaviour("Wander", true)
+	disable_all_behaviours()
+	change_behaviour("GroundWander", true)
 
 func _think():
 	pass

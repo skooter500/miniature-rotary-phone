@@ -15,7 +15,7 @@
 [ext_resource type="Script" path="res://Assignment/Bird/Bird.gd" id="11_cksal"]
 [ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="12_d4g50"]
 [ext_resource type="Script" path="res://Assignment/Bird/BirdComponets/Stamina.gd" id="13_g33kj"]
-[ext_resource type="Script" path="res://behaviors/Wander.gd" id="13_qcvll"]
+[ext_resource type="Script" path="res://Assignment/Bird/BirdComponets/GroundWander.gd" id="13_wbqri"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_us5sd"]
 
@@ -86,9 +86,9 @@ feeler_angle = 5
 feeler_length = 15
 weight = 3.0
 
-[node name="Wander" type="Node" parent="."]
-script = ExtResource("13_qcvll")
-distance = 10.0
+[node name="GroundWander" type="Node" parent="."]
+script = ExtResource("13_wbqri")
+radius = 15.0
 enabled = false
 
 [node name="MeshInstance3D" type="Node3D" parent="." node_paths=PackedStringArray("wing1", "wing2", "body", "claw1", "claw2")]
@@ -110,7 +110,7 @@ tickness = 0.2
 width = 2.0
 num_of_points = 6
 dist_between_points = 1.0
-pos = -1.0
+pos = 0.0140063
 play_flapping = true
 wind_direction = 90.0
 wind_threshold = 15.0
@@ -127,7 +127,7 @@ tickness = 0.2
 width = 2.0
 num_of_points = 6
 dist_between_points = 1.0
-pos = -1.0
+pos = 0.0140063
 play_flapping = true
 wind_direction = 90.0
 wind_threshold = 15.0
