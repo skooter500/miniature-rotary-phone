@@ -27,9 +27,6 @@ script = ExtResource("1_d22uj")
 
 [node name="Boid" type="CharacterBody3D" parent="."]
 script = ExtResource("1_qrlei")
-speed = 10.0
-max_speed = 100.0
-max_force = 100
 
 [node name="Body" type="MeshInstance3D" parent="Boid"]
 transform = Transform3D(0.436104, 0, 0, 0, 0.364936, 0, 0, 0, 2.44859, 0, 0, 0)
@@ -52,6 +49,7 @@ draw_gizmos = false
 
 [node name="ArriveToFlowers" type="Node" parent="Boid"]
 script = ExtResource("6_yu6bc")
+slowing_radius = 50.0
 
 [node name="wing" type="MeshInstance3D" parent="Boid"]
 transform = Transform3D(2.02144, 0, 0, 0, 0.0451481, 0, 0, 0, 4.38048, 1.25191, -0.0180128, -0.00137481)

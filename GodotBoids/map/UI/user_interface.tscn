@@ -37,4 +37,28 @@ offset_left = -18.9956
 offset_top = -27.0
 offset_right = 63.0044
 offset_bottom = -4.0
-text = "Butterfles:"
+text = "Butterflies:"
+
+[node name="butterfly_amount2" type="SpinBox" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -83.0
+offset_top = 33.0
+offset_right = 0.0625
+offset_bottom = 64.0
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/butterfly_amount2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.83
+anchor_top = 1.0
+anchor_right = -0.83
+anchor_bottom = 1.0
+offset_left = -35.0581
+offset_top = -27.0
+offset_right = 66.9419
+offset_bottom = -4.0
+text = "ButterSpeed:"
