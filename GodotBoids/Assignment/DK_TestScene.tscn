@@ -38,10 +38,11 @@ transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
 mesh = SubResource("PlaneMesh_n0yb5")
 skeleton = NodePath("../..")
 
-[node name="Murder" type="Node3D" parent="." node_paths=PackedStringArray("ground")]
+[node name="Murder" type="Node3D" parent="." node_paths=PackedStringArray("ground", "take_off_maker")]
 script = ExtResource("1_vwlqs")
 starting_point = Vector3(0, 100, 0)
 ground = NodePath("../Ground")
+take_off_maker = NodePath("../TakeOffsetMarker")
 fish_scene = ExtResource("2_ossph")
 count = 1
 center_path = NodePath("../Marker3D")
@@ -81,5 +82,7 @@ transform = Transform3D(-0.0595396, -0.82277, 0.565248, -0.0861885, 0.568375, 0.
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a3epi")
+
+[node name="TakeOffsetMarker" type="Marker3D" parent="."]
 
 [editable path="Player"]

@@ -6,6 +6,8 @@ class_name Bird
 @export
 var centre_point: Marker3D
 @export
+var take_off_point: Marker3D
+@export
 var ground: Ground
 
 @onready

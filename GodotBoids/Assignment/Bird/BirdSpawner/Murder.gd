@@ -1,15 +1,20 @@
 extends School
 
+class_name Murder
+
 @export
 var starting_point: Vector3
 @export
 var ground: Ground
+@export
+var take_off_maker: Marker3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	randomize()
 	center = get_node(center_path)
 	center.position = starting_point
+	take_off_maker.position = starting_point*0.25
 	for i in count:
 		var crow = fish_scene.instantiate()		
 		var pos = (Utils.random_point_in_unit_sphere() * radius)+starting_point
@@ -25,5 +30,7 @@ func _ready() -> void:
 			constrain.center = center
 			constrain.radius = radius
 		boid.ground = ground
+		boid.take_off_point = take_off_maker
+		boid.centre_point = center
 			
 
