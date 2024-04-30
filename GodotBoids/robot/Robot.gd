@@ -23,6 +23,7 @@ func _ready():
 	laserbeamR.visible = false
 	currentState = 0
 	robotMesh = get_node("Robot/EnemyVer2")
+	
 	eyeMat = robotMesh.get_surface_override_material(1)
 	pass # Replace with function body.
 
@@ -42,5 +43,9 @@ func _process(delta):
 		laserbeamR.visible = false
 		triggered = false
 	
+
+func _findBirds():
+	var root = get_node(".").get_children()
+	var birds = root
 	
 	
