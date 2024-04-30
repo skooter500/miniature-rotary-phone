@@ -20,9 +20,9 @@ func _ready():
 func on_draw_gizmos():
 	boid = get_parent()
 	var cent = boid.global_transform * (Vector3.BACK * distance)
-	DebugDraw3D.draw_sphere(cent, radius, Color.HOT_PINK)
-	DebugDraw3D.draw_line(boid.global_transform.origin, cent, Color.HOT_PINK)
-	DebugDraw3D.draw_line(cent, worldTarget, Color.HOT_PINK)
+	#DebugDraw3D.draw_sphere(cent, radius, Color.HOT_PINK)
+	#DebugDraw3D.draw_line(boid.global_transform.origin, cent, Color.HOT_PINK)
+	#DebugDraw3D.draw_line(cent, worldTarget, Color.HOT_PINK)
 	
 
 			

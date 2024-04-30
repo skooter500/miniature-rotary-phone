@@ -6,8 +6,9 @@ class_name Arrive extends SteeringBehavior
 
 func on_draw_gizmos():
 	if target: 
-		DebugDraw3D.draw_position(target.global_transform, Color.AQUAMARINE)
-		DebugDraw3D.draw_sphere(target.global_transform.origin, slowing_radius, Color.AQUAMARINE)
+		#DebugDraw3D.draw_position(target.global_transform, Color.AQUAMARINE)
+		#DebugDraw3D.draw_sphere(target.global_transform.origin, slowing_radius, Color.AQUAMARINE)
+		pass
 	# DebugDraw.draw_arrow_line(boid.global_transform.origin, target.global_transform.origin, Color.aquamarine)
 
 func calculate():

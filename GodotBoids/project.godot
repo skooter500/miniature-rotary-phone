@@ -12,7 +12,7 @@ config_version=5
 
 config/name="GodotBoids"
 run/main_scene="res://behaviors/Hybrid1.tscn"
-config/features=PackedStringArray("4.2")
+config/features=PackedStringArray("4.1")
 config/icon="res://behaviors/icon.png"
 
 [audio]
@@ -22,6 +22,10 @@ buses/default_bus_layout="res://behaviors/default_bus_layout.tres"
 [autoload]
 
 XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
+
+[debug_draw_3d]
+
+settings/telemetry_state=1
 
 [display]
 

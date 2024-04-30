@@ -39,7 +39,7 @@ func count_neighbors_partitioned():
 	if draw_gizmos:
 		var a = school.cell_to_position(my_cell)
 		var b = a + Vector3(school.cell_size, school.cell_size, school.cell_size)
-		DebugDraw3D.draw_aabb_ab(a, b, Color.CYAN)
+		#DebugDraw3D.draw_aabb_ab(a, b, Color.CYAN)
 						
 	# Check center cell first!
 	for slice in [0, -1, 1]:
@@ -51,7 +51,7 @@ func count_neighbors_partitioned():
 				if draw_gizmos:
 					var a = school.cell_to_position(key)
 					var b = a + Vector3(school.cell_size, school.cell_size, school.cell_size)
-					DebugDraw3D.draw_aabb_ab(a, b, Color.CYAN)
+					#DebugDraw3D.draw_aabb_ab(a, b, Color.CYAN)
 				
 				if school.cells.has(key):
 					var cell = school.cells[key]
@@ -59,7 +59,8 @@ func count_neighbors_partitioned():
 					for boid in cell:
 						if draw_gizmos:
 							if boid != self:
-								DebugDraw3D.draw_box(boid.global_transform.origin, Quaternion.IDENTITY,  Vector3(3, 3, 3), Color.DARK_GOLDENROD, true)
+								pass
+								#DebugDraw3D.draw_box(boid.global_transform.origin, Quaternion.IDENTITY,  Vector3(3, 3, 3), Color.DARK_GOLDENROD, true)
 						if boid != self and boid.global_transform.origin.distance_to(global_transform.origin) < school.neighbor_distance:
 							neighbors.push_back(boid)
 							if neighbors.size() == school.max_neighbors:
@@ -87,16 +88,16 @@ func set_enabled(behavior, enabled):
 
 func on_draw_gizmos():
 
-	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.z * 10.0 , Color(0, 0, 1), 0.1)
-	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.x * 10.0 , Color(1, 0, 0), 0.1)
-	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.y * 10.0 , Color(0, 1, 0), 0.1)
-	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + force, Color(1, 1, 0), 0.1)
+	#DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.z * 10.0 , Color(0, 0, 1), 0.1)
+	#DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.x * 10.0 , Color(1, 0, 0), 0.1)
+	#DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.y * 10.0 , Color(0, 1, 0), 0.1)
+	#DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + force, Color(1, 1, 0), 0.1)
 	
 	if school and count_neighbors:
-		DebugDraw3D.draw_sphere(global_transform.origin, school.neighbor_distance, Color.WEB_PURPLE)
+		#DebugDraw3D.draw_sphere(global_transform.origin, school.neighbor_distance, Color.WEB_PURPLE)
 		for neighbor in neighbors:
-			DebugDraw3D.draw_sphere(neighbor.global_transform.origin, 3, Color.WEB_PURPLE)
-			
+			#DebugDraw3D.draw_sphere(neighbor.global_transform.origin, 3, Color.WEB_PURPLE)
+			pass
 func seek_force(target: Vector3):	
 	var toTarget = target - global_transform.origin
 	toTarget = toTarget.normalized()
@@ -154,7 +155,8 @@ func calculate():
 				behaviors_active += " Limiting force"
 				break
 	if draw_gizmos:
-		DebugDraw2D.set_text(name, behaviors_active)
+		pass
+		#DebugDraw2D.set_text(name, behaviors_active)
 	return force_acc
 
 

@@ -27,10 +27,10 @@ func _ready():
 func _process(delta):
 	if draw_gizmos:
 		var cent = boid.global_transform * (Vector3.BACK * distance)
-		DebugDraw3D.draw_sphere(cent, radius, Color.HOT_PINK)
-		DebugDraw3D.draw_line(boid.global_transform.origin, cent, Color.HOT_PINK)
-		DebugDraw3D.draw_line(cent, world_target, Color.HOT_PINK)
-		DebugDraw3D.draw_position(Transform3D(Basis(), world_target), Color.HOT_PINK)
+		#DebugDraw3D.draw_sphere(cent, radius, Color.HOT_PINK)
+		#DebugDraw3D.draw_line(boid.global_transform.origin, cent, Color.HOT_PINK)
+		#DebugDraw3D.draw_line(cent, world_target, Color.HOT_PINK)
+		#DebugDraw3D.draw_position(Transform3D(Basis(), world_target), Color.HOT_PINK)
 
 func calculate():		
 	var n  = noise.get_noise_1d(theta)

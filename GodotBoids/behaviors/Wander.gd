@@ -17,10 +17,10 @@ func _ready():
 		
 func on_draw_gizmos():
 	var cent = boid.global_transform * (Vector3.BACK * distance)
-	DebugDraw3D.draw_sphere(cent, radius, Color.DARK_SLATE_BLUE)
-	DebugDraw3D.draw_line(boid.global_transform.origin, cent, Color.DARK_SLATE_BLUE)
-	DebugDraw3D.draw_line(cent, world_target, Color.DARK_SLATE_BLUE, 0.1)			
-	DebugDraw3D.draw_position(Transform3D(Basis(), world_target), Color.DARK_SLATE_BLUE)			
+	#DebugDraw3D.draw_sphere(cent, radius, Color.DARK_SLATE_BLUE)
+	#DebugDraw3D.draw_line(boid.global_transform.origin, cent, Color.DARK_SLATE_BLUE)
+	#DebugDraw3D.draw_line(cent, world_target, Color.DARK_SLATE_BLUE, 0.1)			
+	#DebugDraw3D.draw_position(Transform3D(Basis(), world_target), Color.DARK_SLATE_BLUE)			
 
 func calculate():		
 	var delta = get_process_delta_time()

@@ -1,8 +1,4 @@
 class_name Avoidance extends SteeringBehavior
-	
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
 enum ForceDirection {Normal, Incident, Up, Braking}
 @export var direction = ForceDirection.Normal
@@ -20,11 +16,13 @@ func on_draw_gizmos():
 		var feeler = feelers[i]		
 		
 		if feeler.hit:
-			DebugDraw3D.draw_line(boid.global_transform.origin, feeler.hit_target, Color.CHARTREUSE)
-			DebugDraw3D.draw_arrow(feeler.hit_target, feeler.hit_target + feeler.normal, Color.BLUE, 0.1)
-			DebugDraw3D.draw_arrow(feeler.hit_target, feeler.hit_target + feeler.force * weight, Color.RED, 0.1)			
+			pass
+			#DebugDraw3D.draw_line(boid.global_transform.origin, feeler.hit_target, Color.CHARTREUSE)
+			#DebugDraw3D.draw_arrow(feeler.hit_target, feeler.hit_target + feeler.normal, Color.BLUE, 0.1)
+			#DebugDraw3D.draw_arrow(feeler.hit_target, feeler.hit_target + feeler.force * weight, Color.RED, 0.1)			
 		else:
-			DebugDraw3D.draw_line(boid.global_transform.origin, feeler.end, Color.CHARTREUSE)
+			pass
+			# DebugDraw3D.draw_line(boid.global_transform.origin, feeler.end, Color.CHARTREUSE)
 
 func start_updating():
 	
