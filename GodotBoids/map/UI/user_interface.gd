@@ -69,3 +69,5 @@ func butterflies_speed():
 		print("Butterfly speed changed: ", current_speed)
 		previous_butterfly_speed = current_speed
 		Parameters.BUTTERFLY_SPEED.emit(current_speed)
+		
+

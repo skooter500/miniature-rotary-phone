@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnvnjemlfct6o"]
+[gd_scene load_steps=3 format=3 uid="uid://bnvnjemlfct6o"]
 
 [ext_resource type="Script" path="res://map/UI/user_interface.gd" id="1_wi56x"]
+[ext_resource type="Script" path="res://map/UI/music_slider.gd" id="2_1gc23"]
 
 [node name="UserInterface" type="Node3D"]
 script = ExtResource("1_wi56x")
@@ -62,3 +63,21 @@ offset_top = -27.0
 offset_right = 66.9419
 offset_bottom = -4.0
 text = "ButterSpeed:"
+
+[node name="music_slider" type="HSlider" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = 355.0
+offset_right = -10.0
+offset_bottom = 371.0
+grow_horizontal = 0
+grow_vertical = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+script = ExtResource("2_1gc23")
