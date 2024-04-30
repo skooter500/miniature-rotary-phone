@@ -38,9 +38,9 @@ func _physics_process(delta):
 	var rotation = pov.rotation
 
 	# Calculate movement direction relative to camera orientation
-	var forward = transform.basis.z
-	var right = transform.basis.x
-	var movement_direction = (forward * input_direction.y + right * input_direction.x).normalized()
+	var forward_back = transform.basis.z
+	var right_left = transform.basis.x
+	var movement_direction = (forward_back * input_direction.y + right_left * input_direction.x).normalized()
 	
 	if movement_direction.length() > 0:
 		# Adjust movement direction based on camera tilt
