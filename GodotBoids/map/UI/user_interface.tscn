@@ -39,7 +39,7 @@ offset_right = 63.0044
 offset_bottom = -4.0
 text = "Butterflies:"
 
-[node name="butterfly_amount2" type="SpinBox" parent="CanvasLayer/Control"]
+[node name="butterfly_speed" type="SpinBox" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -50,7 +50,7 @@ offset_right = 0.0625
 offset_bottom = 64.0
 grow_horizontal = 0
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/butterfly_amount2"]
+[node name="Label" type="Label" parent="CanvasLayer/Control/butterfly_speed"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.83
