@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://lk8nhpq4tq5t"]
+[gd_scene load_steps=24 format=3 uid="uid://lk8nhpq4tq5t"]
 
 [ext_resource type="Script" path="res://behaviors/StateMachine.gd" id="2_7ae1c"]
 [ext_resource type="Script" path="res://Assignment/Bird/BirdStates/BirdGlobalState.gd" id="3_lslpa"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://Assignment/Bird/Bird.gd" id="11_cksal"]
 [ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="12_d4g50"]
 [ext_resource type="Script" path="res://Assignment/Bird/BirdComponets/Stamina.gd" id="13_g33kj"]
+[ext_resource type="Script" path="res://behaviors/Wander.gd" id="13_qcvll"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_us5sd"]
 
@@ -84,6 +85,11 @@ direction = 1
 feeler_angle = 5
 feeler_length = 15
 weight = 3.0
+
+[node name="Wander" type="Node" parent="."]
+script = ExtResource("13_qcvll")
+distance = 10.0
+enabled = false
 
 [node name="MeshInstance3D" type="Node3D" parent="." node_paths=PackedStringArray("wing1", "wing2", "body", "claw1", "claw2")]
 script = ExtResource("4_c6rrh")

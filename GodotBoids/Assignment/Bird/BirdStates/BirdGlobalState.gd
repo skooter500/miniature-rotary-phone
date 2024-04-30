@@ -8,7 +8,8 @@ var stamina: Stamina
 @export
 var ground_states = [
 	"DescendToGroundState",
-	"LandState"
+	"LandState",
+	"GroundState"
 ]
 
 func _enter():
@@ -23,7 +24,7 @@ func _think():
 
 func _on_stamina_depleted():
 	print(state_machine.current_state.name)
-	if not state_machine.current_state.name in ground_states:
+	if not state_machine.current_state.name in ground_states or not state_machine.current_state.name.contains("Node"):
 		var new_state = DescendToGroundState.new()
 		new_state.name = "DescendToGroundState"
 		state_machine.change_state(new_state)

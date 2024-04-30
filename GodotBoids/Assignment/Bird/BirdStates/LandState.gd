@@ -23,5 +23,6 @@ func _think():
 			tween.parallel().tween_property(boid, "rotation_degrees:x", 0, body.druation)
 			tween.parallel().tween_property(boid, "global_position:y", boid.ground.position.y+(boid.height/2), body.druation)
 			tween.play()
-		print("I collided with ", collision.get_collider().name)
-	#if boid.rotation_degrees.x < 0:
+			var new_state = GroundState.new()
+			new_state.name = "GroundState"
+			state_machine.change_state(new_state)
