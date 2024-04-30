@@ -14,8 +14,11 @@ func _enter():
 	pass
 
 func _think():
-	var threshold = boid.ground.global_position.y + 10
+	var threshold = boid.ground.global_position.y + 20
 	if boid.global_position.y <= threshold:
+		var wings = boid.find_children("Wing?", "", true, false)
+		for wing in wings:
+			wing.play_slowdown = true
 		var new_state = LandState.new()
 		new_state.name = "LandState"
 		state_machine.change_state(new_state)

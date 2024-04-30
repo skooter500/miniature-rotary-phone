@@ -16,6 +16,9 @@ func _think():
 			boid.pause = true
 			var body = boid.get_node("MeshInstance3D")
 			body.state = "Walking"
+			var wings = boid.find_children("Wing?", "", true, false)
+			for wing in wings:
+				wing.play_slowdown = true
 			var tween = get_tree().create_tween()
 			tween.parallel().tween_property(boid, "rotation_degrees:x", 0, body.druation)
 			tween.parallel().tween_property(boid, "global_position:y", boid.ground.position.y+(boid.height/2), body.druation)
