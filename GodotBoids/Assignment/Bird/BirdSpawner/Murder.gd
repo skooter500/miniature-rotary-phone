@@ -27,4 +27,6 @@ func _ready() -> void:
 		var arrive: Arrive = boid.get_node("Arrive")
 		if arrive:
 			arrive.target = ground
+			boid.ground = ground
+			
 

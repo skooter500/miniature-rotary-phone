@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://lk8nhpq4tq5t"]
+[gd_scene load_steps=23 format=3 uid="uid://lk8nhpq4tq5t"]
 
 [ext_resource type="Script" path="res://behaviors/StateMachine.gd" id="2_7ae1c"]
 [ext_resource type="Script" path="res://Assignment/Bird/BirdStates/BirdGlobalState.gd" id="3_lslpa"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Assignment/Bird/BirdComponets/WingScript.gd" id="10_bqgsl"]
 [ext_resource type="Script" path="res://behaviors/Arrive.gd" id="11_8ecqk"]
 [ext_resource type="Script" path="res://Assignment/Bird/Bird.gd" id="11_cksal"]
+[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="12_d4g50"]
 [ext_resource type="Script" path="res://Assignment/Bird/BirdComponets/Stamina.gd" id="13_g33kj"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_us5sd"]
@@ -30,10 +31,11 @@ albedo_color = Color(0.482353, 0.854902, 1, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7lw0"]
 albedo_color = Color(0, 0, 0, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_nts63"]
-size = Vector3(1, 3.59283, 4.48999)
+[sub_resource type="BoxShape3D" id="BoxShape3D_oknbe"]
+size = Vector3(1, 3.62082, 4.47559)
 
 [node name="Boid" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 script = ExtResource("11_cksal")
 wind_direction = 90.0
 draw_gizmos = false
@@ -75,6 +77,13 @@ script = ExtResource("5_ltxfv")
 [node name="Arrive" type="Node" parent="."]
 script = ExtResource("11_8ecqk")
 enabled = false
+
+[node name="Avoidance" type="Node" parent="."]
+script = ExtResource("12_d4g50")
+direction = 1
+feeler_angle = 5
+feeler_length = 15
+weight = 3.0
 
 [node name="MeshInstance3D" type="Node3D" parent="." node_paths=PackedStringArray("wing1", "wing2", "body", "claw1", "claw2")]
 script = ExtResource("4_c6rrh")
@@ -255,8 +264,8 @@ size = Vector3(0.05, 0.5, 0.05)
 material = SubResource("StandardMaterial3D_828u5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.202545, -0.348267)
-shape = SubResource("BoxShape3D_nts63")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.200478, -0.334107)
+shape = SubResource("BoxShape3D_oknbe")
 
 [node name="Stamina" type="Timer" parent="."]
 autostart = true

@@ -26,12 +26,12 @@ sky = SubResource("Sky_t0a3h")
 
 [node name="Node3D" type="Node3D"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Ground" type="StaticBody3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_0ue3y")
 
-[node name="Ground" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="Ground" type="MeshInstance3D" parent="Ground"]
 transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
 mesh = SubResource("PlaneMesh_n0yb5")
 skeleton = NodePath("../..")
@@ -39,9 +39,9 @@ skeleton = NodePath("../..")
 [node name="Murder" type="Node3D" parent="." node_paths=PackedStringArray("ground")]
 script = ExtResource("1_ydpnf")
 starting_point = Vector3(0, 100, 0)
-ground = NodePath("../StaticBody3D/Ground")
+ground = NodePath("../Ground/Ground")
 fish_scene = ExtResource("1_lp8lg")
-count = 100
+count = 1
 center_path = NodePath("../Marker3D")
 
 [node name="SceneSetup" type="Node" parent="." node_paths=PackedStringArray("birds", "camera_controller", "camera_pursue")]
