@@ -2,9 +2,11 @@ extends State
 
 class_name TakeOffState
 
+var arrive: Arrive
+
 func _enter():
 	disable_all_behaviours()
-	var arrive: Arrive = boid.get_node("Arrive")
+	arrive = boid.get_node("Arrive")
 	if arrive:
 		arrive.target = boid.take_off_point
 	var body = boid.get_node("MeshInstance3D")
@@ -15,4 +17,7 @@ func _enter():
 	change_behaviour("Arrive", true)
 
 func _think():
-	pass
+	if arrive and arrive.target.position.distance_to(boid.global_position) < 5:
+		var new_state = FlockState.new()
+		new_state.name = "FlockState"
+		state_machine.change_state(new_state)

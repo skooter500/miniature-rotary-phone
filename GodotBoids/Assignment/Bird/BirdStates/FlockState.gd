@@ -8,8 +8,15 @@ var stamina_deplated: bool = false
 
 func _enter():
 	stamina = boid.find_child("Stamina")
+	stamina.regen = false
 	stamina.stamina_depleted.connect(_on_stamina_depleted)
 	disable_all_behaviours()
+	change_behaviour("Separation", true)
+	change_behaviour("Alignment", true)
+	change_behaviour("Cohesion", true)
+	change_behaviour("Harmonic", true)
+	change_behaviour("Constrain", true)
+	change_behaviour("NoiseWander", true)
 	
 func _think():
 	if stamina_deplated:
