@@ -11,9 +11,9 @@ var take_off_point: Marker3D
 var ground: Ground
 
 @onready
-var boid: Boid = $Boid
+var boid: Boid = $"."
 @onready
-var body = $Boid/MeshInstance3D
+var body = %MeshInstance3D
 @onready
 var collider: CollisionShape3D = $CollisionShape3D
 

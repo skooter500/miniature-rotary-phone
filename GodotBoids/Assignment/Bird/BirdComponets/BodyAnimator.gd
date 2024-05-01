@@ -16,6 +16,7 @@ var claw1: Node3D
 var claw2: Node3D
 @export
 var druation: float = 1
+@export_category("Wing Properties")
 @export
 var wing_span: int = 5:
 	set(value):
@@ -23,6 +24,48 @@ var wing_span: int = 5:
 		wing_span = value
 	get:
 		return wing_span
+@export
+var distance_between_points: float = 1:
+	set(value):
+		update_wing_property("dist_between_points",value)
+		distance_between_points = value
+	get:
+		return distance_between_points
+@export
+var thickness: float = 0.2:
+	set(value):
+		update_wing_property("tickness",value)
+		thickness = value
+	get:
+		return thickness
+@export
+var width: float = 2:
+	set(value):
+		update_wing_property("width",value)
+		width = value
+	get:
+		return width
+@export_range(0.1,5)
+var wing_flap_duration: float = 1:
+	set(value):
+		update_wing_property("druation",value)
+		wing_flap_duration = value
+	get:
+		return wing_flap_duration
+@export_range(0,360)
+var wind_direction: float = 90:
+	set(value):
+		update_wing_property("wind_direction",value)
+		wind_direction = value
+	get:
+		return wind_direction
+@export_range(0,360)
+var wind_threshold: float = 15:
+	set(value):
+		update_wing_property("wind_threshold",value)
+		wind_threshold = value
+	get:
+		return wind_threshold
 
 var tween: Tween 
 var current_state: String = "Walking"
@@ -48,8 +91,9 @@ func _process(delta: float) -> void:
 			print("Unsupported body state. Please make sure that ",state," is a supported state") 
 
 func update_wing_property(property,value):
-	wing1.set(property, value)
-	wing2.set(property, value)	
+	if wing1 and wing2:
+		wing1.set(property, value)
+		wing2.set(property, value)	
 
 func transition_to_walking():
 	if (tween == null or not tween.is_running()): 

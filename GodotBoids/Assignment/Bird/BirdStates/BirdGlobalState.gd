@@ -20,7 +20,6 @@ func _enter():
 	stamina.stamina_replenished.connect(_on_stamina_regen)
 
 func _think():
-	print(state_machine.current_state.name)
 	pass
 
 func _on_stamina_depleted():
