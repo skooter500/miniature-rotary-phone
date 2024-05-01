@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy4yii2pd3h6a"]
+
+[ext_resource type="Script" path="res://LabeledButton.gd" id="1_2m5l3"]
+
+[node name="LabelButton" type="VBoxContainer" node_paths=PackedStringArray("button", "label")]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+script = ExtResource("1_2m5l3")
+button = NodePath("MarginContainer/Button")
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_vertical = 6
+text = "Placeholder"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="Button" type="Button" parent="MarginContainer"]
+layout_mode = 2
+text = "Placeholder"

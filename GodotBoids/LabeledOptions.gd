@@ -11,6 +11,7 @@ var options: Array[String] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super()
 	options_button.clear()
 	for option in options:
 		options_button.add_item(option)

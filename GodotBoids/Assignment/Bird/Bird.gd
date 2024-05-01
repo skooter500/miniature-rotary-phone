@@ -9,6 +9,11 @@ var centre_point: Marker3D
 var take_off_point: Marker3D
 @export
 var ground: Ground
+@export
+var ground_speed: float = 5
+@export
+var flight_speed: float = 10
+
 
 @onready
 var boid: Boid = $"."
@@ -49,8 +54,21 @@ func setup_constrain() -> void:
 	constrain_node.center_path = centre_point.get_path()
 
 func _on_bird_property_changed(node_name,property_name,value):
+	if node_name != "self":
+		set_child_property(node_name, property_name, value)
+	else:
+		set_self(property_name, value)
+
+func set_child_property(node_name,property_name,value):
 	var node = find_child(node_name)
 	if node == null:
 		print("Node ",node_name," doesn't exist")
 		return
 	node.set(property_name, value)
+
+func set_self(property_name, value):
+	set(property_name, value)
+	if (property_name == "ground_speed") and body.state == "Walking":
+		speed = value
+	if (property_name == "flying_speed") and body.state == "Flying":		 
+		speed = value

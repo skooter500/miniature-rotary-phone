@@ -7,7 +7,7 @@ var stamina_regened: bool
 func _enter():
 	boid.pause = false
 	boid.banking = 0
-	boid.max_speed = 5
+	boid.max_speed = boid.ground_speed
 	var stamina: Stamina = boid.find_child("Stamina")
 	stamina.regen = true
 	stamina.stamina_replenished.connect(_on_stamina_regen)

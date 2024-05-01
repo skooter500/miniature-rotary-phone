@@ -14,6 +14,8 @@ func _enter():
 	var wings = boid.find_children("Wing?", "", true, false)
 	for wing in wings:
 		wing.play_slowdown = false
+	boid.banking = 0.1
+	boid.max_speed = boid.flight_speed
 	change_behaviour("Arrive", true)
 
 func _think():

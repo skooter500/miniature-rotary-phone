@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbvdurbl831xp"]
+[gd_scene load_steps=5 format=3 uid="uid://cbvdurbl831xp"]
 
 [ext_resource type="PackedScene" uid="uid://d2pc0vatxw722" path="res://Assignment/UI/LabelSlider.tscn" id="1_havx2"]
 [ext_resource type="PackedScene" uid="uid://esei351tusyj" path="res://Assignment/UI/LabelOptions.tscn" id="2_4y6ij"]
+[ext_resource type="PackedScene" uid="uid://cy4yii2pd3h6a" path="res://Assignment/UI/LabelButton.tscn" id="2_anlg3"]
+[ext_resource type="Script" path="res://Assignment/UI/MenuSelectButton.gd" id="4_1jh0g"]
 
 [node name="BirdUi" type="Control"]
 layout_mode = 3
@@ -39,23 +41,39 @@ layout_mode = 2
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer"]
+[node name="GroundSpeed" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
 layout_mode = 2
-text = "Spawn new bird"
+min_value = 1.0
+max_value = 20.0
+step = 1.0
+value = 5.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/HarmonicWeight/Label")
+text = "Ground Speed"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "self"
+propery_name = "ground_speed"
 
-[node name="Button" type="Button" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer"]
+[node name="FlightSpeed" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
 layout_mode = 2
-text = "Spawn New Bird"
+min_value = 1.0
+max_value = 20.0
+step = 1.0
+value = 10.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/HarmonicWeight/Label")
+text = "Flight Speed"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "self"
+propery_name = "flight_speed"
 
-[node name="Label7" type="Label" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer"]
+[node name="LabelButton" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer" instance=ExtResource("2_anlg3")]
 layout_mode = 2
-text = "Sound"
+button_text = "New Bird"
+text = "Spawn Bird"
 
-[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer"]
+[node name="Reset" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer" instance=ExtResource("2_anlg3")]
 layout_mode = 2
-item_count = 1
-popup/item_0/text = ""
-popup/item_0/id = 0
+button_text = "Clear Birds"
+text = "Reset"
 
 [node name="Wings" type="MarginContainer" parent="MarginContainer/TabContainer"]
 visible = false
@@ -492,3 +510,17 @@ text = "Range"
 signal_to_notify = "BIRD_PROPERTY_CHANGED"
 node_name = "Flee"
 propery_name = "flee_range"
+
+[node name="Button" type="Button" parent="." node_paths=PackedStringArray("parent")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -4.0
+offset_top = 20.0
+offset_right = 4.0
+offset_bottom = 28.0
+grow_horizontal = 2
+text = "Close"
+script = ExtResource("4_1jh0g")
+parent = NodePath("..")

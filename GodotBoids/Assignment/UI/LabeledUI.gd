@@ -19,7 +19,8 @@ var node_name: String
 @export
 var propery_name: String
 
-
+func _ready() -> void:
+	update_property(label, "text", text)
 
 func update_property(node: Node, property_name, value):
 	if node != null:
