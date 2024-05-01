@@ -26,8 +26,10 @@ grow_vertical = 2
 [node name="TabContainer" type="TabContainer" parent="MarginContainer"]
 layout_mode = 2
 tab_alignment = 1
+current_tab = 1
 
 [node name="General" type="MarginContainer" parent="MarginContainer/TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 20
@@ -88,6 +90,73 @@ button_text = "Reset"
 text = "Reset Birds"
 signal_to_notify = "MURDER_REQUEST"
 node_name = "Reset"
+
+[node name="Stamina" type="MarginContainer" parent="MarginContainer/TabContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="GeneralSettingTab" type="ScrollContainer" parent="MarginContainer/TabContainer/Stamina"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Stamina/GeneralSettingTab"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="Max" parent="MarginContainer/TabContainer/Stamina/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 10.0
+max_value = 1000.0
+step = 1.0
+value = 100.0
+text = "Max"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Stamina"
+propery_name = "max"
+
+[node name="RegenAmount" parent="MarginContainer/TabContainer/Stamina/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+max_value = 100.0
+step = 1.0
+value = 1.0
+text = "Regen Amount"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Stamina"
+propery_name = "regen_value"
+
+[node name="RegenTime" parent="MarginContainer/TabContainer/Stamina/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 0.1
+max_value = 100.0
+value = 0.1
+text = "Regen Time"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Stamina"
+propery_name = "regen_time"
+
+[node name="CostAmount" parent="MarginContainer/TabContainer/Stamina/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+max_value = 100.0
+step = 1.0
+value = 1.0
+text = "Cost Amount"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Stamina"
+propery_name = "cost_value"
+
+[node name="CostTime" parent="MarginContainer/TabContainer/Stamina/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 0.1
+max_value = 100.0
+value = 0.1
+text = "Cost Time"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Stamina"
+propery_name = "cost_time"
 
 [node name="Wings" type="MarginContainer" parent="MarginContainer/TabContainer"]
 visible = false
