@@ -1,0 +1,6 @@
+[gd_resource type="PanoramaSkyMaterial" load_steps=2 format=3 uid="uid://dq1k1jdvdj6dr"]
+
+[ext_resource type="Texture2D" uid="uid://uuaix4b05kag" path="res://map/map_assets/Sky_Day_BlueSky_Equirect.png" id="1_5c00y"]
+
+[resource]
+panorama = ExtResource("1_5c00y")

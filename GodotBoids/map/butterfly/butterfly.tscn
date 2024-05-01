@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cdfwqeyq0gkuk"]
+[gd_scene load_steps=13 format=3 uid="uid://cdfwqeyq0gkuk"]
 
 [ext_resource type="Script" path="res://map/butterfly/butterfly.gd" id="1_d22uj"]
 [ext_resource type="Script" path="res://behaviors/Boid.gd" id="1_qrlei"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="3_vsk4k"]
 [ext_resource type="Script" path="res://behaviors/NoiseWander.gd" id="4_cmk2c"]
 [ext_resource type="Script" path="res://map/butterfly/ArriveToFlowers.gd" id="6_yu6bc"]
+[ext_resource type="Script" path="res://behaviors/Constrain.gd" id="7_e5bos"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_misk8"]
 albedo_color = Color(0.138061, 0.0493356, 0, 0)
@@ -17,6 +18,7 @@ material = SubResource("StandardMaterial3D_misk8")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s4w7r"]
 albedo_color = Color(0.824982, 0.61755, 0.0487809, 1)
+roughness = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_8my78"]
 material = SubResource("StandardMaterial3D_s4w7r")
@@ -29,6 +31,7 @@ script = ExtResource("1_d22uj")
 script = ExtResource("1_qrlei")
 banking = 0.5
 damping = 0.5
+draw_gizmos = false
 
 [node name="Body" type="MeshInstance3D" parent="Boid"]
 transform = Transform3D(0.436104, 0, 0, 0, 0.364936, 0, 0, 0, 2.44859, 0, 0, 0)
@@ -52,6 +55,12 @@ draw_gizmos = false
 [node name="ArriveToFlowers" type="Node" parent="Boid"]
 script = ExtResource("6_yu6bc")
 slowing_radius = 50.0
+draw_gizmos = false
+
+[node name="Constrain" type="Node" parent="Boid"]
+script = ExtResource("7_e5bos")
+radius = 400.0
+draw_gizmos = false
 
 [node name="wing" type="MeshInstance3D" parent="Boid"]
 transform = Transform3D(2.02144, 0, 0, 0, 0.0451481, 0, 0, 0, 4.38048, 1.25191, -0.0180128, -0.00137481)

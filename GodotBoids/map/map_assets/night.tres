@@ -1,0 +1,6 @@
+[gd_resource type="PanoramaSkyMaterial" load_steps=2 format=3 uid="uid://der5w4tdp7kst"]
+
+[ext_resource type="Texture2D" uid="uid://di6rxwt6b3hvi" path="res://map/map_assets/night_sky.png" id="1_4dr3k"]
+
+[resource]
+panorama = ExtResource("1_4dr3k")

@@ -11,6 +11,8 @@ var boid
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Parameters.connect("BUTTERFLY_SPEED", set_speed)
+	Parameters.connect("DRAW_GIZMOS_BUTTERFLY", gizmos_drawn)
+	Parameters.connect("SET_DAY_NIGHT", _set_glow)
 	
 	boid = get_node("Boid")
 	body =  get_node("Boid/Body");
@@ -31,3 +33,19 @@ func set_speed(new_speed):
 	boid.speed = new_speed
 	boid.max_speed = new_speed * 2
 	boid.max_force = new_speed * 2
+
+func gizmos_drawn(value):
+	boid.draw_gizmos = value
+	get_node("Boid/Avoidance").draw_gizmos = value
+	get_node("Boid/Wander").draw_gizmos = value
+	get_node("Boid/NoiseWander").draw_gizmos = value
+	get_node("Boid/ArriveToFlowers").draw_gizmos = value
+	get_node("Boid/Constrain").draw_gizmos = value
+
+func _set_glow(value):
+	if value:
+		left_wing.get_active_material(0).emission_enabled = true
+		left_wing.get_active_material(0).emission = Color(randf(), randf(), randf())
+		left_wing.get_active_material(0).emission_energy_multiplier = 2
+	else:
+		left_wing.get_active_material(0).emission_enabled = false
