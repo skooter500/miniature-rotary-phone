@@ -18,12 +18,12 @@
 [ext_resource type="Script" path="res://Assignment/Bird/BirdComponets/GroundWander.gd" id="13_wbqri"]
 [ext_resource type="Script" path="res://behaviors/Flee.gd" id="14_6cvyl"]
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_us5sd"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_moob3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_828u5"]
 albedo_color = Color(0.160784, 0.160784, 0.160784, 1)
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_djt5d"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_6awtf"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ro1sb"]
 
@@ -57,24 +57,31 @@ script = ExtResource("4_ajedj")
 [node name="Separation" type="Node" parent="."]
 script = ExtResource("7_q465w")
 weight = 4.0
+enabled = false
 
 [node name="Alignment" type="Node" parent="."]
 script = ExtResource("8_ht5wb")
 weight = 5.0
+enabled = false
 
 [node name="Cohesion" type="Node" parent="."]
 script = ExtResource("6_0ivu5")
 weight = 2.0
 draw_gizmos = false
+enabled = false
 
 [node name="Harmonic" type="Node" parent="."]
 script = ExtResource("3_wsylb")
+enabled = false
 
 [node name="NoiseWander" type="Node" parent="."]
 script = ExtResource("4_jiyq7")
+enabled = false
 
 [node name="Constrain" type="Node" parent="."]
 script = ExtResource("5_ltxfv")
+radius = 200.0
+enabled = false
 
 [node name="Arrive" type="Node" parent="."]
 script = ExtResource("11_8ecqk")
@@ -86,6 +93,7 @@ direction = 1
 feeler_angle = 5
 feeler_length = 15
 weight = 3.0
+enabled = false
 
 [node name="GroundWander" type="Node" parent="."]
 script = ExtResource("13_wbqri")
@@ -94,6 +102,7 @@ enabled = false
 
 [node name="Flee" type="Node" parent="."]
 script = ExtResource("14_6cvyl")
+enabled = false
 
 [node name="MeshInstance3D" type="Node3D" parent="." node_paths=PackedStringArray("wing1", "wing2", "body", "claw1", "claw2")]
 unique_name_in_owner = true
@@ -108,14 +117,14 @@ wing_span = 6
 
 [node name="Wing1" type="MeshInstance3D" parent="MeshInstance3D" node_paths=PackedStringArray("parent")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.621, -0.354)
-mesh = SubResource("ImmediateMesh_us5sd")
+mesh = SubResource("ImmediateMesh_moob3")
 skeleton = NodePath("../..")
 script = ExtResource("10_bqgsl")
 tickness = 0.2
 width = 2.0
 num_of_points = 6
 dist_between_points = 1.0
-pos = -1.15491
+pos = -1.0
 play_flapping = true
 wind_direction = 90.0
 wind_threshold = 15.0
@@ -125,14 +134,14 @@ parent = NodePath("../..")
 
 [node name="Wing2" type="MeshInstance3D" parent="MeshInstance3D" node_paths=PackedStringArray("parent")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.621, -0.354)
-mesh = SubResource("ImmediateMesh_djt5d")
+mesh = SubResource("ImmediateMesh_6awtf")
 skeleton = NodePath("../..")
 script = ExtResource("10_bqgsl")
 tickness = 0.2
 width = 2.0
 num_of_points = 6
 dist_between_points = 1.0
-pos = -1.15491
+pos = -1.0
 play_flapping = true
 wind_direction = 90.0
 wind_threshold = 15.0

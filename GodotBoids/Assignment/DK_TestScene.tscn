@@ -47,7 +47,6 @@ starting_point = Vector3(0, 100, 0)
 ground = NodePath("../Ground")
 take_off_maker = NodePath("../TakeOffsetMarker")
 fish_scene = ExtResource("2_ossph")
-count = 1
 center_path = NodePath("../Marker3D")
 
 [node name="SceneSetup" type="Node" parent="." node_paths=PackedStringArray("birds", "camera_controller", "camera_pursue")]

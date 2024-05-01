@@ -18,7 +18,7 @@ func _think():
 			boid.pause = true
 			var body = boid.get_node("MeshInstance3D")
 			body.state = "Walking"
-			var wings = boid.find_children("Wing?", "", true, false)
+			var wings = boid.body.find_children("Wing?")
 			for wing in wings:
 				wing.play_slowdown = true
 			var tween = get_tree().create_tween()

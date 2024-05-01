@@ -150,7 +150,6 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
 environment/ssao/quality=3
 environment/ssil/quality=3
