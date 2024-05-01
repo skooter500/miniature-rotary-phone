@@ -8,6 +8,10 @@ var starting_point: Vector3
 var ground: Ground
 @export
 var take_off_maker: Marker3D
+@export
+var landing_spots: Array[Node3D] = []
+@export
+var robot: Node3D 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,6 +32,9 @@ func spawn_crow() -> void:
 	if constrain:
 		constrain.center = center
 		constrain.radius = radius
+	var arrive = boid.get_node("Arrive")
+	if arrive:
+		arrive.targets = landing_spots
 	boid.ground = ground
 	boid.take_off_point = take_off_maker
 	boid.centre_point = center

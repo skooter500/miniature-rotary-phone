@@ -5,6 +5,7 @@ class_name LandState
 func _enter():
 	disable_all_behaviours()
 	change_behaviour("Avoidance", true)
+	change_behaviour("Arrive", true)
 	
 func _think():
 	#var arrive: Arrive = boid.get_node("Arrive")
@@ -14,6 +15,7 @@ func _think():
 		var collision = boid.get_slide_collision(i)
 		if collision.get_collider().name == "Ground":
 			change_behaviour("Avoidance", false) 
+			change_behaviour("Arrive", false)	
 			# Come to complete stop
 			boid.pause = true
 			var body = boid.get_node("MeshInstance3D")
