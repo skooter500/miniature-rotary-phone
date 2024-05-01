@@ -119,6 +119,22 @@ offset_right = 222.0
 offset_bottom = 23.0
 text = "Butterfly Gizmos:"
 
+[node name="Find_flower" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 642.0
+offset_right = 84.0
+offset_bottom = 673.0
+scale = Vector2(0.75, 0.75)
+text = "Off"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Find_flower"]
+layout_mode = 0
+offset_left = 88.0
+offset_right = 222.0
+offset_bottom = 23.0
+text = "Find Flowers"
+
 [node name="DayNight" type="CheckButton" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 2
