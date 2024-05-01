@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2pc0vatxw722"]
+
+[ext_resource type="Script" path="res://Assignment/UI/LabeledSlider.gd" id="1_yuv6e"]
+
+[node name="VBoxContainer" type="VBoxContainer" node_paths=PackedStringArray("label")]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+script = ExtResource("1_yuv6e")
+max_value = 10.0
+step = 0.1
+value = 6.8
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_vertical = 6
+text = "Placeholder"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 10.0
+step = 0.1
+value = 6.8
+tick_count = 10
+ticks_on_borders = true
+
+[node name="Value" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "6.8"
+horizontal_alignment = 1
