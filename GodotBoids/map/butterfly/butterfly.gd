@@ -43,9 +43,11 @@ func gizmos_drawn(value):
 	get_node("Boid/Constrain").draw_gizmos = value
 
 func _set_glow(value):
+	print("Butterflies glowing")
+	var material = left_wing.get_active_material(0)
 	if value:
-		left_wing.get_active_material(0).emission_enabled = true
-		left_wing.get_active_material(0).emission = Color(randf(), randf(), randf())
-		left_wing.get_active_material(0).emission_energy_multiplier = 2
+		material.emission_enabled = value
+		material.emission = Color(randf(), randf(), randf())
+		material.emission_energy_multiplier = 2
 	else:
-		left_wing.get_active_material(0).emission_enabled = false
+		material.emission_enabled = false
