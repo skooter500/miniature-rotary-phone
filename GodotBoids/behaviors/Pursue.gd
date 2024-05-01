@@ -1,7 +1,7 @@
 class_name Pursue extends SteeringBehavior
 
 @export var enemy_node_path:NodePath
-var enemy_boid:Node
+@export var enemy_boid:Node3D
 
 var target:Vector3
 var world_target:Vector3
@@ -10,8 +10,8 @@ var projected:Vector3
 func _ready():
 	boid = get_parent()
 		
-	if enemy_node_path:
-		enemy_boid = get_node(enemy_node_path)
+	#if enemy_node_path:
+		#enemy_boid = get_node(enemy_node_path)
 		
 func _process(delta):
 	if draw_gizmos:
