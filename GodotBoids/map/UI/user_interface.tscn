@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnvnjemlfct6o"]
+[gd_scene load_steps=3 format=3 uid="uid://bnvnjemlfct6o"]
 
 [ext_resource type="Script" path="res://map/UI/user_interface.gd" id="1_wi56x"]
+[ext_resource type="Script" path="res://map/UI/music_slider.gd" id="2_1gc23"]
 
 [node name="UserInterface" type="Node3D"]
 script = ExtResource("1_wi56x")
@@ -22,8 +23,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -83.0625
-offset_bottom = 31.0
+offset_left = -94.0
+offset_top = 10.0
+offset_right = -10.9375
+offset_bottom = 41.0
 grow_horizontal = 0
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/butterfly_amount"]
@@ -44,10 +47,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -83.0
-offset_top = 33.0
-offset_right = 0.0625
-offset_bottom = 64.0
+offset_left = -93.9375
+offset_top = 43.0
+offset_right = -10.875
+offset_bottom = 74.0
 grow_horizontal = 0
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/butterfly_speed"]
@@ -62,3 +65,77 @@ offset_top = -27.0
 offset_right = 66.9419
 offset_bottom = -4.0
 text = "ButterSpeed:"
+
+[node name="music_slider" type="HSlider" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = 355.0
+offset_right = -10.0
+offset_bottom = 371.0
+grow_horizontal = 0
+grow_vertical = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+script = ExtResource("2_1gc23")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/music_slider"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -183.0
+offset_top = -21.4
+offset_right = -133.0
+offset_bottom = 1.6
+grow_horizontal = 0
+grow_vertical = 0
+text = "Music:"
+
+[node name="Butterfly_gizmo" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 958.0
+offset_top = 87.0
+offset_right = 997.0
+offset_bottom = 111.0
+text = "Off"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Butterfly_gizmo"]
+layout_mode = 0
+offset_left = -128.0
+offset_top = 3.0
+offset_right = -6.0
+offset_bottom = 26.0
+text = "ButterflyGizmo:"
+
+[node name="DayNight" type="CheckButton" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 85.0
+offset_top = -36.33
+offset_right = 129.0
+offset_bottom = -6.33002
+grow_vertical = 0
+scale = Vector2(1.2, 1.2)
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/DayNight"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -2.146
+anchor_bottom = 1.0
+offset_left = -63.3333
+offset_top = 69.655
+offset_right = 15.6667
+offset_bottom = -1.72473
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+text = "Day/Night"

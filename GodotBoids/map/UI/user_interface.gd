@@ -12,10 +12,18 @@ var toggle_mouse = false
 var previous_butterfly_amount = 0
 var previous_butterfly_speed = 0
 
+# some visual UI
+@onready var butterfly_draw_gizmos = $CanvasLayer/Control/Butterfly_gizmo
+var gizmos_enabled = false
+@onready var day_night_button = $CanvasLayer/Control/DayNight
+var day_night = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	previous_butterfly_amount = butterfly_amount.get_value()
 	previous_butterfly_speed = butterfly_speed.get_value()
+	butterfly_draw_gizmos.pressed.connect(_enable_gizmos)
+	day_night_button.pressed.connect(_switch_day_night)
 
 # for camera movement
 func _input(event):
@@ -38,9 +46,9 @@ func _physics_process(delta):
 	var rotation = pov.rotation
 
 	# Calculate movement direction relative to camera orientation
-	var forward = transform.basis.z
-	var right = transform.basis.x
-	var movement_direction = (forward * input_direction.y + right * input_direction.x).normalized()
+	var forward_back = transform.basis.z
+	var right_left = transform.basis.x
+	var movement_direction = (forward_back * input_direction.y + right_left * input_direction.x).normalized()
 	
 	if movement_direction.length() > 0:
 		# Adjust movement direction based on camera tilt
@@ -54,6 +62,8 @@ func _physics_process(delta):
 		
 	amount_butterfies();
 	butterflies_speed();
+
+	
 	
 
 func amount_butterfies():
@@ -69,3 +79,22 @@ func butterflies_speed():
 		print("Butterfly speed changed: ", current_speed)
 		previous_butterfly_speed = current_speed
 		Parameters.BUTTERFLY_SPEED.emit(current_speed)
+		
+
+func _enable_gizmos():
+	if gizmos_enabled:
+		gizmos_enabled = false
+		butterfly_draw_gizmos.set_text("Off")
+		Parameters.DRAW_GIZMOS_BUTTERFLY.emit(gizmos_enabled)
+	else:
+		gizmos_enabled = true
+		butterfly_draw_gizmos.set_text("On")
+		Parameters.DRAW_GIZMOS_BUTTERFLY.emit(gizmos_enabled)
+
+func _switch_day_night():
+	if day_night:
+		day_night = false
+		Parameters.SET_DAY_NIGHT.emit(day_night)
+	else:
+		day_night = true
+		Parameters.SET_DAY_NIGHT.emit(day_night)
