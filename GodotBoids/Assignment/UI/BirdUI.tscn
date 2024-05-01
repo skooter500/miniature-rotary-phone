@@ -65,15 +65,29 @@ signal_to_notify = "BIRD_PROPERTY_CHANGED"
 node_name = "self"
 propery_name = "flight_speed"
 
+[node name="VBoxContainer" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+max_value = 100.0
+step = 1.0
+value = 1.0
+text = "Inital Bird Count"
+signal_to_notify = "MURDER_REQUEST"
+propery_name = "count"
+
 [node name="LabelButton" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer" instance=ExtResource("2_anlg3")]
 layout_mode = 2
 button_text = "New Bird"
 text = "Spawn Bird"
+signal_to_notify = "MURDER_REQUEST"
+node_name = "Spawn"
 
 [node name="Reset" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer" instance=ExtResource("2_anlg3")]
 layout_mode = 2
-button_text = "Clear Birds"
-text = "Reset"
+button_text = "Reset"
+text = "Reset Birds"
+signal_to_notify = "MURDER_REQUEST"
+node_name = "Reset"
 
 [node name="Wings" type="MarginContainer" parent="MarginContainer/TabContainer"]
 visible = false

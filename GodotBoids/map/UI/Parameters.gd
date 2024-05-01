@@ -9,3 +9,4 @@ signal DRAW_GIZMOS_BUTTERFLY(bool)
 signal SET_DAY_NIGHT(bool)
 
 signal BIRD_PROPERTY_CHANGED(node_name,property,value)
+signal MURDER_REQUEST(node_name,property,value)

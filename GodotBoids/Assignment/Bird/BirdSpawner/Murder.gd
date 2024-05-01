@@ -11,12 +11,8 @@ var take_off_maker: Marker3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	randomize()
-	center = get_node(center_path)
-	center.position = starting_point
-	take_off_maker.position = starting_point*0.25
-	for i in count:
-		spawn_crow()
+	spawn_crows()
+	Parameters.MURDER_REQUEST.connect(on_ui_request)
 		
 func spawn_crow() -> void:
 	var crow = fish_scene.instantiate()		
@@ -36,9 +32,24 @@ func spawn_crow() -> void:
 	boid.take_off_point = take_off_maker
 	boid.centre_point = center
 
+func spawn_crows():
+	randomize()
+	center = get_node(center_path)
+	center.position = starting_point
+	take_off_maker.position = starting_point*0.25
+	for i in count:
+		spawn_crow()
+
 func clear_crows():
+	boids.clear()
 	for crow in get_children():
 		crow.queue_free()
 		
-#func on_ui_request(node_name,property_name,value):
-	
+func on_ui_request(node_name,property_name,value):
+	if node_name == "Spawn":
+		spawn_crow()
+	elif node_name == "Reset":
+		clear_crows()
+		spawn_crows()
+	if node_name == "":
+		set(property_name, value)

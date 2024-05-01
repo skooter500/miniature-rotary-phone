@@ -25,6 +25,8 @@ sky_material = SubResource("PhysicalSkyMaterial_thata")
 [sub_resource type="Environment" id="Environment_a3epi"]
 background_mode = 2
 sky = SubResource("Sky_t0a3h")
+glow_enabled = true
+glow_intensity = 0.0
 
 [node name="Node3D" type="Node3D"]
 
@@ -57,6 +59,9 @@ camera_pursue = NodePath("../camera follower/OffsetPursue")
 [node name="Player" parent="." instance=ExtResource("4_bevr5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.85036, 6.48073, 7.11182)
 
+[node name="Camera3D" parent="Player" index="1"]
+current = true
+
 [node name="Camera3D Controller" parent="Player/Camera3D" index="1" node_paths=PackedStringArray("boid_player")]
 boid_player = NodePath("../../../camera follower")
 mode = 0
@@ -74,10 +79,12 @@ draw_gizmos = false
 [node name="OffsetPursue" type="Node" parent="camera follower"]
 script = ExtResource("6_5xlph")
 weight = 5.0
+enabled = false
 
 [node name="Avoidance" type="Node" parent="camera follower"]
 script = ExtResource("7_hoiu5")
 draw_gizmos = false
+enabled = false
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
