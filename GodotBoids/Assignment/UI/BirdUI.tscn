@@ -1,0 +1,428 @@
+[gd_scene format=3 uid="uid://cbvdurbl831xp"]
+
+[node name="BirdUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer"]
+layout_mode = 2
+tab_alignment = 1
+
+[node name="General" type="MarginContainer" parent="MarginContainer/TabContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="GeneralSettingTab" type="ScrollContainer" parent="MarginContainer/TabContainer/General"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/General/GeneralSettingTab"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="WindDirection" type="Label" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer"]
+layout_mode = 2
+text = "Wind Direction:"
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer"]
+layout_mode = 2
+text = "Spawn new bird"
+
+[node name="Button" type="Button" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer"]
+layout_mode = 2
+text = "Spawn New Bird"
+
+[node name="Label3" type="Label" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer"]
+layout_mode = 2
+text = "Wing Animation Duration"
+
+[node name="HSlider2" type="HSlider" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer"]
+layout_mode = 2
+text = "Wing Span Length"
+
+[node name="HSlider3" type="HSlider" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label7" type="Label" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer"]
+layout_mode = 2
+text = "Sound"
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer"]
+layout_mode = 2
+item_count = 1
+popup/item_0/text = ""
+popup/item_0/id = 0
+
+[node name="Separation" type="MarginContainer" parent="MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="SeparationSettings" type="ScrollContainer" parent="MarginContainer/TabContainer/Separation"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Separation/SeparationSettings"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="MarginContainer/TabContainer/Separation/SeparationSettings/VBoxContainer"]
+layout_mode = 2
+text = "Weight"
+
+[node name="HSlider4" type="HSlider" parent="MarginContainer/TabContainer/Separation/SeparationSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Alignment" type="MarginContainer" parent="MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="AlignmentSettings" type="ScrollContainer" parent="MarginContainer/TabContainer/Alignment"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Alignment/AlignmentSettings"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="MarginContainer/TabContainer/Alignment/AlignmentSettings/VBoxContainer"]
+layout_mode = 2
+text = "Weight"
+
+[node name="HSlider4" type="HSlider" parent="MarginContainer/TabContainer/Alignment/AlignmentSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Cohesion" type="MarginContainer" parent="MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="CohesionSettings" type="ScrollContainer" parent="MarginContainer/TabContainer/Cohesion"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Cohesion/CohesionSettings"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="MarginContainer/TabContainer/Cohesion/CohesionSettings/VBoxContainer"]
+layout_mode = 2
+text = "Weight"
+
+[node name="HSlider4" type="HSlider" parent="MarginContainer/TabContainer/Cohesion/CohesionSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Harmonic" type="MarginContainer" parent="MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="HarmonicSettings" type="ScrollContainer" parent="MarginContainer/TabContainer/Harmonic"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
+layout_mode = 2
+text = "Weight"
+
+[node name="HSlider4" type="HSlider" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Label6" type="Label" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
+layout_mode = 2
+text = "Frequency"
+
+[node name="HSlider5" type="HSlider" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Label7" type="Label" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
+layout_mode = 2
+text = "Radius"
+
+[node name="HSlider6" type="HSlider" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Label8" type="Label" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
+layout_mode = 2
+text = "Amplitude"
+
+[node name="HSlider7" type="HSlider" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Label9" type="Label" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
+layout_mode = 2
+text = "Distance"
+
+[node name="HSlider8" type="HSlider" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Label10" type="Label" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
+layout_mode = 2
+text = "Axis"
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Horizontal"
+popup/item_0/id = 0
+popup/item_1/text = "Vertical"
+popup/item_1/id = 1
+
+[node name="Noise Wander" type="MarginContainer" parent="MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="NoiseWanderSettings" type="ScrollContainer" parent="MarginContainer/TabContainer/Noise Wander"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+layout_mode = 2
+text = "Weight"
+
+[node name="HSlider4" type="HSlider" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Label6" type="Label" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+layout_mode = 2
+text = "Frequency"
+
+[node name="HSlider5" type="HSlider" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Label7" type="Label" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+layout_mode = 2
+text = "Radius"
+
+[node name="HSlider6" type="HSlider" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Label8" type="Label" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+layout_mode = 2
+text = "Amplitude"
+
+[node name="HSlider7" type="HSlider" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Label11" type="Label" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+layout_mode = 2
+text = "Theta"
+
+[node name="HSlider9" type="HSlider" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Label9" type="Label" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+layout_mode = 2
+text = "Distance"
+
+[node name="HSlider8" type="HSlider" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Label10" type="Label" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+layout_mode = 2
+text = "Axis"
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Horizontal"
+popup/item_0/id = 0
+popup/item_1/text = "Vertical"
+popup/item_1/id = 1
+
+[node name="Arrive" type="MarginContainer" parent="MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="ArriveSettings" type="ScrollContainer" parent="MarginContainer/TabContainer/Arrive"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Arrive/ArriveSettings"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="MarginContainer/TabContainer/Arrive/ArriveSettings/VBoxContainer"]
+layout_mode = 2
+text = "Weight"
+
+[node name="HSlider4" type="HSlider" parent="MarginContainer/TabContainer/Arrive/ArriveSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Label6" type="Label" parent="MarginContainer/TabContainer/Arrive/ArriveSettings/VBoxContainer"]
+layout_mode = 2
+text = "Slowing Distance"
+
+[node name="HSlider5" type="HSlider" parent="MarginContainer/TabContainer/Arrive/ArriveSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Ground Wander" type="MarginContainer" parent="MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="GroundWanderSettings" type="ScrollContainer" parent="MarginContainer/TabContainer/Ground Wander"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer"]
+layout_mode = 2
+text = "Weight"
+
+[node name="HSlider4" type="HSlider" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Label7" type="Label" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer"]
+layout_mode = 2
+text = "Radius"
+
+[node name="HSlider6" type="HSlider" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Label9" type="Label" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer"]
+layout_mode = 2
+text = "Distance"
+
+[node name="HSlider8" type="HSlider" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Label10" type="Label" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer"]
+layout_mode = 2
+text = "Jitter"
+
+[node name="HSlider9" type="HSlider" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Flee" type="MarginContainer" parent="MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="FleeSettings" type="ScrollContainer" parent="MarginContainer/TabContainer/Flee"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Flee/FleeSettings"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="MarginContainer/TabContainer/Flee/FleeSettings/VBoxContainer"]
+layout_mode = 2
+text = "Weight"
+
+[node name="HSlider4" type="HSlider" parent="MarginContainer/TabContainer/Flee/FleeSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Label6" type="Label" parent="MarginContainer/TabContainer/Flee/FleeSettings/VBoxContainer"]
+layout_mode = 2
+text = "Range"
+
+[node name="HSlider5" type="HSlider" parent="MarginContainer/TabContainer/Flee/FleeSettings/VBoxContainer"]
+layout_mode = 2
+tick_count = 6
+ticks_on_borders = true
