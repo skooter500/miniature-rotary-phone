@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2k6y3sr5sxxi"]
+
+[ext_resource type="Script" path="res://robot/laser_bullet.gd" id="1_6latu"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hiedy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_adjrs"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 5.25
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hrox8"]
+
+[node name="LaserBullet" type="Node3D"]
+transform = Transform3D(-8.74228e-09, 0.5, -8.74228e-09, 0, -2.18557e-08, -0.2, -0.2, -2.18557e-08, 3.82137e-16, 0, 0, 0)
+script = ExtResource("1_6latu")
+speed = 30.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -1.42109e-14, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_hiedy")
+surface_material_override/0 = SubResource("StandardMaterial3D_adjrs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -2.13163e-14, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_hrox8")

@@ -1,0 +1,526 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbvdurbl831xp"]
+
+[ext_resource type="PackedScene" uid="uid://d2pc0vatxw722" path="res://Assignment/UI/LabelSlider.tscn" id="1_havx2"]
+[ext_resource type="PackedScene" uid="uid://esei351tusyj" path="res://Assignment/UI/LabelOptions.tscn" id="2_4y6ij"]
+[ext_resource type="PackedScene" uid="uid://cy4yii2pd3h6a" path="res://Assignment/UI/LabelButton.tscn" id="2_anlg3"]
+[ext_resource type="Script" path="res://Assignment/UI/MenuSelectButton.gd" id="4_1jh0g"]
+
+[node name="BirdUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer"]
+layout_mode = 2
+tab_alignment = 1
+
+[node name="General" type="MarginContainer" parent="MarginContainer/TabContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="GeneralSettingTab" type="ScrollContainer" parent="MarginContainer/TabContainer/General"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/General/GeneralSettingTab"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="GroundSpeed" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+step = 1.0
+value = 5.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/HarmonicWeight/Label")
+text = "Ground Speed"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "self"
+propery_name = "ground_speed"
+
+[node name="FlightSpeed" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+step = 1.0
+value = 10.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/HarmonicWeight/Label")
+text = "Flight Speed"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "self"
+propery_name = "flight_speed"
+
+[node name="LabelButton" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer" instance=ExtResource("2_anlg3")]
+layout_mode = 2
+button_text = "New Bird"
+text = "Spawn Bird"
+
+[node name="Reset" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer" instance=ExtResource("2_anlg3")]
+layout_mode = 2
+button_text = "Clear Birds"
+text = "Reset"
+
+[node name="Wings" type="MarginContainer" parent="MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="GeneralSettingTab" type="ScrollContainer" parent="MarginContainer/TabContainer/Wings"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Wings/GeneralSettingTab"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="WingSpan" parent="MarginContainer/TabContainer/Wings/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 6.0
+text = "Wing Span Count"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "MeshInstance3D"
+propery_name = "wing_span"
+
+[node name="WingSpanLen" parent="MarginContainer/TabContainer/Wings/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 0.1
+max_value = 20.0
+value = 1.0
+text = "Wing Span Length"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "MeshInstance3D"
+propery_name = "distance_between_points"
+
+[node name="FlappingSpeed" parent="MarginContainer/TabContainer/Wings/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 0.1
+max_value = 5.0
+value = 1.0
+text = "Flapping Speed"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "MeshInstance3D"
+propery_name = "wing_flap_duration"
+
+[node name="Thickness" parent="MarginContainer/TabContainer/Wings/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 0.01
+max_value = 5.0
+step = 0.01
+value = 0.2
+text = "Thickness"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "MeshInstance3D"
+propery_name = "thickness"
+
+[node name="Width" parent="MarginContainer/TabContainer/Wings/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 0.1
+value = 2.0
+text = "Width"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "MeshInstance3D"
+propery_name = "width"
+
+[node name="WindDirection" parent="MarginContainer/TabContainer/Wings/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+max_value = 360.0
+step = 1.0
+value = 90.0
+text = "Wind Direction"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "MeshInstance3D"
+propery_name = "wind_direction"
+
+[node name="WindThreshold" parent="MarginContainer/TabContainer/Wings/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+max_value = 360.0
+step = 1.0
+value = 15.0
+text = "Wind Threshold"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "MeshInstance3D"
+propery_name = "wind_threshold"
+
+[node name="Flocking" type="MarginContainer" parent="MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="SeparationSettings" type="ScrollContainer" parent="MarginContainer/TabContainer/Flocking"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Flocking/SeparationSettings"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="SeparationWeight" parent="MarginContainer/TabContainer/Flocking/SeparationSettings/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+step = 1.0
+value = 4.0
+text = "Separation Weight"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Separation"
+propery_name = "weight"
+
+[node name="AlignmentWeight" parent="MarginContainer/TabContainer/Flocking/SeparationSettings/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+step = 1.0
+value = 5.0
+text = "Alignment Weight"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Alignment"
+propery_name = "weight"
+
+[node name="CohesionWeight" parent="MarginContainer/TabContainer/Flocking/SeparationSettings/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+step = 1.0
+value = 2.0
+text = "Cohesion Weight"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Cohesion"
+propery_name = "weight"
+
+[node name="Harmonic" type="MarginContainer" parent="MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="HarmonicSettings" type="ScrollContainer" parent="MarginContainer/TabContainer/Harmonic"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="HarmonicWeight" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+step = 1.0
+value = 1.0
+text = "Harmonic Weight"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Harmonic"
+propery_name = "weight"
+
+[node name="Frequency" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 0.01
+step = 0.01
+value = 0.3
+text = "Frequency"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Harmonic"
+propery_name = "frequency"
+
+[node name="Radius" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+max_value = 60.0
+value = 10.0
+text = "Radius"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Harmonic"
+propery_name = "radius"
+
+[node name="Amplitude" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+max_value = 360.0
+step = 1.0
+value = 80.0
+text = "Amplitude"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Harmonic"
+propery_name = "amplitude"
+
+[node name="Distance" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer" instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 5.0
+text = "Distance"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Harmonic"
+propery_name = "distance"
+
+[node name="Axis" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer" instance=ExtResource("2_4y6ij")]
+layout_mode = 2
+text = "Axis"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Harmonic"
+propery_name = "axis"
+
+[node name="Noise Wander" type="MarginContainer" parent="MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="NoiseWanderSettings" type="ScrollContainer" parent="MarginContainer/TabContainer/Noise Wander"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="NoiseWanderWeight" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+step = 1.0
+value = 1.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/HarmonicWeight/Label")
+text = "Noise Wander Weight"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "NoiseWander"
+propery_name = "weight"
+
+[node name="Frequency" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 0.01
+step = 0.01
+value = 0.3
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Frequency/Label")
+text = "Frequency"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "NoiseWander"
+propery_name = "frequency"
+
+[node name="Radius" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+max_value = 60.0
+value = 10.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Radius/Label")
+text = "Radius"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "NoiseWander"
+propery_name = "radius"
+
+[node name="Theta" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
+layout_mode = 2
+max_value = 5.0
+step = 0.01
+value = 0.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Radius/Label")
+text = "Theta"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "NoiseWander"
+propery_name = "radius"
+
+[node name="Amplitude" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+max_value = 360.0
+step = 1.0
+value = 80.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Amplitude/Label")
+text = "Amplitude"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "NoiseWander"
+propery_name = "amplitude"
+
+[node name="Distance" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 5.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Distance/Label")
+text = "Distance"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "NoiseWander"
+propery_name = "distance"
+
+[node name="Axis" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer" node_paths=PackedStringArray("options_button", "label") instance=ExtResource("2_4y6ij")]
+layout_mode = 2
+options_button = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Axis/MarginContainer/OptionButton")
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Axis/Label")
+text = "Axis"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "NoiseWander"
+propery_name = "axis"
+
+[node name="Arrive" type="MarginContainer" parent="MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="ArriveSettings" type="ScrollContainer" parent="MarginContainer/TabContainer/Arrive"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Arrive/ArriveSettings"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="ArriveWeight" parent="MarginContainer/TabContainer/Arrive/ArriveSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+step = 1.0
+value = 1.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/HarmonicWeight/Label")
+text = "Arrive Weight"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Arrive"
+propery_name = "weight"
+
+[node name="SlowingDistance" parent="MarginContainer/TabContainer/Arrive/ArriveSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+max_value = 50.0
+step = 0.5
+value = 20.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/HarmonicWeight/Label")
+text = "Slowing Distance"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Arrive"
+propery_name = "slowing_radius"
+
+[node name="Ground Wander" type="MarginContainer" parent="MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="GroundWanderSettings" type="ScrollContainer" parent="MarginContainer/TabContainer/Ground Wander"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="GroundWanderWeight" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+step = 1.0
+value = 1.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/HarmonicWeight/Label")
+text = "Ground Wander Weight"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "GroundWander"
+propery_name = "weight"
+
+[node name="Radius" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+max_value = 60.0
+value = 15.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Radius/Label")
+text = "Radius"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "GroundWander"
+propery_name = "radius"
+
+[node name="Distance" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+max_value = 30.0
+value = 20.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Distance/Label")
+text = "Distance"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "GroundWander"
+propery_name = "distance"
+
+[node name="Jitter" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+max_value = 120.0
+step = 1.0
+value = 80.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Amplitude/Label")
+text = "Jitter"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "GroundWander"
+propery_name = "jitter"
+
+[node name="Flee" type="MarginContainer" parent="MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="FleeSettings" type="ScrollContainer" parent="MarginContainer/TabContainer/Flee"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Flee/FleeSettings"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="GroundWanderWeight" parent="MarginContainer/TabContainer/Flee/FleeSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+step = 1.0
+value = 1.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/HarmonicWeight/Label")
+text = "Flee Weight"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Flee"
+propery_name = "weight"
+
+[node name="Range" parent="MarginContainer/TabContainer/Flee/FleeSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
+layout_mode = 2
+min_value = 1.0
+max_value = 120.0
+step = 1.0
+value = 50.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Amplitude/Label")
+text = "Range"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Flee"
+propery_name = "flee_range"
+
+[node name="Button" type="Button" parent="." node_paths=PackedStringArray("parent")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -4.0
+offset_top = 20.0
+offset_right = 4.0
+offset_bottom = 28.0
+grow_horizontal = 2
+text = "Close"
+script = ExtResource("4_1jh0g")
+parent = NodePath("..")

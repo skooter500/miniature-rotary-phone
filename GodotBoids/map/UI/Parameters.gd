@@ -7,3 +7,5 @@ signal BUTTERFLY_SPEED(new_speed)
 signal SET_VOLUME(volume)
 signal DRAW_GIZMOS_BUTTERFLY(bool)
 signal SET_DAY_NIGHT(bool)
+
+signal BIRD_PROPERTY_CHANGED(node_name,property,value)
