@@ -10,6 +10,7 @@ var canShoot = false
 
 @export var pursueColor : Color
 @export var wanderColor: Color
+@export var shootColor : Color
 
 @export var murderNode : Node3D
 
@@ -26,7 +27,7 @@ func _ready():
 	laserbeamL.visible = false
 	laserbeamR.visible = false
 	currentState = 0
-	robotMesh = get_node("Robot/EnemyVer2")
+	robotMesh = find_child("EnemyVer2")
 	pursue = find_child("Pursue")
 	# constrain = find_child("Constrain")
 	
@@ -40,19 +41,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	_checkDistance()
+	
 	if isTrigger:
 		eyeMat.emission = pursueColor
-		
-		if triggered and canShoot:
-			laserbeamL.visible = true
-			laserbeamR.visible = true
-			triggered = false
+	
 	else:
 		eyeMat.emission = wanderColor
-		laserbeamL.visible = false
-		laserbeamR.visible = false
-		triggered = false
-		canShoot = false
 	
 
 func _findBirds():
@@ -72,7 +66,8 @@ func _findBirds():
 
 # Funciton to check the nearest distance to the bird and shoot
 func _checkDistance():
-	if global_transform.origin.distance_to(birds.global_transform.origin) < 30:
+	
+	if global_transform.origin.distance_to(birds.global_transform.origin) < 40:
 		canShoot = true
 	else:
 		canShoot = false

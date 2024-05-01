@@ -50,7 +50,7 @@ laserbeamL = NodePath("Robot/LaserBall_Left")
 laserbeamR = NodePath("Robot/LaserBall_Right")
 
 [node name="Robot" parent="." instance=ExtResource("1_bq7ca")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("3_x7hdx")
 max_force = 50
 banking = 0.07
@@ -73,7 +73,6 @@ script = ExtResource("7_kaj2n")
 radius = 50.0
 amplitude = 90
 distance = 100
-draw_gizmos = false
 
 [node name="Pursue" type="Node" parent="Robot"]
 script = ExtResource("7_d3gbr")

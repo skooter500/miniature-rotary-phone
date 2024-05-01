@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2k6y3sr5sxxi"]
+[gd_scene load_steps=6 format=3 uid="uid://c2k6y3sr5sxxi"]
 
 [ext_resource type="Script" path="res://robot/laser_bullet.gd" id="1_6latu"]
+[ext_resource type="AudioStream" uid="uid://48ptela5bvb7" path="res://robot/415058__matrixxx__retro-laser-shot-06.wav" id="2_fipby"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_hiedy"]
 
@@ -26,3 +27,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_adjrs")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -2.13163e-14, 1, 0, 0, 0)
 shape = SubResource("CylinderShape3D_hrox8")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_fipby")
+autoplay = true
