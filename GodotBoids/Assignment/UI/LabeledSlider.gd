@@ -1,20 +1,8 @@
 @tool
 
-extends VBoxContainer
+extends LabeledUI
 
 class_name LabeledSlider
-
-@export
-var text: String = "Placeholder":
-	set(value):
-		update_property(label, "text", value)
-		text = value
-@export
-var signal_to_notify: String
-@export
-var node_name: String
-@export
-var propery_name: String
 
 @export_category("Slider")
 @export
@@ -39,8 +27,6 @@ var value: float = 0:
 		update_property(slider, "value", value)
 		update_property(value_label, "text", value)
 
-@onready 
-var label: Label = $Label
 @onready
 var slider: HSlider = $HBoxContainer/HSlider
 @onready
@@ -54,10 +40,6 @@ func _ready() -> void:
 	update_property(slider, "value", value)
 	update_property(value_label, "text", value)
 	slider.value_changed.connect(value_changed)
-
-func update_property(node: Node, property_name, value):
-	if node != null:
-		node.set(property_name, value)
 
 func value_changed(slide_value):
 	value = snapped(slide_value,step)

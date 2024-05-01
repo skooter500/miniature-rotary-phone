@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Assignment/UI/LabeledSlider.gd" id="1_yuv6e"]
 
-[node name="VBoxContainer" type="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" node_paths=PackedStringArray("label")]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 50.0
@@ -11,6 +11,7 @@ script = ExtResource("1_yuv6e")
 max_value = 10.0
 step = 0.1
 value = 6.8
+label = NodePath("Label")
 
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(0, 35)

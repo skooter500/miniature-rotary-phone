@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbvdurbl831xp"]
+[gd_scene load_steps=3 format=3 uid="uid://cbvdurbl831xp"]
 
 [ext_resource type="PackedScene" uid="uid://d2pc0vatxw722" path="res://Assignment/UI/LabelSlider.tscn" id="1_havx2"]
+[ext_resource type="PackedScene" uid="uid://esei351tusyj" path="res://Assignment/UI/LabelOptions.tscn" id="2_4y6ij"]
 
 [node name="BirdUi" type="Control"]
 layout_mode = 3
@@ -23,7 +24,7 @@ grow_vertical = 2
 [node name="TabContainer" type="TabContainer" parent="MarginContainer"]
 layout_mode = 2
 tab_alignment = 1
-current_tab = 2
+current_tab = 3
 
 [node name="General" type="MarginContainer" parent="MarginContainer/TabContainer"]
 visible = false
@@ -75,75 +76,76 @@ layout_mode = 2
 
 [node name="WingSpan" parent="MarginContainer/TabContainer/Wings/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
 layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 6.0
 text = "Wing Span Count"
 signal_to_notify = "BIRD_PROPERTY_CHANGED"
 node_name = "MeshInstance3D"
 propery_name = "wing_span"
-min_value = 1.0
-max_value = 20.0
-value = 6.0
 
 [node name="WingSpanLen" parent="MarginContainer/TabContainer/Wings/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
 layout_mode = 2
+min_value = 0.1
+max_value = 20.0
+value = 1.0
 text = "Wing Span Length"
 signal_to_notify = "BIRD_PROPERTY_CHANGED"
 node_name = "MeshInstance3D"
 propery_name = "distance_between_points"
-min_value = 0.1
-max_value = 20.0
-value = 1.0
 
 [node name="FlappingSpeed" parent="MarginContainer/TabContainer/Wings/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
 layout_mode = 2
+min_value = 0.1
+max_value = 5.0
+value = 1.0
 text = "Flapping Speed"
 signal_to_notify = "BIRD_PROPERTY_CHANGED"
 node_name = "MeshInstance3D"
 propery_name = "wing_flap_duration"
-min_value = 0.1
-max_value = 5.0
-value = 1.0
 
 [node name="Thickness" parent="MarginContainer/TabContainer/Wings/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
 layout_mode = 2
-text = "Thickness"
-signal_to_notify = "BIRD_PROPERTY_CHANGED"
-node_name = "MeshInstance3D"
-propery_name = "thickness"
 min_value = 0.01
 max_value = 5.0
 step = 0.01
 value = 0.2
+text = "Thickness"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "MeshInstance3D"
+propery_name = "thickness"
 
 [node name="Width" parent="MarginContainer/TabContainer/Wings/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
 layout_mode = 2
+min_value = 0.1
+value = 2.0
 text = "Width"
 signal_to_notify = "BIRD_PROPERTY_CHANGED"
 node_name = "MeshInstance3D"
 propery_name = "width"
-min_value = 0.1
-value = 2.0
 
 [node name="WindDirection" parent="MarginContainer/TabContainer/Wings/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
 layout_mode = 2
+max_value = 360.0
+step = 1.0
+value = 90.0
 text = "Wind Direction"
 signal_to_notify = "BIRD_PROPERTY_CHANGED"
 node_name = "MeshInstance3D"
 propery_name = "wind_direction"
-max_value = 360.0
-step = 1.0
-value = 90.0
 
 [node name="WindThreshold" parent="MarginContainer/TabContainer/Wings/GeneralSettingTab/VBoxContainer" instance=ExtResource("1_havx2")]
 layout_mode = 2
+max_value = 360.0
+step = 1.0
+value = 15.0
 text = "Wind Threshold"
 signal_to_notify = "BIRD_PROPERTY_CHANGED"
 node_name = "MeshInstance3D"
 propery_name = "wind_threshold"
-max_value = 360.0
-step = 1.0
-value = 15.0
 
 [node name="Flocking" type="MarginContainer" parent="MarginContainer/TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 20
@@ -160,36 +162,35 @@ layout_mode = 2
 
 [node name="SeparationWeight" parent="MarginContainer/TabContainer/Flocking/SeparationSettings/VBoxContainer" instance=ExtResource("1_havx2")]
 layout_mode = 2
+min_value = 1.0
+step = 1.0
+value = 4.0
 text = "Separation Weight"
 signal_to_notify = "BIRD_PROPERTY_CHANGED"
 node_name = "Separation"
 propery_name = "weight"
-min_value = 1.0
-step = 1.0
-value = 4.0
 
 [node name="AlignmentWeight" parent="MarginContainer/TabContainer/Flocking/SeparationSettings/VBoxContainer" instance=ExtResource("1_havx2")]
 layout_mode = 2
+min_value = 1.0
+step = 1.0
+value = 5.0
 text = "Alignment Weight"
 signal_to_notify = "BIRD_PROPERTY_CHANGED"
 node_name = "Alignment"
 propery_name = "weight"
-min_value = 1.0
-step = 1.0
-value = 5.0
 
 [node name="CohesionWeight" parent="MarginContainer/TabContainer/Flocking/SeparationSettings/VBoxContainer" instance=ExtResource("1_havx2")]
 layout_mode = 2
-text = "Cohesion Weight"
-signal_to_notify = "BIRD_PROPERTY_CHANGED"
-node_name = "Separation"
-propery_name = "weight"
 min_value = 1.0
 step = 1.0
 value = 2.0
+text = "Cohesion Weight"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Cohesion"
+propery_name = "weight"
 
 [node name="Harmonic" type="MarginContainer" parent="MarginContainer/TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 20
@@ -204,63 +205,63 @@ layout_mode = 2
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[node name="Label5" type="Label" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
+[node name="HarmonicWeight" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer" instance=ExtResource("1_havx2")]
 layout_mode = 2
-text = "Weight"
+min_value = 1.0
+step = 1.0
+value = 1.0
+text = "Harmonic Weight"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Harmonic"
+propery_name = "weight"
 
-[node name="HSlider4" type="HSlider" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
+[node name="Frequency" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer" instance=ExtResource("1_havx2")]
 layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
-
-[node name="Label6" type="Label" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
-layout_mode = 2
+min_value = 0.01
+step = 0.01
+value = 0.3
 text = "Frequency"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Harmonic"
+propery_name = "frequency"
 
-[node name="HSlider5" type="HSlider" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
+[node name="Radius" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer" instance=ExtResource("1_havx2")]
 layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
-
-[node name="Label7" type="Label" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
-layout_mode = 2
+min_value = 1.0
+max_value = 60.0
+value = 10.0
 text = "Radius"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Harmonic"
+propery_name = "radius"
 
-[node name="HSlider6" type="HSlider" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
+[node name="Amplitude" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer" instance=ExtResource("1_havx2")]
 layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
-
-[node name="Label8" type="Label" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
-layout_mode = 2
+min_value = 1.0
+max_value = 360.0
+step = 1.0
+value = 80.0
 text = "Amplitude"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Harmonic"
+propery_name = "amplitude"
 
-[node name="HSlider7" type="HSlider" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
+[node name="Distance" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer" instance=ExtResource("1_havx2")]
 layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
-
-[node name="Label9" type="Label" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
-layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 5.0
 text = "Distance"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Harmonic"
+propery_name = "distance"
 
-[node name="HSlider8" type="HSlider" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
-layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
-
-[node name="Label10" type="Label" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
+[node name="Axis" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer" instance=ExtResource("2_4y6ij")]
 layout_mode = 2
 text = "Axis"
-
-[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/Harmonic/HarmonicSettings/VBoxContainer"]
-layout_mode = 2
-item_count = 2
-selected = 0
-popup/item_0/text = "Horizontal"
-popup/item_0/id = 0
-popup/item_1/text = "Vertical"
-popup/item_1/id = 1
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Harmonic"
+propery_name = "axis"
 
 [node name="Noise Wander" type="MarginContainer" parent="MarginContainer/TabContainer"]
 visible = false
