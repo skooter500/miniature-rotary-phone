@@ -18,6 +18,7 @@ var robotMesh : MeshInstance3D
 var eyeMat : StandardMaterial3D
 var pursue 
 var constrain
+var curiosityMarker : Node3D
 
 var murder
 var birds 
@@ -29,6 +30,7 @@ func _ready():
 	currentState = 0
 	robotMesh = find_child("EnemyVer2")
 	pursue = find_child("Pursue")
+	curiosityMarker = find_child("CuriosityMarker")
 	# constrain = find_child("Constrain")
 	_findBirds()
 	
@@ -43,8 +45,10 @@ func _process(delta):
 	
 	if isCurious:
 		eyeMat.emission = pursueColor
+		curiosityMarker.visible = true
 	else:
 		eyeMat.emission = wanderColor
+		curiosityMarker.visible = false
 	
 	
 
