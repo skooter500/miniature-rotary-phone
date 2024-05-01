@@ -24,10 +24,8 @@ grow_vertical = 2
 [node name="TabContainer" type="TabContainer" parent="MarginContainer"]
 layout_mode = 2
 tab_alignment = 1
-current_tab = 3
 
 [node name="General" type="MarginContainer" parent="MarginContainer/TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 20
@@ -191,6 +189,7 @@ node_name = "Cohesion"
 propery_name = "weight"
 
 [node name="Harmonic" type="MarginContainer" parent="MarginContainer/TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 20
@@ -279,72 +278,81 @@ layout_mode = 2
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[node name="Label5" type="Label" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+[node name="NoiseWanderWeight" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
 layout_mode = 2
-text = "Weight"
+min_value = 1.0
+step = 1.0
+value = 1.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/HarmonicWeight/Label")
+text = "Noise Wander Weight"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "NoiseWander"
+propery_name = "weight"
 
-[node name="HSlider4" type="HSlider" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+[node name="Frequency" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
 layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
-
-[node name="Label6" type="Label" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
-layout_mode = 2
+min_value = 0.01
+step = 0.01
+value = 0.3
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Frequency/Label")
 text = "Frequency"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "NoiseWander"
+propery_name = "frequency"
 
-[node name="HSlider5" type="HSlider" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+[node name="Radius" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
 layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
-
-[node name="Label7" type="Label" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
-layout_mode = 2
+min_value = 1.0
+max_value = 60.0
+value = 10.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Radius/Label")
 text = "Radius"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "NoiseWander"
+propery_name = "radius"
 
-[node name="HSlider6" type="HSlider" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+[node name="Theta" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
 layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
-
-[node name="Label8" type="Label" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
-layout_mode = 2
-text = "Amplitude"
-
-[node name="HSlider7" type="HSlider" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
-layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
-
-[node name="Label11" type="Label" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
-layout_mode = 2
+max_value = 5.0
+step = 0.01
+value = 0.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Radius/Label")
 text = "Theta"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "NoiseWander"
+propery_name = "radius"
 
-[node name="HSlider9" type="HSlider" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+[node name="Amplitude" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
 layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
+min_value = 1.0
+max_value = 360.0
+step = 1.0
+value = 80.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Amplitude/Label")
+text = "Amplitude"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "NoiseWander"
+propery_name = "amplitude"
 
-[node name="Label9" type="Label" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+[node name="Distance" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
 layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 5.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Distance/Label")
 text = "Distance"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "NoiseWander"
+propery_name = "distance"
 
-[node name="HSlider8" type="HSlider" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
+[node name="Axis" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer" node_paths=PackedStringArray("options_button", "label") instance=ExtResource("2_4y6ij")]
 layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
-
-[node name="Label10" type="Label" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
-layout_mode = 2
+options_button = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Axis/MarginContainer/OptionButton")
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Axis/Label")
 text = "Axis"
-
-[node name="OptionButton" type="OptionButton" parent="MarginContainer/TabContainer/Noise Wander/NoiseWanderSettings/VBoxContainer"]
-layout_mode = 2
-item_count = 2
-selected = 0
-popup/item_0/text = "Horizontal"
-popup/item_0/id = 0
-popup/item_1/text = "Vertical"
-popup/item_1/id = 1
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "NoiseWander"
+propery_name = "axis"
 
 [node name="Arrive" type="MarginContainer" parent="MarginContainer/TabContainer"]
 visible = false
@@ -362,23 +370,28 @@ layout_mode = 2
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[node name="Label5" type="Label" parent="MarginContainer/TabContainer/Arrive/ArriveSettings/VBoxContainer"]
+[node name="ArriveWeight" parent="MarginContainer/TabContainer/Arrive/ArriveSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
 layout_mode = 2
-text = "Weight"
+min_value = 1.0
+step = 1.0
+value = 1.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/HarmonicWeight/Label")
+text = "Arrive Weight"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Arrive"
+propery_name = "weight"
 
-[node name="HSlider4" type="HSlider" parent="MarginContainer/TabContainer/Arrive/ArriveSettings/VBoxContainer"]
+[node name="SlowingDistance" parent="MarginContainer/TabContainer/Arrive/ArriveSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
 layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
-
-[node name="Label6" type="Label" parent="MarginContainer/TabContainer/Arrive/ArriveSettings/VBoxContainer"]
-layout_mode = 2
+min_value = 1.0
+max_value = 50.0
+step = 0.5
+value = 20.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/HarmonicWeight/Label")
 text = "Slowing Distance"
-
-[node name="HSlider5" type="HSlider" parent="MarginContainer/TabContainer/Arrive/ArriveSettings/VBoxContainer"]
-layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Arrive"
+propery_name = "slowing_radius"
 
 [node name="Ground Wander" type="MarginContainer" parent="MarginContainer/TabContainer"]
 visible = false
@@ -396,41 +409,50 @@ layout_mode = 2
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[node name="Label5" type="Label" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer"]
+[node name="GroundWanderWeight" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
 layout_mode = 2
-text = "Weight"
+min_value = 1.0
+step = 1.0
+value = 1.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/HarmonicWeight/Label")
+text = "Ground Wander Weight"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "GroundWander"
+propery_name = "weight"
 
-[node name="HSlider4" type="HSlider" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer"]
+[node name="Radius" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
 layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
-
-[node name="Label7" type="Label" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer"]
-layout_mode = 2
+min_value = 1.0
+max_value = 60.0
+value = 15.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Radius/Label")
 text = "Radius"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "GroundWander"
+propery_name = "radius"
 
-[node name="HSlider6" type="HSlider" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer"]
+[node name="Distance" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
 layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
-
-[node name="Label9" type="Label" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer"]
-layout_mode = 2
+min_value = 1.0
+max_value = 30.0
+value = 20.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Distance/Label")
 text = "Distance"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "GroundWander"
+propery_name = "distance"
 
-[node name="HSlider8" type="HSlider" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer"]
+[node name="Jitter" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
 layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
-
-[node name="Label10" type="Label" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer"]
-layout_mode = 2
+min_value = 1.0
+max_value = 120.0
+step = 1.0
+value = 80.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Amplitude/Label")
 text = "Jitter"
-
-[node name="HSlider9" type="HSlider" parent="MarginContainer/TabContainer/Ground Wander/GroundWanderSettings/VBoxContainer"]
-layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "GroundWander"
+propery_name = "jitter"
 
 [node name="Flee" type="MarginContainer" parent="MarginContainer/TabContainer"]
 visible = false
@@ -448,20 +470,25 @@ layout_mode = 2
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[node name="Label5" type="Label" parent="MarginContainer/TabContainer/Flee/FleeSettings/VBoxContainer"]
+[node name="GroundWanderWeight" parent="MarginContainer/TabContainer/Flee/FleeSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
 layout_mode = 2
-text = "Weight"
+min_value = 1.0
+step = 1.0
+value = 1.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/HarmonicWeight/Label")
+text = "Flee Weight"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Flee"
+propery_name = "weight"
 
-[node name="HSlider4" type="HSlider" parent="MarginContainer/TabContainer/Flee/FleeSettings/VBoxContainer"]
+[node name="Range" parent="MarginContainer/TabContainer/Flee/FleeSettings/VBoxContainer" node_paths=PackedStringArray("label") instance=ExtResource("1_havx2")]
 layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
-
-[node name="Label6" type="Label" parent="MarginContainer/TabContainer/Flee/FleeSettings/VBoxContainer"]
-layout_mode = 2
+min_value = 1.0
+max_value = 120.0
+step = 1.0
+value = 50.0
+label = NodePath("../../../../Harmonic/HarmonicSettings/VBoxContainer/Amplitude/Label")
 text = "Range"
-
-[node name="HSlider5" type="HSlider" parent="MarginContainer/TabContainer/Flee/FleeSettings/VBoxContainer"]
-layout_mode = 2
-tick_count = 6
-ticks_on_borders = true
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "Flee"
+propery_name = "flee_range"
