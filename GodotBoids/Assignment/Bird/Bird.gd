@@ -33,6 +33,7 @@ signal wind_direction_update(new_direction: float)
 func _ready() -> void:
 	super()
 	height = collider.shape.size.y+0.5
+	Parameters.BIRD_PROPERTY_CHANGED.connect(_on_bird_property_changed)
 	#setup_constrain()
 	pass # Replace with function body.
 
@@ -40,10 +41,16 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	super(delta)
-	pass
 
 func setup_constrain() -> void:
 	var constrain_node: Constrain = boid.find_child("Constrain")
 	if constrain_node == null:
 		return
 	constrain_node.center_path = centre_point.get_path()
+
+func _on_bird_property_changed(node_name,property_name,value):
+	var node = find_child(node_name)
+	if node == null:
+		print("Node ",node_name," doesn't exist")
+		return
+	node.set(property_name, value)

@@ -17,7 +17,12 @@ var claw2: Node3D
 @export
 var druation: float = 1
 @export
-var wing_span: int = 5
+var wing_span: int = 5:
+	set(value):
+		update_wing_property("num_of_points",value)
+		wing_span = value
+	get:
+		return wing_span
 
 var tween: Tween 
 var current_state: String = "Walking"
@@ -41,7 +46,11 @@ func _process(delta: float) -> void:
 			transition_to_walking()
 		_:
 			print("Unsupported body state. Please make sure that ",state," is a supported state") 
-	
+
+func update_wing_property(property,value):
+	wing1.set(property, value)
+	wing2.set(property, value)	
+
 func transition_to_walking():
 	if (tween == null or not tween.is_running()): 
 		tween = get_tree().create_tween()
