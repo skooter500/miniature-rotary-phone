@@ -22,7 +22,7 @@ var cost_value: float = 1
 @export_range(0.1, 100)
 var cost_time: float = 0.1
 
-var stamina: float = 0
+var stamina: float = 10
 
 signal stamina_depleted
 signal stamina_replenished
