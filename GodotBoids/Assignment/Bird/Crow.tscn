@@ -18,12 +18,12 @@
 [ext_resource type="Script" path="res://Assignment/Bird/BirdComponets/GroundWander.gd" id="13_wbqri"]
 [ext_resource type="Script" path="res://behaviors/Flee.gd" id="14_6cvyl"]
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_moob3"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_xl1h1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_828u5"]
 albedo_color = Color(0.160784, 0.160784, 0.160784, 1)
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_6awtf"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_8oebl"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ro1sb"]
 
@@ -95,6 +95,14 @@ feeler_length = 15
 weight = 3.0
 enabled = false
 
+[node name="ObAvoidance" type="Node" parent="."]
+script = ExtResource("12_d4g50")
+direction = 4
+feeler_angle = 1
+feeler_length = 15
+weight = 3.0
+enabled = false
+
 [node name="GroundWander" type="Node" parent="."]
 script = ExtResource("13_wbqri")
 radius = 15.0
@@ -117,14 +125,14 @@ wing_span = 6
 
 [node name="Wing1" type="MeshInstance3D" parent="MeshInstance3D" node_paths=PackedStringArray("parent")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.621, -0.354)
-mesh = SubResource("ImmediateMesh_moob3")
+mesh = SubResource("ImmediateMesh_xl1h1")
 skeleton = NodePath("../..")
 script = ExtResource("10_bqgsl")
 tickness = 0.2
 width = 2.0
 num_of_points = 6
 dist_between_points = 1.0
-pos = -1.0
+pos = -1.00391
 play_flapping = true
 wind_direction = 90.0
 wind_threshold = 15.0
@@ -134,14 +142,14 @@ parent = NodePath("../..")
 
 [node name="Wing2" type="MeshInstance3D" parent="MeshInstance3D" node_paths=PackedStringArray("parent")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.621, -0.354)
-mesh = SubResource("ImmediateMesh_6awtf")
+mesh = SubResource("ImmediateMesh_8oebl")
 skeleton = NodePath("../..")
 script = ExtResource("10_bqgsl")
 tickness = 0.2
 width = 2.0
 num_of_points = 6
 dist_between_points = 1.0
-pos = -1.0
+pos = -1.00391
 play_flapping = true
 wind_direction = 90.0
 wind_threshold = 15.0

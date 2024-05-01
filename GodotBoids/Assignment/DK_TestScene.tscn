@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://48bqgtxek4o7"]
+[gd_scene load_steps=17 format=3 uid="uid://48bqgtxek4o7"]
 
 [ext_resource type="Script" path="res://Assignment/Ground.gd" id="1_ep45x"]
 [ext_resource type="Script" path="res://Assignment/Bird/BirdSpawner/Murder.gd" id="1_vwlqs"]
@@ -27,6 +27,12 @@ background_mode = 2
 sky = SubResource("Sky_t0a3h")
 glow_enabled = true
 glow_intensity = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kqcpr"]
+size = Vector3(10, 10, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_w7fwt"]
+size = Vector3(10, 10, 1)
 
 [node name="Node3D" type="Node3D"]
 
@@ -95,5 +101,41 @@ transform = Transform3D(-0.0595396, -0.82277, 0.565248, -0.0861885, 0.568375, 0.
 environment = SubResource("Environment_a3epi")
 
 [node name="TakeOffsetMarker" type="Marker3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(9.77082, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.594931, -45.1971)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_kqcpr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_w7fwt")
+
+[node name="StaticBody3D15" type="StaticBody3D" parent="."]
+transform = Transform3D(9.77082, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.594931, 47.3353)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D15"]
+shape = SubResource("BoxShape3D_kqcpr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D15"]
+mesh = SubResource("BoxMesh_w7fwt")
+
+[node name="StaticBody3D16" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.27096e-07, 0, -1, 0, 1, 0, 9.77082, 0, -4.37114e-08, 46.5539, 0.594931, 2.08386)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D16"]
+shape = SubResource("BoxShape3D_kqcpr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D16"]
+mesh = SubResource("BoxMesh_w7fwt")
+
+[node name="StaticBody3D17" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.27096e-07, 0, -1, 0, 1, 0, 9.77082, 0, -4.37114e-08, -44.5067, 0.594931, 2.08386)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D17"]
+shape = SubResource("BoxShape3D_kqcpr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D17"]
+mesh = SubResource("BoxMesh_w7fwt")
 
 [editable path="Player"]

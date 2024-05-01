@@ -13,6 +13,10 @@ func _enter():
 	stamina.stamina_replenished.connect(_on_stamina_regen)
 	disable_all_behaviours()
 	change_behaviour("GroundWander", true)
+	var obAvoidance: Avoidance = boid.find_child("ObAvoidance")
+	obAvoidance.direction = Avoidance.ForceDirection.Ground
+	obAvoidance.feeler_angle = 1
+	change_behaviour("ObAvoidance", true)
 
 func _think():
 	if stamina_regened:
