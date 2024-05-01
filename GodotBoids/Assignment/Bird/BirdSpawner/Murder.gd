@@ -35,6 +35,9 @@ func spawn_crow() -> void:
 	var arrive = boid.get_node("Arrive")
 	if arrive:
 		arrive.targets = landing_spots
+	var global_state = boid.get_node("BirdGlobalState")
+	if global_state:
+		global_state.robot = robot
 	boid.ground = ground
 	boid.take_off_point = take_off_maker
 	boid.centre_point = center

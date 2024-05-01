@@ -5,7 +5,7 @@ class_name LandState
 func _enter():
 	disable_all_behaviours()
 	change_behaviour("Avoidance", true)
-	change_behaviour("Arrive", true)
+	change_behaviour("Arrive", true)		
 	
 func _think():
 	#var arrive: Arrive = boid.get_node("Arrive")
