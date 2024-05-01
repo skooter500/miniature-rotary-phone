@@ -1,14 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://c2ob3qj0e3xjf"]
+[gd_scene load_steps=16 format=3 uid="uid://c2ob3qj0e3xjf"]
 
 [ext_resource type="PackedScene" uid="uid://dyunwcsba2abh" path="res://Robot.glb" id="1_bq7ca"]
 [ext_resource type="Script" path="res://robot/Robot.gd" id="2_tbcyg"]
 [ext_resource type="Script" path="res://behaviors/Boid.gd" id="3_x7hdx"]
 [ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="4_sdsf0"]
-[ext_resource type="Script" path="res://behaviors/Constrain.gd" id="6_k0q5p"]
+[ext_resource type="Script" path="res://behaviors/Pursue.gd" id="7_d3gbr"]
 [ext_resource type="Script" path="res://behaviors/NoiseWander.gd" id="7_kaj2n"]
 [ext_resource type="PackedScene" uid="uid://bu8cymkyvch83" path="res://robot/laserBall.tscn" id="8_pi1t6"]
-[ext_resource type="Script" path="res://behaviors/Seek.gd" id="9_wxtl8"]
-[ext_resource type="Script" path="res://behaviors/Arrive.gd" id="10_kekn2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cqs65"]
 metallic = 0.5
@@ -77,19 +75,8 @@ amplitude = 90
 distance = 100
 draw_gizmos = false
 
-[node name="Seek" type="Node" parent="Robot"]
-script = ExtResource("9_wxtl8")
-draw_gizmos = false
-enabled = false
-
-[node name="Arrive" type="Node" parent="Robot"]
-script = ExtResource("10_kekn2")
-draw_gizmos = false
-enabled = false
-
-[node name="Constrain" type="Node" parent="Robot"]
-script = ExtResource("6_k0q5p")
-center_path = NodePath("../../../Center")
+[node name="Pursue" type="Node" parent="Robot"]
+script = ExtResource("7_d3gbr")
 
 [node name="LaserBall_Right" parent="Robot" instance=ExtResource("8_pi1t6")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.07822, 0, -1.08333)
