@@ -6,7 +6,7 @@ var isTrigger = false
 var currentState: int
 var triggered = true
 
-var canShoot = false
+var isCurious = false
 
 @export var pursueColor : Color
 @export var wanderColor: Color
@@ -18,23 +18,22 @@ var robotMesh : MeshInstance3D
 var eyeMat : StandardMaterial3D
 var pursue 
 var constrain
+
+var murder
 var birds 
 
 @export var laserbeamL : Node3D
 @export var laserbeamR : Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	laserbeamL.visible = false
-	laserbeamR.visible = false
 	currentState = 0
 	robotMesh = find_child("EnemyVer2")
 	pursue = find_child("Pursue")
 	# constrain = find_child("Constrain")
-	
+	_findBirds()
 	
 	eyeMat = robotMesh.get_surface_override_material(1)
 	
-	_findBirds()
 	pass # Replace with function body.
 
 
@@ -42,32 +41,29 @@ func _ready():
 func _process(delta):
 	_checkDistance()
 	
-	if isTrigger:
+	if isCurious:
 		eyeMat.emission = pursueColor
-	
 	else:
 		eyeMat.emission = wanderColor
 	
+	
 
 func _findBirds():
-	
-	var murder = get_node("../Murder")
-	#
+	murder = get_node("../Murder")
 	if murder.get_child_count() > 0:
 		birds = murder.get_child(0)
-		pursue.enemy_boid = birds
 		#pursue.enemyNodePath = 
-		isTrigger = true
+		pursue.enemy_boid = birds
 		print("Birds found")
 	else:
-		isTrigger = false
 		print("No birds found")
 		
 
 # Funciton to check the nearest distance to the bird and shoot
 func _checkDistance():
-	
-	if global_transform.origin.distance_to(birds.global_transform.origin) < 40:
-		canShoot = true
+	if global_transform.origin.distance_to(birds.global_transform.origin) < 100:
+		isCurious = true
+		pursue.enabled = true
 	else:
-		canShoot = false
+		isCurious = false
+		pursue.enabled = false

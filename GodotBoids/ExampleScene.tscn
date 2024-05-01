@@ -85,7 +85,7 @@ environment = SubResource("Environment_a3epi")
 
 [node name="Robot" parent="." node_paths=PackedStringArray("murderNode") instance=ExtResource("8_2n0ge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-pursueColor = Color(0.49666, 0.698188, 0, 1)
+pursueColor = Color(0.64034, 8.18223e-07, 0.319145, 1)
 shootColor = Color(0.746579, 4.30169e-05, 2.37766e-05, 1)
 murderNode = NodePath("../Murder")
 
