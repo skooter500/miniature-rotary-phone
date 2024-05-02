@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnvnjemlfct6o"]
+[gd_scene load_steps=6 format=3 uid="uid://bnvnjemlfct6o"]
 
 [ext_resource type="Script" path="res://map/UI/user_interface.gd" id="1_wi56x"]
 [ext_resource type="Script" path="res://map/UI/music_slider.gd" id="2_1gc23"]
 [ext_resource type="PackedScene" uid="uid://cbvdurbl831xp" path="res://Assignment/UI/BirdUI.tscn" id="3_c4ivp"]
+[ext_resource type="Script" path="res://map/UI/SFX_slider.gd" id="3_ejyrb"]
 [ext_resource type="Script" path="res://map/UI/ShowBirdUI.gd" id="3_f0mst"]
 
 [node name="UserInterface" type="Node3D"]
@@ -103,6 +104,39 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Music:"
 
+[node name="SFX_slider" type="HSlider" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -143.0
+offset_top = 322.0
+offset_right = -21.0
+offset_bottom = 338.0
+grow_horizontal = 0
+grow_vertical = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+script = ExtResource("3_ejyrb")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/SFX_slider"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -183.0
+offset_top = -21.4
+offset_right = -133.0
+offset_bottom = 1.6
+grow_horizontal = 0
+grow_vertical = 0
+text = "SFX:"
+
 [node name="Butterfly_gizmo" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
 offset_left = 17.0
@@ -174,4 +208,5 @@ script = ExtResource("3_f0mst")
 birdUI = NodePath("../BirdUi")
 
 [node name="BirdUi" parent="CanvasLayer/Control" instance=ExtResource("3_c4ivp")]
+visible = false
 layout_mode = 1
