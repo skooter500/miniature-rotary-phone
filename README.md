@@ -51,6 +51,25 @@ The animation of the wings flapping is done using a sin wave that manipulates th
 to simulate the quick flapping of wings a butterfly would do in real life.
 
 ### Birds
+#### Wings
+The wings are animated using a sine wave where the vertical shift and the amplitude are interpolated between 1 and -1. This creates an effect where the wings are flapping, similar to how a bird flaps their wings. There is a defined wind direction and threshold. If the bird is facing in the direction of the wind or facing down, the wing will go into a glide state. This creates a nice effect where the birds aren't constantly flapping their wings, giving them a more natural behaviour. The wings have three states: flapping, gliding and slowdown. The flapping state has the wings flapping up and down, whereas the gliding state, where the wing is down to mimic a bird gliding, and the slowdown state, where the bird's wings are up to mimic how birds have the wings up to apply to drag to themselves to slow down while landing. The wings are created using procedural geometry, and the mesh is updated for every frame using ImmediateMesh. The [Godot docs](https://docs.godotengine.org/en/stable/tutorials/3d/procedural_geometry/immediatemesh.html) state that ImmediateMesh is the most efficient for creating meshes every frame, which is why it's used. To create the procedural mesh, the vertices, normals, and uv need to be defined in each frame. There is a parameter called num_of_points, which is plotted against the sine wave. These points are used to create each wing segment. The eight corners that make up a segment are done using two points from the sine wave where a thickness and width offset is applied. Only the front, back, top and bottom faces are created since the camera can't see the side faces in each segment. When the last point of the sine wave is reached, a pointy effect is created by not having the last point offset the thickness. 
+
+#### Body Animation
+This is a basic script that controls the wings and also defines two different tweens, which interpolate the body parts into specific positions and rotations. The states are walking, where the bird's head is up and the wings are retracted, and flying, where the bird's wings are extended and the body is brought up in line with the head. 
+
+#### Custom Steering
+The ground wander steering is just a modified jitter wander script with the y-axis zeroed out. This is used for the birds on the ground since birds move in random directions on the ground. The avoidance script was also modified with a new force direction called ground, which is just the normal force direction but with the y-axis also zeroed out.  
+
+#### UI
+Three custom UI nodes were created: a dropdown, a slider and a button. Each UI node is a custom scene containing said UI node and a label along with spacing containers like an hbox or margin container. Using the @tool, the scene was made to feel like a custom node, where the text property of the label gets updated through the root node. The scene has three parameters set up, which are used to emit a signal. The parameters are signal name, node name and property name. The signal name corresponds to one in parameter.gd. The crow has a logic setup to listen to the signal and use the property and node name to adjust the value of the property.
+
+#### States
+Birds transition between five different states. The default state is the flock. A stamina system was created where the birds' stamina drains while they are flying, and then they can recharge by descending onto the ground. 
+Flock state: This state aims to have the birds fly around in the sky and flock with neighbouring birds. It also includes obstacle avoidance to ensure the birds don't hit any trees. This state has separation, allignment, cohesion, harmonic, noise wander, constrain, avoidance, and flee behaviours enabled. 
+Descend state: This state is activated from the flock state when the bird's stamina reaches zero. A random landing spot is assigned to the spot, and using the arrive steering behaviour, the bird descends. This state has constrain, arrive, avoidance, and flee behaviours enabled. 
+- Land state: This landing state activates when the bird gets close to the ground. In this state, avoidance is set to incident, which causes a force that levels out the bird. When the bird's collider hits the ground, it transitions to a walking state. This state has avoidance and arrive behaviours enabled.
+- Ground state: When the bird lands, the bird begins to wander on the ground. It has obstacle avoidance enabled to have the bird to avoid the walls and the pond. While on the ground, the bird's stamina begins to recharge. This state has ground wander, avoidance, and flee enabled.
+- Take off state: When the bird's stamina recharges, or the robot is near it, it begins to fly up into the sky to a certain height. It transitions to the flying state by flapping its wings. Once it reaches that height, it enters the flocking state. This state has the arrive behaviour enabled.
 
 ### Robot
 Robot works similarly like with the butterflies, it implements the Wander, Avoidance, NoiseWander and Constrain nodes into the robot node. It additionally, uses the pursue node that is used to pursue birds if they exist within the scene. There are two different "states" for the robot, which involve the wander that simply moves around the map if they are no birds, noted by a blue glow on its eye. The other "state" is the pursue state, noted by a pink glow on its eye. This will enable the pursue behavior and set it to the first bird in the scene and disable the constrain behavior, allow the robot to freely roam around. When at the pursue state, a red exclamation mark will briefly appear on the robot, alerting that it has found a bird. This is done using timers and boolean to check for this state, allowing for the pursuing of birds to occur. If the robot, locates a bird and is around a certain distance for around 10 seconds, it switches to the next bird by incrementing the index.
@@ -64,7 +83,7 @@ The majority of the scripts were self-made or were referencing and modfying some
 |-----------|-----------|
 | low_poly_stylized_nature_pack (Trees, Rocks and Flowers | From [SketchFab](https://sketchfab.com/3d-models/low-poly-stylized-nature-pack-9c773e846c6e4448b26b2cdecb2b91bf) |
 | AllFreeSky | From [Godot Asset Libary](https://godotengine.org/asset-library/asset/579) |
-| Music | From [Daniel](https://github.com/PanicAtTheKernal/FinalYearProject/tree/main/Assets/Sounds) |
+| Music | From [Daniel's FYP](https://github.com/PanicAtTheKernal/FinalYearProject/tree/main/Assets/Sounds) |
 | map.gd | Self-Made |
 | ArriveToFlowers.gd | Modified Arrive |
 | spawn_butterfly.gd | Self-Made |
@@ -72,6 +91,24 @@ The majority of the scripts were self-made or were referencing and modfying some
 | user_interface.gd | Self-Made |
 | Parameters.gd | Self-Made |
 | SFX/Music_Slider.gd | Referenced [SliderTutorial](https://www.youtube.com/watch?v=aFkRmtGiZCw&t=44s) |
+| BirdSound | Self-Made |
+| BodyAnimation | Self-Made |
+| GroundWander | Modified Wander |
+| Stamina | Self-Made |
+| WingsLines | Self-Made |
+| WingScript | Self-Made |
+| Murder | Self-Made |
+| SceneSetup | Self-Made |
+| BirdGlobalState | Self-Made |
+| DescendToGroundState | Self-Made |
+| FlockState | Self-Made |
+| State | Modified State |
+| Avoidance | Modified Avoidance |
+| GroudnState | Self-Made |
+| LandState | Self-Made |
+| TakeOffState | Self-Made |
+| Bird | Self-Made |
+| Ground | Self-Made |
 | Robot.gd | Self-Made |
 
 
@@ -88,6 +125,7 @@ I have learnt a lot about godot as a whole and how boids functions but the most 
 but now i learnt about the signal bus method which made me realise signals are quite simple yet powerful too. There are plenty more to learn using the godot engine and improvements in the future.
 
 ### Daniel Kondabarov
+I was tasked with creating the bird, which comprises the wings animation, the body, the bird UI, the sound effects and the state machine. I'm most proud of the wings. It was really fun to learn about procedural geometry. When the bird is flying in, and the birds transition between gliding and flapping, it feels realistic compared to how birds flap their wings. I learned about procedural geometry and discovered new ways of using the @tool to create nodes that update in the editor
 
 ### Olabode Balinga
 I was tasked with designing the features with the robot. The robot was made using the Blender application, where the design theme was to create a friendly robot inspired by the robot character Bastion from Overwatch. Like with Bastion, the robot is very curious about nature and to show this, the robot was designed to pursue the birds to scan and observe them. The birds, however, will begin to flee once the robot is seen, leading to a chase. Particle systems were used for the robot to give the idea that it is flying in the air akin to that of a rocket, using jet propulsion. Exclamation mark was designed using Godot.
@@ -97,3 +135,5 @@ I learned how to use particle effects, which was something I was really struggli
 
 # References
 * Grass_Tutorial: https://www.youtube.com/watch?v=3ftcGTp-Se8&t=144s
+* Procedural Geometry Tutorial: https://docs.godotengine.org/en/stable/tutorials/3d/procedural_geometry/immediatemesh.html
+* 3D Tutorial: https://docs.godotengine.org/en/stable/tutorials/3d/using_transforms.html
