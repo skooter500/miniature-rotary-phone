@@ -131,6 +131,8 @@ func _checkDistance(delta):
 				if birdIndex < murder.get_child_count() - 1:
 					birdIndex += 1
 					_findBirds()
+					pursue.enabled = true
+					hasBeenScanned = false
 					timerStarted = false
 				else:
 					hasBeenScanned = true

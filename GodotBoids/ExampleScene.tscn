@@ -43,7 +43,7 @@ script = ExtResource("1_orda2")
 starting_point = Vector3(0, 100, 0)
 ground = NodePath("../Ground/Ground")
 fish_scene = ExtResource("2_jc8ar")
-count = 1
+count = 2
 center_path = NodePath("../Marker3D")
 
 [node name="SceneSetup" type="Node" parent="." node_paths=PackedStringArray("birds", "camera_controller", "camera_pursue")]
