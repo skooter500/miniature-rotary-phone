@@ -63,7 +63,7 @@ The majority of the scripts were self-made or were referencing and modfying some
 |-----------|-----------|
 | low_poly_stylized_nature_pack (Trees, Rocks and Flowers | From [SketchFab](https://sketchfab.com/3d-models/low-poly-stylized-nature-pack-9c773e846c6e4448b26b2cdecb2b91bf) |
 | AllFreeSky | From [Godot Asset Libary](https://godotengine.org/asset-library/asset/579) |
-
+| Music | From [Daniel](https://github.com/PanicAtTheKernal/FinalYearProject/tree/main/Assets/Sounds) |
 
 ## Contributions
 ### Wen Ting Song
