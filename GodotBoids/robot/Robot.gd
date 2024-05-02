@@ -71,21 +71,28 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	_checkDistance(delta)
 	
-	if isCurious:
-		eyeMat.emission = pursueColor
-		
-		if not notified and not timerStarted:
-			curiosityMarker.visible = true
-			notificationTimer.start()
-			timerStarted = true
+	if get_node("../../Murder").get_child_count() > 0:
+		_checkDistance(delta)
+	
+		if isCurious:
+			look_at(birds.global_transform.origin)
+			eyeMat.emission = pursueColor
 			
-		constrain.enabled = false
+			if not notified and not timerStarted:
+				curiosityMarker.visible = true
+				notificationTimer.start()
+				timerStarted = true
+				
+			constrain.enabled = false
+		else:
+			eyeMat.emission = wanderColor
+			curiosityMarker.visible = false
+			constrain.enabled = true
 	else:
-		eyeMat.emission = wanderColor
-		curiosityMarker.visible = false
-		constrain.enabled = true
+			eyeMat.emission = wanderColor
+			curiosityMarker.visible = false
+			constrain.enabled = true
 	
 	
 
@@ -101,7 +108,7 @@ func _findBirds():
 		
 
 func _setupConstrain():
-	groundMarker = get_node("../../GroundMarker")
+	groundMarker = get_node("../../Take-off")
 	constrain.center_path = groundMarker.get_path()
 
 
@@ -116,29 +123,24 @@ func _checkDistance(delta):
 	print("DistanceCheck: " + str(global_transform.origin.distance_to(birds.global_transform.origin)))
 	
 	if not hasBeenScanned:
-		if global_transform.origin.distance_to(birds.global_transform.origin) < 100:
-			isCurious = true
-			pursue.enabled = true
+		isCurious = true
+		pursue.enabled = true
 		
 		if global_transform.origin.distance_to(birds.global_transform.origin) > 0 and global_transform.origin.distance_to(birds.global_transform.origin) < 20:
 			scanningCount += delta
 			print("scannning count" + str(scanningCount))
 			
 			if scanningCount >= 10:
-				isCurious = false
-				pursue.enabled = false
-				
 				if birdIndex < murder.get_child_count() - 1:
 					birdIndex += 1
 					_findBirds()
+					pursue.enabled = true
+					hasBeenScanned = false
 					timerStarted = false
 				else:
 					hasBeenScanned = true
 					scanningCount = 0
-				
 			
-		else:
-			scanningCount = 0
 		
 			
 

@@ -27,7 +27,7 @@ metallic = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ec64"]
 emission_enabled = true
-emission = Color(0.783544, 1.58831e-05, 0.545142, 1)
+emission = Color(0.170384, 0.535605, 0, 1)
 emission_energy_multiplier = 4.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6u73x"]
@@ -40,7 +40,7 @@ roughness = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ya14"]
 emission_enabled = true
-emission = Color(0.871084, 0.568657, 0.0193709, 1)
+emission = Color(0.673123, 0, 0.231556, 1)
 emission_energy_multiplier = 5.55
 
 [sub_resource type="BoxMesh" id="BoxMesh_wsumo"]
@@ -66,7 +66,7 @@ transparency = 1
 blend_mode = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.646345, 0.132828, 9.62615e-08, 1)
+albedo_color = Color(0.905191, 0, 0.543915, 1)
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -75,14 +75,14 @@ particles_anim_loop = false
 
 [sub_resource type="Gradient" id="Gradient_l81dx"]
 offsets = PackedFloat32Array(0.318182, 0.727273)
-colors = PackedColorArray(0.166464, 1.51913e-07, 3.00817e-09, 1, 0.450688, 0.0817933, 4.81308e-08, 1)
+colors = PackedColorArray(0.166464, 1.51913e-07, 3.00817e-09, 1, 0.487764, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_lxans"]
 gradient = SubResource("Gradient_l81dx")
 
 [sub_resource type="Curve" id="Curve_vd770"]
-_data = [Vector2(0.0144928, 0), 0.0, 0.0, 0, 0, Vector2(0.333333, 0.978022), 0.0, 0.0, 0, 0, Vector2(0.985507, 0.043956), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0.0144928, 0), 0.0, 0.0, 0, 0, Vector2(0.572464, 1), 0.0, 0.0, 0, 0, Vector2(0.92029, 0.67033), 0.0, 0.0, 0, 0, Vector2(0.985507, 0.043956), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_bdu0s"]
 curve = SubResource("Curve_vd770")
@@ -95,14 +95,16 @@ initial_velocity_min = 1.0
 initial_velocity_max = 4.0
 angular_velocity_max = 40.0
 gravity = Vector3(0, 0, 0)
-linear_accel_min = 1.0
-linear_accel_max = 53.19
-scale_min = 0.3
+linear_accel_min = 0.01
+linear_accel_max = 36.64
+scale_min = 0.01
 scale_max = 0.8
 scale_curve = SubResource("CurveTexture_bdu0s")
 color_initial_ramp = SubResource("GradientTexture1D_lxans")
 hue_variation_min = -0.28
 hue_variation_max = 0.31
+turbulence_noise_strength = 1.67
+turbulence_noise_scale = 20.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_b7n21"]
 
@@ -180,12 +182,11 @@ mesh = SubResource("PrismMesh_q27q1")
 skeleton = NodePath("../..")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Robot"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.704129, 0)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.709856, 0)
 material_override = SubResource("StandardMaterial3D_wbr0f")
-amount = 500
+amount = 700
 lifetime = 0.3
 randomness = 1.0
-visibility_aabb = AABB(-4, -9.36502, -5.43375, 8, 18.73, 10.8675)
 draw_order = 3
 process_material = SubResource("ParticleProcessMaterial_76xkd")
 draw_pass_1 = SubResource("QuadMesh_b7n21")
