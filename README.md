@@ -17,8 +17,7 @@ soar through the skies enjoying the winds and finally a curious robot fascinated
 The simulation allows many customisations in the UI including how many butterflies to spawn, the birds wing size, their speed, night or day, volume control and much more.
 
 ## Video:
-
-[![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
+[![YouTube](https://github.com/PanicAtTheKernal/miniature-rotary-phone/assets/98461233/17c84673-4376-4d21-a9a4-f3100aff07c0)](https://youtu.be/qU3tOcJ82fo)
 
 ## Screenshots
 ![image](https://github.com/PanicAtTheKernal/miniature-rotary-phone/assets/98461233/6b71848a-c5c4-4fe6-bf9e-e192cab1d180)
@@ -110,6 +109,7 @@ The majority of the scripts were self-made or were referencing and modfying some
 | TakeOffState | Self-Made |
 | Bird | Self-Made |
 | Ground | Self-Made |
+| Robot.gd | Self-Made |
 
 
 ## Contributions
@@ -117,15 +117,21 @@ The majority of the scripts were self-made or were referencing and modfying some
 I was tasked with the map making, some UI design and butterflies for this portion of the project.
 The map was designed by me using a mixture of the godot engine, blender and some free assets to help decorate the map and give it more life.
 The butterflies were introduced to elevate the feeling of nature, there were lots of flowers and i felt like some butterflies would bring far more
-life to the map as a whole.
+life to the map as a whole. The sounds and music were kindly provided by Daniel and I had the pleasure to incorporate it within the map. The night and day button was also dne by me.
 
-The sounds and music were kindly provided by Daniel and I had the pleasure to incorporate it within the map. The night and day button was also dne by me.
+What did I learn?
+
+I have learnt a lot about godot as a whole and how boids functions but the most important aspect i have taken from this assignment is how to use signals. Signals was something i really struggled with
+but now i learnt about the signal bus method which made me realise signals are quite simple yet powerful too. There are plenty more to learn using the godot engine and improvements in the future.
 
 ### Daniel Kondabarov
 I was tasked with creating the bird, which comprises the wings animation, the body, the bird UI, the sound effects and the state machine. I'm most proud of the wings. It was really fun to learn about procedural geometry. When the bird is flying in, and the birds transition between gliding and flapping, it feels realistic compared to how birds flap their wings. I learned about procedural geometry and discovered new ways of using the @tool to create nodes that update in the editor
 
 ### Olabode Balinga
-I was tasked with designing the features with the robot. The robot was made using the Blender application, where the design theme was to create a friendly robot inspired by the robot character Bastion from Overwatch. Like with Bastion, the robot is very curious about nature and to show this, the robot was designed to pursue the birds to scan and observe them. The birds, however, will begin to flee once the robot is seen, leading to a chase. 
+I was tasked with designing the features with the robot. The robot was made using the Blender application, where the design theme was to create a friendly robot inspired by the robot character Bastion from Overwatch. Like with Bastion, the robot is very curious about nature and to show this, the robot was designed to pursue the birds to scan and observe them. The birds, however, will begin to flee once the robot is seen, leading to a chase. Particle systems were used for the robot to give the idea that it is flying in the air akin to that of a rocket, using jet propulsion. Exclamation mark was designed using Godot.
+
+What did I learn?
+I learned how to use particle effects, which was something I was really struggling with in the past, especially during the first semester assignment. However, after watching https://www.youtube.com/watch?v=F27vQR_ivsc ,it gave me an insight into how easy it is to understand Godot's Particle System and use it. Additonally, understanding the paths of nodes was someting I also learned in Godot, improving from what I had learned from my group as well as expanding my knowledge from last semester too.
 
 # References
 * Grass_Tutorial: https://www.youtube.com/watch?v=3ftcGTp-Se8&t=144s
