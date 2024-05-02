@@ -25,6 +25,8 @@ The simulation allows many customisations in the UI including how many butterfli
 ![image](https://github.com/PanicAtTheKernal/miniature-rotary-phone/assets/98461233/52be68c4-41e2-4231-bef1-7ea87e5e9d46)
 ![image](https://github.com/PanicAtTheKernal/miniature-rotary-phone/assets/98461233/33d94cab-c71f-4c03-84df-c7556224ef33)
 ![image](https://github.com/PanicAtTheKernal/miniature-rotary-phone/assets/98461233/d4ea7154-983b-47f2-8949-864556f8c6e8)
+![image](https://github.com/PanicAtTheKernal/miniature-rotary-phone/assets/98917947/e975d0a1-f320-4058-a6f3-d8a6c2fd8a94)
+
 
 
 # Instructions
@@ -52,7 +54,7 @@ to simulate the quick flapping of wings a butterfly would do in real life.
 ### Birds
 
 ### Robot
-
+Robot works similarly like with the butterflies, it implements the Wander, Avoidance, NoiseWander and Constrain nodes into the robot node. It additionally, uses the pursue node that is used to pursue birds if they exist within the scene. There are two different "states" for the robot, which involve the wander that simply moves around the map if they are no birds, noted by a blue glow on its eye. The other "state" is the pursue state, noted by a pink glow on its eye. This will enable the pursue behavior and set it to the first bird in the scene and disable the constrain behavior, allow the robot to freely roam around. When at the pursue state, a red exclamation mark will briefly appear on the robot, alerting that it has found a bird. This is done using timers and boolean to check for this state, allowing for the pursuing of birds to occur. If the robot, locates a bird and is around a certain distance for around 10 seconds, it switches to the next bird by incrementing the index.
 
 # List of classes/assets
 Assets for the bird, butterfly and robot were all self-made in the godot engine or blender. The map is made using a godot meshes and was decorated using
@@ -63,7 +65,6 @@ The majority of the scripts were self-made or were referencing and modfying some
 |-----------|-----------|
 | low_poly_stylized_nature_pack (Trees, Rocks and Flowers | From [SketchFab](https://sketchfab.com/3d-models/low-poly-stylized-nature-pack-9c773e846c6e4448b26b2cdecb2b91bf) |
 | AllFreeSky | From [Godot Asset Libary](https://godotengine.org/asset-library/asset/579) |
-
 
 ## Contributions
 ### Wen Ting Song
@@ -77,7 +78,7 @@ The sounds and music were kindly provided by Daniel and I had the pleasure to in
 ### Daniel Kondabarov
 
 ### Olabode Balinga
-
+I was tasked with designing the features with the robot. The robot was made using the Blender application, where the design theme was to create a friendly robot inspired by the robot character Bastion from Overwatch. Like with Bastion, the robot is very curious about nature and to show this, the robot was designed to pursue the birds to scan and observe them. The birds, however, will begin to flee once the robot is seen, leading to a chase. 
 
 # References
 * Grass_Tutorial: https://www.youtube.com/watch?v=3ftcGTp-Se8&t=144s
