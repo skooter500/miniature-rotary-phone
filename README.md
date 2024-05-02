@@ -80,9 +80,12 @@ The majority of the scripts were self-made or were referencing and modfying some
 I was tasked with the map making, some UI design and butterflies for this portion of the project.
 The map was designed by me using a mixture of the godot engine, blender and some free assets to help decorate the map and give it more life.
 The butterflies were introduced to elevate the feeling of nature, there were lots of flowers and i felt like some butterflies would bring far more
-life to the map as a whole.
+life to the map as a whole. The sounds and music were kindly provided by Daniel and I had the pleasure to incorporate it within the map. The night and day button was also dne by me.
 
-The sounds and music were kindly provided by Daniel and I had the pleasure to incorporate it within the map. The night and day button was also dne by me.
+What did I learn?
+
+I have learnt a lot about godot as a whole and how boids functions but the most important aspect i have taken from this assignment is how to use signals. Signals was something i really struggled with
+but now i learnt about the signal bus method which made me realise signals are quite simple yet powerful too. There are plenty more to learn using the godot engine and improvements in the future.
 
 ### Daniel Kondabarov
 
