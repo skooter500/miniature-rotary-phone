@@ -1,20 +1,31 @@
-# Project Title
+# Birds, Butterflies and Robot
 
-Name:
+## Team Members:
+Daniel kondabarov C20456964
 
-Student Number: 
+Olabode Balinga C20478706
 
-Class Group:
+Wen Ting Song C20325896
 
-Include all team members names and student numbers if a team project
+Class Group: TU856
 
 # Description
+Birds, Butterflies and Robot is a team project that showcases the simplicity yet intricate wonders and beauty of nature,
+In this simulation, the user can observe a small island with lifeforms  such as butterflies that float and wander the island seeking nearby flowers, birds that 
+soar through the skies enjoying the winds and finally a curious robot fascinated by these living beings all whilst listening to a beautiful melody.
+
+The simulation allows many customisations in the UI including how many butterflies to spawn, the birds wing size, their speed, night or day, volume control and much more.
 
 ## Video:
 
 [![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
 
 ## Screenshots
+![image](https://github.com/PanicAtTheKernal/miniature-rotary-phone/assets/98461233/6b71848a-c5c4-4fe6-bf9e-e192cab1d180)
+![image](https://github.com/PanicAtTheKernal/miniature-rotary-phone/assets/98461233/52be68c4-41e2-4231-bef1-7ea87e5e9d46)
+![image](https://github.com/PanicAtTheKernal/miniature-rotary-phone/assets/98461233/33d94cab-c71f-4c03-84df-c7556224ef33)
+![image](https://github.com/PanicAtTheKernal/miniature-rotary-phone/assets/98461233/d4ea7154-983b-47f2-8949-864556f8c6e8)
+
 
 # Instructions
 
