@@ -4,11 +4,14 @@ class_name BirdGlobalState
 
 @export
 var stamina: Stamina
+@export
+var robot: Node3D
 
 @export
 var ground_states = [
 	"DescendToGroundState",
-	"LandState"
+	"LandState",
+	"GroundState"
 ]
 
 func _enter():
@@ -19,14 +22,12 @@ func _enter():
 	stamina.stamina_replenished.connect(_on_stamina_regen)
 
 func _think():
-	pass
+	var flee: Flee = boid.find_child("Flee")
+	if robot and robot.global_position.distance_to(boid.global_position) < flee.flee_range and state_machine.current_state is GroundState:
+		state_machine.change_state(TakeOffState.new())
 
 func _on_stamina_depleted():
-	print(state_machine.current_state.name)
-	if not state_machine.current_state.name in ground_states:
-		var new_state = DescendToGroundState.new()
-		new_state.name = "DescendToGroundState"
-		state_machine.change_state(new_state)
+	pass
 	
 func _on_stamina_regen():
 	pass

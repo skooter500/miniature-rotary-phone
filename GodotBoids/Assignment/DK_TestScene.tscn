@@ -1,0 +1,143 @@
+[gd_scene load_steps=17 format=3 uid="uid://48bqgtxek4o7"]
+
+[ext_resource type="Script" path="res://Assignment/Ground.gd" id="1_ep45x"]
+[ext_resource type="Script" path="res://Assignment/Bird/BirdSpawner/Murder.gd" id="1_vwlqs"]
+[ext_resource type="PackedScene" uid="uid://lk8nhpq4tq5t" path="res://Assignment/Bird/Crow.tscn" id="2_ossph"]
+[ext_resource type="Script" path="res://Assignment/Bird/BirdSpawner/SceneSetup.gd" id="3_3rktv"]
+[ext_resource type="PackedScene" uid="uid://ivslos3b7cmv" path="res://behaviors/player.tscn" id="4_bevr5"]
+[ext_resource type="Script" path="res://behaviors/Boid.gd" id="5_oltg1"]
+[ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="6_5xlph"]
+[ext_resource type="PackedScene" uid="uid://cbvdurbl831xp" path="res://Assignment/UI/BirdUI.tscn" id="6_hr3jn"]
+[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="7_hoiu5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ue3y"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_n0yb5"]
+size = Vector2(1, 1)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_thata"]
+energy_multiplier = 7.88
+
+[sub_resource type="Sky" id="Sky_t0a3h"]
+sky_material = SubResource("PhysicalSkyMaterial_thata")
+
+[sub_resource type="Environment" id="Environment_a3epi"]
+background_mode = 2
+sky = SubResource("Sky_t0a3h")
+glow_enabled = true
+glow_intensity = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kqcpr"]
+size = Vector3(10, 10, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_w7fwt"]
+size = Vector3(10, 10, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+script = ExtResource("1_ep45x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_0ue3y")
+
+[node name="Ground" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
+mesh = SubResource("PlaneMesh_n0yb5")
+skeleton = NodePath("../..")
+
+[node name="Murder" type="Node3D" parent="." node_paths=PackedStringArray("ground", "take_off_maker", "landing_spots", "robot")]
+script = ExtResource("1_vwlqs")
+starting_point = Vector3(0, 100, 0)
+ground = NodePath("../Ground")
+take_off_maker = NodePath("../TakeOffsetMarker")
+landing_spots = [NodePath("../Ground")]
+robot = NodePath("../Player")
+fish_scene = ExtResource("2_ossph")
+center_path = NodePath("../Marker3D")
+
+[node name="SceneSetup" type="Node" parent="." node_paths=PackedStringArray("birds", "camera_controller", "camera_pursue")]
+script = ExtResource("3_3rktv")
+birds = NodePath("../Murder")
+camera_controller = NodePath("../Player/Camera3D/Camera3D Controller")
+camera_pursue = NodePath("../camera follower/OffsetPursue")
+
+[node name="Player" parent="." instance=ExtResource("4_bevr5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.85036, 6.48073, 7.11182)
+
+[node name="Camera3D" parent="Player" index="1"]
+current = true
+
+[node name="Camera3D Controller" parent="Player/Camera3D" index="1" node_paths=PackedStringArray("boid_player")]
+boid_player = NodePath("../../../camera follower")
+mode = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Player"]
+
+[node name="BirdUi" parent="Player/CanvasLayer" instance=ExtResource("6_hr3jn")]
+
+[node name="camera follower" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, -15.0557, 41.7624)
+script = ExtResource("5_oltg1")
+max_force = 30
+draw_gizmos = false
+
+[node name="OffsetPursue" type="Node" parent="camera follower"]
+script = ExtResource("6_5xlph")
+weight = 5.0
+enabled = false
+
+[node name="Avoidance" type="Node" parent="camera follower"]
+script = ExtResource("7_hoiu5")
+draw_gizmos = false
+enabled = false
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.0595396, -0.82277, 0.565248, -0.0861885, 0.568375, 0.818243, -0.994498, 3.7459e-09, -0.104754, -2.22929, 48.4534, 0.0760765)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_a3epi")
+
+[node name="TakeOffsetMarker" type="Marker3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(9.77082, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.594931, -45.1971)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_kqcpr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_w7fwt")
+
+[node name="StaticBody3D15" type="StaticBody3D" parent="."]
+transform = Transform3D(9.77082, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.594931, 47.3353)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D15"]
+shape = SubResource("BoxShape3D_kqcpr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D15"]
+mesh = SubResource("BoxMesh_w7fwt")
+
+[node name="StaticBody3D16" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.27096e-07, 0, -1, 0, 1, 0, 9.77082, 0, -4.37114e-08, 46.5539, 0.594931, 2.08386)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D16"]
+shape = SubResource("BoxShape3D_kqcpr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D16"]
+mesh = SubResource("BoxMesh_w7fwt")
+
+[node name="StaticBody3D17" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.27096e-07, 0, -1, 0, 1, 0, 9.77082, 0, -4.37114e-08, -44.5067, 0.594931, 2.08386)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D17"]
+shape = SubResource("BoxShape3D_kqcpr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D17"]
+mesh = SubResource("BoxMesh_w7fwt")
+
+[editable path="Player"]

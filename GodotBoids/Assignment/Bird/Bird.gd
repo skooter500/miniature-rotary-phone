@@ -6,12 +6,19 @@ class_name Bird
 @export
 var centre_point: Marker3D
 @export
-var ground: Node3D
+var take_off_point: Marker3D
+@export
+var ground: Ground
+@export
+var ground_speed: float = 5
+@export
+var flight_speed: float = 10
+
 
 @onready
-var boid: Boid = $Boid
+var boid: Boid = $"."
 @onready
-var body = $Boid/MeshInstance3D
+var body = %MeshInstance3D
 @onready
 var collider: CollisionShape3D = $CollisionShape3D
 
@@ -31,6 +38,7 @@ signal wind_direction_update(new_direction: float)
 func _ready() -> void:
 	super()
 	height = collider.shape.size.y+0.5
+	Parameters.BIRD_PROPERTY_CHANGED.connect(_on_bird_property_changed)
 	#setup_constrain()
 	pass # Replace with function body.
 
@@ -38,10 +46,29 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	super(delta)
-	pass
 
 func setup_constrain() -> void:
 	var constrain_node: Constrain = boid.find_child("Constrain")
 	if constrain_node == null:
 		return
 	constrain_node.center_path = centre_point.get_path()
+
+func _on_bird_property_changed(node_name,property_name,value):
+	if node_name != "self":
+		set_child_property(node_name, property_name, value)
+	else:
+		set_self(property_name, value)
+
+func set_child_property(node_name,property_name,value):
+	var node = find_child(node_name)
+	if node == null:
+		print("Node ",node_name," doesn't exist")
+		return
+	node.set(property_name, value)
+
+func set_self(property_name, value):
+	set(property_name, value)
+	if (property_name == "ground_speed") and body.state == "Walking":
+		speed = value
+	if (property_name == "flying_speed") and body.state == "Flying":		 
+		speed = value

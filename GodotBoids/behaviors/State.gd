@@ -19,6 +19,10 @@ func _ready():
 	boid = get_parent()
 	state_machine = boid.find_child("StateMachine")
 
+func disable_all_behaviours():
+	for behaviour in boid.behaviors:
+		behaviour.enabled = false
+
 func change_behaviour(behaviour_name: String, new_state: bool):
 	var behaviour = boid.find_child(behaviour_name)
 	if behaviour != null:
