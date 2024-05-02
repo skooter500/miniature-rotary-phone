@@ -17,8 +17,7 @@ soar through the skies enjoying the winds and finally a curious robot fascinated
 The simulation allows many customisations in the UI including how many butterflies to spawn, the birds wing size, their speed, night or day, volume control and much more.
 
 ## Video:
-
-[![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
+[![YouTube](https://github.com/PanicAtTheKernal/miniature-rotary-phone/assets/98461233/17c84673-4376-4d21-a9a4-f3100aff07c0)](https://www.youtube.com/watch?v=J2kHSSFA4NU](https://youtu.be/qU3tOcJ82fo))
 
 ## Screenshots
 ![image](https://github.com/PanicAtTheKernal/miniature-rotary-phone/assets/98461233/6b71848a-c5c4-4fe6-bf9e-e192cab1d180)
