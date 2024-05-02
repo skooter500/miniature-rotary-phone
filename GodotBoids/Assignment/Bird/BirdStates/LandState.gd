@@ -5,7 +5,10 @@ class_name LandState
 func _enter():
 	disable_all_behaviours()
 	change_behaviour("Avoidance", true)
-	change_behaviour("Arrive", true)		
+	change_behaviour("Arrive", true)
+	var missed_approach_timer = boid.find_child("Timer")
+	missed_approach_timer.timeout.connect(_on_missed_approach)
+	missed_approach_timer.start(15)
 	
 func _think():
 	#var arrive: Arrive = boid.get_node("Arrive")
@@ -30,3 +33,8 @@ func _think():
 			var new_state = GroundState.new()
 			new_state.name = "GroundState"
 			state_machine.change_state(new_state)
+
+func _on_missed_approach():
+	var new_state = TakeOffState.new()
+	new_state.name = "TakeOffState"
+	state_machine.change_state(new_state)

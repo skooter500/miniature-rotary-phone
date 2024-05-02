@@ -47,11 +47,13 @@ transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
 mesh = SubResource("PlaneMesh_n0yb5")
 skeleton = NodePath("../..")
 
-[node name="Murder" type="Node3D" parent="." node_paths=PackedStringArray("ground", "take_off_maker")]
+[node name="Murder" type="Node3D" parent="." node_paths=PackedStringArray("ground", "take_off_maker", "landing_spots", "robot")]
 script = ExtResource("1_vwlqs")
 starting_point = Vector3(0, 100, 0)
 ground = NodePath("../Ground")
 take_off_maker = NodePath("../TakeOffsetMarker")
+landing_spots = [NodePath("../Ground")]
+robot = NodePath("../Player")
 fish_scene = ExtResource("2_ossph")
 center_path = NodePath("../Marker3D")
 
