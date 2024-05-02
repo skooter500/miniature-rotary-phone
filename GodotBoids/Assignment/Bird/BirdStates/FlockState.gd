@@ -21,6 +21,7 @@ func _enter():
 	change_behaviour("Constrain", true)
 	change_behaviour("NoiseWander", true)
 	change_behaviour("ObAvoidance", true)
+	change_behaviour("Flee", true)
 	
 func _think():
 	if stamina_deplated:

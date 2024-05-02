@@ -89,6 +89,14 @@ text = "Reset Birds"
 signal_to_notify = "MURDER_REQUEST"
 node_name = "Reset"
 
+[node name="DebugGizmos" parent="MarginContainer/TabContainer/General/GeneralSettingTab/VBoxContainer" instance=ExtResource("2_4y6ij")]
+layout_mode = 2
+options = Array[String](["True", "False"])
+text = "Debug Gizmos"
+signal_to_notify = "BIRD_PROPERTY_CHANGED"
+node_name = "self"
+propery_name = "debug"
+
 [node name="Stamina" type="MarginContainer" parent="MarginContainer/TabContainer"]
 visible = false
 layout_mode = 2

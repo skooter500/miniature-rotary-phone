@@ -13,6 +13,7 @@ func _enter():
 	change_behaviour("Arrive", true)
 	change_behaviour("Avoidance", true)
 	change_behaviour("ObAvoidance", true)
+	change_behaviour("Flee", true)
 
 func _think():
 	var threshold = boid.ground.global_position.y + arrive.slowing_radius 

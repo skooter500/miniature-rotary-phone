@@ -18,7 +18,8 @@ var max: float = 60:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	timer.timeout.connect(_timeout)
-	timer.start(randf_range(min, max))
+	if not Engine.is_editor_hint():
+		timer.start(randf_range(min, max))
 
 func _timeout():
 	play()
