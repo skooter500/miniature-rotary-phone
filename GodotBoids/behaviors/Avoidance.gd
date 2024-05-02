@@ -4,7 +4,7 @@ class_name Avoidance extends SteeringBehavior
 # var a = 2
 # var b = "text"
 
-enum ForceDirection {Normal, Incident, Up, Braking}
+enum ForceDirection {Normal, Incident, Up, Braking, Ground}
 @export var direction = ForceDirection.Normal
 @export var feeler_angle = 45
 @export var feeler_length = 10
@@ -66,6 +66,8 @@ func feel(local_ray):
 				feeler.force = Vector3.UP * force_mag
 			ForceDirection.Braking:
 				feeler.force = to_boid.normalized() * force_mag
+			ForceDirection.Ground:
+				feeler.force = result.normal * force_mag * Vector3(1,0,1)
 		force += feeler.force
 	return feeler
 
