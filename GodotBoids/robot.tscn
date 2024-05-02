@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://c2ob3qj0e3xjf"]
+[gd_scene load_steps=22 format=3 uid="uid://c2ob3qj0e3xjf"]
 
 [ext_resource type="PackedScene" uid="uid://dyunwcsba2abh" path="res://Robot.glb" id="1_bq7ca"]
 [ext_resource type="Script" path="res://robot/Robot.gd" id="2_tbcyg"]
 [ext_resource type="Script" path="res://behaviors/Boid.gd" id="3_x7hdx"]
 [ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="4_sdsf0"]
+[ext_resource type="Script" path="res://behaviors/Constrain.gd" id="6_k0q5p"]
 [ext_resource type="Script" path="res://behaviors/Pursue.gd" id="7_d3gbr"]
 [ext_resource type="Script" path="res://behaviors/NoiseWander.gd" id="7_kaj2n"]
 [ext_resource type="PackedScene" uid="uid://bu8cymkyvch83" path="res://robot/laserBall.tscn" id="8_pi1t6"]
@@ -51,6 +52,15 @@ emission = Color(1, 0.194376, 0.144153, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_du7ca"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7h0tw"]
+metallic = 1.0
+roughness = 0.11
+emission_enabled = true
+emission = Color(1, 0.0645251, 0.368695, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_q27q1"]
+
 [node name="Robot" type="Node3D" node_paths=PackedStringArray("laserbeamL", "laserbeamR")]
 script = ExtResource("2_tbcyg")
 pursueColor = Color(0.772549, 0, 0, 1)
@@ -76,6 +86,10 @@ surface_material_override/6 = SubResource("StandardMaterial3D_4ya14")
 
 [node name="Avoidance" type="Node" parent="Robot"]
 script = ExtResource("4_sdsf0")
+
+[node name="Constrain" type="Node" parent="Robot"]
+script = ExtResource("6_k0q5p")
+center_path = NodePath("../../../Center")
 
 [node name="NoiseWander" type="Node" parent="Robot"]
 script = ExtResource("7_kaj2n")
@@ -113,5 +127,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Robot/CuriosityMarker/Dot"]
 mesh = SubResource("SphereMesh_du7ca")
 surface_material_override/0 = SubResource("StandardMaterial3D_q8ev5")
+
+[node name="Scanner" type="Node3D" parent="Robot"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.3658, 0, 0)
+visible = false
+
+[node name="ScannerMesh" type="MeshInstance3D" parent="Robot/Scanner"]
+transform = Transform3D(0.5, 0, 0, 0, 1.5, 0, 0, 0, 0.3, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_7h0tw")
+mesh = SubResource("PrismMesh_q27q1")
+skeleton = NodePath("../..")
 
 [editable path="Robot"]
