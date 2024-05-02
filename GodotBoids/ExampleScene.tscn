@@ -38,6 +38,7 @@ mesh = SubResource("PlaneMesh_n0yb5")
 skeleton = NodePath("../..")
 
 [node name="Murder" type="Node3D" parent="." node_paths=PackedStringArray("ground")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.108247, 0)
 script = ExtResource("1_orda2")
 starting_point = Vector3(0, 100, 0)
 ground = NodePath("../Ground/Ground")
@@ -83,8 +84,7 @@ transform = Transform3D(-0.0595396, -0.82277, 0.565248, -0.0861885, 0.568375, 0.
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a3epi")
 
-[node name="Robot" parent="." node_paths=PackedStringArray("murderNode") instance=ExtResource("8_2n0ge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-murderNode = NodePath("../Murder")
+[node name="Robot" parent="." instance=ExtResource("8_2n0ge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.52546, 0)
 
 [editable path="Player"]

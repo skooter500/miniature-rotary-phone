@@ -1,12 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://c2ob3qj0e3xjf"]
+[gd_scene load_steps=29 format=3 uid="uid://c2ob3qj0e3xjf"]
 
 [ext_resource type="PackedScene" uid="uid://dyunwcsba2abh" path="res://Robot.glb" id="1_bq7ca"]
 [ext_resource type="Script" path="res://robot/Robot.gd" id="2_tbcyg"]
 [ext_resource type="Script" path="res://behaviors/Boid.gd" id="3_x7hdx"]
 [ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="4_sdsf0"]
+[ext_resource type="Script" path="res://behaviors/Constrain.gd" id="6_k0q5p"]
 [ext_resource type="Script" path="res://behaviors/Pursue.gd" id="7_d3gbr"]
 [ext_resource type="Script" path="res://behaviors/NoiseWander.gd" id="7_kaj2n"]
 [ext_resource type="PackedScene" uid="uid://bu8cymkyvch83" path="res://robot/laserBall.tscn" id="8_pi1t6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iohsv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cqs65"]
 metallic = 0.5
@@ -40,21 +43,97 @@ emission_enabled = true
 emission = Color(0.871084, 0.568657, 0.0193709, 1)
 emission_energy_multiplier = 5.55
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_iohsv"]
+[sub_resource type="BoxMesh" id="BoxMesh_wsumo"]
 
-[node name="Robot" type="Node3D" node_paths=PackedStringArray("laserbeamL", "laserbeamR")]
-script = ExtResource("2_tbcyg")
-pursueColor = Color(0.772549, 0, 0, 1)
-wanderColor = Color(0, 0.584314, 0.811765, 1)
-laserbeamL = NodePath("Robot/LaserBall_Left")
-laserbeamR = NodePath("Robot/LaserBall_Right")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q8ev5"]
+albedo_color = Color(0.412152, 0.412152, 0.412152, 1)
+emission_enabled = true
+emission = Color(1, 0.194376, 0.144153, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_du7ca"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7h0tw"]
+metallic = 1.0
+roughness = 0.11
+emission_enabled = true
+emission = Color(1, 0.0645251, 0.368695, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_q27q1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbr0f"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.646345, 0.132828, 9.62615e-08, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_l81dx"]
+offsets = PackedFloat32Array(0.318182, 0.727273)
+colors = PackedColorArray(0.166464, 1.51913e-07, 3.00817e-09, 1, 0.450688, 0.0817933, 4.81308e-08, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lxans"]
+gradient = SubResource("Gradient_l81dx")
+
+[sub_resource type="Curve" id="Curve_vd770"]
+_data = [Vector2(0.0144928, 0), 0.0, 0.0, 0, 0, Vector2(0.333333, 0.978022), 0.0, 0.0, 0, 0, Vector2(0.985507, 0.043956), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_bdu0s"]
+curve = SubResource("Curve_vd770")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_76xkd"]
+angle_max = 360.0
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 1.0
+initial_velocity_max = 4.0
+angular_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 1.0
+linear_accel_max = 53.19
+scale_min = 0.3
+scale_max = 0.8
+scale_curve = SubResource("CurveTexture_bdu0s")
+color_initial_ramp = SubResource("GradientTexture1D_lxans")
+hue_variation_min = -0.28
+hue_variation_max = 0.31
+
+[sub_resource type="QuadMesh" id="QuadMesh_b7n21"]
+
+[node name="Robot" type="CharacterBody3D"]
+script = ExtResource("3_x7hdx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_iohsv")
+
+[node name="Avoidance" type="Node" parent="."]
+script = ExtResource("4_sdsf0")
+
+[node name="Constrain" type="Node" parent="."]
+script = ExtResource("6_k0q5p")
+center_path = NodePath("../../../Center")
+
+[node name="NoiseWander" type="Node" parent="."]
+script = ExtResource("7_kaj2n")
+radius = 50.0
+amplitude = 90
+distance = 100
+
+[node name="Pursue" type="Node" parent="."]
+script = ExtResource("7_d3gbr")
 
 [node name="Robot" parent="." instance=ExtResource("1_bq7ca")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
-script = ExtResource("3_x7hdx")
-max_force = 50
-banking = 0.07
-damping = 0.3
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("2_tbcyg")
+pursueColor = Color(1, 0.0645251, 0.368695, 1)
+wanderColor = Color(0, 0.584314, 0.811765, 1)
 
 [node name="EnemyVer2" parent="Robot" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_cqs65")
@@ -65,19 +144,6 @@ surface_material_override/4 = SubResource("StandardMaterial3D_6u73x")
 surface_material_override/5 = SubResource("StandardMaterial3D_p8vc6")
 surface_material_override/6 = SubResource("StandardMaterial3D_4ya14")
 
-[node name="Avoidance" type="Node" parent="Robot"]
-script = ExtResource("4_sdsf0")
-
-[node name="NoiseWander" type="Node" parent="Robot"]
-script = ExtResource("7_kaj2n")
-radius = 50.0
-amplitude = 90
-distance = 100
-draw_gizmos = false
-
-[node name="Pursue" type="Node" parent="Robot"]
-script = ExtResource("7_d3gbr")
-
 [node name="LaserBall_Right" parent="Robot" instance=ExtResource("8_pi1t6")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.07822, 0, -1.08333)
 visible = false
@@ -86,7 +152,42 @@ visible = false
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.07822, 0, 1.08333)
 visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Robot"]
-shape = SubResource("BoxShape3D_iohsv")
+[node name="CuriosityMarker" type="Node3D" parent="Robot"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.5, 2.75, 0)
+
+[node name="Top" type="Node3D" parent="Robot/CuriosityMarker"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Robot/CuriosityMarker/Top"]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_wsumo")
+surface_material_override/0 = SubResource("StandardMaterial3D_q8ev5")
+
+[node name="Dot" type="Node3D" parent="Robot/CuriosityMarker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Robot/CuriosityMarker/Dot"]
+mesh = SubResource("SphereMesh_du7ca")
+surface_material_override/0 = SubResource("StandardMaterial3D_q8ev5")
+
+[node name="Scanner" type="Node3D" parent="Robot"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.3658, 0, 0)
+visible = false
+
+[node name="ScannerMesh" type="MeshInstance3D" parent="Robot/Scanner"]
+transform = Transform3D(0.5, 0, 0, 0, 1.5, 0, 0, 0, 0.3, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_7h0tw")
+mesh = SubResource("PrismMesh_q27q1")
+skeleton = NodePath("../..")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Robot"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.704129, 0)
+material_override = SubResource("StandardMaterial3D_wbr0f")
+amount = 500
+lifetime = 0.3
+randomness = 1.0
+visibility_aabb = AABB(-4, -9.36502, -5.43375, 8, 18.73, 10.8675)
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_76xkd")
+draw_pass_1 = SubResource("QuadMesh_b7n21")
 
 [editable path="Robot"]
