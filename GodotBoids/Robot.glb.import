@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Robot.glb-332051661787b301f59ef0a3f3b8b4a0.sc
 
 [params]
 
-nodes/root_type="CharacterBody3D"
+nodes/root_type="Node3D"
 nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
