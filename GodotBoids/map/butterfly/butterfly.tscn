@@ -56,6 +56,7 @@ draw_gizmos = false
 script = ExtResource("6_yu6bc")
 slowing_radius = 50.0
 draw_gizmos = false
+enabled = false
 
 [node name="Constrain" type="Node" parent="Boid"]
 script = ExtResource("7_e5bos")

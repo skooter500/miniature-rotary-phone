@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnvnjemlfct6o"]
+[gd_scene load_steps=6 format=3 uid="uid://bnvnjemlfct6o"]
 
 [ext_resource type="Script" path="res://map/UI/user_interface.gd" id="1_wi56x"]
 [ext_resource type="Script" path="res://map/UI/music_slider.gd" id="2_1gc23"]
+[ext_resource type="PackedScene" uid="uid://cbvdurbl831xp" path="res://Assignment/UI/BirdUI.tscn" id="3_c4ivp"]
+[ext_resource type="Script" path="res://map/UI/SFX_slider.gd" id="3_ejyrb"]
+[ext_resource type="Script" path="res://map/UI/ShowBirdUI.gd" id="3_f0mst"]
 
 [node name="UserInterface" type="Node3D"]
 script = ExtResource("1_wi56x")
@@ -23,11 +26,12 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -94.0
-offset_top = 10.0
-offset_right = -10.9375
-offset_bottom = 41.0
+offset_left = -1007.0
+offset_top = 675.0
+offset_right = -923.938
+offset_bottom = 706.0
 grow_horizontal = 0
+scale = Vector2(0.75, 0.75)
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/butterfly_amount"]
 layout_mode = 1
@@ -36,22 +40,23 @@ anchor_left = -0.83
 anchor_top = 1.0
 anchor_right = -0.83
 anchor_bottom = 1.0
-offset_left = -18.9956
-offset_top = -27.0
-offset_right = 63.0044
-offset_bottom = -4.0
-text = "Butterflies:"
+offset_left = 156.942
+offset_top = -31.0
+offset_right = 242.942
+offset_bottom = -8.0
+text = "Butterflies "
 
 [node name="butterfly_speed" type="SpinBox" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -93.9375
-offset_top = 43.0
-offset_right = -10.875
-offset_bottom = 74.0
+offset_left = -1007.0
+offset_top = 706.0
+offset_right = -923.938
+offset_bottom = 737.0
 grow_horizontal = 0
+scale = Vector2(0.75, 0.75)
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/butterfly_speed"]
 layout_mode = 1
@@ -60,11 +65,11 @@ anchor_left = -0.83
 anchor_top = 1.0
 anchor_right = -0.83
 anchor_bottom = 1.0
-offset_left = -35.0581
-offset_top = -27.0
-offset_right = 66.9419
-offset_bottom = -4.0
-text = "ButterSpeed:"
+offset_left = 156.942
+offset_top = -31.0
+offset_right = 276.942
+offset_bottom = -8.0
+text = "Butterfly Speed"
 
 [node name="music_slider" type="HSlider" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -73,9 +78,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -132.0
+offset_left = -143.0
 offset_top = 355.0
-offset_right = -10.0
+offset_right = -21.0
 offset_bottom = 371.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -99,43 +104,109 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Music:"
 
+[node name="SFX_slider" type="HSlider" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -143.0
+offset_top = 322.0
+offset_right = -21.0
+offset_bottom = 338.0
+grow_horizontal = 0
+grow_vertical = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+script = ExtResource("3_ejyrb")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/SFX_slider"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -183.0
+offset_top = -21.4
+offset_right = -133.0
+offset_bottom = 1.6
+grow_horizontal = 0
+grow_vertical = 0
+text = "SFX:"
+
 [node name="Butterfly_gizmo" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
-offset_left = 958.0
-offset_top = 87.0
-offset_right = 997.0
-offset_bottom = 111.0
+offset_left = 17.0
+offset_top = 739.0
+offset_right = 84.0
+offset_bottom = 770.0
+scale = Vector2(0.75, 0.75)
 text = "Off"
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/Butterfly_gizmo"]
 layout_mode = 0
-offset_left = -128.0
-offset_top = 3.0
-offset_right = -6.0
-offset_bottom = 26.0
-text = "ButterflyGizmo:"
+offset_left = 88.0
+offset_right = 222.0
+offset_bottom = 23.0
+text = "Butterfly Gizmos:"
+
+[node name="Find_flower" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 642.0
+offset_right = 84.0
+offset_bottom = 673.0
+scale = Vector2(0.75, 0.75)
+text = "Off"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Find_flower"]
+layout_mode = 0
+offset_left = 88.0
+offset_right = 222.0
+offset_bottom = 23.0
+text = "Find Flowers"
 
 [node name="DayNight" type="CheckButton" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 85.0
-offset_top = -36.33
-offset_right = 129.0
-offset_bottom = -6.33002
+offset_left = 747.0
+offset_top = -39.0
+offset_right = 791.0
+offset_bottom = -15.0
 grow_vertical = 0
-scale = Vector2(1.2, 1.2)
+scale = Vector2(1.5, 1.5)
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/DayNight"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = -2.146
-anchor_bottom = 1.0
-offset_left = -63.3333
-offset_top = 69.655
-offset_right = 15.6667
-offset_bottom = -1.72473
+anchor_left = 0.0454545
+anchor_top = -2.16683
+anchor_right = 0.0454545
+anchor_bottom = 0.979167
+offset_left = -43.3333
+offset_top = 58.6707
+offset_right = 35.6667
+offset_bottom = 6.16667
 grow_vertical = 0
-scale = Vector2(0.8, 0.8)
+scale = Vector2(0.5, 0.5)
 text = "Day/Night"
+
+[node name="ShowBirdUI" type="Button" parent="CanvasLayer/Control" node_paths=PackedStringArray("birdUI")]
+layout_mode = 0
+offset_left = 607.0
+offset_top = 734.0
+offset_right = 668.0
+offset_bottom = 765.0
+scale = Vector2(0.9, 0.9)
+text = "Bird UI"
+script = ExtResource("3_f0mst")
+birdUI = NodePath("../BirdUi")
+
+[node name="BirdUi" parent="CanvasLayer/Control" instance=ExtResource("3_c4ivp")]
+visible = false
+layout_mode = 1

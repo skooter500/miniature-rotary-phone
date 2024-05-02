@@ -13,6 +13,7 @@ func _ready():
 	Parameters.connect("BUTTERFLY_SPEED", set_speed)
 	Parameters.connect("DRAW_GIZMOS_BUTTERFLY", gizmos_drawn)
 	Parameters.connect("SET_DAY_NIGHT", _set_glow)
+	Parameters.connect("FIND_FLOWERS", _set_arrive)
 	
 	boid = get_node("Boid")
 	body =  get_node("Boid/Body");
@@ -51,3 +52,6 @@ func _set_glow(value):
 		material.emission_energy_multiplier = 2
 	else:
 		material.emission_enabled = false
+
+func _set_arrive(value):
+	get_node("Boid/ArriveToFlowers").enabled = value

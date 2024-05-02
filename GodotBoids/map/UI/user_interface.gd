@@ -9,8 +9,10 @@ var toggle_mouse = false
 # parameters
 @onready var butterfly_amount = $CanvasLayer/Control/butterfly_amount
 @onready var butterfly_speed = $CanvasLayer/Control/butterfly_speed
+@onready var find_flower = $CanvasLayer/Control/Find_flower
 var previous_butterfly_amount = 0
 var previous_butterfly_speed = 0
+var find_flower_enabled = false
 
 # some visual UI
 @onready var butterfly_draw_gizmos = $CanvasLayer/Control/Butterfly_gizmo
@@ -24,7 +26,7 @@ func _ready():
 	previous_butterfly_speed = butterfly_speed.get_value()
 	butterfly_draw_gizmos.pressed.connect(_enable_gizmos)
 	day_night_button.pressed.connect(_switch_day_night)
-
+	find_flower.pressed.connect(_enable_find_flower)
 # for camera movement
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -98,3 +100,13 @@ func _switch_day_night():
 	else:
 		day_night = true
 		Parameters.SET_DAY_NIGHT.emit(day_night)
+
+func _enable_find_flower():
+	if find_flower_enabled:
+		find_flower_enabled = false
+		find_flower.set_text("Off")
+		Parameters.FIND_FLOWERS.emit(find_flower_enabled)
+	else:
+		find_flower_enabled = true
+		find_flower.set_text("On")
+		Parameters.FIND_FLOWERS.emit(find_flower_enabled)
