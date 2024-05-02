@@ -2,17 +2,19 @@ extends State
 
 class_name DescendToGroundState
 
+var arrive: Arrive
+
 func _enter():
 	disable_all_behaviours()
-	var arrive: Arrive = boid.get_node("Arrive")
+	arrive = boid.get_node("Arrive")
 	if arrive:
-		arrive.target = boid.ground
+		arrive.randomise_target()
 	change_behaviour("Constrain", true)	
 	change_behaviour("Arrive", true)
 	change_behaviour("Avoidance", true)
+	change_behaviour("ObAvoidance", true)
 
 func _think():
-	var arrive = boid.find_child("Arrive")
 	var threshold = boid.ground.global_position.y + arrive.slowing_radius 
 	if boid.global_position.y <= threshold:
 		var wings = boid.find_children("Wing?", "", true, false)

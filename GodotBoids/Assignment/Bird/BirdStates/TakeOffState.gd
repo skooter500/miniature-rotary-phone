@@ -11,7 +11,7 @@ func _enter():
 		arrive.target = boid.take_off_point
 	var body = boid.get_node("MeshInstance3D")
 	body.state = "Flying"
-	var wings = boid.find_children("Wing?", "", true, false)
+	var wings = boid.body.find_children("Wing?")
 	for wing in wings:
 		wing.play_slowdown = false
 	boid.banking = 0.1
