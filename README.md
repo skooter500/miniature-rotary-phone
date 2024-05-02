@@ -72,6 +72,7 @@ The majority of the scripts were self-made or were referencing and modfying some
 | user_interface.gd | Self-Made |
 | Parameters.gd | Self-Made |
 | SFX/Music_Slider.gd | Referenced [SliderTutorial](https://www.youtube.com/watch?v=aFkRmtGiZCw&t=44s) |
+| Robot.gd | Self-Made |
 
 
 ## Contributions
@@ -86,7 +87,10 @@ The sounds and music were kindly provided by Daniel and I had the pleasure to in
 ### Daniel Kondabarov
 
 ### Olabode Balinga
-I was tasked with designing the features with the robot. The robot was made using the Blender application, where the design theme was to create a friendly robot inspired by the robot character Bastion from Overwatch. Like with Bastion, the robot is very curious about nature and to show this, the robot was designed to pursue the birds to scan and observe them. The birds, however, will begin to flee once the robot is seen, leading to a chase. 
+I was tasked with designing the features with the robot. The robot was made using the Blender application, where the design theme was to create a friendly robot inspired by the robot character Bastion from Overwatch. Like with Bastion, the robot is very curious about nature and to show this, the robot was designed to pursue the birds to scan and observe them. The birds, however, will begin to flee once the robot is seen, leading to a chase. Particle systems were used for the robot to give the idea that it is flying in the air akin to that of a rocket, using jet propulsion. Exclamation mark was designed using Godot.
+
+What did I learn?
+I learned how to use particle effects, which was something I was really struggling with in the past, especially during the first semester assignment. However, after watching https://www.youtube.com/watch?v=F27vQR_ivsc ,it gave me an insight into how easy it is to understand Godot's Particle System and use it. Additonally, understanding the paths of nodes was someting I also learned in Godot, improving from what I had learned from my group as well as expanding my knowledge from last semester too.
 
 # References
 * Grass_Tutorial: https://www.youtube.com/watch?v=3ftcGTp-Se8&t=144s
