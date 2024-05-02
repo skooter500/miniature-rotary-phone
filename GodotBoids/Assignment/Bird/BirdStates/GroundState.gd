@@ -17,6 +17,7 @@ func _enter():
 	obAvoidance.direction = Avoidance.ForceDirection.Ground
 	obAvoidance.feeler_angle = 1
 	change_behaviour("ObAvoidance", true)
+	change_behaviour("Flee", true)
 
 func _think():
 	if stamina_regened:

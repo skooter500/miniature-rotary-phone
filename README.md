@@ -66,6 +66,17 @@ The majority of the scripts were self-made or were referencing and modfying some
 | low_poly_stylized_nature_pack (Trees, Rocks and Flowers | From [SketchFab](https://sketchfab.com/3d-models/low-poly-stylized-nature-pack-9c773e846c6e4448b26b2cdecb2b91bf) |
 | AllFreeSky | From [Godot Asset Libary](https://godotengine.org/asset-library/asset/579) |
 
+=======
+| Music | From [Daniel](https://github.com/PanicAtTheKernal/FinalYearProject/tree/main/Assets/Sounds) |
+| map.gd | Self-Made |
+| ArriveToFlowers.gd | Modified Arrive |
+| spawn_butterfly.gd | Self-Made |
+| butterfly.gd | Self-Made |
+| user_interface.gd | Self-Made |
+| Parameters.gd | Self-Made |
+| SFX/Music_Slider.gd | Referenced [SliderTutorial](https://www.youtube.com/watch?v=aFkRmtGiZCw&t=44s) |
+
+
 ## Contributions
 ### Wen Ting Song
 I was tasked with the map making, some UI design and butterflies for this portion of the project.

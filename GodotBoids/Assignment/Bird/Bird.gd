@@ -67,6 +67,9 @@ func set_child_property(node_name,property_name,value):
 	node.set(property_name, value)
 
 func set_self(property_name, value):
+	if property_name == "debug":
+		var debug_enabled = true if value == 0 else false
+		draw_gizmos_recursive(debug_enabled)
 	set(property_name, value)
 	if (property_name == "ground_speed") and body.state == "Walking":
 		speed = value
