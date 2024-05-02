@@ -28,94 +28,56 @@ The simulation allows many customisations in the UI including how many butterfli
 
 
 # Instructions
+Use the WSAD keys to move the camera around
+
+Press Shift to hide or use mouse cursor
+
+Interact with the UI to spawn butterflies, birds etc
+
+You can configure various settings from the UI to see how different values change the simulation
+
 
 # How it works
+### Butterfly
+The butterflies works by inheriting several nodes provided the forked repo that facilitates several behaviours,
+these include Wander, Avoidance, NoiseWander, Constrain and a modified Arrive called ArriveToFlowers. These behaviours enable
+the butterflies to simply fly around in a contrained space, they avoid obstacles such as the ground and they seek out flowers on the map.
+
+The arrive function tells the butterflies to arrive to the various flowers located on the map, a timer is used to tell the butterflies to find a different flower every 15 seconds
+to simulate how butterflies behave, always looking for different flowers.
+
+The animation of the wings flapping is done using a sin wave that manipulates the rotation and the Y axis of the butterfly's wings and body
+to simulate the quick flapping of wings a butterfly would do in real life.
+
+### Birds
+
+### Robot
+
 
 # List of classes/assets
+Assets for the bird, butterfly and robot were all self-made in the godot engine or blender. The map is made using a godot meshes and was decorated using
+assets provided by low_poly_stylized_nature_pack from sketchfab. The grass resource was self made using blender but a tutorial was followed in from Grass_Tutorial.
 
+The majority of the scripts were self-made or were referencing and modfying some scripts provided within the miniature-rotatry-phone folder.
 | Class/asset | Source |
 |-----------|-----------|
-| MyClass.cs | Self written |
-| MyClass1.cs | Modified from [reference]() |
-| MyClass2.cs | From [reference]() |
+| low_poly_stylized_nature_pack (Trees, Rocks and Flowers | From [SketchFab](https://sketchfab.com/3d-models/low-poly-stylized-nature-pack-9c773e846c6e4448b26b2cdecb2b91bf) |
+| AllFreeSky | From [Godot Asset Libary](https://godotengine.org/asset-library/asset/579) |
 
-Each team member or individual needs to write a paragraph or two explaining what they contributed to the project
 
-- What they did
-- What they are most proud of
-- What they learned
+## Contributions
+### Wen Ting Song
+I was tasked with the map making, some UI design and butterflies for this portion of the project.
+The map was designed by me using a mixture of the godot engine, blender and some free assets to help decorate the map and give it more life.
+The butterflies were introduced to elevate the feeling of nature, there were lots of flowers and i felt like some butterflies would bring far more
+life to the map as a whole.
+
+The sounds and music were kindly provided by Daniel and I had the pleasure to incorporate it within the map. The night and day button was also dne by me.
+
+### Daniel Kondabarov
+
+### Olabode Balinga
+
 
 # References
-* Item 1
-* Item 2
-
-# From here on, are examples of how to different things in Markdown. You can delete.  
-
-## This is how to markdown text:
-
-This is *emphasis*
-
-This is a bulleted list
-
-- Item
-- Item
-
-This is a numbered list
-
-1. Item
-1. Item
-
-This is a [hyperlink](http://bryanduggan.org)
-
-# Headings
-## Headings
-#### Headings
-##### Headings
-
-This is code:
-
-```Java
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
-
-So is this without specifying the language:
-
-```
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
-
-This is an image using a relative URL:
-
-![An image](images/p8.png)
-
-This is an image using an absolute URL:
-
-![A different image](https://bryanduggandotorg.files.wordpress.com/2019/02/infinite-forms-00045.png?w=595&h=&zoom=2)
-
-This is a youtube video:
-
-[![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
-
-This is a table:
-
-| Heading 1 | Heading 2 |
-|-----------|-----------|
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-
+* Grass_Tutorial: https://www.youtube.com/watch?v=3ftcGTp-Se8&t=144s
