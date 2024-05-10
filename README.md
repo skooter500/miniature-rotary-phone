@@ -137,3 +137,4 @@ I learned how to use particle effects, which was something I was really struggli
 * Grass_Tutorial: https://www.youtube.com/watch?v=3ftcGTp-Se8&t=144s
 * Procedural Geometry Tutorial: https://docs.godotengine.org/en/stable/tutorials/3d/procedural_geometry/immediatemesh.html
 * 3D Tutorial: https://docs.godotengine.org/en/stable/tutorials/3d/using_transforms.html
+* NOTE: Research videos are found in the assignment folder
