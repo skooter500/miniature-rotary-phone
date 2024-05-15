@@ -1,6 +1,5 @@
 extends Node3D
 
-
 var isTrigger = false
 
 var currentState: int
@@ -56,26 +55,23 @@ func _ready():
 	
 	notificationTimer.wait_time = 1.5
 	
-	
 	notificationTimer.timeout.connect(_on_notificationTimer_timeout)
-	
 	
 	notificationTimer.one_shot = true
 	
 	add_child(notificationTimer)
 	eyeMat = robotMesh.get_surface_override_material(1)
 	
-	
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
+	_checkIfBirdExists()
 	if get_node("../../Murder").get_child_count() > 0:
 		_checkDistance(delta)
 	
-		if isCurious:
+		if isCurious and birds != null:
 			look_at(birds.global_transform.origin)
 			eyeMat.emission = pursueColor
 			
@@ -111,6 +107,23 @@ func _setupConstrain():
 	groundMarker = get_node("../../Take-off")
 	constrain.center_path = groundMarker.get_path()
 
+func _checkIfBirdExists():
+	if birds == null:
+		pursue.enabled = false
+		_findBirds()
+		timerStarted = false
+		notified = false
+		notificationTimer.start()
+	#else:
+		#print("Bird is not null")
+		#if pursue.enabled == false:
+			#print("This happening?")
+			#_findBirds()
+			#timerStarted = false
+			#notificationTimer.start()
+			
+			
+			
 
 func _on_notificationTimer_timeout():
 	print("Pursuing Bird")
@@ -120,15 +133,14 @@ func _on_notificationTimer_timeout():
 	
 # Funciton to check the nearest distance to the bird and shoot
 func _checkDistance(delta):
-	print("DistanceCheck: " + str(global_transform.origin.distance_to(birds.global_transform.origin)))
+	# print("DistanceCheck: " + str(global_transform.origin.distance_to(birds.global_transform.origin)))
 	
-	if not hasBeenScanned:
+	if not hasBeenScanned and birds != null:
 		isCurious = true
 		pursue.enabled = true
 		
 		if global_transform.origin.distance_to(birds.global_transform.origin) > 0 and global_transform.origin.distance_to(birds.global_transform.origin) < 20:
 			scanningCount += delta
-			print("scannning count" + str(scanningCount))
 			
 			if scanningCount >= 10:
 				if birdIndex < murder.get_child_count() - 1:

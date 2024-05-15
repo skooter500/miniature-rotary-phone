@@ -138,6 +138,7 @@ pursueColor = Color(1, 0.0645251, 0.368695, 1)
 wanderColor = Color(0, 0.584314, 0.811765, 1)
 
 [node name="EnemyVer2" parent="Robot" index="0"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_cqs65")
 surface_material_override/1 = SubResource("StandardMaterial3D_y684n")
 surface_material_override/2 = SubResource("StandardMaterial3D_gy66l")
