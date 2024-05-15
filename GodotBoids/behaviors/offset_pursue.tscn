@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ivslos3b7cmv" path="res://behaviors/player.tscn" id="2_lcli5"]
 [ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="3"]
 [ext_resource type="Script" path="res://behaviors/TrailRender.gd" id="4"]
-[ext_resource type="PackedScene" uid="uid://d26vt30ugeu0d" path="res://behaviors/SceneSwitcher.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://dc24oh4o5erhi" path="res://behaviors/SceneSwitcher.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://okvro62ssxp" path="res://Models/cobramk3_out/cobramk3.gltf" id="6"]
 [ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="7"]
 [ext_resource type="Script" path="res://behaviors/Boid.gd" id="9"]
