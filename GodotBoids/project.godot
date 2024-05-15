@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GodotBoids"
-run/main_scene="res://behaviors/Hybrid1.tscn"
+run/main_scene="res://Assignment/BirdIntergrationMap.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://behaviors/icon.png"
 

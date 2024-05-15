@@ -20,12 +20,12 @@
 [ext_resource type="AudioStream" uid="uid://min5llsrbtbk" path="res://assets/Caw.mp3" id="18_jgqk4"]
 [ext_resource type="Script" path="res://Assignment/Bird/BirdComponets/BirdSound.gd" id="19_yrwjt"]
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_hyrst"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_u10rq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_828u5"]
 albedo_color = Color(0.160784, 0.160784, 0.160784, 1)
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_kdvtl"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_cnn8i"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ro1sb"]
 
@@ -95,7 +95,7 @@ enabled = false
 script = ExtResource("12_d4g50")
 direction = 1
 feeler_angle = 5
-feeler_length = 15
+feeler_length = 17
 weight = 3.0
 enabled = false
 
@@ -129,14 +129,14 @@ wing_span = 6
 
 [node name="Wing1" type="MeshInstance3D" parent="MeshInstance3D" node_paths=PackedStringArray("parent")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.621, -0.354)
-mesh = SubResource("ImmediateMesh_hyrst")
+mesh = SubResource("ImmediateMesh_u10rq")
 skeleton = NodePath("../..")
 script = ExtResource("10_bqgsl")
 tickness = 0.2
 width = 2.0
 num_of_points = 6
 dist_between_points = 1.0
-pos = -1.19818
+pos = 0.19087
 play_flapping = true
 wind_direction = 90.0
 wind_threshold = 15.0
@@ -146,14 +146,14 @@ parent = NodePath("../..")
 
 [node name="Wing2" type="MeshInstance3D" parent="MeshInstance3D" node_paths=PackedStringArray("parent")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.621, -0.354)
-mesh = SubResource("ImmediateMesh_kdvtl")
+mesh = SubResource("ImmediateMesh_cnn8i")
 skeleton = NodePath("../..")
 script = ExtResource("10_bqgsl")
 tickness = 0.2
 width = 2.0
 num_of_points = 6
 dist_between_points = 1.0
-pos = -1.19818
+pos = 0.19087
 play_flapping = true
 wind_direction = 90.0
 wind_threshold = 15.0
