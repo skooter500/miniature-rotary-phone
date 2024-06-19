@@ -1,6 +1,6 @@
 class_name Root extends Node3D
 
-var custom_font:Font
+var custom_font:Font 
 
 func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_F:

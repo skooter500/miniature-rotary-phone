@@ -170,7 +170,7 @@ transform = Transform3D(0.146447, -0.853553, 0.5, 0.5, 0.5, 0.707107, -0.853553,
 environment = ExtResource("30")
 
 [node name="AttackerBase" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -138.103, -125.307, 114.287)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -236.856, -125.307, 204.61)
 
 [node name="thargoid" parent="AttackerBase" instance=ExtResource("1")]
 transform = Transform3D(3000, 0, 0, 0, 3000, 0, 0, 0, 3000, 0, 0, 0)
@@ -178,7 +178,7 @@ script = ExtResource("14")
 speed = -0.3
 
 [node name="Attacker" type="CharacterBody3D" parent="."]
-transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -135.523, -124.258, 116.064)
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -235.481, -124.258, 207.591)
 collision_mask = 10
 script = ExtResource("17")
 force = Vector3(0, -10, 0)

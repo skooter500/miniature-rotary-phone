@@ -22,7 +22,7 @@ func _input(event):
 	if event is InputEventKey and event.pressed and ! event.echo:
 		if event.keycode == KEY_Q:
 			get_tree().quit()
-		if event.keycode == KEY_N:
+		if event.keycode == KEY_COMMA || event.keycode == KEY_LESS :
 			if current_scene > 0:
 				current_scene -= 1
 			else:
@@ -30,7 +30,7 @@ func _input(event):
 			get_tree().change_scene_to_file(scenes[current_scene])
 			return
 		# print(event.keycode)
-		if event.keycode == KEY_M:
+		if event.keycode == KEY_STOP || event.keycode == KEY_GREATER:
 			current_scene = (current_scene + 1) % scenes.size()
 			get_tree().change_scene_to_file(scenes[current_scene])
 			return

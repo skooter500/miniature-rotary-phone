@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="GodotBoids"
+config/name="Minature Rotary Phone"
 run/main_scene="res://behaviors/Hybrid1.tscn"
 config/features=PackedStringArray("4.3")
 config/icon="res://behaviors/icon.png"
@@ -27,7 +27,6 @@ XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd
 
 window/size/viewport_width=1024
 window/size/viewport_height=768
-window/size/initial_position_type=2
 window/size/resizable=false
 window/size/fullscreen=true
 window/quality/use_debanding=true
