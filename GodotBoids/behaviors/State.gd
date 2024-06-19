@@ -17,4 +17,3 @@ func _think():
 func _ready():
 	state_machine = get_parent()
 	pass # Replace with function body.
-

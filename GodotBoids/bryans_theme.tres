@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://b1a52pwwylsfg"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://b1a52pwwylsfg"]
 
-[ext_resource type="FontFile" uid="uid://0jk2p2kfmllu" path="res://fonts/Hyperspace Bold.otf" id="1_bmxlk"]
+[ext_resource type="FontFile" uid="uid://cmjpe4yuc1gsi" path="res://fonts/CHECKBK0.ttf" id="1_tmrc5"]
+[ext_resource type="FontFile" uid="uid://c7m2s77s7pxfy" path="res://fonts/Minecraft.ttf" id="1_y8joi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4d3n"]
 content_margin_left = 4.0
@@ -72,8 +73,8 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [resource]
-default_font = ExtResource("1_bmxlk")
-default_font_size = 24
+default_font = ExtResource("1_y8joi")
+default_font_size = 36
 Button/colors/font_color = Color(0.498039, 1, 0, 1)
 Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
 Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
@@ -96,4 +97,5 @@ Button/styles/hover = SubResource("StyleBoxFlat_5qtmj")
 Button/styles/normal = SubResource("StyleBoxFlat_mwj3f")
 Button/styles/pressed = SubResource("StyleBoxFlat_r3wnf")
 Label/colors/font_color = Color(0.498039, 1, 0, 1)
+Label/fonts/font = ExtResource("1_tmrc5")
 RichTextLabel/colors/default_color = Color(0.498039, 1, 0, 1)

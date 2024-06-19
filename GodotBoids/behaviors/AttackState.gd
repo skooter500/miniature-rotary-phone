@@ -30,6 +30,7 @@ func _enter():
 
 func _think():
 	var to_target = target - boid.transform.origin 
+	DebugDraw2D.set_text("To target Dist:", to_target.length())
 	if to_target.length() < 50:
 		boid.get_node("StateMachine").change_state(RetreatState.new())
 		pass	

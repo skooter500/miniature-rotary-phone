@@ -71,4 +71,3 @@ func _create_graph(title, is_fps, show_title, flags, parent := &"", parent_side 
 			graph.set_parent(parent, parent_side)
 	
 	return graph
-
