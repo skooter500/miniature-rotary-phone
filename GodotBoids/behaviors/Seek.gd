@@ -18,4 +18,3 @@ func calculate():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	boid = get_parent()
-

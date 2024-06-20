@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://djviuy7c5y1yu"]
+
+[ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_cp5na"]
+[ext_resource type="Texture2D" uid="uid://dv83xf0o5sxt0" path="res://behaviors/clarinet_1.png" id="2_4f63w"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_cp5na")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(465.625, 268)
+scale = Vector2(0.46444, 0.724215)
+texture = ExtResource("2_4f63w")

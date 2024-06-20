@@ -28,5 +28,3 @@ func _ready():
 	boid = get_parent()
 	if enemy_path:
 		enemy_boid = get_node(enemy_path)
-
-

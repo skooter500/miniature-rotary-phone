@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ceylfvsp4dggl"]
+[gd_scene load_steps=22 format=3 uid="uid://ceylfvsp4dggl"]
 
 [ext_resource type="PackedScene" uid="uid://okvro62ssxp" path="res://Models/cobramk3_out/cobramk3.gltf" id="1"]
 [ext_resource type="Script" path="res://behaviors/MoveTarget.gd" id="2"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://d26vt30ugeu0d" path="res://behaviors/SceneSwitcher.tscn" id="10"]
 [ext_resource type="Material" uid="uid://b2raijlysriqd" path="res://behaviors/Tank Material.tres" id="11_a5ijt"]
 [ext_resource type="Script" path="res://behaviors/Boid.gd" id="12"]
-[ext_resource type="PackedScene" uid="uid://4mtp0em00spx" path="res://behaviors/jet_particles.tscn" id="12_75r8b"]
 [ext_resource type="Script" path="res://behaviors/Seek.gd" id="15"]
 [ext_resource type="Script" path="res://behaviors/SpineAnimator.gd" id="16"]
 [ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="16_c0578"]
@@ -160,12 +159,8 @@ shape = SubResource("15")
 [node name="Trail" type="Node3D" parent="Ship"]
 transform = Transform3D(-0.999064, 0.0432532, 0, -0.0432532, -0.999064, 0, 0, 0, 1, 0.55, -0.075, -0.1)
 
-[node name="GPUParticles3D" parent="Ship/Trail" instance=ExtResource("12_75r8b")]
-
 [node name="Trail2" type="Node3D" parent="Ship"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, -0.075, -0.1)
-
-[node name="GPUParticles3D" parent="Ship/Trail2" instance=ExtResource("12_75r8b")]
 
 [node name="ShipTarget" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90.1317)

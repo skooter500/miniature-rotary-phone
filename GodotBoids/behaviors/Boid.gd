@@ -160,6 +160,7 @@ func calculate():
 
 func _process(delta):
 	should_calculate = true
+	# pause = false
 	if draw_gizmos:
 		on_draw_gizmos()
 	if school and count_neighbors:

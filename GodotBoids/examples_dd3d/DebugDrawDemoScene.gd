@@ -571,4 +571,3 @@ func _update_timers(delta : float):
 	timer_2 -= delta
 	timer_3 -= delta
 	timer_text -= delta
-

@@ -79,7 +79,7 @@ script = ExtResource("28")
 
 [node name="Seek" type="Node" parent="Attacker" node_paths=PackedStringArray("target")]
 script = ExtResource("29")
-target = NodePath("../../Base/Marker3D")
+target = NodePath("../../Marker3D")
 enabled = false
 
 [node name="Wander" type="Node" parent="Attacker"]
@@ -184,9 +184,6 @@ transform = Transform3D(-4.37114e-05, 1.3027e-12, -1000, 2.98023e-05, 1000, 0, 1
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Base"]
 shape = SubResource("3")
 
-[node name="Marker3D" type="Marker3D" parent="Base"]
-transform = Transform3D(1, 0, 0, 8.88177e-16, 1, 0, 0, 0, 1, 44.1358, 3.8147e-06, -38.8262)
-
 [node name="pig" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
 collision_layer = 8
@@ -281,6 +278,9 @@ script = ExtResource("14")
 speed = -0.3
 
 [node name="ui_layer" parent="." instance=ExtResource("35_dvhi1")]
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 2.98023e-08, 1, -2.98023e-08, 2.98023e-08, 2.98023e-08, 1, 44.1358, 50, -38.8262)
 
 [editable path="Player"]
 [editable path="Base/coriolis"]

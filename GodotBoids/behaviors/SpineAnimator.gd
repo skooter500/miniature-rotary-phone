@@ -46,4 +46,3 @@ func _physics_process(delta):
 		# var next_rot = nextRot.slerp(prevRot, angular_damping * delta).orthonormalized()		 
 		next.global_transform.basis = next.global_transform.basis.slerp(target_rot, angular_damping * delta).orthonormalized()
 		
-

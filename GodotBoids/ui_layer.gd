@@ -15,5 +15,3 @@ func _process(delta):
 	s = "Scene: " + str(get_tree().current_scene.name) + "\n"
 	s += "Cam:" + str(CameraController.Mode.keys()[cam_controller.mode])
 	label.set_text(s)
-
-
