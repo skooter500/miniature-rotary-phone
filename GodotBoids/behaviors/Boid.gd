@@ -7,7 +7,7 @@ class_name Boid extends CharacterBody3D
 @export var speed:float
 @export var max_speed: float = 10.0
 
-var behaviors = [] 
+var behaviors : Array[SteeringBehavior] = [] 
 @export var max_force = 10
 @export var banking = 0.1
 @export var damping = 0.1
@@ -86,16 +86,16 @@ func set_enabled(behavior, enabled):
 
 
 func on_draw_gizmos():
-
-	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.z * 10.0 , Color(0, 0, 1), 0.1)
-	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.x * 10.0 , Color(1, 0, 0), 0.1)
-	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.y * 10.0 , Color(0, 1, 0), 0.1)
-	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + force, Color(1, 1, 0), 0.1)
-	
+	var origin = global_transform.origin
+	var basis = transform.basis * 10.0
+	DebugDraw3D.draw_arrow(origin, origin + basis.z, Color(0, 0, 1), 0.1)
+	DebugDraw3D.draw_arrow(origin, origin + basis.x, Color(1, 0, 0), 0.1)
+	DebugDraw3D.draw_arrow(origin, origin + basis.y, Color(0, 1, 0), 0.1)
+	DebugDraw3D.draw_arrow(origin, origin + force, Color(1, 1, 0), 0.1)
 	if school and count_neighbors:
-		DebugDraw3D.draw_sphere(global_transform.origin, school.neighbor_distance, Color.WEB_PURPLE)
+		DebugDraw3D.draw_sphere(origin, school.neighbor_distance, Color.WEB_PURPLE)
 		for neighbor in neighbors:
-			DebugDraw3D.draw_sphere(neighbor.global_transform.origin, 3, Color.WEB_PURPLE)
+			DebugDraw3D.draw_sphere(neighbor.origin, 3, Color.WEB_PURPLE)
 			
 func seek_force(target: Vector3):	
 	var toTarget = target - global_transform.origin
@@ -123,10 +123,10 @@ func _ready():
 	
 	for i in get_child_count():
 		var child = get_child(i)
-		if child.has_method("calculate"):
+		if child is SteeringBehavior:
 			behaviors.push_back(child)
-			child.set_process(child.enabled) 
-	# enable_all(false)
+			child.set_process(child.enabled)
+
 	
 func set_enabled_all(enabled):
 	for i in behaviors.size():
@@ -169,28 +169,31 @@ func _process(delta):
 			count_neighbors_simple()
 			
 func _physics_process(delta):
-	# pause = true
-	# lerp in the new forces
 	if should_calculate:
 		new_force = calculate()
 		should_calculate = false		
 	force = lerp(force, new_force, delta)
-	if ! pause:
-		acceleration = force / mass
-		vel += acceleration * delta
-		speed = vel.length()
-		if speed > 0:		
-			if max_speed == 0:
-				print("max_speed is 0")
-			vel = vel.limit_length(max_speed)
-			
-			# Damping
-			vel -= vel * delta * damping
-			
-			set_velocity(vel)
-			move_and_slide()
-			
-			# Implement Banking as described:
-			# https://www.cs.toronto.edu/~dt/siggraph97-course/cwr87/
-			var temp_up = global_transform.basis.y.lerp(Vector3.UP + (acceleration * banking), delta * 5.0)
-			look_at(global_transform.origin - vel.normalized(), temp_up)
+	
+	if pause:
+		return
+	
+	# lerp in the new forces
+
+	acceleration = force / mass
+	vel += acceleration * delta
+	speed = vel.length()
+	if speed > 0:		
+		if max_speed == 0:
+			push_warning("max_speed is 0")
+		vel = vel.limit_length(max_speed)
+		
+		# Damping
+		vel -= vel * delta * damping
+		
+		set_velocity(vel)
+		move_and_slide()
+		
+		# Implement Banking as described:
+		# https://www.cs.toronto.edu/~dt/siggraph97-course/cwr87/
+		var temp_up = global_transform.basis.y.lerp(Vector3.UP + (acceleration * banking), delta * 5.0)
+		look_at(global_transform.origin - vel.normalized(), temp_up)
