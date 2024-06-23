@@ -9,9 +9,8 @@ var harmonic
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	harmonic =  get_node("../../creature/boid/Harmonic")
-	direction.add_item("Vertical")
 	direction.add_item("Horizontal")
-	print("hjello")
+	direction.add_item("Vertical")
 	$GridContainer2/distance.value = harmonic.distance
 	$GridContainer2/radius.value = harmonic.radius
 	$GridContainer2/amplitude.value = harmonic.amplitude
