@@ -26,6 +26,7 @@ func _exit():
 	
 func _think():
 	var to_enemy = enemy.global_transform.origin - boid.global_transform.origin
-	if to_enemy.length() > 200:
+	DebugDraw2D.set_text("To attacker", to_enemy.length())
+	if to_enemy.length() > 120:
 		boid.get_node("StateMachine").change_state(ReturnToBase.new())
 		pass	

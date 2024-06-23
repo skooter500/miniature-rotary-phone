@@ -34,7 +34,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 8
 text = "F:Full screen
 C: Camera Mode 
-N M: Change scene
+< > : Change scene
 Q: Quit "
 
 [node name="MarginContainer2" type="MarginContainer" parent="Control"]

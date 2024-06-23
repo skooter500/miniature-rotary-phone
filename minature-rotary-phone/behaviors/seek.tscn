@@ -1,23 +1,16 @@
-<<<<<<< HEAD
-[gd_scene load_steps=27 format=3 uid="uid://blndr78tdwfus"]
-=======
-[gd_scene load_steps=22 format=3 uid="uid://ceylfvsp4dggl"]
->>>>>>> master
+[gd_scene load_steps=27 format=3 uid="uid://dmi1o12psjnub"]
 
 [ext_resource type="PackedScene" uid="uid://okvro62ssxp" path="res://Models/cobramk3_out/cobramk3.gltf" id="1"]
 [ext_resource type="Script" path="res://behaviors/MoveTarget.gd" id="2"]
-[ext_resource type="PackedScene" path="res://behaviors/player.tscn" id="2_gcac3"]
+[ext_resource type="PackedScene" uid="uid://ivslos3b7cmv" path="res://behaviors/player.tscn" id="2_gcac3"]
 [ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="3"]
 [ext_resource type="Script" path="res://behaviors/root.gd" id="6"]
 [ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="7"]
 [ext_resource type="PackedScene" uid="uid://dc24oh4o5erhi" path="res://behaviors/SceneSwitcher.tscn" id="10"]
-[ext_resource type="Material" path="res://behaviors/Tank Material.tres" id="11_a5ijt"]
+[ext_resource type="Material" uid="uid://b2raijlysriqd" path="res://behaviors/Tank Material.tres" id="11_a5ijt"]
 [ext_resource type="Script" path="res://behaviors/Boid.gd" id="12"]
-<<<<<<< HEAD
 [ext_resource type="Script" path="res://behaviors/TrailRender.gd" id="12_j7bwt"]
-[ext_resource type="Material" path="res://behaviors/CobraTrail.tres" id="13_v60ph"]
-=======
->>>>>>> master
+[ext_resource type="Material" uid="uid://ca5mcii5ms7ww" path="res://behaviors/CobraTrail.tres" id="13_v60ph"]
 [ext_resource type="Script" path="res://behaviors/Seek.gd" id="15"]
 [ext_resource type="Script" path="res://behaviors/SpineAnimator.gd" id="16"]
 [ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="16_c0578"]
@@ -53,6 +46,8 @@ point_count = 2
 
 [node name="seek" type="Node3D"]
 script = ExtResource("6")
+
+[node name="ui_layer" parent="." instance=ExtResource("16_c0578")]
 
 [node name="Player" parent="." instance=ExtResource("2_gcac3")]
 
@@ -183,16 +178,11 @@ script = ExtResource("12_j7bwt")
 width_curve = SubResource("16")
 material = SubResource("StandardMaterial3D_nslo7")
 
-<<<<<<< HEAD
 [node name="Trail4" type="Node3D" parent="Ship"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, -0.075, -0.1)
 script = ExtResource("12_j7bwt")
 width_curve = SubResource("17")
 material = ExtResource("13_v60ph")
-=======
-[node name="Trail2" type="Node3D" parent="Ship"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, -0.075, -0.1)
->>>>>>> master
 
 [node name="ShipTarget" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90.1317)
@@ -202,16 +192,7 @@ script = ExtResource("2")
 wait_time = 5.0
 autostart = true
 
-[node name="ui_layer" parent="." instance=ExtResource("16_c0578")]
-
-[node name="Label" parent="ui_layer/Control/MarginContainer" index="0"]
-text = "F:Full screen
-C: Camera Mode 
-- +: Change scene
-Q: Quit "
-
 [connection signal="timeout" from="CreatureTarget/Timer" to="CreatureTarget" method="_on_Timer_timeout"]
 [connection signal="timeout" from="ShipTarget/Timer" to="ShipTarget" method="_on_Timer_timeout"]
 
 [editable path="Player"]
-[editable path="ui_layer"]

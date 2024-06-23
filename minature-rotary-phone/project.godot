@@ -19,10 +19,6 @@ config/icon="res://behaviors/icon.png"
 
 buses/default_bus_layout="res://behaviors/default_bus_layout.tres"
 
-[autoload]
-
-XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
-
 [display]
 
 window/size/viewport_width=1024

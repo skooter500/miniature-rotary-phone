@@ -26,7 +26,7 @@ func _ready():
 	DebugDraw2D.config.text_custom_font = custom_font
 	DebugDraw2D.config.text_default_size = text_size
 	DebugDraw2D.config.text_background_color = Color.TRANSPARENT
-	DebugDraw2D.config.text_foreground_color = Color.CHARTREUSE
+	#DebugDraw2D.config.text_foreground_color = Color.CHARTREUSE
 	xr_interface = XRServer.find_interface("OpenXR")
 	if xr_interface and xr_interface.is_initialized():
 		print("OpenXR initialised successfully")

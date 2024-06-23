@@ -6,8 +6,8 @@ var world_target:Vector3
 func on_draw_gizmos():
 	if target:
 		world_target = target.global_transform.origin
-	DebugDraw3D.draw_position(target.global_transform, Color.AQUA)
-	DebugDraw3D.draw_line(boid.global_transform.origin, world_target, Color.AQUA)
+		DebugDraw3D.draw_position(target.global_transform, Color.AQUA)
+		DebugDraw3D.draw_line(boid.global_transform.origin, world_target, Color.AQUA)
 
 func calculate():
 	if target:		

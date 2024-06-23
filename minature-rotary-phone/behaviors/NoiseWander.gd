@@ -23,15 +23,15 @@ func _ready():
 	noise.set_frequency(0.01)
 	noise.set_fractal_lacunarity(2)
 	noise.set_fractal_gain(0.5)
-	
-func _process(delta):
-	if draw_gizmos:
-		var cent = boid.global_transform * (Vector3.BACK * distance)
-		DebugDraw3D.draw_sphere(cent, radius, Color.HOT_PINK)
-		DebugDraw3D.draw_line(boid.global_transform.origin, cent, Color.HOT_PINK)
-		DebugDraw3D.draw_line(cent, world_target, Color.HOT_PINK)
-		DebugDraw3D.draw_position(Transform3D(Basis(), world_target), Color.HOT_PINK)
 
+func on_draw_gizmos():
+	var cent = boid.global_transform * (Vector3.BACK * distance)
+	DebugDraw3D.draw_sphere(cent, radius, Color.HOT_PINK)
+	DebugDraw3D.draw_line(boid.global_transform.origin, cent, Color.HOT_PINK)
+	DebugDraw3D.draw_line(cent, world_target, Color.HOT_PINK)
+	DebugDraw3D.draw_position(Transform3D(Basis(), world_target), Color.HOT_PINK)
+	
+	
 func calculate():		
 	var n  = noise.get_noise_1d(theta)
 	var angle = deg_to_rad(n * amplitude)

@@ -22,11 +22,11 @@ func _think():
 	if target.distance_to(boid.global_transform.origin) < 5:		
 		# See: https://www.reddit.com/r/godot/comments/hu213d/class_was_found_in_global_scope_but_its_script/		
 		# boid.get_node("StateMachine").change_state(AttackState.new())
-		var DockedState = load("res://DockedState.gd")
+		var DockedState = load("res://behaviors/DockedState.gd")
 		boid.get_node("StateMachine").change_state(DockedState.new())
 	var to_attacker = boid.global_transform.origin.distance_to(attacker.global_transform.origin)
 	if to_attacker < 50:
-		var DefendState = load("res://DefendState.gd")
+		var DefendState = load("res://behaviors/DefendState.gd")
 		boid.get_node("StateMachine").change_state(DefendState.new())
 		pass
 		

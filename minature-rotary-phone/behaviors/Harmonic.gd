@@ -6,7 +6,7 @@ class_name Harmonic extends SteeringBehavior
 @export var amplitude = 80
 @export var distance = 5
 
-enum Axis { Horizontal, Vertical}
+enum Axis { Horizontal, Vertical  }
 @export var axis = Axis.Horizontal
 var target:Vector3
 var worldTarget:Vector3

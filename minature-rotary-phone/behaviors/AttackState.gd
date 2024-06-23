@@ -5,7 +5,7 @@ var boid
 @onready var pig = get_node("../../pig")
 @onready var base = get_node("../../Base")
 
-var target
+@onready var target = get_node("../../Marker3D2")
 
 func _ready():
 	boid = get_parent()
@@ -23,13 +23,13 @@ func _enter():
 	# seek target
 	var to_base = base.global_transform.origin - boid.global_transform.origin
 	to_base = to_base.normalized()
-	target = boid.get_node("Seek").target.global_position	
+	boid.get_node("Seek").target = target
 	boid.get_node("Seek").enabled = true
 	boid.get_node("Sounds").play_sound(0)
 
 
 func _think():
-	var to_target = target - boid.transform.origin 
+	var to_target = target.global_position - boid.transform.origin 
 	DebugDraw2D.set_text("To target Dist:", to_target.length())
 	if to_target.length() < 50:
 		boid.get_node("StateMachine").change_state(RetreatState.new())

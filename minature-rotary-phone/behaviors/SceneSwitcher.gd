@@ -11,7 +11,6 @@ extends Node
 
 static var current_scene = 0
 static var current_scene_name
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("Current Scene: " + str(current_scene))
@@ -29,9 +28,10 @@ func _input(event):
 				current_scene = scenes.size() - 1
 			get_tree().change_scene_to_file(scenes[current_scene])
 			return
-		# print(event.keycode)
-		if event.keycode == KEY_STOP || event.keycode == KEY_GREATER:
+		if event.keycode == KEY_PERIOD || event.keycode == KEY_GREATER:
 			current_scene = (current_scene + 1) % scenes.size()
+			print(current_scene)
+			print("Changing to: " + scenes[current_scene])
 			get_tree().change_scene_to_file(scenes[current_scene])
 			return
 		current_scene = event.keycode - KEY_0
