@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://behaviors/root.gd" id="6"]
 [ext_resource type="Script" path="res://behaviors/Obstacles.gd" id="7"]
 [ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="8"]
-[ext_resource type="PackedScene" uid="uid://d26vt30ugeu0d" path="res://behaviors/SceneSwitcher.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://dc24oh4o5erhi" path="res://behaviors/SceneSwitcher.tscn" id="9"]
 [ext_resource type="Material" uid="uid://b2raijlysriqd" path="res://behaviors/Tank Material.tres" id="11"]
 [ext_resource type="Script" path="res://behaviors/Boid.gd" id="14"]
 [ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="15_ig2gb"]
