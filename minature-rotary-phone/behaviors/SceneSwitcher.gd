@@ -34,6 +34,7 @@ func _input(event):
 			print("Changing to: " + scenes[current_scene])
 			get_tree().change_scene_to_file(scenes[current_scene])
 			return
-		current_scene = event.keycode - KEY_0
-		if event.keycode >= KEY_0 and current_scene >= 0 and current_scene < scenes.size():			
+		
+		if event.keycode >= KEY_0 and event.keycode <= KEY_9:
+			current_scene = event.keycode - KEY_0			
 			get_tree().change_scene_to_file(scenes[current_scene])

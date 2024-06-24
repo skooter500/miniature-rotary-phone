@@ -22,7 +22,7 @@ script = ExtResource("7")
 [node name="School" type="Node3D" parent="."]
 script = ExtResource("8")
 fish_scene = ExtResource("4")
-count = 100
+count = 200
 radius = 150
 neighbor_distance = 25
 max_neighbors = 5
