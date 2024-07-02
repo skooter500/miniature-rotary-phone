@@ -1,0 +1,344 @@
+[gd_scene load_steps=34 format=3 uid="uid://ddauj6f20tnk5"]
+
+[ext_resource type="Script" path="res://behaviors/root.gd" id="1_vansh"]
+[ext_resource type="PackedScene" uid="uid://ivslos3b7cmv" path="res://behaviors/player.tscn" id="2_h2xis"]
+[ext_resource type="Script" path="res://behaviors/Boid.gd" id="3_ptdoi"]
+[ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="4_k58aa"]
+[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="5_mbkbi"]
+[ext_resource type="Script" path="res://behaviors/PathDrawer.gd" id="6_2wc5q"]
+[ext_resource type="Script" path="res://behaviors/Obstacles.gd" id="7_fwp05"]
+[ext_resource type="PackedScene" uid="uid://gwmykrjbcyf6" path="res://behaviors/Obstacle.tscn" id="8_sg1sl"]
+[ext_resource type="PackedScene" uid="uid://dc24oh4o5erhi" path="res://behaviors/SceneSwitcher.tscn" id="9_6lpuc"]
+[ext_resource type="Script" path="res://behaviors/SpineAnimator.gd" id="10_lhyo1"]
+[ext_resource type="Material" uid="uid://b2raijlysriqd" path="res://behaviors/Tank Material.tres" id="11_6bud3"]
+[ext_resource type="Script" path="res://behaviors/Harmonic.gd" id="12_mbeo4"]
+[ext_resource type="Script" path="res://behaviors/Constrain.gd" id="13_ohu0g"]
+[ext_resource type="Script" path="res://behaviors/NoiseWander.gd" id="14_ob1y5"]
+[ext_resource type="Script" path="res://behaviors/FollowPath.gd" id="15_a4g68"]
+[ext_resource type="Script" path="res://behaviors/Seek.gd" id="16_7ag5g"]
+[ext_resource type="Script" path="res://behaviors/Arrive.gd" id="17_2ho66"]
+[ext_resource type="Script" path="res://behaviors/PlayerSteering.gd" id="18_napqe"]
+[ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="19_e4mw3"]
+[ext_resource type="Script" path="res://behaviors/Controller.gd" id="20_ygvr6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cfqyv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_36o2b"]
+
+[sub_resource type="Curve3D" id="2"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -11.2065, -9.15527e-05, -29.797, 0, 0, 0, 0, 0, 0, -2.83316, 0.000137329, -9.18577, 0, 0, 0, 0, 0, 0, 16.3011, 23.6271, -8.24546, 0, 0, 0, 0, 0, 0, 46.7083, -5.34058e-05, -27.2299, 0, 0, 0, 0, 0, 0, 52.709, 22.523, -0.299791, 0, 0, 0, 0, 0, 0, 61.4845, 0, 43.691, 0, 0, 0, 0, 0, 0, 41.071, 9.53445, 8.45671, 0, 0, 0, 0, 0, 0, 2.29026, 0, 45.1004, 0, 0, 0, 0, 0, 0, 24.8938, -17.113, 20.9767),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 9
+
+[sub_resource type="PlaneMesh" id="10"]
+
+[sub_resource type="PrismMesh" id="14"]
+
+[sub_resource type="BoxShape3D" id="15"]
+
+[sub_resource type="PrismMesh" id="16"]
+
+[sub_resource type="BoxShape3D" id="17"]
+
+[sub_resource type="BoxMesh" id="18"]
+
+[sub_resource type="BoxShape3D" id="19"]
+
+[sub_resource type="BoxShape3D" id="20"]
+
+[sub_resource type="BoxShape3D" id="21"]
+
+[sub_resource type="Environment" id="Environment_d0n74"]
+
+[node name="root2" type="Node3D"]
+script = ExtResource("1_vansh")
+
+[node name="Player" parent="." instance=ExtResource("2_h2xis")]
+
+[node name="Camera3D" parent="Player" index="1"]
+visible = false
+
+[node name="Camera3D Controller" parent="Player/Camera3D" index="1" node_paths=PackedStringArray("boid_player", "boid")]
+boid_player = NodePath("../../../camera follower")
+boid = NodePath("../../../creature/boid")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="Player"]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="Player/XROrigin3D"]
+
+[node name="left" type="XRController3D" parent="Player/XROrigin3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/XROrigin3D/left"]
+mesh = SubResource("BoxMesh_cfqyv")
+
+[node name="right" type="XRController3D" parent="Player/XROrigin3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/XROrigin3D/right"]
+mesh = SubResource("BoxMesh_36o2b")
+
+[node name="camera follower" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, -15.0557, 41.7624)
+script = ExtResource("3_ptdoi")
+max_force = 30
+draw_gizmos = false
+
+[node name="OffsetPursue" type="Node" parent="camera follower" node_paths=PackedStringArray("leader_boid")]
+script = ExtResource("4_k58aa")
+leader_boid = NodePath("../../creature/boid")
+weight = 5.0
+
+[node name="Avoidance" type="Node" parent="camera follower"]
+script = ExtResource("5_mbkbi")
+draw_gizmos = false
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90.1317)
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(0.029265, 0, -0.999572, 0, 1, 0, 0.999572, 0, 0.029265, 6.28377, -4.57764e-05, -18.2004)
+curve = SubResource("2")
+script = ExtResource("6_2wc5q")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.0512, 0.23691)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="DirectionalLight3D"]
+transform = Transform3D(0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-08, 1, 0.763187, -0.646177, -2.61999e-08, 0, 12.0512, 0.23691)
+
+[node name="Center" type="Marker3D" parent="."]
+
+[node name="Obstacles" type="Node3D" parent="."]
+script = ExtResource("7_fwp05")
+obstacle_scene = ExtResource("8_sg1sl")
+radius = 30
+center_path = NodePath("../Center")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(30, 0, 0, 0, 1, 0, 0, 0, 30, 0, -35.9149, 0)
+visible = false
+mesh = SubResource("10")
+
+[node name="SceneSwitcher" parent="." instance=ExtResource("9_6lpuc")]
+
+[node name="creature" type="Node" parent="."]
+
+[node name="spineanimator" type="Node" parent="creature"]
+script = ExtResource("10_lhyo1")
+bonePaths = [NodePath("../boid"), NodePath("../body1"), NodePath("../body2"), NodePath("../body3"), NodePath("../tail")]
+
+[node name="boid" type="CharacterBody3D" parent="creature"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5154)
+script = ExtResource("3_ptdoi")
+max_force = 50
+banking = 0.07
+damping = 0.3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="creature/boid"]
+transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("14")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("11_6bud3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="creature/boid"]
+shape = SubResource("15")
+
+[node name="Avoidance" type="Node" parent="creature/boid"]
+script = ExtResource("5_mbkbi")
+
+[node name="Harmonic" type="Node" parent="creature/boid"]
+script = ExtResource("12_mbeo4")
+frequency = 0.5
+distance = 10
+weight = 6.0
+
+[node name="Constrain" type="Node" parent="creature/boid"]
+script = ExtResource("13_ohu0g")
+center_path = NodePath("../../../Center")
+
+[node name="NoiseWander" type="Node" parent="creature/boid"]
+script = ExtResource("14_ob1y5")
+radius = 50.0
+amplitude = 90
+distance = 100
+draw_gizmos = false
+
+[node name="PathFollow3D" type="Node" parent="creature/boid"]
+script = ExtResource("15_a4g68")
+path_path = NodePath("../../../Path3D")
+waypoint_seek_distance = 5
+weight = 3.0
+
+[node name="Seek" type="Node" parent="creature/boid"]
+script = ExtResource("16_7ag5g")
+draw_gizmos = false
+enabled = false
+
+[node name="Arrive" type="Node" parent="creature/boid"]
+script = ExtResource("17_2ho66")
+draw_gizmos = false
+enabled = false
+
+[node name="UserSteering" type="Node" parent="creature/boid"]
+script = ExtResource("18_napqe")
+draw_gizmos = false
+enabled = false
+
+[node name="tail" type="CharacterBody3D" parent="creature"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.26002)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="creature/tail"]
+transform = Transform3D(1, 0, 0, 0, -8.74228e-08, 1, 0, -2, -4.37114e-08, 0, 0, -0.504121)
+mesh = SubResource("16")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("11_6bud3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="creature/tail"]
+shape = SubResource("17")
+disabled = true
+
+[node name="body3" type="CharacterBody3D" parent="creature"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.70473)
+
+[node name="MeshInstance2" type="MeshInstance3D" parent="creature/body3"]
+mesh = SubResource("18")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("11_6bud3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="creature/body3"]
+shape = SubResource("19")
+
+[node name="body2" type="CharacterBody3D" parent="creature"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.11057)
+
+[node name="MeshInstance3" type="MeshInstance3D" parent="creature/body2"]
+mesh = SubResource("18")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("11_6bud3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="creature/body2"]
+shape = SubResource("20")
+
+[node name="body1" type="CharacterBody3D" parent="creature"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.6521)
+
+[node name="MeshInstance4" type="MeshInstance3D" parent="creature/body1"]
+mesh = SubResource("18")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("11_6bud3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="creature/body1"]
+shape = SubResource("21")
+
+[node name="ui_layer" parent="." instance=ExtResource("19_e4mw3")]
+
+[node name="Control" parent="ui_layer" index="0"]
+script = ExtResource("20_ygvr6")
+
+[node name="GridContainer2" type="GridContainer" parent="ui_layer/Control" index="0"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -165.0
+offset_right = 440.0
+offset_bottom = 198.0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+columns = 2
+
+[node name="Label" type="Label" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+text = "Dist:"
+
+[node name="distance" type="HSlider" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+text = "RAD:"
+
+[node name="radius" type="HSlider" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label3" type="Label" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+text = "Amp:"
+
+[node name="amplitude" type="HSlider" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 180.0
+
+[node name="Label4" type="Label" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+text = "FREQ:"
+
+[node name="Frequency" type="HSlider" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 2.0
+step = 0.01
+
+[node name="Label5" type="Label" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+text = "WEIGHT:"
+
+[node name="weight" type="HSlider" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 10.0
+step = 0.1
+
+[node name="Label6" type="Label" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+text = "DAMPING:"
+
+[node name="damping" type="HSlider" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 10.0
+step = 0.1
+
+[node name="Label7" type="Label" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+text = "ANGULAR:"
+
+[node name="angularDamping" type="HSlider" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 10.0
+step = 0.1
+
+[node name="Label8" type="Label" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+text = "DIRECTION:"
+
+[node name="OptionButton" type="OptionButton" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_d0n74")
+
+[connection signal="value_changed" from="ui_layer/Control/GridContainer2/distance" to="ui_layer/Control" method="_on_distance_value_changed"]
+[connection signal="value_changed" from="ui_layer/Control/GridContainer2/radius" to="ui_layer/Control" method="_on_radius_value_changed"]
+[connection signal="value_changed" from="ui_layer/Control/GridContainer2/damping" to="ui_layer/Control" method="_on_damping_value_changed"]
+[connection signal="value_changed" from="ui_layer/Control/GridContainer2/angularDamping" to="ui_layer/Control" method="_on_angular_damping_value_changed"]
+[connection signal="item_selected" from="ui_layer/Control/GridContainer2/OptionButton" to="ui_layer/Control" method="_on_option_button_item_selected"]
+
+[editable path="Player"]
+[editable path="ui_layer"]
