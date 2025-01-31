@@ -33,7 +33,7 @@ func _ready():
 
 
 func calculate_offset():
-	boid_player.get_node("OffsetPursue").calculate_offset()
+	boid_player.get_node("offset_pursue").calculate_offset()
 	
 func set_mode(mode):
 	self.mode = mode

@@ -1,16 +1,16 @@
 [gd_scene load_steps=15 format=3 uid="uid://by0v7as0ensmo"]
 
-[ext_resource type="Script" path="res://behaviors/Boid.gd" id="1"]
+[ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://ivslos3b7cmv" path="res://behaviors/player.tscn" id="2_on7x8"]
 [ext_resource type="PackedScene" uid="uid://gwmykrjbcyf6" path="res://behaviors/Obstacle.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://di40uxleul3ci" path="res://behaviors/Fish2.tscn" id="4"]
-[ext_resource type="Script" path="res://behaviors/Center.gd" id="5"]
-[ext_resource type="Script" path="res://behaviors/school_config.gd" id="6"]
-[ext_resource type="Script" path="res://behaviors/root.gd" id="7"]
-[ext_resource type="Script" path="res://behaviors/School.gd" id="8"]
-[ext_resource type="Script" path="res://behaviors/Obstacles.gd" id="9"]
-[ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="10"]
-[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="11"]
+[ext_resource type="Script" uid="uid://ceyci7r6qijlk" path="res://behaviors/Center.gd" id="5"]
+[ext_resource type="Script" uid="uid://dexyjr6qrrxy5" path="res://behaviors/school_config.gd" id="6"]
+[ext_resource type="Script" uid="uid://cr5ejl6hlraib" path="res://behaviors/root.gd" id="7"]
+[ext_resource type="Script" uid="uid://brbsahdh6ulkg" path="res://behaviors/School.gd" id="8"]
+[ext_resource type="Script" uid="uid://bpe72cnx2s1eg" path="res://behaviors/Obstacles.gd" id="9"]
+[ext_resource type="Script" uid="uid://h5wrviq7ex0m" path="res://behaviors/OffsetPursue.gd" id="10"]
+[ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/Avoidance.gd" id="11"]
 [ext_resource type="PackedScene" uid="uid://dc24oh4o5erhi" path="res://behaviors/SceneSwitcher.tscn" id="13"]
 [ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="15_itnq4"]
 
@@ -62,7 +62,7 @@ max_speed = 20.0
 max_force = 30
 draw_gizmos = false
 
-[node name="OffsetPursue" type="Node" parent="camera follower"]
+[node name="offset_pursue" type="Node" parent="camera follower"]
 script = ExtResource("10")
 weight = 5.0
 draw_gizmos = false

@@ -1,13 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://bdqt7esskxhsc"]
+[gd_scene load_steps=12 format=3 uid="uid://g63rjyuo56ym"]
 
-[ext_resource type="PackedScene" path="res://behaviors/creature.tscn" id="1"]
-[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="2"]
-[ext_resource type="Script" path="res://behaviors/Boid.gd" id="3"]
-[ext_resource type="Script" path="res://behaviors/FPController.gd" id="6"]
-[ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="7"]
-[ext_resource type="Script" path="res://behaviors/Controller.gd" id="8"]
-[ext_resource type="Script" path="res://behaviors/CameraController.gd" id="9"]
-[ext_resource type="Script" path="res://behaviors/root.gd" id="16"]
+[ext_resource type="PackedScene" uid="uid://pk6xti30q24e" path="res://behaviors/creature.tscn" id="1"]
+[ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/Avoidance.gd" id="2"]
+[ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="3"]
+[ext_resource type="Script" uid="uid://lqy7lve1pfps" path="res://behaviors/FPController.gd" id="6"]
+[ext_resource type="Script" uid="uid://h5wrviq7ex0m" path="res://behaviors/OffsetPursue.gd" id="7"]
+[ext_resource type="Script" uid="uid://do7ve6cbht2yv" path="res://behaviors/Controller.gd" id="8"]
+[ext_resource type="Script" uid="uid://qgg7wto84wvl" path="res://behaviors/CameraController.gd" id="9"]
+[ext_resource type="Script" uid="uid://cr5ejl6hlraib" path="res://behaviors/root.gd" id="16"]
 
 [sub_resource type="Environment" id="6"]
 background_mode = 1
@@ -34,7 +34,6 @@ script = ExtResource("6")
 
 [node name="Camera3D Controller" type="Node" parent="Camera3D"]
 script = ExtResource("9")
-boid_path = NodePath("../../creature/boid")
 
 [node name="camera follower" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.3768, 10.8322, 38.2638)
@@ -42,7 +41,6 @@ script = ExtResource("3")
 
 [node name="OffsetPursue" type="Node" parent="camera follower"]
 script = ExtResource("7")
-leader_node_path = NodePath("../../creature/boid")
 
 [node name="creature" parent="." instance=ExtResource("1")]
 

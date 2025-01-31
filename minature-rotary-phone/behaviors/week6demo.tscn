@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://behaviors/Boid.gd" id="1"]
+[ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="1"]
 [ext_resource type="Material" uid="uid://b2raijlysriqd" path="res://behaviors/Tank Material.tres" id="2"]
-[ext_resource type="Script" path="res://behaviors/SpineAnimator.gd" id="3"]
-[ext_resource type="Script" path="res://behaviors/Harmonic.gd" id="4"]
-[ext_resource type="Script" path="res://behaviors/FPController.gd" id="5"]
+[ext_resource type="Script" uid="uid://bb475dsswmiyu" path="res://behaviors/spine_animator.gd" id="3"]
+[ext_resource type="Script" uid="uid://bctpwo8cerrgq" path="res://behaviors/Harmonic.gd" id="4"]
+[ext_resource type="Script" uid="uid://lqy7lve1pfps" path="res://behaviors/FPController.gd" id="5"]
 
 [sub_resource type="BoxMesh" id=2]
 

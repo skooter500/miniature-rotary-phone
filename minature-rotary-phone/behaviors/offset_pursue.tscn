@@ -1,16 +1,16 @@
 [gd_scene load_steps=16 format=3 uid="uid://bc0aaseobupos"]
 
-[ext_resource type="Script" path="res://behaviors/root.gd" id="1"]
-[ext_resource type="Script" path="res://behaviors/NoiseWander.gd" id="2"]
+[ext_resource type="Script" uid="uid://cr5ejl6hlraib" path="res://behaviors/root.gd" id="1"]
+[ext_resource type="Script" uid="uid://bqb47mif0r5vt" path="res://behaviors/NoiseWander.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://ivslos3b7cmv" path="res://behaviors/player.tscn" id="2_lcli5"]
-[ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="3"]
-[ext_resource type="Script" path="res://behaviors/TrailRender.gd" id="4"]
-[ext_resource type="PackedScene" uid="uid://d26vt30ugeu0d" path="res://behaviors/SceneSwitcher.tscn" id="5"]
+[ext_resource type="Script" uid="uid://h5wrviq7ex0m" path="res://behaviors/OffsetPursue.gd" id="3"]
+[ext_resource type="Script" uid="uid://blhpcqstd5fde" path="res://behaviors/TrailRender.gd" id="4"]
+[ext_resource type="PackedScene" uid="uid://dc24oh4o5erhi" path="res://behaviors/SceneSwitcher.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://okvro62ssxp" path="res://Models/cobramk3_out/cobramk3.gltf" id="6"]
-[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="7"]
-[ext_resource type="Script" path="res://behaviors/Boid.gd" id="9"]
-[ext_resource type="Script" path="res://behaviors/MoveTarget.gd" id="11"]
-[ext_resource type="Script" path="res://behaviors/Wander.gd" id="12"]
+[ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/Avoidance.gd" id="7"]
+[ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="9"]
+[ext_resource type="Script" uid="uid://4lgf670p0wbc" path="res://behaviors/MoveTarget.gd" id="11"]
+[ext_resource type="Script" uid="uid://baw56rnhj0aqm" path="res://behaviors/Wander.gd" id="12"]
 [ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="12_nmf8m"]
 
 [sub_resource type="Curve" id="16"]
@@ -39,7 +39,7 @@ script = ExtResource("9")
 max_speed = 30.0
 max_force = 30
 
-[node name="OffsetPursue" type="Node" parent="camera follower" node_paths=PackedStringArray("leader_boid")]
+[node name="offset_pursue" type="Node" parent="camera follower" node_paths=PackedStringArray("leader_boid")]
 script = ExtResource("3")
 leader_boid = NodePath("../../boid")
 weight = 10.0

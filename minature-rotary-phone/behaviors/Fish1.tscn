@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://bacvf0rrgy0xm"]
 
-[ext_resource type="Script" path="res://behaviors/Boid.gd" id="1"]
-[ext_resource type="Script" path="res://behaviors/Cohesion.gd" id="2"]
-[ext_resource type="Script" path="res://behaviors/Constrain.gd" id="4"]
-[ext_resource type="Script" path="res://behaviors/Wander.gd" id="5"]
-[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="6"]
+[ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="1"]
+[ext_resource type="Script" uid="uid://demjvlx6x2dd8" path="res://behaviors/Cohesion.gd" id="2"]
+[ext_resource type="Script" uid="uid://ci8facjqq07ft" path="res://behaviors/Constrain.gd" id="4"]
+[ext_resource type="Script" uid="uid://baw56rnhj0aqm" path="res://behaviors/Wander.gd" id="5"]
+[ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/Avoidance.gd" id="6"]
 
 [sub_resource type="PrismMesh" id="1"]
 

@@ -1,18 +1,18 @@
 [gd_scene load_steps=27 format=3 uid="uid://ddk4ncyq37n3d"]
 
-[ext_resource type="Script" path="res://behaviors/SpineAnimator.gd" id="2"]
+[ext_resource type="Script" uid="uid://bb475dsswmiyu" path="res://behaviors/spine_animator.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://ivslos3b7cmv" path="res://behaviors/player.tscn" id="2_4myfi"]
-[ext_resource type="Script" path="res://behaviors/Wander.gd" id="3"]
-[ext_resource type="Script" path="res://behaviors/TrailRender.gd" id="4"]
-[ext_resource type="Script" path="res://behaviors/OffsetPursue.gd" id="5"]
-[ext_resource type="Script" path="res://behaviors/root.gd" id="6"]
-[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="7"]
+[ext_resource type="Script" uid="uid://baw56rnhj0aqm" path="res://behaviors/Wander.gd" id="3"]
+[ext_resource type="Script" uid="uid://blhpcqstd5fde" path="res://behaviors/TrailRender.gd" id="4"]
+[ext_resource type="Script" uid="uid://h5wrviq7ex0m" path="res://behaviors/OffsetPursue.gd" id="5"]
+[ext_resource type="Script" uid="uid://cr5ejl6hlraib" path="res://behaviors/root.gd" id="6"]
+[ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/Avoidance.gd" id="7"]
 [ext_resource type="PackedScene" uid="uid://dc24oh4o5erhi" path="res://behaviors/SceneSwitcher.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://okvro62ssxp" path="res://Models/cobramk3_out/cobramk3.gltf" id="9"]
 [ext_resource type="Material" uid="uid://b2raijlysriqd" path="res://behaviors/Tank Material.tres" id="10"]
-[ext_resource type="Script" path="res://behaviors/Boid.gd" id="13"]
-[ext_resource type="Script" path="res://behaviors/NoiseWander.gd" id="14"]
-[ext_resource type="Script" path="res://behaviors/Constrain.gd" id="15"]
+[ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="13"]
+[ext_resource type="Script" uid="uid://bqb47mif0r5vt" path="res://behaviors/NoiseWander.gd" id="14"]
+[ext_resource type="Script" uid="uid://ci8facjqq07ft" path="res://behaviors/Constrain.gd" id="15"]
 [ext_resource type="Material" uid="uid://ca5mcii5ms7ww" path="res://behaviors/CobraTrail.tres" id="15_jv7r0"]
 [ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="17_fnhpk"]
 
@@ -57,7 +57,7 @@ script = ExtResource("13")
 max_force = 30
 draw_gizmos = false
 
-[node name="OffsetPursue" type="Node" parent="camera follower" node_paths=PackedStringArray("leader_boid")]
+[node name="offset_pursue" type="Node" parent="camera follower" node_paths=PackedStringArray("leader_boid")]
 script = ExtResource("5")
 leader_boid = NodePath("../../Creature/boid")
 weight = 5.0
@@ -77,9 +77,9 @@ transform = Transform3D(0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-
 
 [node name="Creature" type="Node" parent="."]
 
-[node name="spineanimator" type="Node" parent="Creature"]
+[node name="spineanimator" type="Node" parent="Creature" node_paths=PackedStringArray("bones")]
 script = ExtResource("2")
-bonePaths = [NodePath("../boid"), NodePath("../body1"), NodePath("../body2"), NodePath("../body3"), NodePath("../tail")]
+bones = [NodePath("../boid"), NodePath("../body1"), NodePath("../body2"), NodePath("../body3"), NodePath("../tail")]
 
 [node name="boid" type="CharacterBody3D" parent="Creature"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5154)
