@@ -1,0 +1,40 @@
+[gd_scene load_steps="6" format="3" uid="uid://1klgn827pvr4"]
+    [ext_resource type="Script" uid="uid://8boome5ofjrx" 
+path="res://SpineAnimator.gd" id="1_8n3i2"]
+    [ext_resource type="Script" uid="uid://cks4uwsgfyggy" 
+path="res://boid.gd" id="2_kb5ac"]
+    
+    [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_body"]
+        albedo_color = Color(0.15, 0.25, 0.35, 1)
+        specular = Color(0.4, 0.4, 0.4, 1)
+        metallic = 0.8
+    [/sub_resource]
+    
+    [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eye"]
+        albedo_color = Color(0.1, 0.1, 0.1, 1)
+        specular = Color(0.2, 0.2, 0.2, 1)
+        metallic = 0.7
+    [/sub_resource]
+    
+    [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mouth"]
+        albedo_color = Color(0.5, 0.2, 0.2, 1)
+        specular = Color(0.4, 0.4, 0.4, 1)
+        metallic = 0.6
+    [/sub_resource]
+    
+    [node name="Whale" type="Node3D"]
+        [node name="Node" type="Node" parent=".">
+            <script>ExtResource("1_8n3i2")</script>
+            <bones>NodePath("../Head/CharacterBody3D2"), 
+NodePath("../Head/MainHead"), NodePath("../Body/MainBody/Segment1"), 
+NodePath("../Body/MainBody/Segment2"), 
+NodePath("../Body/MainBody/Segment3"), 
+NodePath("../Body/MainBody/Segment4"), 
+NodePath("../Body/MainBody/Segment5"), NodePath("../Fins/TailFin")</bones>
+        </node>
+        
+        [node name="Head" type="Node3D" parent=".">
+            <!-- Add head geometry and materials here -->
+        </node>
+    </node>
+[/gd_scene]

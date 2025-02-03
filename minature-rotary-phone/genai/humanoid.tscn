@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3]
+
+[node name="Humanoid" type="Spatial"]
+
+[node name="Torso" type="CSGBox" parent="."]
+size = Vector3(1, 2, 0.5)
+transform = Transform(Basis(), Vector3(0, 1, 0))
+
+[node name="Head" type="CSGSphere" parent="Torso"]
+radius = 0.5
+transform = Transform(Basis(), Vector3(0, 1.5, 0))
+
+[node name="LeftArm" type="CSGCylinder" parent="Torso"]
+radius = 0.25
+height = 1.5
+transform = Transform(Basis().rotated(Vector3(0, 0, 1), deg2rad(90)), Vector3(-0.75, 0.75, 0))
+
+[node name="RightArm" type="CSGCylinder" parent="Torso"]
+radius = 0.25
+height = 1.5
+transform = Transform(Basis().rotated(Vector3(0, 0, 1), deg2rad(90)), Vector3(0.75, 0.75, 0))
+
+[node name="LeftLeg" type="CSGCylinder" parent="Torso"]
+radius = 0.3
+height = 2
+transform = Transform(Basis().rotated(Vector3(1, 0, 0), deg2rad(180)), Vector3(-0.3, -1.5, 0))
+
+[node name="RightLeg" type="CSGCylinder" parent="Torso"]
+radius = 0.3
+height = 2
+transform = Transform(Basis().rotated(Vector3(1, 0, 0), deg2rad(180)), Vector3(0.3, -1.5, 0))

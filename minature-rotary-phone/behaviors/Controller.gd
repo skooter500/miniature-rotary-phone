@@ -7,7 +7,7 @@ extends Node
 var harmonic
 @onready var direction = get_node("GridContainer2/OptionButton")
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _r667eady():
 	harmonic =  get_node("../../creature/boid/Harmonic")
 	direction.add_item("Horizontal")
 	direction.add_item("Vertical")

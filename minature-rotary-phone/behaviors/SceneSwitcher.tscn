@@ -4,4 +4,4 @@
 
 [node name="SceneSwitcher" type="Node"]
 script = ExtResource("1")
-scenes = Array[String](["behaviors/Seek.tscn", "behaviors/Arrive.tscn", "behaviors/FollowPath.tscn", "behaviors/Wander.tscn", "behaviors/PlayerSteering.tscn", "behaviors/Hybrid1.tscn", "behaviors/offset_pursue.tscn", "behaviors/School With Avoidance.tscn", "behaviors/take_control.tscn", "behaviors/StateMachineBots.tscn"])
+scenes = Array[String](["behaviors/seek.tscn", "behaviors/arrive.tscn", "behaviors/follow_path.tscn", "behaviors/wander.tscn", "behaviors/PlayerSteering.tscn", "behaviors/Hybrid1.tscn", "behaviors/offset_pursue.tscn", "behaviors/School With Avoidance.tscn", "behaviors/take_control.tscn", "behaviors/StateMachineBots.tscn"])

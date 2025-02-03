@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6g8p2mjy4k3q"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="Dog" type="Node3D"]
+
+[node name="Body" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+size = Vector3(1.2, 0.8, 2)
+
+[node name="Head" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 1.2)
+size = Vector3(0.7, 0.6, 0.6)
+
+[node name="Snout" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 1.6)
+size = Vector3(0.4, 0.3, 0.4)
+
+[node name="LegFrontRight" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, -0.6)
+radius = 0.15
+height = 0.8
+
+[node name="LegFrontLeft" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, -0.6)
+radius = 0.15
+height = 0.8
+
+[node name="LegBackRight" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0.6)
+radius = 0.15
+height = 0.8
+
+[node name="LegBackLeft" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0.6)
+radius = 0.15
+height = 0.8
+
+[node name="Tail" type="CSGCylinder3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0.7, -1.2)
+radius = 0.1
+height = 0.8
+
+[node name="EarRight" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.2, 1.2)
+size = Vector3(0.15, 0.3, 0.15)
+
+[node name="EarLeft" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 1.2, 1.2)
+size = Vector3(0.15, 0.3, 0.15)
+
+[node name="EyeRight" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.9, 1.45)
+radius = 0.05
+material = SubResource("StandardMaterial3D_1")
+
+[node name="EyeLeft" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.9, 1.45)
+radius = 0.05
+material = SubResource("StandardMaterial3D_2")
+
+[node name="Nose" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 1.8)
+radius = 0.08
+material = SubResource("StandardMaterial3D_3")

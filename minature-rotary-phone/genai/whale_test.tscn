@@ -1,0 +1,344 @@
+[gd_scene load_steps=26 format=3 uid="uid://cqlc8ti4gx6be"]
+
+[ext_resource type="Script" uid="uid://cr5ejl6hlraib" path="res://behaviors/root.gd" id="1_4yvfo"]
+[ext_resource type="PackedScene" uid="uid://ivslos3b7cmv" path="res://behaviors/player.tscn" id="2_fxeey"]
+[ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="3_vxbnv"]
+[ext_resource type="Script" uid="uid://h5wrviq7ex0m" path="res://behaviors/OffsetPursue.gd" id="4_d4q8q"]
+[ext_resource type="Script" uid="uid://baw56rnhj0aqm" path="res://behaviors/Wander.gd" id="4_fxeey"]
+[ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/Avoidance.gd" id="5_r3f3w"]
+[ext_resource type="Script" uid="uid://bfoar4ahwpbra" path="res://behaviors/PathDrawer.gd" id="6_2ikgh"]
+[ext_resource type="Script" uid="uid://bpe72cnx2s1eg" path="res://behaviors/Obstacles.gd" id="7_rcb4y"]
+[ext_resource type="PackedScene" uid="uid://gwmykrjbcyf6" path="res://behaviors/Obstacle.tscn" id="8_6c8n7"]
+[ext_resource type="PackedScene" uid="uid://dc24oh4o5erhi" path="res://behaviors/SceneSwitcher.tscn" id="9_qktx5"]
+[ext_resource type="Script" uid="uid://bb475dsswmiyu" path="res://behaviors/spine_animator.gd" id="10_0b6o4"]
+[ext_resource type="Script" uid="uid://bctpwo8cerrgq" path="res://behaviors/Harmonic.gd" id="12_uevbr"]
+[ext_resource type="Script" uid="uid://ci8facjqq07ft" path="res://behaviors/Constrain.gd" id="13_ff8ds"]
+[ext_resource type="Script" uid="uid://bqb47mif0r5vt" path="res://behaviors/NoiseWander.gd" id="14_04fg5"]
+[ext_resource type="Script" uid="uid://b6jj7yxhu2hi1" path="res://behaviors/follow_path.gd" id="15_ffbcd"]
+[ext_resource type="Script" uid="uid://c2d7mphmtn1jv" path="res://behaviors/Seek.gd" id="16_cdrm8"]
+[ext_resource type="Script" uid="uid://bn4xj07get8k6" path="res://behaviors/arrive.gd" id="17_yn0d2"]
+[ext_resource type="Script" uid="uid://cqk70j8jant4u" path="res://behaviors/PlayerSteering.gd" id="18_0pedk"]
+[ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="19_7rerm"]
+[ext_resource type="Script" uid="uid://do7ve6cbht2yv" path="res://behaviors/Controller.gd" id="20_43173"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eye"]
+albedo_color = Color(0.1, 0.1, 0.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_body"]
+albedo_color = Color(0.15, 0.25, 0.35, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mouth"]
+albedo_color = Color(0.5, 0.2, 0.2, 1)
+
+[sub_resource type="Curve3D" id="2"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -11.2065, -9.15527e-05, -29.797, 0, 0, 0, 0, 0, 0, -2.83316, 0.000137329, -9.18577, 0, 0, 0, 0, 0, 0, 16.3011, 23.6271, -8.24546, 0, 0, 0, 0, 0, 0, 46.7083, -5.34058e-05, -27.2299, 0, 0, 0, 0, 0, 0, 52.709, 22.523, -0.299791, 0, 0, 0, 0, 0, 0, 61.4845, 0, 43.691, 0, 0, 0, 0, 0, 0, 41.071, 9.53445, 8.45671, 0, 0, 0, 0, 0, 0, 2.29026, 0, 45.1004, 0, 0, 0, 0, 0, 0, 24.8938, -17.113, 20.9767),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 9
+
+[sub_resource type="PlaneMesh" id="10"]
+
+[node name="root2" type="Node3D"]
+script = ExtResource("1_4yvfo")
+
+[node name="Whale" type="Node3D" parent="."]
+
+[node name="spine_animator" type="Node" parent="Whale" node_paths=PackedStringArray("bones")]
+script = ExtResource("10_0b6o4")
+bones = [NodePath("../Head/boid"), NodePath("../Head/MainHead"), NodePath("../Body/MainBody/Segment1"), NodePath("../Body/MainBody/Segment2"), NodePath("../Body/MainBody/Segment3"), NodePath("../Body/MainBody/Segment4"), NodePath("../Body/MainBody/Segment5"), NodePath("../Fins/TailFin")]
+
+[node name="Head" type="Node3D" parent="Whale"]
+
+[node name="EyeRight" type="CSGSphere3D" parent="Whale/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.5, 3)
+radius = 0.25
+material = SubResource("StandardMaterial3D_eye")
+
+[node name="boid" type="CharacterBody3D" parent="Whale/Head"]
+transform = Transform3D(1, 0, 0, 0, 0.6, 0.2, 0, -0.1, 1, 0, -0.2, 4.2)
+script = ExtResource("3_vxbnv")
+
+[node name="Blowhole" type="CSGCylinder3D" parent="Whale/Head/boid"]
+transform = Transform3D(1, 0, 0, 0, 1.6129, -0.322581, 0, 0.16129, 0.967742, 0, 3.54839, -1.64516)
+radius = 0.12
+height = 0.3
+material = SubResource("StandardMaterial3D_body")
+
+[node name="Snout" type="CSGSphere3D" parent="Whale/Head/boid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 7.45058e-09, 1, 0, 0, 0)
+radius = 1.4
+material = SubResource("StandardMaterial3D_body")
+
+[node name="Wander" type="Node" parent="Whale/Head/boid"]
+script = ExtResource("4_fxeey")
+metadata/_custom_type_script = ExtResource("4_fxeey")
+
+[node name="Avoidance" type="Node" parent="Whale/Head/boid"]
+script = ExtResource("5_r3f3w")
+
+[node name="Harmonic" type="Node" parent="Whale/Head/boid"]
+script = ExtResource("12_uevbr")
+frequency = 0.5
+distance = 10
+weight = 6.0
+
+[node name="Constrain" type="Node" parent="Whale/Head/boid"]
+script = ExtResource("13_ff8ds")
+center_path = NodePath("../../../Center")
+
+[node name="NoiseWander" type="Node" parent="Whale/Head/boid"]
+script = ExtResource("14_04fg5")
+radius = 50.0
+amplitude = 90
+distance = 100
+draw_gizmos = false
+
+[node name="PathFollow3D" type="Node" parent="Whale/Head/boid"]
+script = ExtResource("15_ffbcd")
+path_path = NodePath("../../../Path3D")
+waypoint_seek_distance = 5
+weight = 3.0
+
+[node name="Seek" type="Node" parent="Whale/Head/boid"]
+script = ExtResource("16_cdrm8")
+draw_gizmos = false
+enabled = false
+
+[node name="Arrive" type="Node" parent="Whale/Head/boid"]
+script = ExtResource("17_yn0d2")
+draw_gizmos = false
+enabled = false
+
+[node name="UserSteering" type="Node" parent="Whale/Head/boid"]
+script = ExtResource("18_0pedk")
+draw_gizmos = false
+enabled = false
+
+[node name="MainHead" type="CSGSphere3D" parent="Whale/Head"]
+transform = Transform3D(1, 0, 0, 0, 0.8, 0, 0, 0, 1.2, 0, 0.3, 2.6)
+radius = 1.8
+material = SubResource("StandardMaterial3D_body")
+
+[node name="EyeLeft" type="CSGSphere3D" parent="Whale/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.5, 3)
+radius = 0.25
+material = SubResource("StandardMaterial3D_eye")
+
+[node name="Mouth" type="CSGCylinder3D" parent="Whale/Head"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.6, 4.2)
+radius = 0.8
+height = 0.2
+material = SubResource("StandardMaterial3D_mouth")
+
+[node name="Body" type="Node3D" parent="Whale"]
+
+[node name="MainBody" type="CSGCombiner3D" parent="Whale/Body"]
+
+[node name="Segment1" type="CSGCylinder3D" parent="Whale/Body/MainBody"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+radius = 1.8
+height = 3.0
+
+[node name="Segment2" type="CSGCylinder3D" parent="Whale/Body/MainBody"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, -3.1)
+radius = 1.7
+height = 2.8
+
+[node name="Segment3" type="CSGCylinder3D" parent="Whale/Body/MainBody"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, -6.2)
+radius = 1.5
+height = 2.6
+
+[node name="Segment4" type="CSGCylinder3D" parent="Whale/Body/MainBody"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, -8.85448)
+radius = 1.2
+height = 2.4
+
+[node name="Segment5" type="CSGCylinder3D" parent="Whale/Body/MainBody"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, -10.9153)
+radius = 0.9
+
+[node name="Fins" type="Node3D" parent="Whale"]
+
+[node name="RightFin" type="CSGPolygon3D" parent="Whale/Fins"]
+transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 1.5, 0.2, -1)
+polygon = PackedVector2Array(0, 0, 2, 0.8, 3.5, 0.6, 3.2, -0.8, 0, -0.3)
+depth = 0.3
+material = SubResource("StandardMaterial3D_body")
+
+[node name="LeftFin" type="CSGPolygon3D" parent="Whale/Fins"]
+transform = Transform3D(-0.82806, -0.560639, 0, 0.560639, -0.82806, 0, 0, 0, 1, -1.5, 0.2, -1)
+polygon = PackedVector2Array(0, 0, 2, 0.8, 3.5, 0.6, 3.2, -0.8, 0, -0.3)
+depth = 0.3
+material = SubResource("StandardMaterial3D_body")
+
+[node name="DorsalFin" type="CSGPolygon3D" parent="Whale/Fins"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.47015, -2.47445)
+polygon = PackedVector2Array(0, 0, 1.2, 2.2, 1.8, 1.9, 1.1, 0)
+depth = 0.3
+material = SubResource("StandardMaterial3D_body")
+
+[node name="TailFin" type="CSGPolygon3D" parent="Whale/Fins"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -15.6173)
+polygon = PackedVector2Array(-0.3, 0, 0, 3, 3, 4, 3.8, 0, 3, -4, 0, -3, -0.3, 0)
+depth = 0.2
+material = SubResource("StandardMaterial3D_body")
+
+[node name="Player" parent="." instance=ExtResource("2_fxeey")]
+
+[node name="Camera3D Controller" parent="Player/Camera3D" index="1" node_paths=PackedStringArray("boid_player")]
+boid_player = NodePath("../../../camera follower")
+
+[node name="camera follower" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, -15.0557, 41.7624)
+script = ExtResource("3_vxbnv")
+max_force = 30
+draw_gizmos = false
+
+[node name="offset_pursue" type="Node" parent="camera follower" node_paths=PackedStringArray("leader_boid")]
+script = ExtResource("4_d4q8q")
+leader_boid = NodePath("../../Whale/Head/boid")
+weight = 5.0
+
+[node name="Avoidance" type="Node" parent="camera follower"]
+script = ExtResource("5_r3f3w")
+draw_gizmos = false
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90.1317)
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(0.029265, 0, -0.999572, 0, 1, 0, 0.999572, 0, 0.029265, 6.28377, -4.57764e-05, -18.2004)
+curve = SubResource("2")
+script = ExtResource("6_2ikgh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.0512, 0.23691)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="DirectionalLight3D"]
+transform = Transform3D(0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-08, 1, 0.763187, -0.646177, -2.61999e-08, 0, 12.0512, 0.23691)
+
+[node name="Center" type="Marker3D" parent="."]
+
+[node name="Obstacles" type="Node3D" parent="."]
+script = ExtResource("7_rcb4y")
+obstacle_scene = ExtResource("8_6c8n7")
+radius = 30
+center_path = NodePath("../Center")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(30, 0, 0, 0, 1, 0, 0, 0, 30, 0, -35.9149, 0)
+visible = false
+mesh = SubResource("10")
+
+[node name="SceneSwitcher" parent="." instance=ExtResource("9_qktx5")]
+
+[node name="ui_layer" parent="." instance=ExtResource("19_7rerm")]
+
+[node name="Control" parent="ui_layer" index="0"]
+script = ExtResource("20_43173")
+
+[node name="GridContainer2" type="GridContainer" parent="ui_layer/Control" index="0"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -165.0
+offset_right = 440.0
+offset_bottom = 198.0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+columns = 2
+
+[node name="Label" type="Label" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+text = "Dist:"
+
+[node name="distance" type="HSlider" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+text = "RAD:"
+
+[node name="radius" type="HSlider" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label3" type="Label" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+text = "Amp:"
+
+[node name="amplitude" type="HSlider" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 180.0
+
+[node name="Label4" type="Label" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+text = "FREQ:"
+
+[node name="Frequency" type="HSlider" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 2.0
+step = 0.01
+
+[node name="Label5" type="Label" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+text = "WEIGHT:"
+
+[node name="weight" type="HSlider" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 10.0
+step = 0.1
+
+[node name="Label6" type="Label" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+text = "DAMPING:"
+
+[node name="damping" type="HSlider" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 10.0
+step = 0.1
+
+[node name="Label7" type="Label" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+text = "ANGULAR:"
+
+[node name="angularDamping" type="HSlider" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 10.0
+step = 0.1
+
+[node name="Label8" type="Label" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+text = "DIRECTION:"
+
+[node name="OptionButton" type="OptionButton" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ui_layer/Control/GridContainer2"]
+layout_mode = 2
+
+[connection signal="value_changed" from="ui_layer/Control/GridContainer2/distance" to="ui_layer/Control" method="_on_distance_value_changed"]
+[connection signal="value_changed" from="ui_layer/Control/GridContainer2/radius" to="ui_layer/Control" method="_on_radius_value_changed"]
+[connection signal="value_changed" from="ui_layer/Control/GridContainer2/damping" to="ui_layer/Control" method="_on_damping_value_changed"]
+[connection signal="value_changed" from="ui_layer/Control/GridContainer2/angularDamping" to="ui_layer/Control" method="_on_angular_damping_value_changed"]
+[connection signal="item_selected" from="ui_layer/Control/GridContainer2/OptionButton" to="ui_layer/Control" method="_on_option_button_item_selected"]
+
+[editable path="Player"]
+[editable path="ui_layer"]

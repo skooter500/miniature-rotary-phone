@@ -1,0 +1,141 @@
+[gd_scene load_steps=9 format=3 uid="uid://b6w8j2p4h7m3q"]
+
+[ext_resource type="Script" uid="uid://lqy7lve1pfps" path="res://behaviors/FPController.gd" id="1_sycgy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.7, 0.7, 0.75, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="Curve3D" id="Curve3D_1"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+metallic = 1.0
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0.6, 0.6, 0.65, 1)
+metallic = 0.9
+roughness = 0.15
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+transparency = 1
+albedo_color = Color(0.1, 0.3, 0.9, 0.6)
+metallic = 0.5
+roughness = 0.1
+
+[sub_resource type="Curve3D" id="Curve3D_2"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.4),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0.3, 0.3, 0.35, 1)
+metallic = 0.95
+roughness = 0.05
+
+[node name="SpaceFighter" type="Node3D"]
+
+[node name="MainBody" type="CSGCombiner3D" parent="."]
+
+[node name="MainHull" type="CSGBox3D" parent="MainBody"]
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 2, 0, 0, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="NoseCone" type="CSGPolygon3D" parent="MainBody"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.5, 0, 0)
+polygon = PackedVector2Array(0, -0.1, 0.3, -0.1, 0, 0.1)
+mode = 1
+spin_degrees = 360.0
+spin_sides = 8
+smooth_faces = true
+material = SubResource("StandardMaterial3D_1")
+
+[node name="Path3D" type="Path3D" parent="MainBody/NoseCone"]
+curve = SubResource("Curve3D_1")
+
+[node name="WingLeft" type="CSGPolygon3D" parent="MainBody"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.25, 0, 0)
+polygon = PackedVector2Array(0, 0, 0.8, -0.6, 0.2, -0.6, 0, -0.1)
+depth = 0.05
+material = SubResource("StandardMaterial3D_1")
+
+[node name="WingRight" type="CSGPolygon3D" parent="MainBody"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.25, 0, 0)
+polygon = PackedVector2Array(0, 0, 0.8, -0.6, 0.2, -0.6, 0, -0.1)
+depth = 0.05
+material = SubResource("StandardMaterial3D_1")
+
+[node name="Engine1" type="CSGCylinder3D" parent="MainBody"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.45, 0.15, 0.2)
+radius = 0.1
+height = 0.3
+sides = 12
+material = SubResource("StandardMaterial3D_2")
+
+[node name="Engine2" type="CSGCylinder3D" parent="MainBody"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.45, -0.15, 0.2)
+radius = 0.1
+height = 0.3
+sides = 12
+material = SubResource("StandardMaterial3D_2")
+
+[node name="Cockpit" type="CSGCombiner3D" parent="MainBody"]
+
+[node name="CockpitBase" type="CSGBox3D" parent="MainBody/Cockpit"]
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 0.4, 0.1, 0.15, 0)
+size = Vector3(0.4, 1, 1)
+material = SubResource("StandardMaterial3D_3")
+
+[node name="CockpitGlass" type="CSGPolygon3D" parent="MainBody/Cockpit"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.3, 0.15, 0)
+polygon = PackedVector2Array(0, -0.1, 0.2, -0.1, 0, 0.1)
+mode = 1
+spin_degrees = 360.0
+spin_sides = 8
+smooth_faces = true
+material = SubResource("StandardMaterial3D_4")
+
+[node name="Path3D" type="Path3D" parent="MainBody/Cockpit/CockpitGlass"]
+curve = SubResource("Curve3D_2")
+
+[node name="WeaponMountLeft" type="CSGBox3D" parent="MainBody"]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.2, 0.3, 0.4)
+size = Vector3(0.4, 1, 1)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="WeaponMountRight" type="CSGBox3D" parent="MainBody"]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.2, -0.3, 0.4)
+size = Vector3(0.4, 1, 1)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="WeaponLeft" type="CSGCylinder3D" parent="MainBody"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.4, 0.3, 0.4)
+radius = 0.05
+height = 0.4
+material = SubResource("StandardMaterial3D_5")
+
+[node name="WeaponRight" type="CSGCylinder3D" parent="MainBody"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.4, -0.3, 0.4)
+radius = 0.05
+height = 0.4
+material = SubResource("StandardMaterial3D_5")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
+script = ExtResource("1_sycgy")
+speed = 10.0
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.0512, 0.23691)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="DirectionalLight3D2"]
+transform = Transform3D(0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-08, 1, 0.763187, -0.646177, -2.61999e-08, 0, 12.0512, 0.23691)
