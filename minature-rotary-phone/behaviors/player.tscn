@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://ivslos3b7cmv"]
 
-[ext_resource type="Script" path="res://behaviors/FPController.gd" id="1_1myh2"]
+[ext_resource type="Script" uid="uid://lqy7lve1pfps" path="res://behaviors/fp_controller.gd" id="1_1myh2"]
 [ext_resource type="Environment" uid="uid://b5dnnkkpxo3qc" path="res://behaviors/seek_environment..tres" id="2_jj480"]
-[ext_resource type="Script" path="res://behaviors/CameraController.gd" id="3_hu8t5"]
+[ext_resource type="Script" uid="uid://qgg7wto84wvl" path="res://behaviors/CameraController.gd" id="3_hu8t5"]
 
 [sub_resource type="SphereShape3D" id="18"]
 

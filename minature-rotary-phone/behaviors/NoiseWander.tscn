@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://c78rv6n8baln7"]
 
 [ext_resource type="Script" uid="uid://bb475dsswmiyu" path="res://behaviors/spine_animator.gd" id="2"]
-[ext_resource type="Script" uid="uid://lqy7lve1pfps" path="res://behaviors/FPController.gd" id="3"]
-[ext_resource type="Script" uid="uid://bqb47mif0r5vt" path="res://behaviors/NoiseWander.gd" id="4"]
-[ext_resource type="Script" uid="uid://h5wrviq7ex0m" path="res://behaviors/OffsetPursue.gd" id="5"]
+[ext_resource type="Script" uid="uid://lqy7lve1pfps" path="res://behaviors/fp_controller.gd" id="3"]
+[ext_resource type="Script" uid="uid://bqb47mif0r5vt" path="res://behaviors/noise_wander.gd" id="4"]
+[ext_resource type="Script" uid="uid://h5wrviq7ex0m" path="res://behaviors/offset_pursue.gd" id="5"]
 [ext_resource type="Script" uid="uid://d2bspunugejyo" path="res://behaviors/NoiseWanderController.gd" id="6"]
 [ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="7"]
 [ext_resource type="Script" uid="uid://bfoar4ahwpbra" path="res://behaviors/PathDrawer.gd" id="9"]

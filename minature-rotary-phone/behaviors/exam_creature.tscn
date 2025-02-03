@@ -1,16 +1,15 @@
-[gd_scene load_steps=21 format=3 uid="uid://dsk1xsrlpolgh"]
+[gd_scene load_steps=20 format=3 uid="uid://41h4w01vjpdq"]
 
 [ext_resource type="Script" uid="uid://bb475dsswmiyu" path="res://behaviors/spine_animator.gd" id="2"]
-[ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/Avoidance.gd" id="3"]
-[ext_resource type="Script" uid="uid://bqb47mif0r5vt" path="res://behaviors/NoiseWander.gd" id="4"]
-[ext_resource type="Script" uid="uid://cqk70j8jant4u" path="res://behaviors/PlayerSteering.gd" id="5"]
+[ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/avoidance.gd" id="3"]
+[ext_resource type="Script" uid="uid://bqb47mif0r5vt" path="res://behaviors/noise_wander.gd" id="4"]
+[ext_resource type="Script" uid="uid://cqk70j8jant4u" path="res://behaviors/player_steering.gd" id="5"]
 [ext_resource type="Script" uid="uid://di08ea5kveqbp" path="res://behaviors/Rotate.gd" id="6"]
 [ext_resource type="Script" uid="uid://bg8s6cu2yyuok" path="res://behaviors/CreatureController.gd" id="7"]
-[ext_resource type="Script" uid="uid://ci8facjqq07ft" path="res://behaviors/Constrain.gd" id="8"]
-[ext_resource type="Script" uid="uid://bctpwo8cerrgq" path="res://behaviors/Harmonic.gd" id="10"]
+[ext_resource type="Script" uid="uid://ci8facjqq07ft" path="res://behaviors/constrain.gd" id="8"]
+[ext_resource type="Script" uid="uid://bctpwo8cerrgq" path="res://behaviors/harmonic.gd" id="10"]
 [ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="11"]
 [ext_resource type="Script" uid="uid://cr5ejl6hlraib" path="res://behaviors/root.gd" id="14"]
-[ext_resource type="PackedScene" uid="uid://0byvm1g7eaa6" path="res://behaviors/Dodecahedron.tscn" id="19"]
 
 [sub_resource type="PrismMesh" id="5"]
 
@@ -41,7 +40,6 @@ script = ExtResource("7")
 
 [node name="spineanimator" type="Node" parent="creature"]
 script = ExtResource("2")
-bonePaths = [NodePath("../boid"), NodePath("../body1"), NodePath("../body2"), NodePath("../body3"), NodePath("../tail")]
 
 [node name="boid" type="CharacterBody3D" parent="creature"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5154)
@@ -130,7 +128,16 @@ disabled = true
 [node name="Pod" type="Area3D" parent="creature/tail"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -2)
 
-[node name="Dodecahedron" parent="creature/tail/Pod" instance=ExtResource("19")]
+[node name="Dodecahedron" parent="creature/tail/Pod"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.210667, 0)
 script = ExtResource("6")
 speed = 1.0

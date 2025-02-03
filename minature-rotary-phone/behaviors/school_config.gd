@@ -7,7 +7,7 @@ extends Node
 
 func configure_scene():
 	var b = $"../School/Boid"
-	$"../camera follower/OffsetPursue".leader_boid = b
+	$"../camera follower/offset_pursue".leader_boid = b
 	
 	$"../Player/Camera3D/Camera3D Controller".boid = b 
 func _ready():

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://b6w8j2p4h7m3q"]
 
-[ext_resource type="Script" uid="uid://lqy7lve1pfps" path="res://behaviors/FPController.gd" id="1_sycgy"]
+[ext_resource type="Script" uid="uid://lqy7lve1pfps" path="res://behaviors/fp_controller.gd" id="1_sycgy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
 albedo_color = Color(0.7, 0.7, 0.75, 1)

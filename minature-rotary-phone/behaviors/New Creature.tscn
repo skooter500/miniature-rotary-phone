@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3]
 
-[ext_resource type="PackedScene" path="res://behaviors/creature.tscn" id="1"]
-[ext_resource type="Script" path="res://behaviors/FPController.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://pk6xti30q24e" path="res://behaviors/creature.tscn" id="1"]
+[ext_resource type="Script" uid="uid://lqy7lve1pfps" path="res://behaviors/fp_controller.gd" id="2"]
 
 [node name="Node3D" type="Node3D"]
 

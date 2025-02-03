@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://b4pok7xvls88x"]
 
-[ext_resource type="Script" path="res://behaviors/Bullet.gd" id="1"]
+[ext_resource type="Script" uid="uid://2es3upt55jyt" path="res://behaviors/Bullet.gd" id="1"]
 [ext_resource type="Material" uid="uid://b2raijlysriqd" path="res://behaviors/Tank Material.tres" id="2_tjw4x"]
-[ext_resource type="Script" path="res://behaviors/TrailRender.gd" id="4_hw6f4"]
+[ext_resource type="Script" uid="uid://blhpcqstd5fde" path="res://behaviors/trail_renderer.gd" id="4_hw6f4"]
 [ext_resource type="AudioStream" uid="uid://bl3ratrk2ga41" path="res://sounds/Laser_Shoot26.wav" id="5"]
 [ext_resource type="Curve" path="res://behaviors/trail_width_curve.tres" id="5_qhohp"]
 [ext_resource type="Material" uid="uid://ca5mcii5ms7ww" path="res://behaviors/CobraTrail.tres" id="6_ubv1i"]

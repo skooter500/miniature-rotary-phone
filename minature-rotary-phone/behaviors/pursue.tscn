@@ -2,11 +2,11 @@
 
 [ext_resource type="Material" uid="uid://jru41rxv1b16" path="res://behaviors/Ground.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://c72rp0138c4sb" path="res://Models/ferdelance_out/ferdelance.gltf" id="2"]
-[ext_resource type="Script" path="res://behaviors/Follow.gd" id="3"]
-[ext_resource type="Script" path="res://behaviors/PathDrawer.gd" id="4"]
-[ext_resource type="Script" path="res://behaviors/BigBoid.gd" id="5"]
+[ext_resource type="Script" uid="uid://nwuxxlseq0f" path="res://behaviors/Follow.gd" id="3"]
+[ext_resource type="Script" uid="uid://bfoar4ahwpbra" path="res://behaviors/PathDrawer.gd" id="4"]
+[ext_resource type="Script" uid="uid://b6lcmc31bt8im" path="res://behaviors/big_boid.gd" id="5"]
 [ext_resource type="PackedScene" uid="uid://okvro62ssxp" path="res://Models/cobramk3_out/cobramk3.gltf" id="6"]
-[ext_resource type="Script" path="res://behaviors/TrailRender.gd" id="7"]
+[ext_resource type="Script" uid="uid://blhpcqstd5fde" path="res://behaviors/trail_renderer.gd" id="7"]
 
 [sub_resource type="PlaneMesh" id=2]
 

@@ -17,21 +17,21 @@
 [ext_resource type="Script" uid="uid://di08ea5kveqbp" path="res://behaviors/Rotate.gd" id="14"]
 [ext_resource type="Script" uid="uid://cr5ejl6hlraib" path="res://behaviors/root.gd" id="15"]
 [ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="17"]
-[ext_resource type="Script" uid="uid://cqk70j8jant4u" path="res://behaviors/PlayerSteering.gd" id="18"]
-[ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/Avoidance.gd" id="19"]
+[ext_resource type="Script" uid="uid://cqk70j8jant4u" path="res://behaviors/player_steering.gd" id="18"]
+[ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/avoidance.gd" id="19"]
 [ext_resource type="PackedScene" uid="uid://dc24oh4o5erhi" path="res://behaviors/SceneSwitcher.tscn" id="20"]
 [ext_resource type="Script" uid="uid://cbrc3unamm5q3" path="res://behaviors/Flee.gd" id="21"]
-[ext_resource type="Script" uid="uid://wtnjsmv3y8y2" path="res://behaviors/Pursue.gd" id="22"]
-[ext_resource type="Script" uid="uid://blhpcqstd5fde" path="res://behaviors/TrailRender.gd" id="23"]
+[ext_resource type="Script" uid="uid://wtnjsmv3y8y2" path="res://behaviors/pursue.gd" id="22"]
+[ext_resource type="Script" uid="uid://blhpcqstd5fde" path="res://behaviors/trail_renderer.gd" id="23"]
 [ext_resource type="Material" uid="uid://ca5mcii5ms7ww" path="res://behaviors/CobraTrail.tres" id="24"]
 [ext_resource type="Curve" path="res://behaviors/trail_width_curve.tres" id="25"]
-[ext_resource type="Script" uid="uid://baw56rnhj0aqm" path="res://behaviors/Wander.gd" id="26"]
-[ext_resource type="Script" uid="uid://bhtkod4qbxkx7" path="res://behaviors/StateMachine.gd" id="27"]
+[ext_resource type="Script" uid="uid://baw56rnhj0aqm" path="res://behaviors/wander.gd" id="26"]
+[ext_resource type="Script" uid="uid://bhtkod4qbxkx7" path="res://behaviors/state_machine.gd" id="27"]
 [ext_resource type="Script" uid="uid://oxik7qwy2p8e" path="res://behaviors/AttackState.gd" id="28"]
-[ext_resource type="Script" uid="uid://c2d7mphmtn1jv" path="res://behaviors/Seek.gd" id="29"]
+[ext_resource type="Script" uid="uid://c2d7mphmtn1jv" path="res://behaviors/seek.gd" id="29"]
 [ext_resource type="Environment" uid="uid://1cpn0tg8jm7c" path="res://behaviors/default_environment.tres" id="30"]
 [ext_resource type="AudioStream" uid="uid://yggohfeablt2" path="res://sounds/safely home.mp3" id="31"]
-[ext_resource type="Script" uid="uid://h5wrviq7ex0m" path="res://behaviors/OffsetPursue.gd" id="32"]
+[ext_resource type="Script" uid="uid://h5wrviq7ex0m" path="res://behaviors/offset_pursue.gd" id="32"]
 [ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="35_dvhi1"]
 
 [sub_resource type="SphereShape3D" id="3"]
@@ -54,7 +54,7 @@ script = ExtResource("17")
 max_speed = 15.0
 max_force = 50
 
-[node name="OffsetPursue" type="Node" parent="camera follower" node_paths=PackedStringArray("leader_boid")]
+[node name="offset_pursue" type="Node" parent="camera follower" node_paths=PackedStringArray("leader_boid")]
 script = ExtResource("32")
 leader_boid = NodePath("../../Attacker")
 

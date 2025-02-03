@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cjb0v7ofk5qio"]
 
-[ext_resource type="Script" path="res://behaviors/BigBoid.gd" id="1"]
-[ext_resource type="Script" path="res://behaviors/TrailRender.gd" id="2"]
+[ext_resource type="Script" uid="uid://b6lcmc31bt8im" path="res://behaviors/big_boid.gd" id="1"]
+[ext_resource type="Script" uid="uid://blhpcqstd5fde" path="res://behaviors/trail_renderer.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://bylu6abfrb8hd" path="res://behaviors/cobramk3.tscn" id="3"]
 
 [sub_resource type="BoxShape3D" id="14"]

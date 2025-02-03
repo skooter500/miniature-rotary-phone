@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3]
 
-[ext_resource type="Script" uid="uid://bxk2dwj7mbatd" path="res://behaviors/Spawner.gd" id="1"]
+[ext_resource type="Script" uid="uid://bxk2dwj7mbatd" path="res://behaviors/spawner.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://pk6xti30q24e" path="res://behaviors/creature.tscn" id="2"]
 [ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="3"]
-[ext_resource type="Script" uid="uid://lqy7lve1pfps" path="res://behaviors/FPController.gd" id="7"]
+[ext_resource type="Script" uid="uid://lqy7lve1pfps" path="res://behaviors/fp_controller.gd" id="7"]
 [ext_resource type="Script" uid="uid://cr5ejl6hlraib" path="res://behaviors/root.gd" id="13"]
 
 [sub_resource type="Environment" id=6]

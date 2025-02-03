@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://1biqajqofiiq"]
 
-[ext_resource type="Script" path="res://behaviors/FPController.gd" id="1"]
-[ext_resource type="Script" path="res://behaviors/BigBoid.gd" id="4"]
+[ext_resource type="Script" uid="uid://lqy7lve1pfps" path="res://behaviors/fp_controller.gd" id="1"]
+[ext_resource type="Script" uid="uid://b6lcmc31bt8im" path="res://behaviors/big_boid.gd" id="4"]
 
 [sub_resource type="Environment" id="5"]
 background_mode = 1

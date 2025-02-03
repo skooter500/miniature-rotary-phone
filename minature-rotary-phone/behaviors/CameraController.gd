@@ -31,7 +31,6 @@ func _ready():
 	call_deferred("calculate_offset")
 	call_deferred("set_mode", mode)
 
-
 func calculate_offset():
 	boid_player.get_node("offset_pursue").calculate_offset()
 	

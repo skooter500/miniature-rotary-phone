@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://dc24oh4o5erhi"]
 
-[ext_resource type="Script" uid="uid://bjgyqsmmooqpc" path="res://behaviors/SceneSwitcher.gd" id="1"]
+[ext_resource type="Script" uid="uid://bjgyqsmmooqpc" path="res://behaviors/scene_switcher.gd" id="1"]
 
 [node name="SceneSwitcher" type="Node"]
 script = ExtResource("1")
-scenes = Array[String](["behaviors/seek.tscn", "behaviors/arrive.tscn", "behaviors/follow_path.tscn", "behaviors/wander.tscn", "behaviors/PlayerSteering.tscn", "behaviors/Hybrid1.tscn", "behaviors/offset_pursue.tscn", "behaviors/School With Avoidance.tscn", "behaviors/take_control.tscn", "behaviors/StateMachineBots.tscn"])
+scenes = Array[String](["behaviors/seek.tscn", "behaviors/arrive.tscn", "behaviors/FollowPath.tscn", "behaviors/Wander.tscn", "behaviors/PlayerSteering.tscn", "behaviors/Hybrid1.tscn", "behaviors/offset_pursue.tscn", "behaviors/SchoolWithAvoidance.tscn", "behaviors/take_control.tscn", "behaviors/StateMachineBots.tscn"])

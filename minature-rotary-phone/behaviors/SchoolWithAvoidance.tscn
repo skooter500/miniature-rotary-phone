@@ -7,10 +7,10 @@
 [ext_resource type="Script" uid="uid://ceyci7r6qijlk" path="res://behaviors/Center.gd" id="5"]
 [ext_resource type="Script" uid="uid://dexyjr6qrrxy5" path="res://behaviors/school_config.gd" id="6"]
 [ext_resource type="Script" uid="uid://cr5ejl6hlraib" path="res://behaviors/root.gd" id="7"]
-[ext_resource type="Script" uid="uid://brbsahdh6ulkg" path="res://behaviors/School.gd" id="8"]
+[ext_resource type="Script" uid="uid://brbsahdh6ulkg" path="res://behaviors/school.gd" id="8"]
 [ext_resource type="Script" uid="uid://bpe72cnx2s1eg" path="res://behaviors/Obstacles.gd" id="9"]
-[ext_resource type="Script" uid="uid://h5wrviq7ex0m" path="res://behaviors/OffsetPursue.gd" id="10"]
-[ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/Avoidance.gd" id="11"]
+[ext_resource type="Script" uid="uid://h5wrviq7ex0m" path="res://behaviors/offset_pursue.gd" id="10"]
+[ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/avoidance.gd" id="11"]
 [ext_resource type="PackedScene" uid="uid://dc24oh4o5erhi" path="res://behaviors/SceneSwitcher.tscn" id="13"]
 [ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="15_itnq4"]
 
