@@ -12,5 +12,5 @@ func _process(delta):
 	var s
 	
 	s = "Scene: " + str(SceneSwitcher.current_scene_name) + "\n" 
-	s += "Cam:" + str(CameraController.Mode.keys()[cam_controller.mode])
+	# s += "Cam:" + str(CameraController.Mode.keys()[cam_controller.mode])
 	label.set_text(s)

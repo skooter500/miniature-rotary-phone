@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://1klgn827pvr4"]
+[gd_scene load_steps=8 format=3 uid="uid://1klgn827pvr4"]
 
 [ext_resource type="Script" uid="uid://bb475dsswmiyu" path="res://behaviors/spine_animator.gd" id="1_8n3i2"]
 [ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="2_kb5ac"]
+[ext_resource type="Script" uid="uid://bctpwo8cerrgq" path="res://behaviors/harmonic.gd" id="3_jmt5s"]
+[ext_resource type="Script" uid="uid://lqy7lve1pfps" path="res://behaviors/fp_controller.gd" id="3_x8kim"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_body"]
 albedo_color = Color(0.15, 0.25, 0.35, 1)
@@ -14,43 +16,56 @@ albedo_color = Color(0.5, 0.2, 0.2, 1)
 
 [node name="Whale" type="Node3D"]
 
-[node name="Node" type="Node" parent="." node_paths=PackedStringArray("bones")]
+[node name="spine_animator" type="Node" parent="." node_paths=PackedStringArray("bones")]
 script = ExtResource("1_8n3i2")
-bones = [NodePath("../Head/CharacterBody3D2"), NodePath("../Head/MainHead"), NodePath("../Body/MainBody/Segment1"), NodePath("../Body/MainBody/Segment2"), NodePath("../Body/MainBody/Segment3"), NodePath("../Body/MainBody/Segment4"), NodePath("../Body/MainBody/Segment5"), NodePath("../Fins/TailFin")]
+bones = [NodePath("../boid"), NodePath("../Body/MainBody/Segment1"), NodePath("../Body/MainBody/Segment2"), NodePath("../Body/MainBody/Segment3"), NodePath("../Body/MainBody/Segment4"), NodePath("../Body/MainBody/Segment5"), NodePath("../Fins/Node3D")]
 
-[node name="Head" type="Node3D" parent="."]
-
-[node name="CharacterBody3D2" type="CharacterBody3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 0.6, 0.2, 0, -0.1, 1, 0, -0.2, 4.2)
+[node name="boid" type="CharacterBody3D" parent="."]
 script = ExtResource("2_kb5ac")
+speed = 5.0
+max_force = 100
 
-[node name="Snout" type="CSGSphere3D" parent="Head/CharacterBody3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 7.45058e-09, 1, 0, 0, 0)
+[node name="Harmonic" type="Node" parent="boid"]
+script = ExtResource("3_jmt5s")
+radius = 20.0
+distance = 10
+axis = 1
+weight = 10.0
+metadata/_custom_type_script = ExtResource("3_jmt5s")
+
+[node name="Head" type="Node3D" parent="boid"]
+
+[node name="Snout" type="CSGSphere3D" parent="boid/Head"]
+transform = Transform3D(1, 0, 0, 0, 0.6, 0.2, 0, -0.1, 1, 0, -0.2, 4.2)
 radius = 1.4
 material = SubResource("StandardMaterial3D_body")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="Head"]
+[node name="EyeRight" type="CSGSphere3D" parent="boid/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.5, 3)
-
-[node name="EyeRight" type="CSGSphere3D" parent="Head/CharacterBody3D"]
 radius = 0.25
 material = SubResource("StandardMaterial3D_eye")
 
-[node name="MainHead" type="CSGSphere3D" parent="Head"]
+[node name="MainHead" type="CSGSphere3D" parent="boid/Head"]
 transform = Transform3D(1, 0, 0, 0, 0.8, 0, 0, 0, 1.2, 0, 0.3, 2.6)
 radius = 1.8
 material = SubResource("StandardMaterial3D_body")
 
-[node name="EyeLeft" type="CSGSphere3D" parent="Head"]
+[node name="EyeLeft" type="CSGSphere3D" parent="boid/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.5, 3)
 radius = 0.25
 material = SubResource("StandardMaterial3D_eye")
 
-[node name="Mouth" type="CSGCylinder3D" parent="Head"]
+[node name="Mouth" type="CSGCylinder3D" parent="boid/Head"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.6, 4.2)
 radius = 0.8
 height = 0.2
 material = SubResource("StandardMaterial3D_mouth")
+
+[node name="Blowhole" type="CSGCylinder3D" parent="boid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 2.2)
+radius = 0.12
+height = 0.3
+material = SubResource("StandardMaterial3D_body")
 
 [node name="Body" type="Node3D" parent="."]
 
@@ -61,10 +76,28 @@ transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 
 radius = 1.8
 height = 3.0
 
+[node name="RightFin" type="CSGPolygon3D" parent="Body/MainBody/Segment1"]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, 0.2, -1.5, -1)
+polygon = PackedVector2Array(0, 0, 2, 0.8, 3.5, 0.6, 3.2, -0.8, 0, -0.3)
+depth = 0.3
+material = SubResource("StandardMaterial3D_body")
+
+[node name="LeftFin" type="CSGPolygon3D" parent="Body/MainBody/Segment1"]
+transform = Transform3D(0.560639, -0.82806, 0, 0.82806, 0.560639, 0, 0, 0, 1, 0.2, 1.5, -1)
+polygon = PackedVector2Array(0, 0, 2, 0.8, 3.5, 0.6, 3.2, -0.8, 0, -0.3)
+depth = 0.3
+material = SubResource("StandardMaterial3D_body")
+
 [node name="Segment2" type="CSGCylinder3D" parent="Body/MainBody"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, -3.1)
 radius = 1.7
 height = 2.8
+
+[node name="DorsalFin" type="CSGPolygon3D" parent="Body/MainBody/Segment2"]
+transform = Transform3D(1.91069e-15, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -1, -1, 0, -4.37114e-08, 1.47015, -6.42623e-08, 0.62555)
+polygon = PackedVector2Array(0, 0, 1.2, 2.2, 1.8, 1.9, 1.1, 0)
+depth = 0.3
+material = SubResource("StandardMaterial3D_body")
 
 [node name="Segment3" type="CSGCylinder3D" parent="Body/MainBody"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, -6.2)
@@ -82,32 +115,27 @@ radius = 0.9
 
 [node name="Fins" type="Node3D" parent="."]
 
-[node name="RightFin" type="CSGPolygon3D" parent="Fins"]
-transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 1.5, 0.2, -1)
-polygon = PackedVector2Array(0, 0, 2, 0.8, 3.5, 0.6, 3.2, -0.8, 0, -0.3)
-depth = 0.3
-material = SubResource("StandardMaterial3D_body")
+[node name="Node3D" type="Node3D" parent="Fins"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15.6173)
 
-[node name="LeftFin" type="CSGPolygon3D" parent="Fins"]
-transform = Transform3D(-0.82806, -0.560639, 0, 0.560639, -0.82806, 0, 0, 0, 1, -1.5, 0.2, -1)
-polygon = PackedVector2Array(0, 0, 2, 0.8, 3.5, 0.6, 3.2, -0.8, 0, -0.3)
-depth = 0.3
-material = SubResource("StandardMaterial3D_body")
-
-[node name="DorsalFin" type="CSGPolygon3D" parent="Fins"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.47015, -2.47445)
-polygon = PackedVector2Array(0, 0, 1.2, 2.2, 1.8, 1.9, 1.1, 0)
-depth = 0.3
-material = SubResource("StandardMaterial3D_body")
-
-[node name="TailFin" type="CSGPolygon3D" parent="Fins"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -15.6173)
+[node name="TailFin" type="CSGPolygon3D" parent="Fins/Node3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 polygon = PackedVector2Array(-0.3, 0, 0, 3, 3, 4, 3.8, 0, 3, -4, 0, -3, -0.3, 0)
 depth = 0.2
 material = SubResource("StandardMaterial3D_body")
 
-[node name="Blowhole" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 2.2)
-radius = 0.12
-height = 0.3
-material = SubResource("StandardMaterial3D_body")
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.926483, 15.526)
+size = Vector3(1, 0.452576, 2.93896)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.176636, 0.831107, 0.313542)
+operation = 1
+radius = 0.477797
+
+[node name="Camera3D" type="Camera3D" parent="."]
+script = ExtResource("3_x8kim")
+speed = 10.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.999841, 0, -0.0178538, -0.0138006, 0.634434, 0.772854, 0.0113271, 0.772977, -0.634333, 0, 0, 0)

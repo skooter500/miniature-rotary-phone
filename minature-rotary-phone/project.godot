@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Minature Rotary Phone"
-run/main_scene="res://behaviors/seek.tscn"
+run/main_scene="uid://d1rd0kxf7f6kk"
 config/features=PackedStringArray("4.4")
 config/icon="res://behaviors/icon.png"
 
@@ -123,8 +123,8 @@ renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
 environment/ssao/quality=3
 environment/ssil/quality=3
-anti_aliasing/screen_space_roughness_limiter/enabled=false
 anti_aliasing/quality/msaa_3d=3
+anti_aliasing/screen_space_roughness_limiter/enabled=false
 quality/subsurface_scattering/quality=2
 quality/filters/msaa=2
 

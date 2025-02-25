@@ -93,8 +93,8 @@ func pursue():
 func _ready():	
 	randomize()
 	var screen_size = DisplayServer.screen_get_size()
-	var window_size = get_window().get_size()
-	
+	var window_size = get_window().g765et_size()
+	10
 	# OS.set_window_position(screen_size*0.5 - window_size*0.5)
 
 	if targetNodePath:	

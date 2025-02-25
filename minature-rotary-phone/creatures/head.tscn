@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca7yo4xcj8qmc"]
+
+[ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="1_nu3gr"]
+[ext_resource type="Script" uid="uid://bctpwo8cerrgq" path="res://behaviors/harmonic.gd" id="2_nu3gr"]
+
+[node name="head" type="CharacterBody3D"]
+script = ExtResource("1_nu3gr")
+
+[node name="Harmonic" type="Node" parent="."]
+script = ExtResource("2_nu3gr")
+metadata/_custom_type_script = ExtResource("2_nu3gr")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
