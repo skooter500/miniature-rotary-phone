@@ -133,7 +133,6 @@ weight = 10.0
 script = ExtResource("14")
 frequency = 0.5
 distance = 20
-axis = 1
 weight = 7.0
 
 [node name="Constrain" type="Node" parent="creature/boid"]

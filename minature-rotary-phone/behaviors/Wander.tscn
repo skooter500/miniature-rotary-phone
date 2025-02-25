@@ -99,8 +99,9 @@ shape = SubResource("8")
 [node name="NoiseWander" type="Node" parent="Creature/boid"]
 script = ExtResource("14")
 frequency = 5.0
+radius = 20.0
 amplitude = 200
-distance = 15
+distance = 100
 weight = 10.0
 
 [node name="Constrain" type="Node" parent="Creature/boid"]
@@ -180,6 +181,9 @@ shape = SubResource("15")
 
 [node name="Wander" type="Node" parent="Ship"]
 script = ExtResource("3")
+radius = 10.03
+jitter = 200.0
+weight = 5.0
 
 [node name="Constrain" type="Node" parent="Ship"]
 script = ExtResource("15")
