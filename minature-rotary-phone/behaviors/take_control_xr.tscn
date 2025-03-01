@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://c3udleh357odo" path="res://behaviors/jet.gd" id="2_ldydu"]
 [ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="3_7egbg"]
 [ext_resource type="PackedScene" uid="uid://bcjp8kcgde4cs" path="res://scene_anchor.tscn" id="3_ldydu"]
-[ext_resource type="PackedScene" path="res://scene_global_mesh.tscn" id="4_ag6a5"]
+[ext_resource type="PackedScene" uid="uid://bwo5nq0clfe3c" path="res://scene_global_mesh.tscn" id="4_ag6a5"]
 [ext_resource type="Script" uid="uid://h5wrviq7ex0m" path="res://behaviors/offset_pursue.gd" id="4_cpb5b"]
 [ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/avoidance.gd" id="5_xrk0n"]
 [ext_resource type="Script" uid="uid://bfoar4ahwpbra" path="res://behaviors/PathDrawer.gd" id="6_rgg40"]

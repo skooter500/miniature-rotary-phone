@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Minature Rotary Phone"
-run/main_scene="uid://d1rd0kxf7f6kk"
+run/main_scene="uid://dmi1o12psjnub"
 config/features=PackedStringArray("4.4")
 config/icon="res://behaviors/icon.png"
 
@@ -131,4 +131,5 @@ quality/filters/msaa=2
 [xr]
 
 openxr/enabled=true
+openxr/startup_alert=false
 shaders/enabled=true

@@ -31,7 +31,7 @@ radius = 20.0
 distance = 10
 axis = 1
 weight = 10.0
-metadata/_custom_type_script = ExtResource("3_jmt5s")
+metadata/_custom_type_script = "uid://bctpwo8cerrgq"
 
 [node name="Head" type="Node3D" parent="boid"]
 

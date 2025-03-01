@@ -143,9 +143,9 @@ amplitude = 90
 distance = 100
 draw_gizmos = false
 
-[node name="PathFollow3D" type="Node" parent="creature/boid"]
+[node name="PathFollow3D" type="Node" parent="creature/boid" node_paths=PackedStringArray("path")]
 script = ExtResource("14")
-path_path = NodePath("../../../Path3D")
+path = NodePath("../../../Path3D")
 waypoint_seek_distance = 5
 weight = 3.0
 

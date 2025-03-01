@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7rubewuhrpnq"]
 
-[ext_resource type="Script" path="res://ui_layer.gd" id="1_434qe"]
+[ext_resource type="Script" uid="uid://cxrnj65v8cnt0" path="res://ui_layer.gd" id="1_434qe"]
 [ext_resource type="Theme" uid="uid://du16em6mflgkj" path="res://behaviors/bryans_theme.tres" id="1_irlwy"]
 
 [node name="ui_layer" type="CanvasLayer"]
@@ -34,7 +34,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 8
 text = "F:Full screen
 C: Camera Mode 
-< > : Change scene
+0-9 : Change scene
 Q: Quit "
 
 [node name="MarginContainer2" type="MarginContainer" parent="Control"]
