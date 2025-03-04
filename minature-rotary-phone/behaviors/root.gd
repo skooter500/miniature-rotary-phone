@@ -51,6 +51,7 @@ func _ready():
 	DebugDraw2D.config.text_custom_font = custom_font
 	DebugDraw2D.config.text_default_size = text_size
 	DebugDraw2D.config.text_background_color = Color.TRANSPARENT
+	DebugDraw3D.scoped_config().set_thickness(0.001)
 	#DebugDraw2D.config.text_foreground_color = Color.CHARTREUSE
 	xr_interface = XRServer.find_interface("OpenXR")
 	if xr_interface and xr_interface.is_initialized():
@@ -134,15 +135,16 @@ func enable_passthrough(enable: bool) -> void:
 
 
 func _on_left_button_pressed(name: String) -> void:
-	if name == "ax_button":
+	print(name)
+	if name == "menu_button":
 		scene_and_spatial_anchors_displayed = ! scene_and_spatial_anchors_displayed
 		scene_manager.visible = scene_and_spatial_anchors_displayed	
-	elif name == "by_button":
+	elif name == "select_button":
 		enable_passthrough(not passthrough_enabled)
-	elif name == "menu_button":
-		scene_manager.request_scene_capture()
 pass # Replace with function body.
 
 
 func _on_right_button_pressed(name: String) -> void:
+	print(name)
+	scene_manager.request_scene_capture()
 	pass # Replace with function body.

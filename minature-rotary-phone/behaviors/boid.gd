@@ -86,11 +86,12 @@ func set_enabled(behavior, enabled):
 
 
 func on_draw_gizmos():
-
-	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.z * 10.0 , Color(0, 0, 1), 0.1)
-	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.x * 10.0 , Color(1, 0, 0), 0.1)
-	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.y * 10.0 , Color(0, 1, 0), 0.1)
-	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + force, Color(1, 1, 0), 0.1)
+	
+	var len = 0.1
+	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.z * len , Color(0, 0, 1), 0.1)
+	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.x * len , Color(1, 0, 0), 0.1)
+	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.y * len , Color(0, 1, 0), 0.1)
+	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + force, Color(1, 1, 0), 0.1 * len)
 	
 	if school and count_neighbors:
 		DebugDraw3D.draw_sphere(global_transform.origin, school.neighbor_distance, Color.WEB_PURPLE)

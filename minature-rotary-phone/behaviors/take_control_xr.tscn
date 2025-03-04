@@ -30,13 +30,16 @@ ambient_light_color = Color(0.699653, 0.699653, 0.699653, 1)
 script = ExtResource("1_ldydu")
 
 [node name="School" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("11_oxv6l")
 fish_scene = ExtResource("3_oxv6l")
-radius = 0.5
-neighbor_distance = 0.2
+count = 100
+radius = 1.0
+neighbor_distance = 1.0
 max_neighbors = 5
-cell_size = 0.1
+cell_size = 0.5
 grid_size = 10
+center_path = NodePath("../center")
 
 [node name="SchoolConfig" type="Node" parent="."]
 script = ExtResource("13_vwiud")
@@ -51,11 +54,13 @@ environment = SubResource("Environment_ldydu")
 
 [node name="left" type="XRController3D" parent="Player/XROrigin3D"]
 tracker = &"left_hand"
+pose = &"grip"
 
 [node name="OpenXRFbRenderModel" type="OpenXRFbRenderModel" parent="Player/XROrigin3D/left"]
 
 [node name="right" type="XRController3D" parent="Player/XROrigin3D"]
 tracker = &"right_hand"
+pose = &"grip"
 
 [node name="OpenXRFbRenderModel" type="OpenXRFbRenderModel" parent="Player/XROrigin3D/right"]
 render_model_type = 1
