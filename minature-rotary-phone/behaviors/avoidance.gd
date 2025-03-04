@@ -6,8 +6,8 @@ class_name Avoidance extends SteeringBehavior
 
 enum ForceDirection {Normal, Incident, Up, Braking}
 @export var direction = ForceDirection.Normal
-@export var feeler_angle = 45
-@export var feeler_length = 10
+@export var feeler_angle:float = 45
+@export var feeler_length:float = 10
 @export var updates_per_second = 5
 
 var force = Vector3.ZERO

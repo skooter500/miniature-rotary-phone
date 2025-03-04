@@ -16,7 +16,7 @@ size = Vector3(0.00949707, 0.0237183, 0.0824707)
 
 [node name="Boid" type="CharacterBody3D"]
 script = ExtResource("1_0g1a7")
-max_speed = 0.2
+max_speed = 0.5
 max_force = 1.0
 damping = 0.3
 draw_gizmos = false
@@ -32,29 +32,29 @@ shape = SubResource("2")
 
 [node name="Avoidance" type="Node" parent="."]
 script = ExtResource("3_lfo5w")
-feeler_angle = 60
-feeler_length = 1
-weight = 2.0
-draw_gizmos = false
+feeler_length = 0.2
+updates_per_second = 2
 
 [node name="Separation" type="Node" parent="."]
 script = ExtResource("4_6642d")
 weight = 2.0
 draw_gizmos = false
+enabled = false
 
 [node name="Alignment" type="Node" parent="."]
 script = ExtResource("5_aml3r")
 weight = 2.0
 draw_gizmos = false
+enabled = false
 
 [node name="Cohesion" type="Node" parent="."]
 script = ExtResource("6_aica7")
 weight = 2.0
 draw_gizmos = false
+enabled = false
 
 [node name="Wander" type="Node" parent="."]
 script = ExtResource("7_27y5q")
-distance = 0.1
-radius = 0.2
-jitter = 5.0
-draw_gizmos = false
+distance = 0.2
+radius = 0.1
+jitter = 0.5
