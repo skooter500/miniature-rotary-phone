@@ -60,7 +60,7 @@ func _process(delta):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	center = get_node(center_path)
+	center = $"../center"
 	var cell = position_to_cell(Vector3(-60, 59, 80))
 	var p = cell_to_position(cell)
 	for i in count:

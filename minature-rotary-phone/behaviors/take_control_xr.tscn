@@ -1,7 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://d1rd0kxf7f6kk"]
+[gd_scene load_steps=15 format=3 uid="uid://d1rd0kxf7f6kk"]
 
 [ext_resource type="Script" uid="uid://cr5ejl6hlraib" path="res://behaviors/root.gd" id="1_ldydu"]
-[ext_resource type="Script" uid="uid://c3udleh357odo" path="res://behaviors/jet.gd" id="2_ldydu"]
 [ext_resource type="PackedScene" uid="uid://bcjp8kcgde4cs" path="res://scene_anchor.tscn" id="3_ldydu"]
 [ext_resource type="PackedScene" uid="uid://cg8s1fo3cgktc" path="res://behaviors/Fish2_small.tscn" id="3_oxv6l"]
 [ext_resource type="PackedScene" uid="uid://bwo5nq0clfe3c" path="res://scene_global_mesh.tscn" id="4_ldydu"]
@@ -14,15 +13,6 @@
 
 [sub_resource type="Environment" id="Environment_ldydu"]
 background_mode = 1
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_ag6a5"]
-top_radius = 0.05
-bottom_radius = 0.05
-height = 0.3
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ldydu"]
-transparency = 1
-albedo_color = Color(0.0901961, 0.65098, 0.764706, 0.113725)
 
 [sub_resource type="SphereShape3D" id="18"]
 
@@ -59,23 +49,16 @@ script = ExtResource("5_hebbm")
 [node name="Camera3D" type="XRCamera3D" parent="Player/XROrigin3D"]
 environment = SubResource("Environment_ldydu")
 
-[node name="left" type="XRController3D" parent="Player/XROrigin3D" node_paths=PackedStringArray("xr_controller")]
+[node name="left" type="XRController3D" parent="Player/XROrigin3D"]
 tracker = &"left_hand"
-script = ExtResource("2_ldydu")
-xr_controller = NodePath(".")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/XROrigin3D/left"]
-mesh = SubResource("CylinderMesh_ag6a5")
-surface_material_override/0 = SubResource("StandardMaterial3D_ldydu")
+[node name="OpenXRFbRenderModel" type="OpenXRFbRenderModel" parent="Player/XROrigin3D/left"]
 
-[node name="right" type="XRController3D" parent="Player/XROrigin3D" node_paths=PackedStringArray("xr_controller")]
+[node name="right" type="XRController3D" parent="Player/XROrigin3D"]
 tracker = &"right_hand"
-script = ExtResource("2_ldydu")
-xr_controller = NodePath(".")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/XROrigin3D/right"]
-mesh = SubResource("CylinderMesh_ag6a5")
-surface_material_override/0 = SubResource("StandardMaterial3D_ldydu")
+[node name="OpenXRFbRenderModel" type="OpenXRFbRenderModel" parent="Player/XROrigin3D/right"]
+render_model_type = 1
 
 [node name="OpenXRFbSceneManager" type="OpenXRFbSceneManager" parent="Player/XROrigin3D"]
 default_scene = ExtResource("3_ldydu")
@@ -105,6 +88,8 @@ transform = Transform3D(0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ag6a5")
+
+[node name="center" type="Marker3D" parent="."]
 
 [connection signal="button_pressed" from="Player/XROrigin3D/left" to="." method="_on_left_button_pressed"]
 [connection signal="button_pressed" from="Player/XROrigin3D/right" to="." method="_on_right_button_pressed"]

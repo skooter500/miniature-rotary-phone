@@ -2,8 +2,6 @@ extends Node3D
 
 # @onready var player:RigidBody3D = $"../../.."
 
-@onready var flames:GPUParticles3D = $GPUParticles3D
-@onready var audio:AudioStreamPlayer3D = $AudioStreamPlayer3D
 @export  var xr_controller:XRController3D
 
 @export var power = 100.0

@@ -4,6 +4,9 @@ var custom_font:Font
 
 var environment:Environment
 
+var passthrough_enabled: bool = false
+
+
 func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_F:
 		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
@@ -111,13 +114,35 @@ func _create_graph(title, is_fps, show_title, flags, parent := &"", parent_side 
 
 var scene_and_spatial_anchors_displayed:bool = true
 
+func enable_passthrough(enable: bool) -> void:
+	if passthrough_enabled == enable:
+		return
+
+	var supported_blend_modes = xr_interface.get_supported_environment_blend_modes()
+	if XRInterface.XR_ENV_BLEND_MODE_ALPHA_BLEND in supported_blend_modes and XRInterface.XR_ENV_BLEND_MODE_OPAQUE in supported_blend_modes:
+		if enable:
+			# Switch to passthrough.
+			xr_interface.environment_blend_mode = XRInterface.XR_ENV_BLEND_MODE_ALPHA_BLEND
+			get_viewport().transparent_bg = true
+			environment.background_color = Color(0.0, 0.0, 0.0, 0.0)
+		else:
+			# Switch back to VR.
+			xr_interface.environment_blend_mode = XRInterface.XR_ENV_BLEND_MODE_OPAQUE
+			get_viewport().transparent_bg = false
+			environment.background_color = Color(0.3, 0.3, 0.3, 1.0)
+		passthrough_enabled = enable
+
+
 func _on_left_button_pressed(name: String) -> void:
-	print(name)
-	scene_manager.request_scene_capture()
-	pass # Replace with function body.
+	if name == "ax_button":
+		scene_and_spatial_anchors_displayed = ! scene_and_spatial_anchors_displayed
+		scene_manager.visible = scene_and_spatial_anchors_displayed	
+	elif name == "by_button":
+		enable_passthrough(not passthrough_enabled)
+	elif name == "menu_button":
+		scene_manager.request_scene_capture()
+pass # Replace with function body.
 
 
 func _on_right_button_pressed(name: String) -> void:
-	scene_and_spatial_anchors_displayed = ! scene_and_spatial_anchors_displayed
-	scene_manager.visible = scene_and_spatial_anchors_displayed
 	pass # Replace with function body.
