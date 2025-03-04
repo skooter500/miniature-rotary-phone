@@ -1,17 +1,14 @@
-[gd_scene load_steps=21 format=3 uid="uid://d1rd0kxf7f6kk"]
+[gd_scene load_steps=18 format=3 uid="uid://d1rd0kxf7f6kk"]
 
 [ext_resource type="Script" uid="uid://cr5ejl6hlraib" path="res://behaviors/root.gd" id="1_ldydu"]
-[ext_resource type="Script" uid="uid://qgg7wto84wvl" path="res://behaviors/CameraController.gd" id="2_hebbm"]
 [ext_resource type="Script" uid="uid://c3udleh357odo" path="res://behaviors/jet.gd" id="2_ldydu"]
-[ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="3_7egbg"]
 [ext_resource type="PackedScene" uid="uid://bcjp8kcgde4cs" path="res://scene_anchor.tscn" id="3_ldydu"]
-[ext_resource type="Script" uid="uid://h5wrviq7ex0m" path="res://behaviors/offset_pursue.gd" id="4_cpb5b"]
+[ext_resource type="PackedScene" uid="uid://cg8s1fo3cgktc" path="res://behaviors/Fish2_small.tscn" id="3_oxv6l"]
 [ext_resource type="PackedScene" uid="uid://bwo5nq0clfe3c" path="res://scene_global_mesh.tscn" id="4_ldydu"]
-[ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/avoidance.gd" id="5_xrk0n"]
+[ext_resource type="Script" uid="uid://lqy7lve1pfps" path="res://behaviors/fp_controller.gd" id="5_hebbm"]
 [ext_resource type="Script" uid="uid://bfoar4ahwpbra" path="res://behaviors/PathDrawer.gd" id="6_rgg40"]
 [ext_resource type="PackedScene" uid="uid://dc24oh4o5erhi" path="res://behaviors/SceneSwitcher.tscn" id="9_md8iv"]
 [ext_resource type="Script" uid="uid://brbsahdh6ulkg" path="res://behaviors/school.gd" id="11_oxv6l"]
-[ext_resource type="PackedScene" uid="uid://di40uxleul3ci" path="res://behaviors/Fish2.tscn" id="12_hebbm"]
 [ext_resource type="Script" uid="uid://dexyjr6qrrxy5" path="res://behaviors/school_config.gd" id="13_vwiud"]
 [ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="19_tb82s"]
 
@@ -44,28 +41,23 @@ script = ExtResource("1_ldydu")
 
 [node name="School" type="Node3D" parent="."]
 script = ExtResource("11_oxv6l")
-fish_scene = ExtResource("12_hebbm")
-count = 100
-radius = 150
-neighbor_distance = 25
+fish_scene = ExtResource("3_oxv6l")
+radius = 0.5
+neighbor_distance = 0.2
 max_neighbors = 5
-cell_size = 20
-grid_size = 1000
-center_path = NodePath("../Center")
+cell_size = 0.1
+grid_size = 10
 
 [node name="SchoolConfig" type="Node" parent="."]
 script = ExtResource("13_vwiud")
 
 [node name="Player" type="RigidBody3D" parent="."]
+script = ExtResource("5_hebbm")
 
 [node name="XROrigin3D" type="XROrigin3D" parent="Player"]
 
 [node name="Camera3D" type="XRCamera3D" parent="Player/XROrigin3D"]
 environment = SubResource("Environment_ldydu")
-
-[node name="Camera3D Controller" type="Node" parent="Player/XROrigin3D/Camera3D" node_paths=PackedStringArray("boid_player")]
-script = ExtResource("2_hebbm")
-boid_player = NodePath("../../../../camera follower")
 
 [node name="left" type="XRController3D" parent="Player/XROrigin3D" node_paths=PackedStringArray("xr_controller")]
 tracker = &"left_hand"
@@ -92,21 +84,6 @@ scenes/global_mesh = ExtResource("4_ldydu")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.5873, 6.48073, 33.382)
 shape = SubResource("18")
-
-[node name="camera follower" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, -15.0557, 41.7624)
-script = ExtResource("3_7egbg")
-max_force = 30
-draw_gizmos = false
-
-[node name="offset_pursue" type="Node" parent="camera follower" node_paths=PackedStringArray("leader_boid")]
-script = ExtResource("4_cpb5b")
-leader_boid = NodePath("")
-weight = 5.0
-
-[node name="Avoidance" type="Node" parent="camera follower"]
-script = ExtResource("5_xrk0n")
-draw_gizmos = false
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90.1317)

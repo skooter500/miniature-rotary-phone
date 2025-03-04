@@ -4,14 +4,14 @@ class_name School extends Node
 
 @export var count = 5
 
-@export var radius = 100
+@export var radius:float = 100
 
-@export var neighbor_distance = 20
+@export var neighbor_distance:float = 20
 @export var max_neighbors = 10
 
 var boids = []
 
-@export var cell_size = 10
+@export var cell_size:float = 10
 @export var grid_size = 10000
 @export var partition = true
 var cells = {}
@@ -20,7 +20,7 @@ var cells = {}
 var center
 
 func draw_gizmos():
-	var size = 200
+	var size = 10
 	var sub_divisions = size / cell_size
 	DebugDraw3D.draw_grid(Vector3.ZERO, Vector3.RIGHT * size, Vector3.BACK * size, Vector2(sub_divisions, sub_divisions), Color.AQUAMARINE)
 	# DebugDraw.draw_grid(Vector3.ZERO, Vector3.UP * size, Vector3.BACK * size, Vector2(sub_divisions, sub_divisions), Color.aquamarine)

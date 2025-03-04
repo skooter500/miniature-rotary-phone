@@ -55,7 +55,6 @@ func _process(delta):
 			global_translate(global_transform.basis.x * speed * turn * mult * delta)
 		
 		var movef = Input.get_axis("move_forward", "move_back")
-		print(movef)
 		if abs(movef) > 0:     
 			global_translate(global_transform.basis.z * speed * movef * mult * delta)
 		

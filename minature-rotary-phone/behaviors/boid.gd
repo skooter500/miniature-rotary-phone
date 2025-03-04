@@ -1,6 +1,6 @@
 class_name Boid extends CharacterBody3D
 
-@export var mass = 1
+@export var mass:float = 1
 @export var force = Vector3.ZERO
 @export var acceleration = Vector3.ZERO
 @export var vel = Vector3.ZERO
@@ -8,9 +8,9 @@ class_name Boid extends CharacterBody3D
 @export var max_speed: float = 10.0
 
 var behaviors = [] 
-@export var max_force = 10
-@export var banking = 0.1
-@export var damping = 0.1
+@export var max_force:float = 10
+@export var banking:float = 0.1
+@export var damping:float = 0.1
 
 @export var draw_gizmos = true
 @export var pause = false

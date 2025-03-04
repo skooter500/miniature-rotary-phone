@@ -1,0 +1,64 @@
+[gd_scene load_steps=11 format=3 uid="uid://cg8s1fo3cgktc"]
+
+[ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="1_0g1a7"]
+[ext_resource type="Material" uid="uid://b2raijlysriqd" path="res://behaviors/Tank Material.tres" id="2_ai84y"]
+[ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/avoidance.gd" id="3_lfo5w"]
+[ext_resource type="Script" uid="uid://ue4qggm22wt8" path="res://behaviors/separation.gd" id="4_6642d"]
+[ext_resource type="Script" uid="uid://cg3qiodyr8j4b" path="res://behaviors/alignment.gd" id="5_aml3r"]
+[ext_resource type="Script" uid="uid://demjvlx6x2dd8" path="res://behaviors/cohesion.gd" id="6_aica7"]
+[ext_resource type="Script" uid="uid://baw56rnhj0aqm" path="res://behaviors/wander.gd" id="7_27y5q"]
+[ext_resource type="Script" uid="uid://ci8facjqq07ft" path="res://behaviors/constrain.gd" id="8_mdxy7"]
+
+[sub_resource type="PrismMesh" id="1"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="2"]
+size = Vector3(0.1, 0.1, 0.2)
+
+[node name="Boid" type="CharacterBody3D"]
+script = ExtResource("1_0g1a7")
+max_speed = 3.0
+damping = 0.3
+draw_gizmos = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("1")
+surface_material_override/0 = ExtResource("2_ai84y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("2")
+
+[node name="Avoidance" type="Node" parent="."]
+script = ExtResource("3_lfo5w")
+feeler_angle = 60
+feeler_length = 3
+weight = 2.0
+draw_gizmos = false
+
+[node name="Separation" type="Node" parent="."]
+script = ExtResource("4_6642d")
+weight = 20.0
+draw_gizmos = false
+
+[node name="Alignment" type="Node" parent="."]
+script = ExtResource("5_aml3r")
+weight = 20.0
+draw_gizmos = false
+
+[node name="Cohesion" type="Node" parent="."]
+script = ExtResource("6_aica7")
+weight = 20.0
+draw_gizmos = false
+
+[node name="Wander" type="Node" parent="."]
+script = ExtResource("7_27y5q")
+distance = 2.0
+radius = 1.0
+jitter = 5.0
+draw_gizmos = false
+
+[node name="Constrain" type="Node" parent="."]
+script = ExtResource("8_mdxy7")
+radius = 10.0
+draw_gizmos = false
