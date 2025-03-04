@@ -146,5 +146,5 @@ pass # Replace with function body.
 
 func _on_right_button_pressed(name: String) -> void:
 	print(name)
-	scene_manager.request_scene_capture()
+	# scene_manager.request_scene_capture()
 	pass # Replace with function body.

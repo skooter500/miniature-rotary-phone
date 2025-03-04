@@ -22,7 +22,7 @@ var center
 func draw_gizmos():
 	var size = 10
 	var sub_divisions = size / cell_size
-	DebugDraw3D.draw_grid(Vector3.ZERO, Vector3.RIGHT * size, Vector3.BACK * size, Vector2(sub_divisions, sub_divisions), Color.AQUAMARINE)
+	# DebugDraw3D.draw_grid(Vector3.ZERO, Vector3.RIGHT * size, Vector3.BACK * size, Vector2(sub_divisions, sub_divisions), Color.AQUAMARINE)
 	# DebugDraw.draw_grid(Vector3.ZERO, Vector3.UP * size, Vector3.BACK * size, Vector2(sub_divisions, sub_divisions), Color.aquamarine)
 
 
@@ -60,14 +60,13 @@ func _process(delta):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	center = $"../center"
 	var cell = position_to_cell(Vector3(-60, 59, 80))
 	var p = cell_to_position(cell)
 	for i in count:
 		var fish = fish_scene.instantiate()		
 		var pos = Utils.random_point_in_unit_sphere() * radius
 		add_child(fish)
-		fish.global_position = pos
+		fish.position = pos
 		fish.global_rotation = Vector3(0, randf_range(0, PI * 2.0),  0)
 		# fish.global_transform.origin = pos
 		# fish.global_transform.basis = Basis(Vector3.UP, randf_range(0, PI * 2.0))

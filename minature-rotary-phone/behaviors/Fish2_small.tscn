@@ -1,11 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cg8s1fo3cgktc"]
+[gd_scene load_steps=7 format=3 uid="uid://cg8s1fo3cgktc"]
 
 [ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="1_0g1a7"]
 [ext_resource type="Material" uid="uid://b2raijlysriqd" path="res://behaviors/Tank Material.tres" id="2_ai84y"]
 [ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/avoidance.gd" id="3_lfo5w"]
-[ext_resource type="Script" uid="uid://ue4qggm22wt8" path="res://behaviors/separation.gd" id="4_6642d"]
-[ext_resource type="Script" uid="uid://cg3qiodyr8j4b" path="res://behaviors/alignment.gd" id="5_aml3r"]
-[ext_resource type="Script" uid="uid://demjvlx6x2dd8" path="res://behaviors/cohesion.gd" id="6_aica7"]
 [ext_resource type="Script" uid="uid://baw56rnhj0aqm" path="res://behaviors/wander.gd" id="7_27y5q"]
 
 [sub_resource type="PrismMesh" id="1"]
@@ -16,10 +13,17 @@ size = Vector3(0.00949707, 0.0237183, 0.0824707)
 
 [node name="Boid" type="CharacterBody3D"]
 script = ExtResource("1_0g1a7")
-max_speed = 0.5
-max_force = 1.0
+max_speed = 0.4
+max_force = 0.1
 damping = 0.3
 draw_gizmos = false
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0271504, 0)
+pixel_size = 0.0005
+offset = Vector2(0, 100)
+text = "Hello World
+"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0)
@@ -32,29 +36,14 @@ shape = SubResource("2")
 
 [node name="Avoidance" type="Node" parent="."]
 script = ExtResource("3_lfo5w")
-feeler_length = 0.2
-updates_per_second = 2
-
-[node name="Separation" type="Node" parent="."]
-script = ExtResource("4_6642d")
-weight = 2.0
-draw_gizmos = false
-enabled = false
-
-[node name="Alignment" type="Node" parent="."]
-script = ExtResource("5_aml3r")
-weight = 2.0
-draw_gizmos = false
-enabled = false
-
-[node name="Cohesion" type="Node" parent="."]
-script = ExtResource("6_aica7")
-weight = 2.0
-draw_gizmos = false
-enabled = false
+feeler_length = 0.4
+updates_per_second = 3
+weight = 4.0
 
 [node name="Wander" type="Node" parent="."]
 script = ExtResource("7_27y5q")
-distance = 0.2
-radius = 0.1
-jitter = 0.5
+distance = 0.4
+radius = 0.3
+jitter = 1.0
+weight = 0.5
+draw_gizmos = false

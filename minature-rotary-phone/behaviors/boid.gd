@@ -156,6 +156,7 @@ func calculate():
 				break
 	if draw_gizmos:
 		DebugDraw2D.set_text(name, behaviors_active)
+	$Label3D.text = behaviors_active
 	return force_acc
 
 
