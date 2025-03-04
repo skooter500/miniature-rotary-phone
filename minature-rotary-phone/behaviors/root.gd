@@ -2,6 +2,8 @@ class_name Root extends Node3D
 
 var custom_font:Font 
 
+var environment:Environment
+
 func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_F:
 		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
@@ -21,7 +23,27 @@ var xr_interface: XRInterface
 
 var text_size = 30
 
+	
+func _scene_data_missing() -> void:
+	scene_manager.request_scene_capture()
+
+func _scene_capture_completed(success: bool) -> void:
+	if success == false:
+		return
+
+	# Delete any existing anchors, since the user may have changed them.
+	if scene_manager.are_scene_anchors_created():
+		scene_manager.remove_scene_anchors()
+
+	# Create scene_anchors for the freshly captured scene
+	scene_manager.create_scene_anchors()
+
+
 func _ready():
+	scene_manager.openxr_fb_scene_data_missing.connect(_scene_data_missing)
+	scene_manager.openxr_fb_scene_capture_completed.connect(_scene_capture_completed)
+
+	environment = $WorldEnvironment.environment
 	custom_font = load("res://fonts/Hyperspace Bold.otf")
 	DebugDraw2D.config.text_custom_font = custom_font
 	DebugDraw2D.config.text_default_size = text_size
@@ -36,9 +58,22 @@ func _ready():
 
 		# Change our main viewport to output to the HMD
 		get_viewport().use_xr = true
+		var modes = xr_interface.get_supported_environment_blend_modes()
+		if XRInterface.XR_ENV_BLEND_MODE_ALPHA_BLEND in modes:
+			xr_interface.environment_blend_mode = XRInterface.XR_ENV_BLEND_MODE_ALPHA_BLEND
+		elif XRInterface.XR_ENV_BLEND_MODE_ADDITIVE in modes:
+			xr_interface.environment_blend_mode = XRInterface.XR_ENV_BLEND_MODE_ADDITIVE
+		else:
+			print("ARGH!!!!")
+			return false
 	else:
 		print("OpenXR not initialized, please check if your headset is connected")
+	
+	get_viewport().transparent_bg = true
+	environment.background_mode = Environment.BG_CLEAR_COLOR
+	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	get_window().set_current_screen(1)
+
 
 	 # get_window().set_current_screen(1)
 
@@ -71,3 +106,18 @@ func _create_graph(title, is_fps, show_title, flags, parent := &"", parent_side 
 			graph.set_parent(parent, parent_side)
 	
 	return graph
+	
+@onready var scene_manager: OpenXRFbSceneManager = $"Player/XROrigin3D/OpenXRFbSceneManager"
+
+var scene_and_spatial_anchors_displayed:bool = true
+
+func _on_left_button_pressed(name: String) -> void:
+	print(name)
+	scene_manager.request_scene_capture()
+	pass # Replace with function body.
+
+
+func _on_right_button_pressed(name: String) -> void:
+	scene_and_spatial_anchors_displayed = ! scene_and_spatial_anchors_displayed
+	scene_manager.visible = scene_and_spatial_anchors_displayed
+	pass # Replace with function body.

@@ -9,7 +9,7 @@ func configure_scene():
 	var b = $"../School/Boid"
 	$"../camera follower/offset_pursue".leader_boid = b
 	
-	$"../Player/Camera3D/Camera3D Controller".boid = b 
+	# $"../Player/Camera3D/Camera3D Controller".boid = b 
 func _ready():
 	configure_scene()
 	pass # Replace with function body

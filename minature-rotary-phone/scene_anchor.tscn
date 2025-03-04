@@ -1,13 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://bcjp8kcgde4cs"]
 
-[ext_resource type="Script" uid="uid://fusrkmjdkmb4" path="res://scene_anchor.gd" id="1_l6xwj"]
+[ext_resource type="Script" uid="uid://dvvu8hs7v6rd5" path="res://scene_anchor.gd" id="1_l6xwj"]
 
-[node name="SceneAnchor" type="Node3D"]
+[node name="SceneAnchor" type="StaticBody3D"]
 script = ExtResource("1_l6xwj")
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
-text = "Label"
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-collision_layer = 2

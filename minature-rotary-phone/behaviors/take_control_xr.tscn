@@ -1,29 +1,27 @@
-[gd_scene load_steps=34 format=3 uid="uid://d1rd0kxf7f6kk"]
+[gd_scene load_steps=21 format=3 uid="uid://d1rd0kxf7f6kk"]
 
 [ext_resource type="Script" uid="uid://cr5ejl6hlraib" path="res://behaviors/root.gd" id="1_ldydu"]
+[ext_resource type="Script" uid="uid://qgg7wto84wvl" path="res://behaviors/CameraController.gd" id="2_hebbm"]
 [ext_resource type="Script" uid="uid://c3udleh357odo" path="res://behaviors/jet.gd" id="2_ldydu"]
 [ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="3_7egbg"]
 [ext_resource type="PackedScene" uid="uid://bcjp8kcgde4cs" path="res://scene_anchor.tscn" id="3_ldydu"]
-[ext_resource type="PackedScene" uid="uid://bwo5nq0clfe3c" path="res://scene_global_mesh.tscn" id="4_ag6a5"]
 [ext_resource type="Script" uid="uid://h5wrviq7ex0m" path="res://behaviors/offset_pursue.gd" id="4_cpb5b"]
+[ext_resource type="PackedScene" uid="uid://bwo5nq0clfe3c" path="res://scene_global_mesh.tscn" id="4_ldydu"]
 [ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/avoidance.gd" id="5_xrk0n"]
 [ext_resource type="Script" uid="uid://bfoar4ahwpbra" path="res://behaviors/PathDrawer.gd" id="6_rgg40"]
 [ext_resource type="PackedScene" uid="uid://dc24oh4o5erhi" path="res://behaviors/SceneSwitcher.tscn" id="9_md8iv"]
-[ext_resource type="Script" uid="uid://bg8s6cu2yyuok" path="res://behaviors/CreatureController.gd" id="10_0i4en"]
-[ext_resource type="Script" uid="uid://bb475dsswmiyu" path="res://behaviors/spine_animator.gd" id="11_gjpqf"]
-[ext_resource type="Material" uid="uid://b2raijlysriqd" path="res://behaviors/Tank Material.tres" id="12_8esj0"]
-[ext_resource type="Script" uid="uid://bctpwo8cerrgq" path="res://behaviors/harmonic.gd" id="13_mcoxa"]
-[ext_resource type="Script" uid="uid://ci8facjqq07ft" path="res://behaviors/constrain.gd" id="14_6p2wi"]
-[ext_resource type="Script" uid="uid://bqb47mif0r5vt" path="res://behaviors/noise_wander.gd" id="15_w0gkl"]
-[ext_resource type="Script" uid="uid://cqk70j8jant4u" path="res://behaviors/player_steering.gd" id="16_cq6dc"]
-[ext_resource type="Material" path="res://behaviors/Trans Material.tres" id="17_y36e1"]
-[ext_resource type="Script" uid="uid://di08ea5kveqbp" path="res://behaviors/Rotate.gd" id="18_7ld7d"]
+[ext_resource type="Script" uid="uid://brbsahdh6ulkg" path="res://behaviors/school.gd" id="11_oxv6l"]
+[ext_resource type="PackedScene" uid="uid://di40uxleul3ci" path="res://behaviors/Fish2.tscn" id="12_hebbm"]
+[ext_resource type="Script" uid="uid://dexyjr6qrrxy5" path="res://behaviors/school_config.gd" id="13_vwiud"]
 [ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="19_tb82s"]
+
+[sub_resource type="Environment" id="Environment_ldydu"]
+background_mode = 1
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ag6a5"]
 top_radius = 0.05
 bottom_radius = 0.05
-height = 0.8
+height = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ldydu"]
 transparency = 1
@@ -38,64 +36,60 @@ _data = {
 }
 point_count = 9
 
-[sub_resource type="PrismMesh" id="14"]
-
-[sub_resource type="BoxShape3D" id="15"]
-
-[sub_resource type="BoxMesh" id="16"]
-
-[sub_resource type="BoxShape3D" id="17"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_7egbg"]
-
-[sub_resource type="BoxShape3D" id="19"]
-
-[sub_resource type="PrismMesh" id="20"]
-
-[sub_resource type="BoxShape3D" id="21"]
-
-[sub_resource type="TorusMesh" id="TorusMesh_ktscl"]
-material = ExtResource("17_y36e1")
-inner_radius = 2.0
-outer_radius = 5.0
-rings = 5
-ring_segments = 10
-
-[sub_resource type="SphereShape3D" id="22"]
-radius = 3.0
+[sub_resource type="Environment" id="Environment_ag6a5"]
+ambient_light_color = Color(0.699653, 0.699653, 0.699653, 1)
 
 [node name="root" type="Node3D"]
 script = ExtResource("1_ldydu")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="School" type="Node3D" parent="."]
+script = ExtResource("11_oxv6l")
+fish_scene = ExtResource("12_hebbm")
+count = 100
+radius = 150
+neighbor_distance = 25
+max_neighbors = 5
+cell_size = 20
+grid_size = 1000
+center_path = NodePath("../Center")
 
-[node name="XROrigin3D" type="XROrigin3D" parent="RigidBody3D"]
+[node name="SchoolConfig" type="Node" parent="."]
+script = ExtResource("13_vwiud")
 
-[node name="XRCamera3D" type="XRCamera3D" parent="RigidBody3D/XROrigin3D"]
+[node name="Player" type="RigidBody3D" parent="."]
 
-[node name="left" type="XRController3D" parent="RigidBody3D/XROrigin3D" node_paths=PackedStringArray("xr_controller")]
+[node name="XROrigin3D" type="XROrigin3D" parent="Player"]
+
+[node name="Camera3D" type="XRCamera3D" parent="Player/XROrigin3D"]
+environment = SubResource("Environment_ldydu")
+
+[node name="Camera3D Controller" type="Node" parent="Player/XROrigin3D/Camera3D" node_paths=PackedStringArray("boid_player")]
+script = ExtResource("2_hebbm")
+boid_player = NodePath("../../../../camera follower")
+
+[node name="left" type="XRController3D" parent="Player/XROrigin3D" node_paths=PackedStringArray("xr_controller")]
 tracker = &"left_hand"
 script = ExtResource("2_ldydu")
 xr_controller = NodePath(".")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/XROrigin3D/left"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/XROrigin3D/left"]
 mesh = SubResource("CylinderMesh_ag6a5")
 surface_material_override/0 = SubResource("StandardMaterial3D_ldydu")
 
-[node name="right" type="XRController3D" parent="RigidBody3D/XROrigin3D" node_paths=PackedStringArray("xr_controller")]
+[node name="right" type="XRController3D" parent="Player/XROrigin3D" node_paths=PackedStringArray("xr_controller")]
 tracker = &"right_hand"
 script = ExtResource("2_ldydu")
 xr_controller = NodePath(".")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/XROrigin3D/right"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/XROrigin3D/right"]
 mesh = SubResource("CylinderMesh_ag6a5")
 surface_material_override/0 = SubResource("StandardMaterial3D_ldydu")
 
-[node name="OpenXRFbSceneManager" type="OpenXRFbSceneManager" parent="RigidBody3D/XROrigin3D"]
+[node name="OpenXRFbSceneManager" type="OpenXRFbSceneManager" parent="Player/XROrigin3D"]
 default_scene = ExtResource("3_ldydu")
-scenes/global_mesh = ExtResource("4_ag6a5")
+scenes/global_mesh = ExtResource("4_ldydu")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.5873, 6.48073, 33.382)
 shape = SubResource("18")
 
@@ -107,7 +101,7 @@ draw_gizmos = false
 
 [node name="offset_pursue" type="Node" parent="camera follower" node_paths=PackedStringArray("leader_boid")]
 script = ExtResource("4_cpb5b")
-leader_boid = NodePath("../../creature/boid")
+leader_boid = NodePath("")
 weight = 5.0
 
 [node name="Avoidance" type="Node" parent="camera follower"]
@@ -130,116 +124,10 @@ transform = Transform3D(0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-
 
 [node name="SceneSwitcher" parent="." instance=ExtResource("9_md8iv")]
 
-[node name="creature" type="Node3D" parent="."]
-
-[node name="Controller" type="Node" parent="creature"]
-script = ExtResource("10_0i4en")
-
-[node name="spineanimator" type="Node" parent="creature" node_paths=PackedStringArray("bones")]
-script = ExtResource("11_gjpqf")
-bones = [NodePath("../boid"), NodePath("../body1"), NodePath("../body2"), NodePath("../body3"), NodePath("../tail")]
-
-[node name="boid" type="CharacterBody3D" parent="creature"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5154)
-script = ExtResource("3_7egbg")
-max_force = 80
-damping = 0.3
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="creature/boid"]
-transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("14")
-skeleton = NodePath("../../..")
-surface_material_override/0 = ExtResource("12_8esj0")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="creature/boid"]
-shape = SubResource("15")
-
-[node name="Avoidance" type="Node" parent="creature/boid"]
-script = ExtResource("5_xrk0n")
-direction = 2
-feeler_length = 15
-weight = 10.0
-
-[node name="Harmonic" type="Node" parent="creature/boid"]
-script = ExtResource("13_mcoxa")
-frequency = 0.5
-distance = 20
-axis = 1
-weight = 7.0
-
-[node name="Constrain" type="Node" parent="creature/boid"]
-script = ExtResource("14_6p2wi")
-
-[node name="NoiseWander" type="Node" parent="creature/boid"]
-script = ExtResource("15_w0gkl")
-radius = 50.0
-amplitude = 90
-distance = 100
-draw_gizmos = false
-
-[node name="UserSteering" type="Node" parent="creature/boid"]
-script = ExtResource("16_cq6dc")
-weight = 15.0
-draw_gizmos = false
-enabled = false
-
-[node name="body1" type="CharacterBody3D" parent="creature"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.6357)
-
-[node name="MeshInstance4" type="MeshInstance3D" parent="creature/body1"]
-mesh = SubResource("16")
-skeleton = NodePath("../../..")
-surface_material_override/0 = ExtResource("12_8esj0")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="creature/body1"]
-shape = SubResource("17")
-
-[node name="body2" type="CharacterBody3D" parent="creature"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.16915)
-
-[node name="MeshInstance3" type="MeshInstance3D" parent="creature/body2"]
-mesh = SubResource("16")
-skeleton = NodePath("../../..")
-surface_material_override/0 = ExtResource("12_8esj0")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="creature/body2"]
-shape = SubResource("BoxShape3D_7egbg")
-
-[node name="body3" type="CharacterBody3D" parent="creature"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.63446)
-
-[node name="MeshInstance2" type="MeshInstance3D" parent="creature/body3"]
-mesh = SubResource("16")
-skeleton = NodePath("../../..")
-surface_material_override/0 = ExtResource("12_8esj0")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="creature/body3"]
-shape = SubResource("19")
-
-[node name="tail" type="CharacterBody3D" parent="creature"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.31343)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="creature/tail"]
-transform = Transform3D(1, 0, 0, 0, -8.74228e-08, 1, 0, -2, -4.37114e-08, 0, 0, -0.504121)
-mesh = SubResource("20")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("12_8esj0")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="creature/tail"]
-shape = SubResource("21")
-disabled = true
-
-[node name="Pod" type="Area3D" parent="creature/tail"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -2)
-
-[node name="Dod" type="MeshInstance3D" parent="creature/tail/Pod"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("TorusMesh_ktscl")
-script = ExtResource("18_7ld7d")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="creature/tail/Pod"]
-shape = SubResource("22")
-
 [node name="ui_layer" parent="." instance=ExtResource("19_tb82s")]
 
-[connection signal="body_entered" from="creature/tail/Pod" to="creature/Controller" method="_on_Pod_body_entered"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ag6a5")
+
+[connection signal="button_pressed" from="Player/XROrigin3D/left" to="." method="_on_left_button_pressed"]
+[connection signal="button_pressed" from="Player/XROrigin3D/right" to="." method="_on_right_button_pressed"]

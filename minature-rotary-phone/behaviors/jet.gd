@@ -10,7 +10,10 @@ extends Node3D
 
 @export var trigger = 0.0
 
+var player
+
 func _ready():
+	player = $"../.."
 	pass
 
 var lerped_trigger = 0.0
@@ -27,7 +30,7 @@ func _physics_process(delta):
 			#audio.play()
 		#audio.volume_db = remap(lerped_trigger, 0, 1, -80, 20)
 		var force = - global_transform.basis.y * power * trigger
-		# player.apply_force(-force, Vector3.ZERO)
+		player.apply_force(-force, Vector3.ZERO)
 		# xr_controller.trigger_haptic_pulse("Haptic", 300 * lerped_trigger, 1, delta, 0)
 	#else:
 		#audio.stop()
