@@ -1,0 +1,100 @@
+[gd_scene load_steps=15 format=3 uid="uid://c6v8wrpny48ww"]
+
+[ext_resource type="Script" uid="uid://cr5ejl6hlraib" path="res://behaviors/root.gd" id="1_ye4xt"]
+[ext_resource type="Script" uid="uid://brbsahdh6ulkg" path="res://behaviors/school.gd" id="2_uim5v"]
+[ext_resource type="PackedScene" uid="uid://cg8s1fo3cgktc" path="res://behaviors/Fish2_small.tscn" id="3_ftxp0"]
+[ext_resource type="Script" uid="uid://dexyjr6qrrxy5" path="res://behaviors/school_config.gd" id="4_hk2jd"]
+[ext_resource type="Script" uid="uid://lqy7lve1pfps" path="res://behaviors/fp_controller.gd" id="5_pwrkf"]
+[ext_resource type="PackedScene" uid="uid://bcjp8kcgde4cs" path="res://scene_anchor.tscn" id="6_xulai"]
+[ext_resource type="PackedScene" uid="uid://bwo5nq0clfe3c" path="res://scene_global_mesh.tscn" id="7_tykgi"]
+[ext_resource type="Script" uid="uid://bfoar4ahwpbra" path="res://behaviors/PathDrawer.gd" id="8_abjyi"]
+[ext_resource type="PackedScene" uid="uid://dc24oh4o5erhi" path="res://behaviors/SceneSwitcher.tscn" id="9_snqj4"]
+[ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="10_87ava"]
+
+[sub_resource type="Environment" id="Environment_ldydu"]
+background_mode = 1
+
+[sub_resource type="SphereShape3D" id="18"]
+
+[sub_resource type="Curve3D" id="2"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -11.2065, -9.15527e-05, -29.797, 0, 0, 0, 0, 0, 0, -2.83316, 0.000137329, -9.18577, 0, 0, 0, 0, 0, 0, 16.3011, 23.6271, -8.24546, 0, 0, 0, 0, 0, 0, 46.7083, -5.34058e-05, -27.2299, 0, 0, 0, 0, 0, 0, 52.709, 22.523, -0.299791, 0, 0, 0, 0, 0, 0, 61.4845, 0, 43.691, 0, 0, 0, 0, 0, 0, 41.071, 9.53445, 8.45671, 0, 0, 0, 0, 0, 0, 2.29026, 0, 45.1004, 0, 0, 0, 0, 0, 0, 24.8938, -17.113, 20.9767),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 9
+
+[sub_resource type="Environment" id="Environment_ag6a5"]
+ambient_light_color = Color(0.699653, 0.699653, 0.699653, 1)
+
+[node name="root" type="Node3D"]
+script = ExtResource("1_ye4xt")
+
+[node name="School" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("2_uim5v")
+fish_scene = ExtResource("3_ftxp0")
+count = 50
+radius = 0.5
+neighbor_distance = 1.0
+max_neighbors = 5
+cell_size = 0.5
+grid_size = 10
+center_path = NodePath("../center")
+
+[node name="SchoolConfig" type="Node" parent="."]
+script = ExtResource("4_hk2jd")
+
+[node name="Player" type="RigidBody3D" parent="."]
+script = ExtResource("5_pwrkf")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="Player"]
+
+[node name="Camera3D" type="XRCamera3D" parent="Player/XROrigin3D"]
+environment = SubResource("Environment_ldydu")
+
+[node name="left" type="XRController3D" parent="Player/XROrigin3D"]
+tracker = &"left_hand"
+pose = &"grip"
+
+[node name="OpenXRFbRenderModel" type="OpenXRFbRenderModel" parent="Player/XROrigin3D/left"]
+
+[node name="right" type="XRController3D" parent="Player/XROrigin3D"]
+tracker = &"right_hand"
+pose = &"grip"
+
+[node name="OpenXRFbRenderModel" type="OpenXRFbRenderModel" parent="Player/XROrigin3D/right"]
+render_model_type = 1
+
+[node name="OpenXRFbSceneManager" type="OpenXRFbSceneManager" parent="Player/XROrigin3D"]
+default_scene = ExtResource("6_xulai")
+scenes/global_mesh = ExtResource("7_tykgi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.5873, 6.48073, 33.382)
+shape = SubResource("18")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90.1317)
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(0.029265, 0, -0.999572, 0, 1, 0, 0.999572, 0, 0.029265, 6.28377, -4.57764e-05, -18.2004)
+curve = SubResource("2")
+script = ExtResource("8_abjyi")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.0512, 0.23691)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="DirectionalLight3D"]
+transform = Transform3D(0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-08, 1, 0.763187, -0.646177, -2.61999e-08, 0, 12.0512, 0.23691)
+
+[node name="SceneSwitcher" parent="." instance=ExtResource("9_snqj4")]
+
+[node name="ui_layer" parent="." instance=ExtResource("10_87ava")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ag6a5")
+
+[node name="center" type="Marker3D" parent="."]
+
+[connection signal="button_pressed" from="Player/XROrigin3D/left" to="." method="_on_left_button_pressed"]
+[connection signal="button_pressed" from="Player/XROrigin3D/right" to="." method="_on_right_button_pressed"]

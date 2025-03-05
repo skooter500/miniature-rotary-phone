@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cg8s1fo3cgktc"]
+[gd_scene load_steps=13 format=3 uid="uid://cg8s1fo3cgktc"]
 
 [ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="1_0g1a7"]
 [ext_resource type="Material" uid="uid://b2raijlysriqd" path="res://behaviors/Tank Material.tres" id="2_ai84y"]
 [ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/avoidance.gd" id="3_lfo5w"]
+[ext_resource type="Script" uid="uid://bb475dsswmiyu" path="res://behaviors/spine_animator.gd" id="5_0gqwn"]
+[ext_resource type="Script" uid="uid://bctpwo8cerrgq" path="res://behaviors/harmonic.gd" id="5_wled1"]
 [ext_resource type="Script" uid="uid://baw56rnhj0aqm" path="res://behaviors/wander.gd" id="7_27y5q"]
 
 [sub_resource type="PrismMesh" id="1"]
@@ -11,39 +13,127 @@ size = Vector3(0.02, 0.04, 0.02)
 [sub_resource type="BoxShape3D" id="2"]
 size = Vector3(0.00949707, 0.0237183, 0.0824707)
 
-[node name="Boid" type="CharacterBody3D"]
+[sub_resource type="PrismMesh" id="PrismMesh_wled1"]
+size = Vector3(0.02, 0.04, 0.02)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dvv3a"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0g1a7"]
+size = Vector3(0.02, 0.02, 0.02)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ai84y"]
+size = Vector3(0.0204468, 0.0273438, 0.0185699)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="spine_animator" type="Node" parent="." node_paths=PackedStringArray("bones")]
+script = ExtResource("5_0gqwn")
+bones = [NodePath("../Boid"), NodePath("../body1"), NodePath("../body2"), NodePath("../body3"), NodePath("../body4"), NodePath("../tail")]
+
+[node name="Boid" type="CharacterBody3D" parent="."]
+collision_layer = 2
 script = ExtResource("1_0g1a7")
 max_speed = 0.4
-max_force = 0.1
+max_force = 0.6
 damping = 0.3
 draw_gizmos = false
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="Label3D" type="Label3D" parent="Boid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0271504, 0)
 pixel_size = 0.0005
 offset = Vector2(0, 100)
 text = "Hello World
 "
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boid"]
 transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("1")
 surface_material_override/0 = ExtResource("2_ai84y")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000354005, -0.000994874, -0.000708014)
 shape = SubResource("2")
 
-[node name="Avoidance" type="Node" parent="."]
+[node name="Avoidance" type="Node" parent="Boid"]
 script = ExtResource("3_lfo5w")
 feeler_length = 0.4
-updates_per_second = 3
 weight = 4.0
 
-[node name="Wander" type="Node" parent="."]
+[node name="Harmonic" type="Node" parent="Boid"]
+script = ExtResource("5_wled1")
+frequency = 0.5
+radius = 0.5
+distance = 0
+axis = 1
+weight = 2.0
+draw_gizmos = false
+metadata/_custom_type_script = "uid://bctpwo8cerrgq"
+
+[node name="Wander" type="Node" parent="Boid"]
 script = ExtResource("7_27y5q")
 distance = 0.4
 radius = 0.3
 jitter = 1.0
 weight = 0.5
 draw_gizmos = false
+
+[node name="tail" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.229)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="tail"]
+transform = Transform3D(1, 0, 0, 0, -8.74228e-08, 1, 0, -2, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_wled1")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_ai84y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tail"]
+shape = SubResource("BoxShape3D_dvv3a")
+disabled = true
+
+[node name="body1" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0625446)
+
+[node name="MeshInstance4" type="MeshInstance3D" parent="body1"]
+mesh = SubResource("BoxMesh_0g1a7")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_ai84y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="body1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000213623, 0.00292969, 0.000587448)
+shape = SubResource("BoxShape3D_ai84y")
+
+[node name="body2" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0942265)
+
+[node name="MeshInstance4" type="MeshInstance3D" parent="body2"]
+mesh = SubResource("BoxMesh_0g1a7")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_ai84y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="body2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000213623, 0, 0.000587448)
+shape = SubResource("BoxShape3D_ai84y")
+
+[node name="body3" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.12966)
+
+[node name="MeshInstance4" type="MeshInstance3D" parent="body3"]
+mesh = SubResource("BoxMesh_0g1a7")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_ai84y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="body3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000213623, 0, 0.000587448)
+shape = SubResource("BoxShape3D_ai84y")
+
+[node name="body4" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.160508)
+
+[node name="MeshInstance4" type="MeshInstance3D" parent="body4"]
+mesh = SubResource("BoxMesh_0g1a7")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_ai84y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="body4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000213623, 0, 0.000587448)
+shape = SubResource("BoxShape3D_ai84y")

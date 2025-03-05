@@ -54,7 +54,6 @@ boid = NodePath("../../../Creature/boid")
 [node name="camera follower" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, 12.5344, 41.7624)
 script = ExtResource("13")
-max_force = 30
 draw_gizmos = false
 
 [node name="offset_pursue" type="Node" parent="camera follower" node_paths=PackedStringArray("leader_boid")]
@@ -84,7 +83,6 @@ bones = [NodePath("../boid"), NodePath("../body1"), NodePath("../body2"), NodePa
 [node name="boid" type="CharacterBody3D" parent="Creature"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5154)
 script = ExtResource("13")
-max_force = 50
 damping = 0.3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Creature/boid"]

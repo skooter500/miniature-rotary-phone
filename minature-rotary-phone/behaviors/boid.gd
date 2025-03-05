@@ -148,7 +148,7 @@ func calculate():
 			if is_nan(f.x) or is_nan(f.y) or is_nan(f.z):
 				print(str(behaviors[i]) + " is NAN")
 				f = Vector3.ZERO
-			behaviors_active += behaviors[i].name + ": " + str(round(f.length())) + " "
+			behaviors_active += behaviors[i].name + ": " + str("%.2f" % f.length()) + " "
 			force_acc += f 
 			if force_acc.length() > max_force:
 				force_acc = force_acc.limit_length(max_force)

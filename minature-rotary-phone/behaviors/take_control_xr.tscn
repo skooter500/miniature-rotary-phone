@@ -1,14 +1,19 @@
-[gd_scene load_steps=15 format=3 uid="uid://d1rd0kxf7f6kk"]
+[gd_scene load_steps=22 format=3 uid="uid://d1rd0kxf7f6kk"]
 
 [ext_resource type="Script" uid="uid://cr5ejl6hlraib" path="res://behaviors/root.gd" id="1_ldydu"]
+[ext_resource type="Script" uid="uid://cmw6n17mebkcx" path="res://behaviors/boid.gd" id="3_7egbg"]
 [ext_resource type="PackedScene" uid="uid://bcjp8kcgde4cs" path="res://scene_anchor.tscn" id="3_ldydu"]
 [ext_resource type="PackedScene" uid="uid://cg8s1fo3cgktc" path="res://behaviors/Fish2_small.tscn" id="3_oxv6l"]
 [ext_resource type="PackedScene" uid="uid://bwo5nq0clfe3c" path="res://scene_global_mesh.tscn" id="4_ldydu"]
 [ext_resource type="Script" uid="uid://lqy7lve1pfps" path="res://behaviors/fp_controller.gd" id="5_hebbm"]
-[ext_resource type="Script" uid="uid://bfoar4ahwpbra" path="res://behaviors/PathDrawer.gd" id="6_rgg40"]
+[ext_resource type="Script" uid="uid://s5pb8njisohn" path="res://behaviors/avoidance.gd" id="5_xrk0n"]
 [ext_resource type="PackedScene" uid="uid://dc24oh4o5erhi" path="res://behaviors/SceneSwitcher.tscn" id="9_md8iv"]
 [ext_resource type="Script" uid="uid://brbsahdh6ulkg" path="res://behaviors/school.gd" id="11_oxv6l"]
+[ext_resource type="PackedScene" uid="uid://okvro62ssxp" path="res://Models/cobramk3_out/cobramk3.gltf" id="12_gfet3"]
+[ext_resource type="Script" uid="uid://blhpcqstd5fde" path="res://behaviors/trail_renderer.gd" id="13_h8rf7"]
 [ext_resource type="Script" uid="uid://dexyjr6qrrxy5" path="res://behaviors/school_config.gd" id="13_vwiud"]
+[ext_resource type="Material" uid="uid://ca5mcii5ms7ww" path="res://behaviors/CobraTrail.tres" id="14_glp4p"]
+[ext_resource type="Script" uid="uid://baw56rnhj0aqm" path="res://behaviors/wander.gd" id="15_ldydu"]
 [ext_resource type="PackedScene" uid="uid://c7rubewuhrpnq" path="res://ui_layer.tscn" id="19_tb82s"]
 
 [sub_resource type="Environment" id="Environment_ldydu"]
@@ -16,15 +21,19 @@ background_mode = 1
 
 [sub_resource type="SphereShape3D" id="18"]
 
-[sub_resource type="Curve3D" id="2"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -11.2065, -9.15527e-05, -29.797, 0, 0, 0, 0, 0, 0, -2.83316, 0.000137329, -9.18577, 0, 0, 0, 0, 0, 0, 16.3011, 23.6271, -8.24546, 0, 0, 0, 0, 0, 0, 46.7083, -5.34058e-05, -27.2299, 0, 0, 0, 0, 0, 0, 52.709, 22.523, -0.299791, 0, 0, 0, 0, 0, 0, 61.4845, 0, 43.691, 0, 0, 0, 0, 0, 0, 41.071, 9.53445, 8.45671, 0, 0, 0, 0, 0, 0, 2.29026, 0, 45.1004, 0, 0, 0, 0, 0, 0, 24.8938, -17.113, 20.9767),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
-}
-point_count = 9
-
 [sub_resource type="Environment" id="Environment_ag6a5"]
 ambient_light_color = Color(0.699653, 0.699653, 0.699653, 1)
+
+[sub_resource type="Curve" id="Curve_7egbg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.997785, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_cpb5b"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.998893, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xrk0n"]
+size = Vector3(0.648376, 0.141174, 0.321167)
 
 [node name="root" type="Node3D"]
 script = ExtResource("1_ldydu")
@@ -33,7 +42,6 @@ script = ExtResource("1_ldydu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("11_oxv6l")
 fish_scene = ExtResource("3_oxv6l")
-count = 100
 radius = 0.5
 neighbor_distance = 1.0
 max_neighbors = 5
@@ -76,11 +84,6 @@ shape = SubResource("18")
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90.1317)
 
-[node name="Path3D" type="Path3D" parent="."]
-transform = Transform3D(0.029265, 0, -0.999572, 0, 1, 0, 0.999572, 0, 0.029265, 6.28377, -4.57764e-05, -18.2004)
-curve = SubResource("2")
-script = ExtResource("6_rgg40")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.0512, 0.23691)
 
@@ -95,6 +98,53 @@ transform = Transform3D(0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-
 environment = SubResource("Environment_ag6a5")
 
 [node name="center" type="Marker3D" parent="."]
+
+[node name="Ship" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("3_7egbg")
+mass = 0.1
+max_speed = 0.3
+max_force = 1.0
+banking = 0.2
+
+[node name="cobramk3" parent="Ship" instance=ExtResource("12_gfet3")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="Trail" type="Node3D" parent="Ship"]
+transform = Transform3D(-0.999064, 0.0432532, 0, -0.0432532, -0.999064, 0, 0, 0, 1, 0.0553341, -0.0162813, -0.1)
+script = ExtResource("13_h8rf7")
+width = 0.1
+width_curve = SubResource("Curve_7egbg")
+material = ExtResource("14_glp4p")
+
+[node name="Trail2" type="Node3D" parent="Ship"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0610901, -0.0197675, -0.1)
+script = ExtResource("13_h8rf7")
+width = 0.1
+width_curve = SubResource("Curve_cpb5b")
+material = ExtResource("14_glp4p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ship"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000946045, -0.00112915, 0.0438843)
+shape = SubResource("BoxShape3D_xrk0n")
+
+[node name="Avoidance" type="Node" parent="Ship"]
+script = ExtResource("5_xrk0n")
+feeler_length = 1.0
+weight = 0.1
+
+[node name="Wander2" type="Node" parent="Ship"]
+script = ExtResource("15_ldydu")
+distance = 1.0
+radius = 0.3
+jitter = 2.0
+weight = 0.2
+draw_gizmos = false
+
+[node name="Label3D" type="Label3D" parent="Ship"]
+pixel_size = 0.002
+offset = Vector2(0, 100)
+text = "i love jc"
 
 [connection signal="button_pressed" from="Player/XROrigin3D/left" to="." method="_on_left_button_pressed"]
 [connection signal="button_pressed" from="Player/XROrigin3D/right" to="." method="_on_right_button_pressed"]

@@ -17,7 +17,7 @@ func _input(event):
 func on_draw_gizmos():
 	var size = 5000
 	var sub_divisions = size / 100
-	DebugDraw3D.draw_grid(Vector3.ZERO, Vector3.RIGHT* size, Vector3.BACK * size, Vector2(sub_divisions, sub_divisions), Color.WHITE)
+	# DebugDraw3D.draw_grid(Vector3.ZERO, Vector3.RIGHT* size, Vector3.BACK * size, Vector2(sub_divisions, sub_divisions), Color.WHITE)
 	
 	# DebugDraw.draw_grid(Vector3.ZERO, Vector3.UP * size, Vector3.BACK * size, Vector2(sub_divisions, sub_divisions), Color.aquamarine)
 	# DebugDraw.draw_grid(Vector3.ZERO, Vector3.RIGHT* size, Vector3.BACK * size, Vector2(sub_divisions, sub_divisions), Color.AQUAMARINE)
@@ -146,5 +146,6 @@ pass # Replace with function body.
 
 func _on_right_button_pressed(name: String) -> void:
 	print(name)
-	# scene_manager.request_scene_capture()
+	if name == "menu_button":
+		scene_manager.request_scene_capture()
 	pass # Replace with function body.

@@ -54,7 +54,6 @@ script = ExtResource("9")
 [node name="camera follower" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, -15.0557, 41.7624)
 script = ExtResource("2")
-max_force = 30
 
 [node name="offset_pursue" type="Node" parent="camera follower" node_paths=PackedStringArray("leader_boid")]
 script = ExtResource("10")
@@ -110,7 +109,6 @@ bones = [NodePath("../boid"), NodePath("../body1"), NodePath("../body2"), NodePa
 [node name="boid" type="CharacterBody3D" parent="Creature"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5154)
 script = ExtResource("2")
-max_force = 50
 damping = 0.3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Creature/boid"]
@@ -175,7 +173,6 @@ shape = SubResource("14")
 [node name="Ship" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.8709, 0, 0)
 script = ExtResource("2")
-max_force = 50
 damping = 0.3
 
 [node name="cobramk3" parent="Ship" instance=ExtResource("5")]
